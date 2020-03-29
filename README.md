@@ -5,7 +5,7 @@
 
 #### 软件架构
 软件架构说明
-
+![输入图片说明](https://images.gitee.com/uploads/images/2020/0329/211114_38ee6ea8_1894302.png "屏幕截图.png")
 
 #### 安装教程
 
