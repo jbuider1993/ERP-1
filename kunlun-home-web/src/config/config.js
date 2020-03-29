@@ -80,6 +80,7 @@ const config = {
       option: [
         { key: "menu", url: "/option/menu", icon: "windows", name: "菜单管理", isShow: true },
         { key: "icon", url: "/option/icon", icon: "select", name: "图标管理", isShow: true },
+        { key: "dictionary", url: "/option/dictionary", icon: "read", name: "数据字典", isShow: true },
         { key: "notice", url: "/option/notice", icon: "message", name: "通知公告", isShow: true },
         { key: "interface", url: "", icon: "file", name: "接口文档", isShow: true, children: [
             { key: "trace", url: BASE_SWAGGER_API, icon: "file-markdown", name: "缓存链路", isShow: true },
@@ -88,7 +89,15 @@ const config = {
         { key: "info", url: "/option/info", icon: "info-circle", name: "关于我们", isShow: true },
       ]
     }
-  }
+  },
+  theme_color: [
+    {key: "1", value: "#5adf96", name: "叶兰绿"},
+    {key: "1", value: "#f5515f", name: "赤诚红"},
+    {key: "1", value: "#9958dc", name: "玉烟紫"},
+    {key: "1", value: "#f7889c", name: "芙蕖粉"},
+    {key: "1", value: "#304269", name: "露莓黑"},
+    {key: "1", value: "#1890ff", name: "经典蓝"},
+  ]
 };
 
 export default config;

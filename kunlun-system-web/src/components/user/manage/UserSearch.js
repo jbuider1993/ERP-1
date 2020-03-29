@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {Form, Input, Button, Row, Col, AutoComplete, DatePicker, Icon} from 'antd';
 import styles from './User.less';
 import index from '../../../index.less';
+import commonStyles from '../../../pages/index.css';
 
 const FormItem = Form.Item;
 const Option = AutoComplete.Option;
@@ -28,7 +29,7 @@ class UserSearch extends React.Component {
     };
 
     return (
-      <div>
+      <div className={commonStyles.singleRowSearch}>
         <Form>
           <Row className={index.formRowDiv}>
             <Col span={6}>

@@ -27,8 +27,8 @@ class SelectMenuDrawer extends React.Component {
     const { checkedTreeNodeKeys, expandedTreeNodeKeys, selectedTreeNode } = this.state;
 
     const formItemLayout = {
-      labelCol: {span: 6},
-      wrapperCol: {span: 18},
+      labelCol: {span: 8},
+      wrapperCol: {span: 16},
     };
 
     const onCheckTreeNode = (checkedTreeNodeKeys, item) => {
@@ -57,7 +57,7 @@ class SelectMenuDrawer extends React.Component {
 
     // 返回工具栏新增、批量删除按钮
     return (
-      <div>
+      <div className={styles.drawerDiv}>
         <Spin spinning={selectMenuLoading}>
           <Drawer
             title="父级菜单"

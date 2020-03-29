@@ -1,5 +1,5 @@
 .drawer [class^=ant-drawer-content-wrapper] {
-  margin-top: 60px !important;
+  margin-top: 55px !important;
 }
 
 .drawerStyle [class^=ant-drawer-content-wrapper] {
@@ -16,6 +16,10 @@
   top: -7px !important;
 }
 
+.tabPane [role="tablist"] {
+  margin: 0px 0px 10px 0px !important;
+}
+
 .tabPane [role="tab"] {
   width: 105px !important;
 }
@@ -23,35 +27,39 @@
 .tabPane [role="tab"] > div {
   margin-left: 5px !important;
 }
+
 .themeDiv {
-  margin-top: 15px;
-  margin-bottom: 15px;
-  width: 230px;
-}
-
-.themeDiv:hover {
-  background: #126AD1;
-  opacity: 0.3;
-}
-
-.themeDivHover {
   margin-top: 10px;
   margin-bottom: 15px;
   width: 230px;
-  background: #126AD1 !important;
-  opacity: 0.3 !important;
+}
+
+.selectedThemeDiv {
+  margin-top: 10px;
+  margin-bottom: 15px;
+  width: 230px;
+  box-shadow: 0px 0 8px #000000;
+  opacity: 0.5 !important;
 }
 
 .headerDiv {
   width: 230px;
-  height: 40px;
+  height: 20px;
   border: solid #4A90E2 1px;
   text-align: center;
   background: #4A90E2;
 }
 
+.subMenuDiv {
+  width: 230px;
+  height: 20px;
+  border: solid #7D98B8 1px;
+  text-align: center;
+  background: #7D98B8;
+}
+
 .siderDiv {
-  width: 70px;
+  width: 55px;
   height: 120px;
   border: solid #7D98B8 1px;
   float: left;
@@ -64,6 +72,16 @@
 .contentDiv {
   width: 230px;
   height: 120px;
+  border: solid #E8EBEE 1px;
+  background: #E8EBEE;
+  text-align: center;
+  border-top: 0px;
+  border-bottom: 0px;
+}
+
+.contentSubMenuDiv {
+  width: 230px;
+  height: 100px;
   border: solid #E8EBEE 1px;
   background: #E8EBEE;
   text-align: center;

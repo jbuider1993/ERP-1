@@ -152,13 +152,18 @@ const SystemInfo = (props) => {
                         <a href={"http://demo9java.5kcrm.net/"} target = "_blank">悟空 CRM</a>
                       </h3>
                     </div>
+                    <div className={styles.carsouselFour}>
+                      <h3 className={styles.carsouselFont}>
+                        <a href={"http://biz.demo.zentao.net"} target = "_blank">禅道企业版</a>
+                      </h3>
+                    </div>
                   </Carousel>
                 </div>
               </div>
             </div>
           </div>
         </Content>
-        <Footer style={{ textAlign: 'center', marginTop: "14px", width: "100%", height: "64px", marginBottom: "4px" }}>
+        <Footer style={{ textAlign: 'center', marginTop: "15px", width: "100%", height: "64px" }}>
           <div>{config.footerText}</div>
         </Footer>
       </Layout>

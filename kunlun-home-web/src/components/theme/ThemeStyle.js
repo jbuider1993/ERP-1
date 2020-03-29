@@ -4,7 +4,7 @@ import { Icon, Switch } from "antd";
 
 const ThemeStyle = (props) => {
 
-  const { themeStyle, onChangeStyle, onTabStyle } = props;
+  const { themeStyle, onChangeStyle } = props;
 
   return (
     <div style={{ marginBottom: "15px" }}>
@@ -12,22 +12,17 @@ const ThemeStyle = (props) => {
         <li style={{ marginBottom: "5px" }}><Icon type="layout" />&nbsp;样式布局：</li>
         <li>
           <ul style={{ listStyle: "none", cursor: "pointer", marginLeft: "-40px" }}>
-            <li className={themeStyle == "hsc" ? [styles.themeDiv, styles.themeDivHover] : styles.themeDiv} onClick={() => onChangeStyle("hsc")}>
+            <li title={"左侧菜单布局"} className={themeStyle == "siderMenu" ? styles.selectedThemeDiv : styles.themeDiv} onClick={() => onChangeStyle("siderMenu")}>
               <div className={styles.headerDiv}>Header</div>
               <div className={styles.siderDiv}>Sider</div>
               <div className={styles.contentDiv}>Content</div>
             </li>
-            <li className={themeStyle == "hscf" ? [styles.themeDiv, styles.themeDivHover] : styles.themeDiv} onClick={() => onChangeStyle("hscf")}>
+            <li title={"子菜单布局"} className={themeStyle == "subMenu" ? styles.selectedThemeDiv : styles.themeDiv} onClick={() => onChangeStyle("subMenu")}>
               <div className={styles.headerDiv}>Header</div>
-              <div className={styles.siderDiv}>Sider</div>
-              <div className={styles.contentDiv}>Content</div>
-              <div className={styles.footerDiv}>Footer</div>
+              <div className={styles.subMenuDiv}>SubMenu</div>
+              <div className={styles.contentSubMenuDiv}>Content</div>
             </li>
           </ul>
-        </li>
-        <li style={{ marginBottom: "5px" }}><Icon type="block" />&nbsp;页签样式：</li>
-        <li>
-          <Switch checkedChildren="无间距" unCheckedChildren="有空隙" defaultChecked onChange={onTabStyle} />
         </li>
       </ul>
     </div>

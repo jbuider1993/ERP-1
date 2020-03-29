@@ -6,7 +6,7 @@ const OnlineToolbar = (props) => {
   const { onExport } = props;
 
   return (
-    <div style={{marginBottom: "15px"}}>
+    <div style={{marginBottom: "15px", marginTop: "15px"}}>
       <Button type="primary" size="default" icon="export" onClick={() => onExport()}>导出</Button>
     </div>
   );

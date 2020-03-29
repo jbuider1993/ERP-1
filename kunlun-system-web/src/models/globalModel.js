@@ -26,5 +26,5 @@ export default {
       const { dispatch, history } = params;
       dispatch({ type: "setTokenModel", payload: { token: window._TOKEN_, userInfo: window._USERINFO_ }});
     }
-  },
+  }
 };

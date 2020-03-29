@@ -1,6 +1,6 @@
 import React from 'react';
 import {Table, Icon, Tag, Tooltip, Button} from 'antd';
-import indexStyles from "../../routes/home/homeIndex.less";
+import indexStyles from "../../pages/home/homeIndex.less";
 
 class ServiceInvokeList extends React.Component {
 
@@ -20,9 +20,13 @@ class ServiceInvokeList extends React.Component {
     return (
       <div className={indexStyles.tableCDiv}>
         <div className={indexStyles.tableCTitleDiv}>
-          <div className={indexStyles.tableCTitleFont}>系统服务调用情况展示列表</div>
+          <div className={indexStyles.tableCTitleFont}>服务调用情况统计</div>
           <div className={indexStyles.tableCTitleTool}>
-            <div onClick={() => onShowDetail("trace")} className={indexStyles.serviceInvokeHover}>查看详情</div>
+            <div onClick={() => onShowDetail("zipkin")} className={indexStyles.fontWeightHover}>
+              <Tooltip title={"查看详情"}>
+                <Icon type="profile" style={{fontSize: "16px", marginTop: "5px", marginRight: "20px"}} />
+              </Tooltip>
+            </div>
           </div>
         </div>
         <div className={indexStyles.tableCContentDiv}>

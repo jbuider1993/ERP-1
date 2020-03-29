@@ -73,7 +73,7 @@ const Login = (props) => {
                   <FormItem>
                     {getFieldDecorator('password', {
                       initialValue: "", rules: [{ required: true, message: "请输入密码!" }]})
-                    (<Input style={{ width: "240px" }} placeholder={"请输入密码"} prefix={<Icon type="lock" style={{ color: '#506c86' }} />}/>)}
+                    (<Input.Password style={{ width: "240px" }} placeholder={"请输入密码"} prefix={<Icon type="lock" style={{ color: '#506c86' }} />}/>)}
                   </FormItem>
                 </Row>
                 <Row style={{ left: "-55px" }}>

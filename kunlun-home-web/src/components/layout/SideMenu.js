@@ -2,6 +2,7 @@ import React from 'react';
 import {Layout, Menu, Icon, Tabs, Dropdown} from 'antd';
 import config from "../../config/config";
 import styles from './Menu.less';
+import umiRouter from 'umi/router';
 
 const { Sider, Content } = Layout;
 const { SubMenu } = Menu;
@@ -23,9 +24,15 @@ class SideMenu extends React.Component {
   render() {
 
     const { history,
-      collapsed, activeHeadMenuKey, onSelectSideMenu, activeSideMenuKey, paneTabs, onTabChange,
-      onOpenSubMenu, openedSubMenuKey, removeTab, closeCurrentTab, closeOtherTab, onCloseTab, tokenModel, siderColor, tabStyle
+      collapsed, activeHeadMenuKey, onSelectSideMenu, activeSideMenuKey, paneTabs, onTabChange, updatePathMap, menuMap,
+      onOpenSubMenu, openedSubMenuKey, removeTab, closeCurrentTab, closeOtherTab, onCloseTab, tokenModel, themeStyle, siderColor
     } = this.props;
+
+    // 更新路由Map
+    if (!menuMap.get(activeSideMenuKey)) {
+      menuMap.set(activeSideMenuKey, activeHeadMenuKey);
+      updatePathMap(menuMap);
+    }
 
     // 左侧菜单
     const siderFlag = config.frame_menu.sider[activeHeadMenuKey] ? true : false;
@@ -81,7 +88,7 @@ class SideMenu extends React.Component {
 
     const loadParamsToIFrame = () => {
       if (!tokenModel) {
-        history.push({pathname: "/"});
+        umiRouter.push({pathname: "/scmp"});
         return;
       }
       const iFrameParams = { token: tokenModel.token, userInfo: tokenModel.userInfo, isAuth: true };
@@ -92,10 +99,15 @@ class SideMenu extends React.Component {
     // 刷新时间戳
     const refreshFlag = this.state.refreshView;
 
+    const isShowSider = activeHeadMenuKey != "home" && themeStyle == "siderMenu" ? true : false;
+    const pageUrl = siderFlag ? config.frame_menu.sider[activeHeadMenuKey].filter(item => item.key == activeSideMenuKey)[0].url : "/home";
+
+    const height = (document.documentElement.clientHeight - 55 - 40) + "px";
+
     return (
       <Layout style={{height: "100%"}}>
         <Sider trigger={null} collapsible collapsed={collapsed} width={"220px"}
-               style={{ display: siderFlag ? "block" : "none" }} className={styles.siderDiv}>
+               style={{ display: isShowSider ? "block" : "none" }} className={styles.siderDiv}>
           <Menu
             mode="inline"
             selectedKeys={activeSideMenuKey}
@@ -108,14 +120,14 @@ class SideMenu extends React.Component {
             {siderMenu}
           </Menu>
         </Sider>
-        <Layout style={{padding: tabStyle != "gap" ? "15px" : "0px", background: "#fff"}}>
+        <Layout style={{background: "#fff"}}>
           <Content>
             {/* 引入页面显示组件 */}
             {
-              activeHeadMenuKey == config.frame_menu.main[0].key ?
-              <iframe id={"homeIFrame"} name={"homeIFrame"} onLoad={loadParamsToIFrame} style={{width: "100%", height: "100%", display: "block"}} frameBorder={"no"} src={config.LOCAL_API + "/#/home"}/> :
+              activeHeadMenuKey == config.frame_menu.main[0].key || (activeHeadMenuKey != "home" && themeStyle == "subMenu") ?
+              <iframe id={"homeIFrame"} name={"homeIFrame"} onLoad={loadParamsToIFrame} style={{width: "100%", height: "100%", padding: activeHeadMenuKey != "home" ? "20px" : "0", display: "block"}} frameBorder={"no"} src={config.LOCAL_API + pageUrl}/> :
               <Tabs
-                className={[tabStyle != "gap" ? styles.paneTab : styles.gapTab, styles.distanceDiv]}
+                className={[styles.gapTab, styles.distanceDiv]}
                 type="editable-card"
                 hideAdd
                 onChange={onTabChange}
@@ -126,14 +138,14 @@ class SideMenu extends React.Component {
                 {
                   paneTabs.map((pane, index) =>
                     <TabPane key={pane.key} tab={pane.name}>
-                      <div style={{width: "100%", height: "100%", padding: tabStyle != "gap" ? "0px" : "15px"}} ref={"iframe" + index}>
-                        <iframe id={"tabIFrame"} name={"tabIFrame"} frameBorder={"no"}
-                                style={{width: "100%", height: "95.8%"}}
+                      <div className={styles.tabDiv} ref={"iframe" + index}>
+                        <iframe id={"tabIFrame" + index} name={"tabIFrame" + index} frameBorder={"no"}
+                                style={{width: "100%", height: "100%"}}
                                 onLoad={loadParamsToIFrame}
                                 src={(activeHeadMenuKey == "resource" && activeSideMenuKey != "virtual" && activeSideMenuKey != "service")
                                   || (activeHeadMenuKey == "option" && openedSubMenuKey == "interface") || pane.tabType && pane.tabType == "1" ?
                                   pane.url + (refreshFlag ? ("?refreshView=" + refreshFlag) : "") :
-                                  config.LOCAL_API + "/#" + pane.url + (refreshFlag ? ("?refreshView=" + refreshFlag) : "")}
+                                  config.LOCAL_API + pane.url + (refreshFlag ? ("?refreshView=" + refreshFlag) : "")}
                         />
                       </div>
                     </TabPane>)

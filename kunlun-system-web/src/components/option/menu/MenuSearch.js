@@ -1,7 +1,7 @@
 import React from 'react';
 import { Form, Row, Col, Input, Button, AutoComplete, Icon } from 'antd';
 import config from '../../../config/config';
-import styles from './Menu.less';
+import commonStyles from '../../../pages/index.css';
 import index from "../../../index.less";
 
 const FormItem = Form.Item;
@@ -40,11 +40,10 @@ class MenuSearch extends React.Component {
       onReset()
     };
 
-    const menuLevelOptions = config.MENU_LEVEL.map(item => <Option key={item.key}
-                                                                   value={item.name}>{item.name}</Option>);
+    const menuLevelOptions = config.MENU_LEVEL.map(item => <Option key={item.key} value={item.name}>{item.name}</Option>);
 
     return (
-      <div>
+      <div className={this.state.expand ? commonStyles.singleRowSearch : commonStyles.doubleRowSearch}>
         <Form>
           <Row className={index.formRowDiv}>
             <Col span={6}>

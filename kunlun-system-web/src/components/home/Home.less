@@ -1,23 +1,61 @@
-.userNumCanvas > div > canvas {
-  height: 300px !important;
+.userNumCanvas > canvas {
+  width: 100% !important;
+  height: 330px !important;
 }
 
-.redisCanvas > div > canvas {
+.redisCanvas > canvas {
+  width: 100% !important;
   height: 300px !important;
   background: #ffffff;
 }
 
-.serverMemoryCanvas > div > canvas {
+.serverMemoryDiv {
+  display: flex;
+  flex-direction: row;
+  flex: 1;
+  background: #ffffff;
+}
+
+.serverCPU {
+  display: flex;
+  flex: 1;
+}
+
+.serverCPU > canvas {
+  height: 160px !important;
+  width: 95% !important;
+  background: #ffffff;
+}
+
+.serverCPU [class^=guide-annotation] {
+  top: 83% !important;
+  left: 35% !important;
+}
+
+.serverDisk {
+  display: flex;
+  flex: 1;
+}
+
+.serverDisk > canvas {
+  width: 95% !important;
+  height: 160px !important;
+  background: #ffffff;
+}
+
+.serverDisk [class^=guide-annotation] {
+  top: 83% !important;
+  left: 35% !important;
+}
+
+.serverDiskCanvas > canvas {
+  width: 100% !important;
   height: 200px !important;
   background: #ffffff;
 }
 
-.serverDiskCanvas > div > canvas {
-  height: 200px !important;
-  background: #ffffff;
-}
-
-.mqCanvas > div > canvas {
+.mqCanvas > canvas {
+  width: 100% !important;
   height: 300px !important;
   background: #ffffff;
 }
@@ -128,16 +166,13 @@
 }
 
 .scheduleDiv {
-  padding-left: 15px;
   height: 55px;
   font-size: 16px;
   background: #ffffff;
   border-bottom: 1px solid #e8e8e8;
   padding-top: 15px;
-}
-
-.scheduleDetailDiv {
-  background: #ffffff;
+  display: flex;
+  flex-direction: row;
 }
 
 .scheduleDividerDiv {
@@ -146,8 +181,56 @@
   width: 100%;
 }
 
-.scheduleDistanceDiv {
-  margin-top: 5px;
+.calcendarDiv {
+  display: flex;
+  flex: 1.5;
+  border-right: 1px solid #d9d9d9;
+  width: 50%;
+}
+
+.calcendarDiv [class^=ant-fullcalendar-header] {
+  display: none;
+}
+
+.calcendarDiv [class^=ant-fullcalendar] > table {
+  height: 184px !important;
+}
+
+.calcendarDiv [class^=ant-fullcalendar] {
+  border-top: 0px;
+}
+
+.scheduleShowDiv {
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  line-height: 2;
+  margin: 0px 10px 0px 10px;
+}
+
+.scheduleContentDiv {
+  margin: 0px 10px 10px 10px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  line-height: 2;
+}
+
+.scheduleToolBarDiv {
+  text-align: center;
+  padding: 7px 5px 5px 5px;
+}
+
+.scheduleShowPersonDiv {
+  display: flex;
+  flex-direction: row;
+}
+
+.personDiv {
+  width: 80%;
+  word-wrap:break-word;
+  padding: 0px 0px 0px 5px;
 }
 
 .functionIconDiv {
@@ -176,7 +259,24 @@
   padding: 5px 0px 10px 20px !important;
 }
 
-.scheduleTimeAndLocationDiv {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+.arrowLeft {
+  position: absolute;
+  margin-top: -1.76%
+}
+
+.arrowRight {
+  margin-top: -30.85%;
+  margin-left: 97%;
+}
+
+.arrowIcon {
+  font-size: 20px;
+  margin-top: 5px;
+  color: rgba(0, 0, 0, 0.25);
+  margin-right: 5px;
+}
+
+.arrowIcon:hover {
+  color: blue;
+  cursor: pointer;
 }

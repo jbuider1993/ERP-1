@@ -10,7 +10,7 @@ class NoficationPane extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      activedTabKey: "1"
+      activedTabKey: "notice"
     }
   }
 
@@ -32,7 +32,7 @@ class NoficationPane extends React.Component {
           type="editable-card"
           className={styles.tabTitle}
         >
-          <TabPane tab={"通知（" + noficationList.length + "）"} key={"1"} closable={false}>
+          <TabPane tab={"通知（" + noficationList.length + "）"} key={"notice"} closable={false}>
             <ul className={styles.tabul}>
             {
               noficationList.length  == 0 ? <div className={styles.emptyDiv}>
@@ -47,7 +47,7 @@ class NoficationPane extends React.Component {
             }
             </ul>
           </TabPane>
-          <TabPane tab={"日程（" + messageList.length + "）"} key={"2"} closable={false}>
+          <TabPane tab={"日程（" + messageList.length + "）"} key={"schedule"} closable={false}>
             <ul className={styles.tabul}>
             {
               messageList.length  == 0 ? <div className={styles.emptyDiv}>
@@ -63,7 +63,7 @@ class NoficationPane extends React.Component {
             }
             </ul>
           </TabPane>
-          <TabPane tab={"待办（" + todoList.length + "）"} key={"3"} closable={false}>
+          <TabPane tab={"待办（" + todoList.length + "）"} key={"todo"} closable={false}>
             <ul className={styles.tabul}>
             {
               todoList.length == 0 ? <div className={styles.emptyDiv}>
@@ -86,7 +86,7 @@ class NoficationPane extends React.Component {
         </Tabs>
         <div className={styles.noticeTabButton}>
           <div className={styles.noticeTabClear} onClick={() => clearPane(this.state.activedTabKey)}>
-            清空{this.state.activedTabKey == "1" ? "通知" : this.state.activedTabKey == "2" ? "日程" : "待办"}
+            清空{this.state.activedTabKey == "notice" ? "通知" : this.state.activedTabKey == "schedule" ? "日程" : "待办"}
             </div>
           <div className={styles.noticeTabMore} onClick={() => onDetail(this.state.activedTabKey)}>查看更多</div>
         </div>

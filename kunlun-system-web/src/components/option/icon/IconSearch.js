@@ -2,6 +2,7 @@ import React from 'react';
 import { Form, Row, Col, Input, Button, AutoComplete, Icon } from 'antd';
 import config from '../../../config/config';
 import index from "../../../index.less";
+import commonStyles from '../../../pages/index.css';
 
 const FormItem = Form.Item;
 const Option = AutoComplete.Option;
@@ -31,7 +32,7 @@ class IconSearch extends React.Component {
                                                                    value={item.name}>{item.name}</Option>);
 
     return (
-      <div>
+      <div className={commonStyles.singleRowSearch}>
         <Form>
           <Row className={index.formRowDiv}>
             <Col span={6}>

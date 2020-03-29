@@ -20,9 +20,10 @@ export default {
     themeDrawerVisible: false,
     themeColor: "#000000",
     siderColor: "#fff",
-    themeStyle: "hsc",
+    themeStyle: "siderMenu",
     selectedStyle: "theme",
-    tabStyle: "gap",
+    isBlockStyle: true,
+    menuMap: new Map(),
   },
   reducers: {
     updateState(state, { payload }) {
@@ -30,7 +31,7 @@ export default {
     }
   },
   effects: {
-    *init({ payload }, { select, call, put }) {
+    *initMenu({ payload }, { select, call, put }) {
       let { pathUrlList, paneTabs } = yield select(state => state.globalModel);
       if (pathUrlList.length > 0) return;
       const main1 = config.frame_menu.main;
@@ -45,7 +46,6 @@ export default {
         if (array[i].key != "") pathUrlList.push({ key: array[i].key, name: array[i].name, url: array[i].url });
       }
       yield put({ type: "updateState", payload: { pathUrlList, paneTabs }});
-      yield put({ type: "getAuthCode", payload: {}});
     },
 
     *getAuthCode({ payload: params }, { select, call, put }) {
@@ -95,24 +95,10 @@ export default {
     },
 
     *addActiveRoute({ payload: params }, { select, call, put }) {
-      const { paneTabs } = yield select(state => state.globalModel);
-      let activeHeadMenuKey;
-      const siderMenuObj = config.frame_menu.sider;
-      for (let siderKey of Object.keys(siderMenuObj)) {
-        const siderChildren = siderMenuObj[siderKey];
-        for (let i = 0; i < siderChildren.length; i++) {
-          const menuObj = siderChildren[i];
-          if (menuObj.key == params.key) {
-            activeHeadMenuKey = siderKey;
-            if (params.key == "update") {
-              menuObj["url"] = menuObj["url"] + params.params.id
-            }
-            paneTabs.push(menuObj);
-          }
-        }
-      }
+      let { paneTabs } = yield select(state => state.globalModel);
+      const {activeHeadMenuKey, paneTabList } = yield call(globalService.getActivedMenu, params, paneTabs);
       console.log("open tab, activeHeadMenuKey ===>>> " + activeHeadMenuKey + ", activeSideMenuKey ===>>> " + params.key);
-      yield put({ type: "updateState", payload: { paneTabs, activeHeadMenuKey, activeSideMenuKey: params.key }});
+      yield put({ type: "updateState", payload: { paneTabs: paneTabList, activeHeadMenuKey, activeSideMenuKey: params.key }});
     },
   },
   subscriptions: {
@@ -126,9 +112,14 @@ export default {
       history.listen(location => {
         console.log("=====program start running=====");
         if (location.pathname == "/") {
-          dispatch({type: "init", payload: {}});
-          dispatch({type: "updateState", payload: {dispatch}});
+          dispatch({type: "getAuthCode", payload: {}});
         }
+
+        if (location.pathname == "/scmp") {
+          dispatch({type: "initMenu", payload: {}});
+        }
+
+        dispatch({type: "updateState", payload: {dispatch}});
       });
     },
   },

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Form, Input, Button, Row, Col, AutoComplete} from 'antd';
-import styles from './OperatorLog.less';
+import commonStyles from '../../../pages/index.css';
 import index from '../../../index.less';
 
 const FormItem = Form.Item;
@@ -40,7 +40,7 @@ class OperatorLogSearch extends React.Component {
     };
 
     return (
-      <div>
+      <div className={this.state.isShowDetailItem ? commonStyles.doubleRowSearch : commonStyles.singleRowSearch}>
         <Form>
           <Row className={index.formRowDiv}>
             <Col span={6}>

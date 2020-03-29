@@ -1,7 +1,7 @@
 import React from 'react';
 import { Table, Popconfirm, Icon, Tag } from 'antd';
 import config from '../../../config/config';
-import styles from './Machine.less';
+import styles from './Instance.less';
 
 const MachineList = (props) => {
 

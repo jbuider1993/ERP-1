@@ -1,6 +1,7 @@
 import React from 'react';
 import { Form, Row, Col, Input, Button, AutoComplete, Icon } from 'antd';
 import styles from './Message.less';
+import commonStyles from '../../../pages/index.css';
 
 const FormItem = Form.Item;
 const Option = AutoComplete.Option;
@@ -34,7 +35,7 @@ class MessageSearch extends React.Component {
     const messageOptions = messageTypes.map(item => <Option key={item.key} value={item.name}>{item.name}</Option>);
 
     return (
-      <div>
+      <div className={commonStyles.singleRowSearch}>
         <Form>
           <Row className={styles.formRowDiv}>
             <Col span={6}>

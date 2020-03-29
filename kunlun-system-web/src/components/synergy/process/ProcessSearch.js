@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Form, Input, Button, Row, Col, AutoComplete} from 'antd';
-import styles from './Process.less';
+import commonStyles from '../../../pages/index.css';
 import index from '../../../index.less';
 
 const FormItem = Form.Item;
@@ -26,7 +26,7 @@ const ProcessSearch = (props) => {
   };
 
   return (
-    <div>
+    <div className={commonStyles.singleRowSearch}>
       <Form>
         <Row className={index.formRowDiv}>
           <Col span={6}>
