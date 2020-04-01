@@ -33,23 +33,23 @@ const SystemInfo = (props) => {
                   <Divider className={styles.dividerDiv} />
                 </div>
                 <div className={styles.briefContentDiv}>
-                  <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;scmp 系统基于前后端分离架构，通过Apache Shiro与Jwt组件，用token进行数据交互认证，可独立部署。</div>
-                  <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;scmp-service 基于 SpringBoot 与 Spring Cloud 构建开发，提供后端基于微服务架构的解决方案；scmp-web 基于 dva 与蚂蚁金服 Ant Design 构建开发，提供前端解决方案。</div>
-                  <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;系统基于前后端分离架构，前端服务有：scmp-home-web（前端框架）和scmp-system-web（前端业务服务）；后端服务有：scmp-registry-center（微服务注册中心）、scmp-gate-way（微服务网关）、scmp-cache-trace（缓存与微服务调用链追踪）和scmp-system-service（系统业务服务）。</div>
+                  <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{config.name}基于前后端分离架构，通过Apache Shiro与Jwt组件，用token进行数据交互认证，可独立部署。</div>
+                  <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;kunlun-service 基于 SpringBoot 与 Spring Cloud 构建开发，提供后端基于微服务架构的解决方案；kunlun-web 基于 umi(乌米) 与蚂蚁金服 Ant Design 构建开发，提供前端解决方案。</div>
+                  <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;系统基于前后端分离架构，前端服务有：kunlun-home-web（前端框架）和kunlun-system-web（前端业务服务）；后端服务有：kunlun-register-service（微服务注册中心）、kunlun-gateway-service（微服务网关）、kunlun-basedata-service（基础数据、缓存与微服务调用链追踪）和kunlun-system-service（系统业务服务）。</div>
                 </div>
                 <div className={styles.projectInfoDIv}>
                   <Descriptions title="" layout="vertical" bordered column={3} style={{ flex: 1}}>
                     <DescriptionsItem label="名称">服务治理</DescriptionsItem>
-                    <DescriptionsItem label="项目名">scmp-registry-ampq</DescriptionsItem>
+                    <DescriptionsItem label="项目名">kunlun-register-service</DescriptionsItem>
                     <DescriptionsItem label="说明">服务注册、服务发现、服务心跳检测及高级消息队列</DescriptionsItem>
                     <DescriptionsItem label="服务网关">基础数据服务</DescriptionsItem>
-                    <DescriptionsItem label="scmp-gate-way">scmp-base-cache</DescriptionsItem>
+                    <DescriptionsItem label="kunlun-gateway-service">kunlun-basedata-service</DescriptionsItem>
                     <DescriptionsItem label="服务路由及分布式服务配置中心">提供基础数据支持，如菜单、角色、权限等，并提供分布式缓存功能</DescriptionsItem>
                     <DescriptionsItem label="业务服务">前端框架服务</DescriptionsItem>
-                    <DescriptionsItem label="scmp-system-service">scmp-home-web</DescriptionsItem>
+                    <DescriptionsItem label="kunlun-system-service">kunlun-home-web</DescriptionsItem>
                     <DescriptionsItem label="业务功能支持服务">提供项目布局，登录、菜单、主题等功能</DescriptionsItem>
                     <DescriptionsItem label="前端业务服务">公共模块</DescriptionsItem>
-                    <DescriptionsItem label="scmp-system-web">scmp-common-service</DescriptionsItem>
+                    <DescriptionsItem label="kunlun-system-web">kunlun-common-api</DescriptionsItem>
                     <DescriptionsItem label="提供前端业务数据展示功能">提供公共基础模型、工具等</DescriptionsItem>
                   </Descriptions>
                 </div>
