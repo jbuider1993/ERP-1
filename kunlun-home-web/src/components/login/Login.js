@@ -56,7 +56,6 @@ const Login = (props) => {
             <div className={styles.inputDiv}>
               <div className={styles.welcomeDiv}>
                 <span className={styles.welcomeFont1}>欢迎使用{config.name}</span>
-                <span className={styles.welcomeFont2}>-SCMP！</span>
               </div>
               <Form>
                 <Row>

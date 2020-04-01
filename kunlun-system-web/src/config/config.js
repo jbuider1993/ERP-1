@@ -5,8 +5,8 @@ const CACHE_TRACE_API = 'http://localhost:8020';
 const SYSTEM_SERVICE_API = 'http://localhost:8025';
 const PROCESS_API = "http://localhost:8025";
 const config = {
-  name: '协同管理系统',
-  footerText: '协同管理系统 © 2018-2028 SCMP Copyright | Version 2.0',
+  name: '昆仑管理系统',
+  footerText: '昆仑管理系统 © 2018-2028 KunLun Copyright | Version 2.0',
   logo: '/logo.png',
   PAGE_SIZE: 5,
   PAGE_SIZE_LIST: ['5', '10', '15', '20', '50', '100'],

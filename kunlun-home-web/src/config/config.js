@@ -10,8 +10,8 @@ const SYSTEM_SWAGGER_API = 'http://localhost:8025/swagger-ui.html';
 const SYSTEM_SERVICE_API = 'http://localhost:8015/system-service';
 const PROCESS_API = "http://localhost:8025";
 const config = {
-  name: '协同管理系统',
-  footerText: '协同管理系统 © 2018-2028 SCMP Copyright | Version 2.0',
+  name: '昆仑管理系统',
+  footerText: '昆仑管理系统 © 2018-2028 KunLun Copyright | Version 2.0',
   logo: '/logo.png',
   LIMIT_SIZE: 5,
   PAGE_SIZE: 10,
