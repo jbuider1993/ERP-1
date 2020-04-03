@@ -48,7 +48,7 @@ const Login = (props) => {
 
   return (
     <div className={styles.loginDiv}>
-      <div className={styles.loginPicture} style={{ marginLeft: "7.4%", marginTop: "5.2%", height: "90%", width: "85%", border: "40px solid #fafafa"}}>
+      <div className={styles.loginPicture} style={{ marginLeft: "7.4%", marginTop: "5.2%", height: "90.2%", width: "85%", border: "40px solid #fafafa"}}>
         <div className={styles.logoDiv}>
           <WindowsFilled className={styles.logoIcon} />
           <div className={styles.logoFont}>{config.name}</div>
