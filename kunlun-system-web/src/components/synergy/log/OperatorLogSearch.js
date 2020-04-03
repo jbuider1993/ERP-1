@@ -17,7 +17,9 @@ class OperatorLogSearch extends React.Component {
 
   render() {
 
-    const {onSearch, onReset, form: {getFieldDecorator, getFieldsValue, setFieldsValue, resetFields}} = this.props;
+    const {onSearch, onReset} = this.props;
+    const [form] = Form.useForm();
+    const { getFieldsValue, validateFields, setFieldsValue, resetFields } = form;
 
     const handleSearch = () => {
       let fields = getFieldsValue();
@@ -44,21 +46,18 @@ class OperatorLogSearch extends React.Component {
         <Form>
           <Row className={index.formRowDiv}>
             <Col span={6}>
-              <FormItem {...formItemLayout} label="登录IP">
-                {getFieldDecorator('ip', {initialValue: ""})
-                (<Input placeholder="请输入模型名称" size="default"/>)}
+              <FormItem {...formItemLayout} label="登录IP" name={"ip"}>
+                <Input placeholder="请输入模型名称" size="default"/>
               </FormItem>
             </Col>
             <Col span={6}>
-              <FormItem {...formItemLayout} label='访问用户'>
-                {getFieldDecorator('userName', {initialValue: "",})
-                (<Input placeholder="请输入模型Key" size="default"/>)}
+              <FormItem {...formItemLayout} label='访问用户' name={"userName"}>
+                <Input placeholder="请输入模型Key" size="default"/>
               </FormItem>
             </Col>
             <Col span={6}>
-              <FormItem {...formItemLayout} label='访问服务'>
-                {getFieldDecorator('serviceName', {initialValue: ""})
-                (<Input placeholder="请输入创建时间" size="default"/>)}
+              <FormItem {...formItemLayout} label='访问服务' name={"serviceName"}>
+                <Input placeholder="请输入创建时间" size="default"/>
               </FormItem>
             </Col>
             <Col span={6}>
@@ -73,15 +72,13 @@ class OperatorLogSearch extends React.Component {
             this.state.isShowDetailItem ?
             <Row className={index.formRowDiv}>
               <Col span={6}>
-                <FormItem {...formItemLayout} label="调用方法">
-                  {getFieldDecorator('methodName', {initialValue: ""})
-                  (<Input placeholder="请输入模型名称" size="default"/>)}
+                <FormItem {...formItemLayout} label="调用方法" name={"methodName"}>
+                  <Input placeholder="请输入模型名称" size="default"/>
                 </FormItem>
               </Col>
               <Col span={6}>
-                <FormItem {...formItemLayout} label='操作时间'>
-                  {getFieldDecorator('operateTime', {initialValue: "",})
-                  (<Input placeholder="请输入模型Key" size="default"/>)}
+                <FormItem {...formItemLayout} label='操作时间' name={"operateTime"}>
+                  <Input placeholder="请输入模型Key" size="default"/>
                 </FormItem>
               </Col>
             </Row> : null
@@ -92,4 +89,4 @@ class OperatorLogSearch extends React.Component {
   };
 }
 
-export default Form.create()(OperatorLogSearch);
+export default OperatorLogSearch;

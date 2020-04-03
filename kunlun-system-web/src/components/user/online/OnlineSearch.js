@@ -17,7 +17,9 @@ class OnlineSearch extends React.Component {
 
   render() {
 
-    const { onSearch, onReset, form: { getFieldDecorator, getFieldsValue, setFieldsValue, resetFields }} = this.props;
+    const { onSearch, onReset } = this.props;
+    const [form] = Form.useForm();
+    const { getFieldsValue, validateFields, setFieldsValue, resetFields } = form;
 
     const toggleCollapse = () => {
       const { expand } = this.state;
@@ -44,21 +46,18 @@ class OnlineSearch extends React.Component {
         <Form>
           <Row className={index.formRowDiv}>
             <Col span={6}>
-              <FormItem {...formItemLayout} label="登录账号">
-                {getFieldDecorator('loginName', {initialValue: ""})
-                (<Input placeholder="请输入登录账号" size="default"/>)}
+              <FormItem {...formItemLayout} label="登录账号" name={"loginName"}>
+                <Input placeholder="请输入登录账号" size="default"/>
               </FormItem>
             </Col>
             <Col span={6}>
-              <FormItem {...formItemLayout} label='主机IP'>
-                {getFieldDecorator('loginIp', {initialValue: "",})
-                (<Input placeholder="请输入主机IP" size="default"/>)}
+              <FormItem {...formItemLayout} label='主机IP' name={"loginIp"}>
+                <Input placeholder="请输入主机IP" size="default"/>
               </FormItem>
             </Col>
             <Col span={6}>
-              <FormItem {...formItemLayout} label='登录地点'>
-                {getFieldDecorator('loginAddress', {initialValue: ""})
-                (<Input placeholder="请输入登录地点" size="default"/>)}
+              <FormItem {...formItemLayout} label='登录地点' name={"loginAddress"}>
+                <Input placeholder="请输入登录地点" size="default"/>
               </FormItem>
             </Col>
             <Col span={6}>
@@ -71,27 +70,23 @@ class OnlineSearch extends React.Component {
           </Row>
           <Row style={{ display: this.state.expand ? "none" : "block"}} className={index.formRowDiv}>
             <Col span={6}>
-              <FormItem {...formItemLayout} label='浏览器'>
-                {getFieldDecorator('usedBrowser', {initialValue: ""})
-                (<Input placeholder="请输入浏览器" size="default"/>)}
+              <FormItem {...formItemLayout} label='浏览器' name={"usedBrowser"}>
+                <Input placeholder="请输入浏览器" size="default"/>
               </FormItem>
             </Col>
             <Col span={6}>
-              <FormItem {...formItemLayout} label='操作系统'>
-                {getFieldDecorator('usedWindow', {initialValue: ""})
-                (<Input placeholder="请输入操作系统" size="default"/>)}
+              <FormItem {...formItemLayout} label='操作系统' name={"usedWindow"}>
+                <Input placeholder="请输入操作系统" size="default"/>
               </FormItem>
             </Col>
             <Col span={6}>
-              <FormItem {...formItemLayout} label='是否在线'>
-                {getFieldDecorator('online', {initialValue: ""})
-                (<Input placeholder="请选择状态" size="default"/>)}
+              <FormItem {...formItemLayout} label='是否在线' name={"online"}>
+                <Input placeholder="请选择状态" size="default"/>
               </FormItem>
             </Col>
             <Col span={6}>
-              <FormItem {...formItemLayout} label='登录时间'>
-                {getFieldDecorator('loginTime', {initialValue: ""})
-                (<Input placeholder="请输入登录时间" size="default"/>)}
+              <FormItem {...formItemLayout} label='登录时间' name={"loginTime"}>
+                <Input placeholder="请输入登录时间" size="default"/>
               </FormItem>
             </Col>
           </Row>
@@ -101,4 +96,4 @@ class OnlineSearch extends React.Component {
   };
 }
 
-export default Form.create()(OnlineSearch);
+export default OnlineSearch;

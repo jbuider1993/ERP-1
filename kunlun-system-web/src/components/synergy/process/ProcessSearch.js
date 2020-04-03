@@ -8,7 +8,9 @@ const Option = AutoComplete.Option;
 
 const ProcessSearch = (props) => {
 
-  const { onSearch, onReset, form: { getFieldDecorator, getFieldsValue, setFieldsValue, resetFields }} = props;
+  const { onSearch, onReset } = props;
+  const [form] = Form.useForm();
+  const { getFieldsValue, validateFields, setFieldsValue, resetFields } = form;
 
   const handleSearch = () => {
     let fields = getFieldsValue();
@@ -30,21 +32,18 @@ const ProcessSearch = (props) => {
       <Form>
         <Row className={index.formRowDiv}>
           <Col span={6}>
-            <FormItem {...formItemLayout} label="模型名称">
-              {getFieldDecorator('modelName', {initialValue: ""})
-              (<Input placeholder="请输入模型名称" size="default" />)}
+            <FormItem {...formItemLayout} label="模型名称" name={"modelName"}>
+              <Input placeholder="请输入模型名称" size="default" />
             </FormItem>
           </Col>
           <Col span={6}>
-            <FormItem {...formItemLayout} label='模型Key'>
-              {getFieldDecorator('modelKey', { initialValue: "",  })
-              (<Input placeholder="请输入模型Key" size="default" />)}
+            <FormItem {...formItemLayout} label='模型Key' name={"modelKey"}>
+              <Input placeholder="请输入模型Key" size="default" />
             </FormItem>
           </Col>
           <Col span={6}>
-            <FormItem {...formItemLayout} label='创建时间'>
-              {getFieldDecorator('createTime', { initialValue: "" })
-              (<Input placeholder="请输入创建时间" size="default" />)}
+            <FormItem {...formItemLayout} label='创建时间' name={"createTime"}>
+              <Input placeholder="请输入创建时间" size="default" />
             </FormItem>
           </Col>
           <Col span={6}>
@@ -59,4 +58,4 @@ const ProcessSearch = (props) => {
   );
 };
 
-export default Form.create()(ProcessSearch);
+export default ProcessSearch;

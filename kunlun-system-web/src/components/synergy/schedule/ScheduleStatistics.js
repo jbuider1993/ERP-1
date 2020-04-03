@@ -76,4 +76,4 @@ const ScheduleStatistics = (props) => {
   );
 };
 
-export default Form.create()(ScheduleStatistics);
+export default ScheduleStatistics;

@@ -137,4 +137,4 @@ const OperatorLogModal = (props) => {
   );
 };
 
-export default Form.create()(OperatorLogModal);
+export default OperatorLogModal;

@@ -10,7 +10,9 @@ class RoleSearch extends React.Component {
 
   render() {
 
-    const { onSearch, onReset, form: { getFieldDecorator, getFieldsValue, setFieldsValue, resetFields }} = this.props;
+    const { onSearch, onReset } = this.props;
+    const [form] = Form.useForm();
+    const { getFieldsValue, validateFields, setFieldsValue, resetFields } = form;
 
     const handleSearch = () => {
       let fields = getFieldsValue();
@@ -32,21 +34,18 @@ class RoleSearch extends React.Component {
         <Form>
           <Row className={index.formRowDiv}>
             <Col span={6}>
-              <FormItem {...formItemLayout} label="角色名称">
-                {getFieldDecorator('userName', {initialValue: ""})
-                (<Input placeholder="请输入角色名称" size="default"/>)}
+              <FormItem {...formItemLayout} label="角色名称" name={"userName"}>
+                <Input placeholder="请输入角色名称" size="default"/>
               </FormItem>
             </Col>
             <Col span={6}>
-              <FormItem {...formItemLayout} label='是否启用'>
-                {getFieldDecorator('phoneNumber', {initialValue: "",})
-                (<Input placeholder="请选择启用状态" size="default"/>)}
+              <FormItem {...formItemLayout} label='是否启用' name={"phoneNumber"}>
+                <Input placeholder="请选择启用状态" size="default"/>
               </FormItem>
             </Col>
             <Col span={6}>
-              <FormItem {...formItemLayout} label='创建时间'>
-                {getFieldDecorator('email', {initialValue: ""})
-                (<Input placeholder="请输入创建时间" size="default"/>)}
+              <FormItem {...formItemLayout} label='创建时间' name={"email"}>
+                <Input placeholder="请输入创建时间" size="default"/>
               </FormItem>
             </Col>
             <Col span={6}>
@@ -62,4 +61,4 @@ class RoleSearch extends React.Component {
   };
 }
 
-export default Form.create()(RoleSearch);
+export default RoleSearch;

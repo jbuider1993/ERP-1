@@ -82,4 +82,4 @@ const ModelModal = (props) => {
   );
 };
 
-export default Form.create()(ModelModal);
+export default ModelModal;

@@ -14,7 +14,9 @@ class MessageSearch extends React.Component {
 
   render() {
 
-    const {addMenu, unfoldCollapse, onSearch, onReset, form: {getFieldDecorator, getFieldsValue, resetFields}} = this.props;
+    const {addMenu, unfoldCollapse, onSearch, onReset} = this.props;
+    const [form] = Form.useForm();
+    const { getFieldsValue, validateFields, setFieldsValue, resetFields } = form;
 
     const formItemLayout = {
       labelCol: {span: 8},

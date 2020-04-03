@@ -9,7 +9,9 @@ const Option = AutoComplete.Option;
 
 const MachineSearch = (props) => {
 
-  const { onSearch, form: { getFieldDecorator, getFieldsValue, resetFields } } = props;
+  const { onSearch } = props;
+  const [form] = Form.useForm();
+  const { getFieldsValue, validateFields, setFieldsValue, resetFields } = form;
 
   const formItemLayout = {
     labelCol: { span: 8 },
@@ -28,26 +30,23 @@ const MachineSearch = (props) => {
       <Form>
         <Row className={index.formRowDiv}>
           <Col span={6}>
-            <FormItem label={"菜单名称"} {...formItemLayout}>
-              { getFieldDecorator("name", { initialValue: ""})
-              (<Input placeholder={"请输入菜单名称"} />)}
+            <FormItem label={"菜单名称"} {...formItemLayout} name={"name"}>
+              <Input placeholder={"请输入菜单名称"} />
             </FormItem>
           </Col>
           <Col span={6}>
-            <FormItem label={"访问路径"} {...formItemLayout}>
-              { getFieldDecorator("url", { initialValue: ""})
-              (<Input placeholder={"请输入访问路径"} />)}
+            <FormItem label={"访问路径"} {...formItemLayout} name={"url"}>
+              <Input placeholder={"请输入访问路径"} />
             </FormItem>
           </Col>
           <Col span={6}>
-            <FormItem label={"菜单级别"} {...formItemLayout}>
-              { getFieldDecorator("level", { initialValue: ""})
-              (<AutoComplete
+            <FormItem label={"菜单级别"} {...formItemLayout} name={"level"}>
+              <AutoComplete
                 placeholder={"请输入菜单级别"}
                 dataSource={menuLevelOptions}
               >
                 <Input suffix={<Icon type="down" className="certain-category-icon" />} />
-              </AutoComplete>)}
+              </AutoComplete>
             </FormItem>
           </Col>
           <Col span={6}>
@@ -62,4 +61,4 @@ const MachineSearch = (props) => {
   );
 };
 
-export default Form.create()(MachineSearch);
+export default MachineSearch;

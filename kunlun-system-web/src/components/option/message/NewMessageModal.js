@@ -43,8 +43,9 @@ class NewMessageModal extends React.Component {
 
     const {
       newMessageModalVisible, messageModalType, messageRecord, onCancel, onOk,
-      form: { getFieldDecorator, setFieldsValue, validateFields, getFieldValue, getFieldsValue }
     } = this.props;
+    const [form] = Form.useForm();
+    const { getFieldsValue, validateFields, setFieldsValue, resetFields } = form;
 
     const formItemLayout = {
       labelCol: {span: 3},

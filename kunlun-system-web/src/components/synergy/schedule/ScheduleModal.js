@@ -12,11 +12,10 @@ class ScheduleModal extends React.Component {
   render() {
 
     const {
-      scheduleModalVisible, operateType, onSave, onCancel, singleSchedule, saveLoading, onCacheThemeColor, form: {
-        getFieldDecorator,
-        validateFields
-      }
+      scheduleModalVisible, operateType, onSave, onCancel, singleSchedule, saveLoading, onCacheThemeColor
     } = this.props;
+    const [form] = Form.useForm();
+    const { getFieldsValue, validateFields, setFieldsValue, resetFields } = form;
 
     const formItemLayout = {
       labelCol: {span: 8},
@@ -58,86 +57,59 @@ class ScheduleModal extends React.Component {
           confirmLoading={saveLoading}
         >
           <Form>
-            <Row>
+            <Row initialValues={singleSchedule}>
               <Col span={0}>
-                <FormItem {...formItemLayout} label="主题">
-                  {getFieldDecorator('id', { initialValue: singleSchedule ? singleSchedule.id : "" })
-                  (<Input />)}
+                <FormItem {...formItemLayout} label="主题" name={"id"}>
+                  <Input />
                 </FormItem>
               </Col>
               <Col span={12}>
-                <FormItem {...formItemLayout} label="主题">
-                  {getFieldDecorator('theme', {
-                    initialValue: singleSchedule ? singleSchedule.theme : "",
-                    rules: [{required: true, message: '请输入用户名'}]
-                  })
-                  (<Input placeholder={"请输入用户名"}/>)}
+                <FormItem {...formItemLayout} label="主题" name={"theme"} rules={[{required: true, message: '请输入用户名'}]}>
+                  <Input placeholder={"请输入用户名"}/>
                 </FormItem>
               </Col>
               <Col span={12}>
-                <FormItem {...formItemLayout} label="主题颜色">
-                  {getFieldDecorator('themeColor', {
-                    initialValue: "",
-                    rules: [{required: false, message: '请选择主题颜色'}]
-                  })
-                  (<div>
+                <FormItem {...formItemLayout} label="主题颜色" label="主题" name={"themeColor"} rules={[{required: true, message: '请选择主题颜色'}]}>
+                  <div>
                     <ul className={styles.scheduleThemeUl}>
                       {themeColorOptions}
                     </ul>
-                  </div>)}
+                  </div>
                 </FormItem>
               </Col>
             </Row>
             <Row>
               <Col span={12}>
-                <FormItem {...formItemLayout} label="开始时间">
-                  {getFieldDecorator('startTime', {
-                    initialValue: singleSchedule && singleSchedule.startTime ? moment(singleSchedule.startTime) : "",
-                    rules: [{required: true, message: '请输入开始时间'}]
-                  })
-                  (<DatePicker
+                <FormItem {...formItemLayout} label="开始时间" label="主题" name={"startTime"} rules={[{required: true, message: '请输入开始时间'}]}>
+                  <DatePicker
                     style={{width: "100%"}}
                     format="YYYY-MM-DD HH:mm:ss"
                     showTime={{defaultValue: moment('00:00:00', 'HH:mm:ss')}}
-                  />)
-                  }
+                  />
                 </FormItem>
               </Col>
               <Col span={12}>
-                <FormItem {...formItemLayout} label="结束时间">
-                  {getFieldDecorator('endTime', {
-                    initialValue: singleSchedule && singleSchedule.endTime ? moment(singleSchedule.endTime) : "",
-                    rules: [{required: true, message: '请输入结束时间'}]
-                  })
-                  (<DatePicker
+                <FormItem {...formItemLayout} label="结束时间" label="主题" name={"endTime"} rules={[{required: true, message: '请输入结束时间'}]}>
+                  <DatePicker
                     style={{width: "100%"}}
                     format="YYYY-MM-DD HH:mm:ss"
                     showTime={{defaultValue: moment('00:00:00', 'HH:mm:ss')}}
-                  />)
-                  }
+                  />
                 </FormItem>
               </Col>
             </Row>
             <Row>
               <Col span={12}>
-                <FormItem {...formItemLayout} label="参与人">
-                  {getFieldDecorator('participant', {
-                    initialValue: singleSchedule ? singleSchedule.participant : "",
-                    rules: [{required: true, message: '请选择参与人'}]
-                  })
-                  (<Select mode="tags" style={{width: '100%'}} tokenSeparators={[',']}>
-                  </Select>)}
+                <FormItem {...formItemLayout} label="参与人" label="主题" name={"participant"} rules={[{required: true, message: '请选择参与人'}]}>
+                  <Select mode="tags" style={{width: '100%'}} tokenSeparators={[',']}>
+                  </Select>
                 </FormItem>
               </Col>
             </Row>
             <Row>
               <Col span={24}>
-                <FormItem {...formItemRemarkLayout} label="备注">
-                  {getFieldDecorator('content', {
-                    initialValue: singleSchedule ? singleSchedule.content : "",
-                    rules: [{required: true, message: '请输入主题内容'}]
-                  })
-                  (<TextArea placeholder={"请输入主题内容"}/>)}
+                <FormItem {...formItemRemarkLayout} label="备注" label="主题" name={"content"} rules={[{required: true, message: '请输入主题内容'}]}>
+                  <TextArea placeholder={"请输入主题内容"}/>
                 </FormItem>
               </Col>
             </Row>
@@ -148,4 +120,4 @@ class ScheduleModal extends React.Component {
   };
 }
 
-export default Form.create()(ScheduleModal);
+export default ScheduleModal;

@@ -110,4 +110,4 @@ const ProcessModal = (props) => {
   );
 };
 
-export default Form.create()(ProcessModal);
+export default ProcessModal;

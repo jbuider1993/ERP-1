@@ -21,12 +21,10 @@ class MachineModal extends React.Component {
     // 从传递过来的props中获取参数
     const {
       machineModalVisible, onCancel, onSave, machineInfoData, operateType, saveLoading,
-      form: {
-        getFieldDecorator,
-        validateFields,
-      }
     } = this.props;
     const { radioCheckedValue } = this.state;
+    const [form] = Form.useForm();
+    const { getFieldsValue, validateFields, setFieldsValue, resetFields } = form;
 
     const formItemLayout = {
       labelCol: {span: 8},

@@ -6,10 +6,9 @@ const FormItem = Form.Item;
 
 const UserModal = (props) => {
 
-  const { userModalVisible, userInfoData, operateType, onSave, updateUser, onCancel, form: {
-    getFieldDecorator,
-    validateFields }
-  } = props;
+  const { userModalVisible, userInfoData, operateType, onSave, updateUser, onCancel } = props;
+  const [form] = Form.useForm();
+  const { getFieldsValue, validateFields, setFieldsValue, resetFields } = form;
 
   const formItemLayout = {
     labelCol: { span: 8 },
@@ -35,42 +34,33 @@ const UserModal = (props) => {
         width={800}
         destroyOnClose={true}
       >
-        <Form>
+        <Form initialValues={userInfoData}>
           <Row>
             <Col span={0}>
-              <FormItem label="用户ID">
-                { getFieldDecorator('id', { initialValue: userInfoData ? userInfoData.id : "" })
-                (<Input />) }
+              <FormItem label="用户ID" name={"id"}>
+                <Input />
               </FormItem>
             </Col>
             <Col span={12}>
-              <FormItem { ...formItemLayout } label="用户名">
-                { getFieldDecorator('userName', { initialValue: userInfoData ? userInfoData.userName : "",
-                rules: [{required: true, message: '请输入用户名'}]})
-                (<Input placeholder={"请输入用户名"} />) }
+              <FormItem { ...formItemLayout } label="用户名" name={"userName"} rules={[{required: true, message: '请输入用户名'}]}>
+                <Input placeholder={"请输入用户名"} />
               </FormItem>
             </Col>
             <Col span={12}>
-              <FormItem { ...formItemLayout } label="密码">
-                { getFieldDecorator('password', { initialValue: userInfoData ? userInfoData.password : "",
-                rules: [{required: true, message: '请输入密码'}]})
-                (<Input placeholder={"请输入密码"} />) }
+              <FormItem { ...formItemLayout } label="密码" name={"password"} rules={[{required: true, message: '请输入密码'}]}>
+                <Input placeholder={"请输入密码"} />
               </FormItem>
             </Col>
           </Row>
           <Row>
             <Col span={12}>
-              <FormItem { ...formItemLayout } label="电话号码">
-                { getFieldDecorator('phoneNumber', { initialValue: userInfoData ? userInfoData.phoneNumber : "",
-                rules: [{required: true, message: '请输入电话号码'}]})
-                (<Input placeholder={"请输入电话号码"} />) }
+              <FormItem { ...formItemLayout } label="电话号码" name={"phoneNumber"} rules={[{required: true, message: '请输入电话号码'}]}>
+                <Input placeholder={"请输入电话号码"} />
               </FormItem>
             </Col>
             <Col span={12}>
-              <FormItem { ...formItemLayout } label="邮箱">
-                { getFieldDecorator('email', { initialValue: userInfoData ? userInfoData.email : "",
-                rules: [{required: true, message: '请输入邮箱'}]})
-                (<Input placeholder={"请输入邮箱"} />) }
+              <FormItem { ...formItemLayout } label="邮箱" name={"email"} rules={[{required: true, message: '请输入邮箱'}]}>
+                <Input placeholder={"请输入邮箱"} />
               </FormItem>
             </Col>
           </Row>
@@ -80,4 +70,4 @@ const UserModal = (props) => {
   );
 };
 
-export default Form.create()(UserModal);
+export default UserModal;
