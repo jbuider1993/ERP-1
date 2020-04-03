@@ -7,13 +7,13 @@
     "lint": "eslint --ext .js src mock tests"
   },
   "dependencies": {
-    "@antv/g2plot": "^0.11.19",
-    "antd": "^3.26.0",
-    "axios": "^0.18.0",
-    "braft-editor": "^2.3.5",
-    "dva": "^2.4.0",
+    "@antv/g2plot": "^1.0.2",
+    "antd": "^4.1.0",
+    "axios": "^0.19.0",
+    "braft-editor": "^2.3.8",
+    "dva": "^2.4.1",
     "react": "^16.10.0",
-    "react-amap": "^1.2.5",
+    "react-amap": "^1.2.7",
     "react-dom": "^16.10.0"
   },
   "devDependencies": {
@@ -27,8 +27,8 @@
     "husky": "^0.14.3",
     "lint-staged": "^7.2.2",
     "react-test-renderer": "^16.7.0",
-    "umi": "^2.7.7",
-    "umi-plugin-react": "^1.8.4"
+    "umi": "^2.13.10",
+    "umi-plugin-react": "^1.15.5"
   },
   "lint-staged": {
     "*.{js,jsx}": [

@@ -9,7 +9,15 @@ const FormItem = Form.Item;
  */
 const UserInfo = (props) => {
 
-  const { onSaveUserInfo, onCloseUserInfo, tokenModel, form: { getFieldDecorator, validateFields }} = props;
+  const { onSaveUserInfo, onCloseUserInfo, tokenModel} = props;
+
+  const [form] = Form.useForm();
+  const {
+    getFieldDecorator,
+    getFieldsValue,
+    validateFields,
+    resetFields
+  } = form;
 
   const formItemLayout = {
     labelCol: { span: 8 },
@@ -54,7 +62,7 @@ const UserInfo = (props) => {
       <div className={styles.userInfoUpdate}>
         <Card title="基本资料" className={styles.cardHeader}>
           <div style={{ marginLeft: "-35%" }}>
-            <Form>
+            <Form name="username">
               <Col span={24}>
                 <FormItem { ...formItemLayout } label="用户名称">
                   { getFieldDecorator('userName', { initialValue: tokenModel ? tokenModel.userInfo.userName : "",
@@ -109,4 +117,4 @@ const UserInfo = (props) => {
   )
 };
 
-export default Form.create()(UserInfo);
+export default UserInfo;

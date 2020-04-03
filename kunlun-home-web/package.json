@@ -7,12 +7,12 @@
     "lint": "eslint --ext .js src mock tests"
   },
   "dependencies": {
-    "dva": "^2.4.0",
-    "antd": "^3.26.0",
+    "dva": "^2.4.1",
+    "antd": "^4.1.0",
     "react": "^16.10.0",
     "react-dom": "^16.10.0",
-	  "axios": "^0.18.0",
-	  "react-color": "^2.17.0"
+	  "axios": "^0.19.0",
+	  "react-color": "^2.18.0"
   },
   "devDependencies": {
     "babel-eslint": "^9.0.0",
@@ -25,8 +25,8 @@
     "husky": "^0.14.3",
     "lint-staged": "^7.2.2",
     "react-test-renderer": "^16.7.0",
-    "umi": "^2.7.7",
-    "umi-plugin-react": "^1.8.4"
+    "umi": "^2.13.10",
+    "umi-plugin-react": "^1.15.5"
   },
   "lint-staged": {
     "*.{js,jsx}": ["eslint --fix", "git add"]

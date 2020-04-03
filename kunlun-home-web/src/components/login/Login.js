@@ -12,13 +12,14 @@ const Login = (props) => {
     onLogin,
     refreshCode,
     pageLoading,
-    form: {
-      getFieldDecorator,
-      getFieldsValue,
-      validateFields,
-      resetFields
-    }
   } = props;
+
+  const [form] = Form.useForm();
+  const {
+    getFieldsValue,
+    validateFields,
+    resetFields
+  } = form;
 
   const login = () => {
     validateFields((err, values) => {
@@ -57,29 +58,23 @@ const Login = (props) => {
               <div className={styles.welcomeDiv}>
                 <span className={styles.welcomeFont1}>欢迎使用{config.name}</span>
               </div>
-              <Form>
+              <Form initialValues={{}}>
                 <Row>
                   <div className={styles.loginFont}>用户登录</div>
                 </Row>
                 <Row align="left">
-                  <FormItem>
-                    {getFieldDecorator('userName', {
-                      initialValue: "", rules: [{ required: true, message: "请输入用户名!" }]})
-                    (<Input style={{ width: "240px" }} placeholder={"请输入用户名"} prefix={<Icon type="user" style={{ color: '#506c86' }} />}/>)}
+                  <FormItem name={"userName"} rules={[{required: true, message: "请输入用户名!"}]}>
+                    <Input style={{ width: "240px" }} placeholder={"请输入用户名"} prefix={<Icon type="user" style={{ color: '#506c86' }} />}/>
                   </FormItem>
                 </Row>
                 <Row align="center">
-                  <FormItem>
-                    {getFieldDecorator('password', {
-                      initialValue: "", rules: [{ required: true, message: "请输入密码!" }]})
-                    (<Input.Password style={{ width: "240px" }} placeholder={"请输入密码"} prefix={<Icon type="lock" style={{ color: '#506c86' }} />}/>)}
+                  <FormItem name={"password"} rules={[{ required: true, message: "请输入密码!" }]}>
+                    <Input.Password style={{ width: "240px" }} placeholder={"请输入密码"} prefix={<Icon type="lock" style={{ color: '#506c86' }} />}/>
                   </FormItem>
                 </Row>
                 <Row style={{ left: "-55px" }}>
-                  <FormItem>
-                    {getFieldDecorator('code', {
-                      initialValue: "", rules: [{ required: true, message: "请输入验证码!" }]})
-                    (<Input placeholder={"请输入验证码"} style={{ width: "130px" }} onPressEnter={onKeyEnter} prefix={<Icon type="safety" style={{ color: '#506c86' }} />} />)}
+                  <FormItem name={"code"} rules={[{ required: true, message: "请输入验证码!" }]}>
+                    <Input placeholder={"请输入验证码"} style={{ width: "130px" }} onPressEnter={onKeyEnter} prefix={<Icon type="safety" style={{ color: '#506c86' }} />} />
                   </FormItem>
                 </Row>
                 <Row style={{ right: "13.5%", marginTop: "-20.4%", float: "right", display: "inline-block" }}>
@@ -101,4 +96,4 @@ const Login = (props) => {
   );
 };
 
-export default Form.create()(Login);
+export default Login;
