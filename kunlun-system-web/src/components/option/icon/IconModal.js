@@ -81,4 +81,4 @@ class IconModal extends React.Component {
   };
 }
 
-export default Form.create()(IconModal);
+export default IconModal;

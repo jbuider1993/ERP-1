@@ -19,12 +19,11 @@ class SelectMenuDrawer extends React.Component {
 
     // 从传递过来的props中获取参数
     const {
-      selectMenuModalVisible, onClose, selectMenuLoading, menuList, onSelectTreeNode, form: {
-        getFieldDecorator,
-        validateFields,
-      }
+      selectMenuModalVisible, onClose, selectMenuLoading, menuList, onSelectTreeNode
     } = this.props;
     const { checkedTreeNodeKeys, expandedTreeNodeKeys, selectedTreeNode } = this.state;
+    const [form] = Form.useForm();
+    const { getFieldsValue, validateFields, setFieldsValue, resetFields } = form;
 
     const formItemLayout = {
       labelCol: {span: 8},
@@ -73,13 +72,8 @@ class SelectMenuDrawer extends React.Component {
                 <Form>
                   <Row>
                     <Col span={24}>
-                      <FormItem {...formItemLayout} label="菜单名称">
-                        {getFieldDecorator('level', {
-                          initialValue: "",
-                          rules: [{required: false, message: '请选择菜单类型'}]
-                        })
-                        (<Input/>)
-                        }
+                      <FormItem {...formItemLayout} label="菜单名称" name={"level"} rules={[{required: false, message: '请选择菜单类型'}]}>
+                        <Input/>
                       </FormItem>
                     </Col>
                   </Row>
@@ -111,4 +105,4 @@ class SelectMenuDrawer extends React.Component {
   };
 }
 
-export default Form.create()(SelectMenuDrawer);
+export default SelectMenuDrawer;

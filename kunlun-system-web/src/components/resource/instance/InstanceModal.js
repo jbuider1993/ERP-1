@@ -67,78 +67,50 @@ class MachineModal extends React.Component {
             <Form align="center" style={{marginLeft: "-4%"}}>
               <Row>
                 <Col span={12}>
-                  <FormItem {...formItemLayout} label="菜单类型">
-                    {getFieldDecorator('level', {
-                      initialValue: "",
-                      rules: [{required: false, message: '请选择菜单类型'}]
-                    })
-                    (<RadioGroup value={radioCheckedValue} onChange={onLevelChange}>
+                  <FormItem {...formItemLayout} label="菜单类型" name={"level"} rules={[{required: false, message: '请选择菜单类型'}]}>
+                    <RadioGroup value={radioCheckedValue} onChange={onLevelChange}>
                       {levelOptions}
-                    </RadioGroup>)
-                    }
+                    </RadioGroup>
                   </FormItem>
                 </Col>
                 <Col span={12}>
-                  <FormItem {...formItemLayout} label="是否禁用">
-                    {getFieldDecorator('forbid', {
-                      initialValue: "",
-                      rules: [{required: false, message: '请选择菜单类型'}]
-                    })
-                    (<RadioGroup value={radioCheckedValue}>
+                  <FormItem {...formItemLayout} label="是否禁用" name={"forbid"} rules={[{required: false, message: '请选择菜单类型'}]}>
+                    <RadioGroup value={radioCheckedValue}>
                       {forbidOptions}
-                    </RadioGroup>)
-                    }
+                    </RadioGroup>
                   </FormItem>
                 </Col>
               </Row>
               <Row>
                 <Col span={12}>
-                  <FormItem {...formItemLayout} label="父级菜单">
-                    {getFieldDecorator('parent', {
-                      initialValue: "",
-                      rules: [{required: false, message: '请选择父级菜单'}]
-                    })
-                    (<Input disabled={radioCheckedValue == config.MENU_LEVEL[0].key ? true : false}
-                            suffix={<Icon type="down" className="certain-category-icon"/>}/>)}
+                  <FormItem {...formItemLayout} label="父级菜单" name={"parent"} rules={[{required: false, message: 'parent'}]}>
+                    <Input disabled={radioCheckedValue == config.MENU_LEVEL[0].key ? true : false}
+                            suffix={<Icon type="down" className="certain-category-icon"/>}/>
                   </FormItem>
                 </Col>
                 <Col span={12}>
-                  <FormItem {...formItemLayout} label="菜单名称">
-                    {getFieldDecorator('name', {
-                      initialValue: "",
-                      rules: [{required: false, message: '请输入菜单名称'}]
-                    })(<Input/>)}
+                  <FormItem {...formItemLayout} label="菜单名称" name={"name"} rules={[{required: false, message: '请输入菜单名称'}]}>
+                    <Input/>
                   </FormItem>
                 </Col>
               </Row>
               <Row>
                 <Col span={12}>
-                  <FormItem {...formItemLayout} label="菜单key">
-                    {getFieldDecorator('key', {
-                      initialValue: "",
-                      rules: [{required: false, message: '请输入菜单key'}]
-                    })(<Input/>)}
+                  <FormItem {...formItemLayout} label="菜单key" name={"key"} rules={[{required: false, message: '请输入菜单key'}]}>
+                    <Input/>
                   </FormItem>
                 </Col>
                 <Col span={12}>
-                  <FormItem {...formItemLayout} label="菜单图标">
-                    {getFieldDecorator('icon', {
-                      initialValue: "",
-                      rules: [{required: false, message: '请选择菜单图标'}]
-                    })
-                    (<Input suffix={<Icon type="down" className="certain-category-icon"/>}/>)
-                    }
+                  <FormItem {...formItemLayout} label="菜单图标" name={"icon"} rules={[{required: false, message: '请选择菜单图标'}]}>
+                    <Input suffix={<Icon type="down" className="certain-category-icon"/>}/>
                   </FormItem>
                 </Col>
 
               </Row>
               <Row>
                 <Col span={12}>
-                  <FormItem {...formItemLayout} label="菜单url">
-                    {getFieldDecorator('url', {
-                      initialValue: "",
-                      rules: [{required: false, message: '请输入菜单url'}]
-                    })(<Input/>)}
+                  <FormItem {...formItemLayout} label="菜单url" name={"url"} rules={[{required: false, message: '请输入菜单url'}]}>
+                    <Input/>
                   </FormItem>
                 </Col>
               </Row>
@@ -150,4 +122,4 @@ class MachineModal extends React.Component {
   };
 }
 
-export default Form.create()(MachineModal);
+export default MachineModal;

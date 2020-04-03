@@ -24,7 +24,7 @@ const ShowMessageModal = (props) => {
         destroyOnClose={true}
         footer={[]}
       >
-        <Form>
+        <Form initialValues={messageRecord}>
           <Row>
             <Col span={24}>
               <FormItem {...formItemLayout} label="消息标题">
@@ -50,4 +50,4 @@ const ShowMessageModal = (props) => {
   );
 };
 
-export default Form.create()(ShowMessageModal);
+export default ShowMessageModal;

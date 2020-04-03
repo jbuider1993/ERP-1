@@ -11,7 +11,9 @@ class DictionarySearch extends React.Component {
 
   render() {
 
-    const { onSearch, onReset, form: { getFieldDecorator, getFieldsValue, setFieldsValue, resetFields }} = this.props;
+    const { onSearch, onReset } = this.props;
+    const [form] = Form.useForm();
+    const { getFieldsValue, setFieldsValue, resetFields } = form;
 
     const handleSearch = () => {
       let fields = getFieldsValue();
@@ -30,24 +32,21 @@ class DictionarySearch extends React.Component {
 
     return (
       <div className={commonStyles.singleRowSearch}>
-        <Form>
+        <Form initialValues={{}}>
           <Row className={index.formRowDiv}>
             <Col span={6}>
-              <FormItem {...formItemLayout} label="用户名">
-                {getFieldDecorator('dictionaryName', {initialValue: ""})
-                (<Input placeholder="请输入用户名" size="default"/>)}
+              <FormItem {...formItemLayout} label="用户名" name={"dictionaryName"}>
+                <Input placeholder="请输入用户名" size="default"/>
               </FormItem>
             </Col>
             <Col span={6} className={styles.colDiv}>
-              <FormItem {...formItemLayout} label='电话号码'>
-                {getFieldDecorator('phoneNumber', {initialValue: "",})
-                (<Input placeholder="请输入电话号码" size="default"/>)}
+              <FormItem {...formItemLayout} label='电话号码' name={"phoneNumber"}>
+                <Input placeholder="请输入电话号码" size="default"/>
               </FormItem>
             </Col>
             <Col span={6} className={styles.colDiv}>
-              <FormItem {...formItemLayout} label='创建时间'>
-                {getFieldDecorator('createTime', {initialValue: ""})
-                (<DatePicker placeholder="请输入创建时间" size="default" style={{ width: "100%"}} />)}
+              <FormItem {...formItemLayout} label='创建时间' name={"createTime"}>
+                <DatePicker placeholder="请输入创建时间" size="default" style={{ width: "100%"}} />
               </FormItem>
             </Col>
             <Col span={6}>
@@ -63,4 +62,4 @@ class DictionarySearch extends React.Component {
   };
 }
 
-export default Form.create()(DictionarySearch);
+export default DictionarySearch;

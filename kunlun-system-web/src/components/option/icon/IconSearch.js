@@ -11,7 +11,9 @@ class IconSearch extends React.Component {
 
   render() {
 
-    const {onSearch, onReset, form: {getFieldDecorator, getFieldsValue, resetFields}} = this.props;
+    const {onSearch, onReset} = this.props;
+    const [form] = Form.useForm();
+    const { getFieldsValue, setFieldsValue, resetFields } = form;
 
     const formItemLayout = {
       labelCol: {span: 8},
@@ -36,21 +38,18 @@ class IconSearch extends React.Component {
         <Form>
           <Row className={index.formRowDiv}>
             <Col span={6}>
-              <FormItem label={"菜单名称"} {...formItemLayout}>
-                {getFieldDecorator("name", {initialValue: ""})
-                (<Input placeholder={"请输入菜单名称"}/>)}
+              <FormItem label={"菜单名称"} {...formItemLayout} name={"name"}>
+                <Input placeholder={"请输入菜单名称"}/>
               </FormItem>
             </Col>
             <Col span={6}>
-              <FormItem label={"访问路径"} {...formItemLayout}>
-                {getFieldDecorator("url", {initialValue: ""})
-                (<Input placeholder={"请输入访问路径"}/>)}
+              <FormItem label={"访问路径"} {...formItemLayout} name={"url"}>
+                <Input placeholder={"请输入访问路径"}/>
               </FormItem>
             </Col>
             <Col span={6}>
-              <FormItem label={"创建时间"} {...formItemLayout}>
-                {getFieldDecorator("createTime", {initialValue: ""})
-                (<Input placeholder={"请输入创建时间"}/>)}
+              <FormItem label={"创建时间"} {...formItemLayout} name={"createTime"}>
+                <Input placeholder={"请输入创建时间"}/>
               </FormItem>
             </Col>
             <Col span={6}>
@@ -66,4 +65,4 @@ class IconSearch extends React.Component {
   };
 }
 
-export default Form.create()(IconSearch);
+export default IconSearch;

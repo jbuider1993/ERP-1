@@ -63,36 +63,23 @@ class NewMessageModal extends React.Component {
           width={"70%"}
           destroyOnClose={true}
         >
-          <Form>
+          <Form initialValues={messageRecord}>
             <Row>
               <Col span={24}>
-                <FormItem {...formItemLayout} label="消息标题">
-                  {getFieldDecorator('title', {
-                    initialValue: messageRecord ? messageRecord.title : "",
-                    rules: [{required: false, message: '请输入消息标题'}]
-                  })
-                  (<Input placeholder={"请输入消息标题"} />)}
+                <FormItem {...formItemLayout} label="消息标题" name={"title"} rules={[{required: false, message: '请输入消息标题'}]}>
+                  <Input placeholder={"请输入消息标题"} />
                 </FormItem>
               </Col>
               <Col span={24}>
-                <FormItem {...formItemLayout} label="概要描述">
-                  {getFieldDecorator('description', {
-                    initialValue: messageRecord ? messageRecord.description : "",
-                    rules: [{required: false, message: '请输入概要描述'}]
-                  })(<TextArea placeholder={"请输入概要描述"} />)}
+                <FormItem {...formItemLayout} label="概要描述" name={"description"} rules={[{required: false, message: '请输入概要描述'}]}>
+                  <TextArea placeholder={"请输入概要描述"} />
                 </FormItem>
               </Col>
             </Row>
             <Row>
               <Col span={24}>
-                <FormItem {...formItemLayout} label="详细消息">
-                  {getFieldDecorator('content', {
-                    initialValue: messageRecord ? messageRecord.content : "",
-                    rules: [{required: false, message: '请输入正文内容'}]
-                  })(<BraftEditor
-                      className={styles.draftEditorDiv}
-                      placeholder="请输入正文内容"
-                    />)}
+                <FormItem {...formItemLayout} label="详细消息" name={"content"} rules={[{required: false, message: '请输入正文内容'}]}>
+                  <BraftEditor className={styles.draftEditorDiv} placeholder="请输入正文内容"/>
                 </FormItem>
               </Col>
             </Row>
@@ -103,4 +90,4 @@ class NewMessageModal extends React.Component {
   };
 }
 
-export default Form.create()(NewMessageModal);
+export default NewMessageModal;

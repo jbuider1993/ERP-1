@@ -18,7 +18,9 @@ class MenuSearch extends React.Component {
 
   render() {
 
-    const {addMenu, unfoldCollapse, onSearch, onReset, form: {getFieldDecorator, getFieldsValue, resetFields}} = this.props;
+    const {addMenu, unfoldCollapse, onSearch, onReset} = this.props;
+    const [form] = Form.useForm();
+    const {getFieldDecorator, getFieldsValue, resetFields} = form;
 
     const formItemLayout = {
       labelCol: {span: 8},
@@ -47,26 +49,23 @@ class MenuSearch extends React.Component {
         <Form>
           <Row className={index.formRowDiv}>
             <Col span={6}>
-              <FormItem label={"菜单名称"} {...formItemLayout}>
-                {getFieldDecorator("name", {initialValue: ""})
-                (<Input placeholder={"请输入菜单名称"}/>)}
+              <FormItem label={"菜单名称"} {...formItemLayout} name={"name"}>
+                <Input placeholder={"请输入菜单名称"}/>
               </FormItem>
             </Col>
             <Col span={6}>
-              <FormItem label={"访问路径"} {...formItemLayout}>
-                {getFieldDecorator("url", {initialValue: ""})
-                (<Input placeholder={"请输入访问路径"}/>)}
+              <FormItem label={"访问路径"} {...formItemLayout} name={"url"}>
+                <Input placeholder={"请输入访问路径"}/>
               </FormItem>
             </Col>
             <Col span={6}>
-              <FormItem label={"菜单级别"} {...formItemLayout}>
-                {getFieldDecorator("level", {initialValue: ""})
-                (<AutoComplete
+              <FormItem label={"菜单级别"} {...formItemLayout} name={"level"}>
+                <AutoComplete
                   placeholder={"请输入菜单级别"}
                   dataSource={menuLevelOptions}
                 >
                   <Input suffix={<Icon type="down" className="certain-category-icon"/>}/>
-                </AutoComplete>)}
+                </AutoComplete>
               </FormItem>
             </Col>
             <Col span={6}>
@@ -79,15 +78,13 @@ class MenuSearch extends React.Component {
           </Row>
           <Row style={{display: this.state.expand ? "none" : "block"}} className={index.formRowDiv}>
             <Col span={6}>
-              <FormItem label={"是否禁用"} {...formItemLayout}>
-                {getFieldDecorator("forbid", {initialValue: ""})
-                (<Input placeholder={"请选择是否禁用"}/>)}
+              <FormItem label={"是否禁用"} {...formItemLayout} name={"forbid"}>
+                <Input placeholder={"请选择是否禁用"}/>
               </FormItem>
             </Col>
             <Col span={6}>
-              <FormItem label={"创建时间"} {...formItemLayout}>
-                {getFieldDecorator("createTime", {initialValue: ""})
-                (<Input placeholder={"请输入创建时间"}/>)}
+              <FormItem label={"创建时间"} {...formItemLayout} name={"createTime"}>
+                <Input placeholder={"请输入创建时间"}/>
               </FormItem>
             </Col>
           </Row>
@@ -97,4 +94,4 @@ class MenuSearch extends React.Component {
   };
 }
 
-export default Form.create()(MenuSearch);
+export default MenuSearch;

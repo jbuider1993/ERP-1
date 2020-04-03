@@ -39,26 +39,23 @@ class MessageSearch extends React.Component {
         <Form>
           <Row className={styles.formRowDiv}>
             <Col span={6}>
-              <FormItem label={"消息名称"} {...formItemLayout}>
-                {getFieldDecorator("name", {initialValue: ""})
-                (<Input placeholder={"请输入消息名称"}/>)}
+              <FormItem label={"消息名称"} {...formItemLayout} name={"name"}>
+                <Input placeholder={"请输入消息名称"}/>
               </FormItem>
             </Col>
             <Col span={6}>
-              <FormItem label={"消息类型"} {...formItemLayout}>
-                {getFieldDecorator("url", {initialValue: ""})
-                (<AutoComplete
+              <FormItem label={"消息类型"} {...formItemLayout} name={"url"}>
+                <AutoComplete
                   placeholder={"请选择消息类型"}
                   dataSource={messageOptions}
                 >
                   <Input suffix={<Icon type="down" className="certain-category-icon"/>}/>
-                </AutoComplete>)}
+                </AutoComplete>
               </FormItem>
             </Col>
             <Col span={6}>
-              <FormItem label={"创建时间"} {...formItemLayout}>
-                {getFieldDecorator("level", {initialValue: ""})
-                (<Input placeholder={"请输入创建时间"}/>)}
+              <FormItem label={"创建时间"} {...formItemLayout} name={"level"}>
+                <Input placeholder={"请输入创建时间"}/>
               </FormItem>
             </Col>
             <Col span={6}>
@@ -74,4 +71,4 @@ class MessageSearch extends React.Component {
   };
 }
 
-export default Form.create()(MessageSearch);
+export default MessageSearch;
