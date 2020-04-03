@@ -7,6 +7,7 @@
     "lint": "eslint --ext .js src mock tests"
   },
   "dependencies": {
+    "@ant-design/icons": "^4.0.5",
     "@antv/g2plot": "^1.0.2",
     "antd": "^4.1.0",
     "axios": "^0.19.0",

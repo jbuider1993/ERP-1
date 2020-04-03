@@ -2,6 +2,7 @@ import React from 'react';
 import styles from './Login.less';
 import config from '../../config/config';
 import {Button, Form, Input, Row, Icon, message, Spin} from 'antd';
+import {WindowsFilled} from '@ant-design/icons';
 
 const FormItem = Form.Item;
 
@@ -49,7 +50,7 @@ const Login = (props) => {
     <div className={styles.loginDiv}>
       <div className={styles.loginPicture} style={{ marginLeft: "7.4%", marginTop: "5.2%", height: "90%", width: "85%", border: "40px solid #fafafa"}}>
         <div className={styles.logoDiv}>
-          <Icon type={"windows"} theme={"filled"} className={styles.logoIcon} />
+          <WindowsFilled className={styles.logoIcon} />
           <div className={styles.logoFont}>{config.name}</div>
         </div>
         <div className={styles.spinSpanDiv}>
@@ -59,10 +60,10 @@ const Login = (props) => {
                 <span className={styles.welcomeFont1}>欢迎使用{config.name}</span>
               </div>
               <Form initialValues={{}}>
-                <Row>
+                <Row align="center">
                   <div className={styles.loginFont}>用户登录</div>
                 </Row>
-                <Row align="left">
+                <Row align="center">
                   <FormItem name={"userName"} rules={[{required: true, message: "请输入用户名!"}]}>
                     <Input style={{ width: "240px" }} placeholder={"请输入用户名"} prefix={<Icon type="user" style={{ color: '#506c86' }} />}/>
                   </FormItem>
@@ -72,7 +73,7 @@ const Login = (props) => {
                     <Input.Password style={{ width: "240px" }} placeholder={"请输入密码"} prefix={<Icon type="lock" style={{ color: '#506c86' }} />}/>
                   </FormItem>
                 </Row>
-                <Row style={{ left: "-55px" }}>
+                <Row align="center" style={{ left: "-55px" }}>
                   <FormItem name={"code"} rules={[{ required: true, message: "请输入验证码!" }]}>
                     <Input placeholder={"请输入验证码"} style={{ width: "130px" }} onPressEnter={onKeyEnter} prefix={<Icon type="safety" style={{ color: '#506c86' }} />} />
                   </FormItem>
