@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './Login.less';
 import config from '../../config/config';
 import {Button, Form, Input, Row, Icon, message, Spin} from 'antd';
-import {WindowsFilled} from '@ant-design/icons';
+import {WindowsFilled, UserOutlined, LockOutlined, SafetyCertificateOutlined} from '@ant-design/icons';
 
 const FormItem = Form.Item;
 
@@ -65,17 +65,17 @@ const Login = (props) => {
                 </Row>
                 <Row align="center">
                   <FormItem name={"userName"} rules={[{required: true, message: "请输入用户名!"}]}>
-                    <Input style={{ width: "240px" }} placeholder={"请输入用户名"} prefix={<Icon type="user" style={{ color: '#506c86' }} />}/>
+                    <Input style={{ width: "240px" }} placeholder={"请输入用户名"} prefix={<UserOutlined style={{ color: '#506c86' }} />}/>
                   </FormItem>
                 </Row>
                 <Row align="center">
                   <FormItem name={"password"} rules={[{ required: true, message: "请输入密码!" }]}>
-                    <Input.Password style={{ width: "240px" }} placeholder={"请输入密码"} prefix={<Icon type="lock" style={{ color: '#506c86' }} />}/>
+                    <Input.Password style={{ width: "240px" }} placeholder={"请输入密码"} prefix={<LockOutlined style={{ color: '#506c86' }} />}/>
                   </FormItem>
                 </Row>
-                <Row align="center" style={{ left: "-55px" }}>
+                <Row align="center" style={{ marginLeft: "-110px" }}>
                   <FormItem name={"code"} rules={[{ required: true, message: "请输入验证码!" }]}>
-                    <Input placeholder={"请输入验证码"} style={{ width: "130px" }} onPressEnter={onKeyEnter} prefix={<Icon type="safety" style={{ color: '#506c86' }} />} />
+                    <Input placeholder={"请输入验证码"} style={{ width: "130px" }} onPressEnter={onKeyEnter} prefix={<SafetyCertificateOutlined style={{ color: '#506c86' }} />} />
                   </FormItem>
                 </Row>
                 <Row style={{ right: "13.5%", marginTop: "-20.4%", float: "right", display: "inline-block" }}>
