@@ -3,7 +3,7 @@ import {Avatar, Card, Col, Row, Statistic, Tooltip} from 'antd';
 import indexStyles from "../../pages/home/homeIndex.less";
 import userLogo from '../../assets/userLogo.png';
 import styles from './Home.less';
-import * as Icon from '@ant-design/icons';
+import 'remixicon/fonts/remixicon.css';
 
 class UserWorkbenchCard extends React.Component {
 
@@ -21,14 +21,14 @@ class UserWorkbenchCard extends React.Component {
             <div className={indexStyles.allUserInfo}>
               <div onClick={() => onShowDetail("list")} className={indexStyles.fontWeightHover}>
                 <Tooltip title={"查看全部用户"}>
-                  <Icon.TeamOutlined style={{fontSize: "18px", marginLeft: "70px", marginTop: "5px"}} />
+                  <i className="ri-group-line" style={{fontSize: "18px", marginLeft: "70px", marginTop: "5px"}}></i>
                 </Tooltip>
               </div>
             </div>
           </div>
           <div className={indexStyles.userInfoDiv}>
             <div className={indexStyles.userPhotoDiv}>
-              <Avatar size={80} icon={<Icon.UserOutlined />} src={userLogo} />
+              <Avatar size={80} icon={<i className="ri-user-line"></i>} src={userLogo} />
             </div>
             <div className={indexStyles.userFontDiv}>
               <div><span style={{fontWeight: "bold"}}>{tokenModel ? tokenModel.userName : "admin"}</span>&nbsp;&nbsp;&nbsp;&nbsp;{tokenModel ? tokenModel.userInfo.userName : "管理员"}</div>
@@ -44,7 +44,7 @@ class UserWorkbenchCard extends React.Component {
           <div className={indexStyles.userCountBlock}>
             <div style={{float: "right"}} onClick={() => onShowDetail("online")} className={indexStyles.fontWeightHover}>
               <Tooltip title={"查看登录用户"}>
-                <Icon.UserOutlined style={{fontSize: "16px", marginRight: "20px"}} />
+                <i className="ri-user-line" style={{fontSize: "16px", marginRight: "20px"}}></i>
               </Tooltip>
             </div>
           </div>
@@ -56,7 +56,7 @@ class UserWorkbenchCard extends React.Component {
                              value={userCounts ? userCounts.userCount : 11.28}
                              precision={2}
                              valueStyle={{color: '#3f8600'}}
-                             prefix={<Icon.GlobalOutlined style={{marginRight: "10px"}} />}
+                             prefix={<i className="ri-global-line" style={{marginRight: "10px"}}></i>}
                              suffix="人"/>
                 </Card>
               </Col>
@@ -66,7 +66,7 @@ class UserWorkbenchCard extends React.Component {
                              value={userCounts ? userCounts.onlineCount : 9.3}
                              precision={2}
                              valueStyle={{color: '#cf1322'}}
-                             prefix={<Icon.LaptopOutlined style={{marginRight: "10px"}} />}
+                             prefix={<i className="ri-macbook-line" style={{marginRight: "10px"}}></i>}
                              suffix="人"/>
                 </Card>
               </Col>
@@ -76,7 +76,7 @@ class UserWorkbenchCard extends React.Component {
                              value={userCounts ? userCounts.userCount : 11.28}
                              precision={2}
                              valueStyle={{color: '#3f8600'}}
-                             prefix={<Icon.RobotOutlined style={{marginRight: "10px"}} />}
+                             prefix={<i className="ri-computer-line" style={{marginRight: "10px"}}></i>}
                              suffix="人"/>
                 </Card>
               </Col>

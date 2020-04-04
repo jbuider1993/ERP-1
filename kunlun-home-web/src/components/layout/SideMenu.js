@@ -38,16 +38,16 @@ class SideMenu extends React.Component {
     // 左侧菜单
     const siderFlag = config.frame_menu.sider[activeHeadMenuKey] ? true : false;
     const siderMenu = siderFlag ? config.frame_menu.sider[activeHeadMenuKey].filter(item => item.isShow).map(item => (item.children ?
-      <SubMenu key={item.key} title={<span><Icon type={item.icon}/><span>{item.name}</span></span>} style={{ background: siderColor }}>
+      <SubMenu key={item.key} title={<span><i class={item.icon}/><span>{item.name}</span></span>} style={{ background: siderColor }}>
         {
           item.children ? item.children.filter(item => item.isShow).map(subItem => (
             <MenuItem key={subItem.key} path={subItem.url}>
-              <Icon type={subItem.icon}/><span>{subItem.name}</span>
+              <i class={subItem.icon}/><span>{subItem.name}</span>
             </MenuItem>)) : ""
         }
       </SubMenu> :
       <MenuItem key={item.key} path={item.url}>
-        <Icon type={item.icon}/><span>{item.name}</span>
+        <i class={item.icon}/><span>{item.name}</span>
       </MenuItem>)) : "";
 
     // Tabs页签编辑，即删除
@@ -60,16 +60,16 @@ class SideMenu extends React.Component {
     const dropdownOptions = (
       <Menu style={{ marginTop: "-6px", marginRight: "-9px", right: "5px", padding: "5px 10px 5px 0px" }}>
         <MenuItem style={{ marginTop: "3px", marginLeft: "10px" }}>
-          <div onClick={() => onRefreshTab()}><Icon type={"reload"}/>&nbsp;刷新当前页签</div>
+          <div onClick={() => onRefreshTab()}><i className="ri-refresh-line"></i>&nbsp;刷新当前页签</div>
         </MenuItem>
         <MenuItem style={{ marginTop: "3px", marginBottom: "5px", marginLeft: "10px" }}>
-          <div onClick={closeCurrentTab}><Icon type={"close"}/>&nbsp;关闭当前页签</div>
+          <div onClick={closeCurrentTab}><i className="ri-close-line"></i>&nbsp;关闭当前页签</div>
         </MenuItem>
         <MenuItem style={{ marginTop: "3px", marginBottom: "5px", marginLeft: "10px" }}>
-          <div onClick={closeOtherTab}><Icon type={"close-square"}/>&nbsp;关闭其他页签</div>
+          <div onClick={closeOtherTab}><i className="ri-checkbox-indeterminate-line"></i>&nbsp;关闭其他页签</div>
         </MenuItem>
         <MenuItem style={{ marginTop: "3px", marginBottom: "5px", marginLeft: "10px" }}>
-          <div onClick={onCloseTab}><Icon type={"close-circle"}/>&nbsp;关闭所有页签</div>
+          <div onClick={onCloseTab}><i className="ri-close-circle-line"></i>&nbsp;关闭所有页签</div>
         </MenuItem>
       </Menu>
     );
@@ -77,7 +77,7 @@ class SideMenu extends React.Component {
     const tabOperateOptions = <div style={{marginTop: "2px", marginRight: "10px", marginLeft: "10px"}}>
       <Dropdown overlay={dropdownOptions} className={styles.down}>
         <div>
-          <Icon.DownSquareOutlined style={{ fontSize: "20px" }} />
+          <i className="ri-menu-line" style={{ fontSize: "20px" }}></i>
         </div>
       </Dropdown>
     </div>;
