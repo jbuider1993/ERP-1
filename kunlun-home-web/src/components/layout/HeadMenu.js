@@ -1,8 +1,9 @@
 import React from 'react';
-import {Layout, Menu, Icon, Dropdown, Avatar, Divider, Tooltip, Badge} from 'antd';
+import {Layout, Menu, Dropdown, Avatar, Divider, Tooltip, Badge} from 'antd';
 import styles from './Menu.less';
 import config from "../../config/config";
 import NoficationPane from '../nofication/NoficationPane';
+import 'remixicon/fonts/remixicon.css';
 
 const { Header } = Layout;
 const MenuItem = Menu.Item;
@@ -26,7 +27,7 @@ class HeadMenu extends React.Component {
     const main = config.frame_menu.main;
     const initMainMenu = main.map(item =>
       <MenuItem key={item.key} path={item.url}>
-        <Icon type={item.icon} />{item.name}
+        <i className={item.icon}/>{item.name}
       </MenuItem>);
 
     // 子菜单项
@@ -34,16 +35,16 @@ class HeadMenu extends React.Component {
     const isShowSubMenu = sider && sider.length > 0 && themeStyle == "subMenu" ? true : false;
     const initSubMenu = isShowSubMenu ? sider.filter(item => item.isShow).map(item =>
       (item.children ?
-        <SubMenu key={item.key} title={<span style={{color: "#000000"}}><Icon type={item.icon}/><span>{item.name}</span><Icon type="caret-down" style={{marginLeft: "5px"}} /></span>} style={{ background: "#f5f5f5" }}>
+        <SubMenu key={item.key} title={<span style={{color: "#000000"}}><i className={item.icon}/><span>{item.name}</span><i className="ri-arrow-down-s-line" style={{marginLeft: "5px"}}></i></span>} style={{ background: "#f5f5f5" }}>
           {
             item.children ? item.children.filter(item => item.isShow).map(subItem => (
               <MenuItem key={subItem.key} path={subItem.url}>
-                <span style={{color: "#ffffff"}}><Icon type={subItem.icon} /><span style={{color: activeSideMenuKey == subItem.key ? "#1890ff" : "#ffffff"}}>{subItem.name}</span></span>
+                <span style={{color: "#ffffff"}}><i className={item.icon}/><span style={{color: activeSideMenuKey == subItem.key ? "#1890ff" : "#ffffff"}}>{subItem.name}</span></span>
               </MenuItem>)) : null
           }
         </SubMenu> :
         <MenuItem key={item.key} path={item.url}>
-          <span style={{color: "#000000"}}><Icon type={item.icon} /><span style={{color: activeSideMenuKey == item.key ? "#1890ff" : "#000000"}}>{item.name}</span></span>
+          <span style={{color: "#000000"}}><i className={item.icon}/><span style={{color: activeSideMenuKey == item.key ? "#1890ff" : "#000000"}}>{item.name}</span></span>
         </MenuItem>)) : null;
 
     // 消息通知项
@@ -56,29 +57,29 @@ class HeadMenu extends React.Component {
     const dropdownInfoOptions = (
       <Menu style={{ marginTop: "-6px", marginRight: "-1px", right: "-15%", padding: "5px 10px 5px 0px" }}>
         <MenuItem style={{ marginTop: "5px", marginLeft: "10px" }}>
-          <div onClick={onShowUserInfo}><Icon type={"user"}/>&nbsp;个人中心</div>
+          <div onClick={onShowUserInfo}><i className="ri-shield-user-line"></i>&nbsp;个人中心</div>
         </MenuItem>
         <Divider style={{ margin: "5px" }} />
         <MenuItem style={{ marginTop: "5px", marginBottom: "8px", marginLeft: "10px" }}>
-          <div onClick={onLogout}><Icon type={"logout"}/>&nbsp;退出系统</div>
+          <div onClick={onLogout}><i className="ri-logout-circle-r-line"></i>&nbsp;退出系统</div>
         </MenuItem>
       </Menu>
     );
 
   return (
     <div style={{ height: isShowSubMenu ? "90px" : "55px" }}>
-      <Header style={{ height: "55px", background: themeColor }} >
-        <div style={{ height: "55px", float: "left", marginRight: "0%", marginTop: "-5px" }}>
-          <Icon type="windows" theme="filled" style={{ fontSize: "35px", color: "aliceblue", marginLeft: "-20%", marginTop: "15px" }} />
+      <Header className="header" style={{ height: "55px", background: themeColor, lineHeight: "0px" }} >
+        <div style={{ height: "55px", float: "left", marginRight: "0%", marginTop: "26px", marginLeft:"15px" }}>
+          <i className="ri-dashboard-line" style={{ fontSize: "35px", color: "aliceblue", marginLeft: "-20%", marginTop: "-17px" }}></i>
           <span className={styles.logContent}>{config.name}</span>
         </div>
-        <div onClick={e => {toggleSiderMenu()}} className={styles.collapseDiv}>
-          <Icon title={"缩放左侧菜单"} className={styles.trigger} type={collapsed ? "menu-fold" : "menu-unfold"}/>
+        <div title={"缩放左侧菜单"} onClick={e => {toggleSiderMenu()}} className={styles.collapseDiv}>
+          <i className={collapsed ? "ri-indent-decrease" : "ri-indent-increase"} className={styles.trigger} />
         </div>
-        <ul style={{ float: "right", listStyle: "none", display: "flex", height: "55px", marginRight: "-25px", cursor: "pointer", marginTop: "-2px" }}>
+        <ul style={{ float: "right", listStyle: "none", display: "flex", marginRight: "-25px", cursor: "pointer", marginTop: "20px" }}>
           <li className={styles.menuToolBarli}>
             <Tooltip title={"了解项目"} onClick={onSystemInfo} overlayClassName={styles.messageToolTipA}>
-              <Icon type={"question-circle-o"} style={{ fontSize: "15px", color: "#e8e8e8" }} />
+              <i className="ri-information-line" style={{ fontSize: "15px", color: "#e8e8e8" }}></i>
             </Tooltip>
           </li>
           <li className={styles.menuToolBarliMessage}>
@@ -86,7 +87,7 @@ class HeadMenu extends React.Component {
               <Dropdown overlay={dropdownNoficationOptions} trigger={['click']}>
                 <div>
                   <Badge dot={badgeCount > 0 ? true : false}>
-                    <Icon type={"notification"} style={{ fontSize: "15px", color: "#e8e8e8" }} />
+                    <i className="ri-volume-up-line" style={{ fontSize: "15px", color: "#e8e8e8" }}></i>
                   </Badge>
                 </div>
               </Dropdown>
@@ -94,13 +95,13 @@ class HeadMenu extends React.Component {
           </li>
           <li className={styles.menuToolBarli} onClick={onTheme}>
             <Tooltip title={"主题"} overlayClassName={styles.messageToolTipA}>
-              <Icon type={"skin"} style={{ fontSize: "15px", color: "#e8e8e8" }} />
+              <i className="ri-t-shirt-line" style={{ fontSize: "15px", color: "#e8e8e8" }}></i>
             </Tooltip>
           </li>
-          <li style={{marginTop: "-2px"}}>
+          <li style={{marginTop: "-6px"}}>
             <Dropdown overlay={dropdownInfoOptions} trigger={['click']}>
               <div>
-                <Avatar size={33} icon="user" style={{ marginTop: "-5.5%", background: "#096dd9" }} />
+                <Avatar size={33} icon={<i className="ri-account-circle-fill"></i>} style={{ marginTop: "-5.5%", background: "#096dd9" }} />
                 <span style={{ color: "#fff", marginLeft: "3px" }}>&nbsp;{tokenModel ? tokenModel.userInfo.userName : "SCMP"}</span>
               </div>
             </Dropdown>

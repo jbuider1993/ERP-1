@@ -9,11 +9,12 @@ const Option = AutoComplete.Option;
 
 class DictionarySearch extends React.Component {
 
+  formRef = React.createRef();
+
   render() {
 
     const { onSearch, onReset } = this.props;
-    const [form] = Form.useForm();
-    const { getFieldsValue, setFieldsValue, resetFields } = form;
+    const { getFieldsValue, setFieldsValue, resetFields } = this.formRef;
 
     const handleSearch = () => {
       let fields = getFieldsValue();
@@ -32,7 +33,7 @@ class DictionarySearch extends React.Component {
 
     return (
       <div className={commonStyles.singleRowSearch}>
-        <Form initialValues={{}}>
+        <Form initialValues={{}} ref={this.formRef}>
           <Row className={index.formRowDiv}>
             <Col span={6}>
               <FormItem {...formItemLayout} label="用户名" name={"dictionaryName"}>

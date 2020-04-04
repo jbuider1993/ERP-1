@@ -1,8 +1,9 @@
 import React from 'react';
 import styles from './Home.less';
-import {Avatar, Icon, Tooltip, Empty } from 'antd';
+import {Avatar, Tooltip, Empty } from 'antd';
 import moment from 'moment';
 import indexStyles from '../../pages/home/homeIndex.less';
+import * as Icon from '@ant-design/icons';
 
 class TodaySchedule extends React.Component {
 
@@ -26,7 +27,7 @@ class TodaySchedule extends React.Component {
           <div className={indexStyles.mqTitleFontDiv}>事项日程</div>
           <div onClick={() => onShowDetail("schedule")} className={indexStyles.fontWeightHover}>
             <Tooltip title={"查看详情"}>
-              <Icon type="profile" style={{fontSize: "16px", marginTop: "5px", marginRight: "20px"}} />
+              <Icon.ProfileOutlined style={{fontSize: "16px", marginTop: "5px", marginRight: "20px"}} />
             </Tooltip>
           </div>
         </div>
@@ -38,7 +39,7 @@ class TodaySchedule extends React.Component {
             !scheduleData ? <Empty /> :
               <div className={styles.scheduleContentDiv}>
                 <div className={styles.arrowLeft}>
-                  <Icon type="left-circle" className={styles.arrowIcon} onClick={() => onClickArrow("left")}/>
+                  <Icon.LeftCircleOutlined className={styles.arrowIcon} onClick={() => onClickArrow("left")}/>
                 </div>
                 <div><span>主题：</span><span style={{color: scheduleData.themeColor}}>&nbsp;{scheduleData.theme}</span></div>
                 <div><span>时间：</span><span>&nbsp;{moment(scheduleData.startTime).format(timeFormat) + " - " + moment(scheduleData.endTime).format(timeFormat)}</span></div>
@@ -49,7 +50,7 @@ class TodaySchedule extends React.Component {
                   <span className={styles.personDiv}>{scheduleData.participant}</span>
                 </div>
                 <div className={styles.arrowRight}>
-                  <Icon type="right-circle" className={styles.arrowIcon} onClick={() => onClickArrow("right")}/>
+                  <Icon.RightCircleOutlined className={styles.arrowIcon} onClick={() => onClickArrow("right")}/>
                 </div>
               </div>
           }

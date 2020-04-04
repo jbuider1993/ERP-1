@@ -16,6 +16,8 @@ class MenuModal extends React.Component {
     }
   }
 
+  formRef = React.createRef();
+
   render() {
 
     // 从传递过来的props中获取参数
@@ -24,8 +26,7 @@ class MenuModal extends React.Component {
       selectedTreeNode, selectedIconRows, menuInfoData, menuModalType,
     } = this.props;
     const { radioCheckedValue } = this.state;
-    const [form] = Form.useForm();
-    const { getFieldsValue, validateFields, setFieldsValue, resetFields } = form;
+    const { getFieldsValue, validateFields, setFieldsValue, resetFields } = this.formRef;
 
     const formItemLayout = {
       labelCol: {span: 8},
@@ -100,7 +101,7 @@ class MenuModal extends React.Component {
             width={800}
             destroyOnClose={true}
           >
-            <Form align="center" style={{marginLeft: "-4%"}} initialValues={menuInfoData}>
+            <Form align="center" style={{marginLeft: "-4%"}} initialValues={menuInfoData} ref={this.formRef}>
               <Row>
                 <Col span={0}>
                   <FormItem {...formItemLayout} label="" name={"id"} rules={[{required: false, message: ''}]}/>

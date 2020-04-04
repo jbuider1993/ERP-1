@@ -12,11 +12,12 @@ class MessageSearch extends React.Component {
     super(props);
   }
 
+  formRef = React.createRef();
+
   render() {
 
     const {addMenu, unfoldCollapse, onSearch, onReset} = this.props;
-    const [form] = Form.useForm();
-    const { getFieldsValue, validateFields, setFieldsValue, resetFields } = form;
+    const { getFieldsValue, validateFields, setFieldsValue, resetFields } = this.formRef;
 
     const formItemLayout = {
       labelCol: {span: 8},
@@ -38,7 +39,7 @@ class MessageSearch extends React.Component {
 
     return (
       <div className={commonStyles.singleRowSearch}>
-        <Form>
+        <Form ref={this.formRef}>
           <Row className={styles.formRowDiv}>
             <Col span={6}>
               <FormItem label={"消息名称"} {...formItemLayout} name={"name"}>

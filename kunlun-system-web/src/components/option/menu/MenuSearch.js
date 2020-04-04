@@ -16,11 +16,12 @@ class MenuSearch extends React.Component {
     };
   }
 
+  formRef = React.createRef();
+
   render() {
 
     const {addMenu, unfoldCollapse, onSearch, onReset} = this.props;
-    const [form] = Form.useForm();
-    const {getFieldDecorator, getFieldsValue, resetFields} = form;
+    const {getFieldDecorator, getFieldsValue, resetFields} = this.formRef;
 
     const formItemLayout = {
       labelCol: {span: 8},
@@ -46,7 +47,7 @@ class MenuSearch extends React.Component {
 
     return (
       <div className={this.state.expand ? commonStyles.singleRowSearch : commonStyles.doubleRowSearch}>
-        <Form>
+        <Form ref={this.formRef}>
           <Row className={index.formRowDiv}>
             <Col span={6}>
               <FormItem label={"菜单名称"} {...formItemLayout} name={"name"}>

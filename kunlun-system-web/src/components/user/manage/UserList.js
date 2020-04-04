@@ -1,6 +1,7 @@
 import React from 'react';
 import styles from './User.less';
-import {Table, Icon, Tag, Popconfirm} from 'antd';
+import {Table, Tag, Popconfirm} from 'antd';
+import {SnippetsOutlined, EditOutlined, DeleteOutlined} from '@ant-design/icons';
 
 const UserList = (props) => {
 
@@ -19,13 +20,13 @@ const UserList = (props) => {
     { title: '操作', key: 'operate', width: '10%',
       render: (text, record) => (
       <span>
-        <a onClick={() => onEdit(record)}><Icon type="edit" style={{color: '#08c'}}/></a>
+        <a onClick={() => onEdit(record)}><EditOutlined style={{color: '#08c'}}/></a>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <Popconfirm title="确定删除当前记录？" onConfirm={onDelete.bind(null, record)}>
-          <Icon type="delete" style={{color: 'red'}}/>
+          <DeleteOutlined style={{color: 'red'}}/>
         </Popconfirm>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <a onClick={() => onView(record)}><Icon type="snippets" /></a>
+        <a onClick={() => onView(record)}><SnippetsOutlined /></a>
       </span>)
   }];
 

@@ -15,6 +15,8 @@ class SelectMenuDrawer extends React.Component {
     };
   }
 
+  formRef = React.createRef();
+
   render() {
 
     // 从传递过来的props中获取参数
@@ -22,8 +24,7 @@ class SelectMenuDrawer extends React.Component {
       selectMenuModalVisible, onClose, selectMenuLoading, menuList, onSelectTreeNode
     } = this.props;
     const { checkedTreeNodeKeys, expandedTreeNodeKeys, selectedTreeNode } = this.state;
-    const [form] = Form.useForm();
-    const { getFieldsValue, validateFields, setFieldsValue, resetFields } = form;
+    const { getFieldsValue, validateFields, setFieldsValue, resetFields } = this.formRef;
 
     const formItemLayout = {
       labelCol: {span: 8},
@@ -69,7 +70,7 @@ class SelectMenuDrawer extends React.Component {
           >
             <div className={styles.menuDrawerDiv}>
               <div className={styles.menuDrawerModalDiv}>
-                <Form>
+                <Form ref={this.formRef}>
                   <Row>
                     <Col span={24}>
                       <FormItem {...formItemLayout} label="菜单名称" name={"level"} rules={[{required: false, message: '请选择菜单类型'}]}>

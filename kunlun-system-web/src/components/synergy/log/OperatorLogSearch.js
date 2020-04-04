@@ -15,11 +15,12 @@ class OperatorLogSearch extends React.Component {
     }
   }
 
+  formRef = React.createRef();
+
   render() {
 
     const {onSearch, onReset} = this.props;
-    const [form] = Form.useForm();
-    const { getFieldsValue, validateFields, setFieldsValue, resetFields } = form;
+    const { getFieldsValue, validateFields, setFieldsValue, resetFields } = this.formRef;
 
     const handleSearch = () => {
       let fields = getFieldsValue();
@@ -43,7 +44,7 @@ class OperatorLogSearch extends React.Component {
 
     return (
       <div className={this.state.isShowDetailItem ? commonStyles.doubleRowSearch : commonStyles.singleRowSearch}>
-        <Form>
+        <Form ref={this.formRef}>
           <Row className={index.formRowDiv}>
             <Col span={6}>
               <FormItem {...formItemLayout} label="登录IP" name={"ip"}>

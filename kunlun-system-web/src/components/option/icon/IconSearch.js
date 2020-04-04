@@ -9,11 +9,12 @@ const Option = AutoComplete.Option;
 
 class IconSearch extends React.Component {
 
+  formRef = React.createRef();
+
   render() {
 
     const {onSearch, onReset} = this.props;
-    const [form] = Form.useForm();
-    const { getFieldsValue, setFieldsValue, resetFields } = form;
+    const { getFieldsValue, setFieldsValue, resetFields } = this.formRef;
 
     const formItemLayout = {
       labelCol: {span: 8},
@@ -35,7 +36,7 @@ class IconSearch extends React.Component {
 
     return (
       <div className={commonStyles.singleRowSearch}>
-        <Form>
+        <Form ref={this.formRef}>
           <Row className={index.formRowDiv}>
             <Col span={6}>
               <FormItem label={"菜单名称"} {...formItemLayout} name={"name"}>

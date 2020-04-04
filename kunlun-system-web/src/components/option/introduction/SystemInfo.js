@@ -117,6 +117,7 @@ const SystemInfo = (props) => {
                     <DescriptionsItem label="前端技术栈"><a target = "_blank" href={"https://github.com/facebook/react"}>react</a></DescriptionsItem>
                     <DescriptionsItem label="前端UI库"><a target = "_blank" href={"https://ant.design/index-cn"}>Ant Design</a></DescriptionsItem>
                     <DescriptionsItem label="图表库"><a target = "_blank" href={"https://antv.alipay.com/zh-cn/index.html"}>AntV@G2</a></DescriptionsItem>
+                    <DescriptionsItem label="图标库"><a target = "_blank" href={"https://remixicon.com/"}>Remix Icon</a></DescriptionsItem>
                     <DescriptionsItem label="地图组件"><a target = "_blank" href={"https://github.com/ElemeFE/react-amap"}>react-amap</a></DescriptionsItem>
                     <DescriptionsItem label="富文本编辑器"><a target = "_blank" href={"https://braft.margox.cn/"}>braft-editor</a></DescriptionsItem>
                     <DescriptionsItem label="HTTP库"><a target = "_blank" href={"http://www.axios-js.com/"}>axios</a></DescriptionsItem>

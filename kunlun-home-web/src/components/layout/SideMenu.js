@@ -1,8 +1,9 @@
 import React from 'react';
-import {Layout, Menu, Icon, Tabs, Dropdown} from 'antd';
+import {Layout, Menu, Tabs, Dropdown} from 'antd';
 import config from "../../config/config";
 import styles from './Menu.less';
 import umiRouter from 'umi/router';
+import 'remixicon/fonts/remixicon.css';
 
 const { Sider, Content } = Layout;
 const { SubMenu } = Menu;
@@ -76,7 +77,7 @@ class SideMenu extends React.Component {
     const tabOperateOptions = <div style={{marginTop: "2px", marginRight: "10px", marginLeft: "10px"}}>
       <Dropdown overlay={dropdownOptions} className={styles.down}>
         <div>
-          <Icon type="down-square" style={{ fontSize: "20px" }} />
+          <Icon.DownSquareOutlined style={{ fontSize: "20px" }} />
         </div>
       </Dropdown>
     </div>;

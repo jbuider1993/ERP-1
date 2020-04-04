@@ -69,7 +69,8 @@ class UserStatisticsChart extends React.Component {
             <AutoComplete
               getPopupContainer={() => document.getElementById('userChartMonthSelect')}
               placeholder={"请选择年份"}
-              dataSource={yearOptions}>
+              dataSource={yearOptions}
+            >
               <Input suffix={<Icon type="search" className="certain-category-icon" />} />
             </AutoComplete>
           </div>

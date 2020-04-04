@@ -15,11 +15,12 @@ class OnlineSearch extends React.Component {
     };
   }
 
+  formRef = React.createRef();
+
   render() {
 
     const { onSearch, onReset } = this.props;
-    const [form] = Form.useForm();
-    const { getFieldsValue, validateFields, setFieldsValue, resetFields } = form;
+    const { getFieldsValue, validateFields, setFieldsValue, resetFields } = this.formRef;
 
     const toggleCollapse = () => {
       const { expand } = this.state;
@@ -43,7 +44,7 @@ class OnlineSearch extends React.Component {
 
     return (
       <div className={this.state.expand ? commonStyles.singleRowSearch : commonStyles.doubleRowSearch}>
-        <Form>
+        <Form ref={this.formRef}>
           <Row className={index.formRowDiv}>
             <Col span={6}>
               <FormItem {...formItemLayout} label="登录账号" name={"loginName"}>

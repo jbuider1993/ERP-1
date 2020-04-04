@@ -17,13 +17,13 @@ class ServerMemoryDiskChart extends React.Component {
       value: 64,
       min: 0,
       max: 100,
+      range: [0, 25, 50, 75, 100],
       padding: [10, 10, 30, 10],
-      gaugeStyle: {
-        colors: ['#30bf78', '#a0d911', '#faad14', '#f4664a'],
-        tickLabelSize: 15,
-      },
-      statistic: () => {
-        return '<div class="g2plot-gauge-label"><p class="value">CPU使用率</p></div>';
+      colors: ['#30bf78', '#a0d911', '#faad14', '#f4664a'],
+      tickLabelSize: 5,
+      statistic: {
+        visible: true,
+        text: 'CPU使用率',
       },
     });
     gaugePlot.render();
@@ -35,13 +35,13 @@ class ServerMemoryDiskChart extends React.Component {
       value: 51,
       min: 0,
       max: 100,
+      range: [0, 25, 50, 75, 100],
       padding: [10, 10, 30, 10],
-      gaugeStyle: {
-        colors: ['#30bf78', '#a0d911', '#faad14', '#f4664a'],
-        tickLabelSize: 15,
-      },
-      statistic: () => {
-        return '<div class="g2plot-gauge-label"><p class="title">磁盘使用率</p></div>';
+      colors: ['#30bf78', '#a0d911', '#faad14', '#f4664a'],
+      tickLabelSize: 5,
+      statistic: {
+        visible: true,
+        text: '磁盘使用率',
       },
     });
     gaugePlot.render();

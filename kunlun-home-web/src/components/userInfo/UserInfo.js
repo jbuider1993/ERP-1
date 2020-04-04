@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Layout, Icon, Card, Divider, Avatar, Form, Col, Input, Button } from 'antd';
 import styles from './UserInfo.less';
+import {SaveOutlined, CloseCircleOutlined} from '@ant-design/icons';
 
 const FormItem = Form.Item;
 
@@ -12,12 +13,7 @@ const UserInfo = (props) => {
   const { onSaveUserInfo, onCloseUserInfo, tokenModel} = props;
 
   const [form] = Form.useForm();
-  const {
-    getFieldDecorator,
-    getFieldsValue,
-    validateFields,
-    resetFields
-  } = form;
+  const {getFieldDecorator, getFieldsValue, validateFields, resetFields} = form;
 
   const formItemLayout = {
     labelCol: { span: 8 },
@@ -62,54 +58,42 @@ const UserInfo = (props) => {
       <div className={styles.userInfoUpdate}>
         <Card title="基本资料" className={styles.cardHeader}>
           <div style={{ marginLeft: "-35%" }}>
-            <Form name="username">
+            <Form initialValues={tokenModel ? tokenModel.userInfo : null}>
               <Col span={24}>
-                <FormItem { ...formItemLayout } label="用户名称">
-                  { getFieldDecorator('userName', { initialValue: tokenModel ? tokenModel.userInfo.userName : "",
-                    rules: [{required: true, message: '请输入用户名称'}]})
-                  (<Input placeholder={"请输入用户名称"} />) }
+                <FormItem { ...formItemLayout } label="用户名称" name={"userName"} rules={[{required: true, message: '请输入用户名称'}]}>
+                  <Input placeholder={"请输入用户名称"} />
                 </FormItem>
               </Col>
               <Col span={24}>
-                <FormItem { ...formItemLayout } label="手机号码">
-                  { getFieldDecorator('phoneNumber', { initialValue: tokenModel ? tokenModel.userInfo.phoneNumber : "",
-                    rules: [{required: true, message: '请输入手机号码'}]})
-                  (<Input placeholder={"请输入手机号码"} />) }
+                <FormItem { ...formItemLayout } label="手机号码" name={"phoneNumber"} rules={[{required: true, message: '请输入手机号码'}]}>
+                  <Input placeholder={"请输入手机号码"} />
                 </FormItem>
               </Col>
               <Col span={24}>
-                <FormItem { ...formItemLayout } label="邮箱地址">
-                  { getFieldDecorator('email', { initialValue: tokenModel ? tokenModel.userInfo.email : "",
-                    rules: [{required: true, message: '请输入用户名'}]})
-                  (<Input placeholder={"请输入用户名"} />) }
+                <FormItem { ...formItemLayout } label="邮箱地址" name={"email"} rules={[{required: true, message: '请输入用户名'}]}>
+                  <Input placeholder={"请输入用户名"} />
                 </FormItem>
               </Col>
               <Col span={24}>
-                <FormItem { ...formItemLayout } label="旧密码">
-                  { getFieldDecorator('password', { initialValue: tokenModel ? tokenModel.userInfo.password : "",
-                    rules: [{required: true, message: '请输入旧密码'}]})
-                  (<Input placeholder={"请输入旧密码"} />) }
+                <FormItem { ...formItemLayout } label="旧密码" name={"password"} rules={[{required: true, message: '请输入旧密码'}]}>
+                  <Input placeholder={"请输入旧密码"} />
                 </FormItem>
               </Col>
               <Col span={24}>
-                <FormItem { ...formItemLayout } label="新密码">
-                  { getFieldDecorator('newPassword', { initialValue: "",
-                    rules: [{required: true, message: '请输入新密码'}]})
-                  (<Input placeholder={"请输入新密码"} />) }
+                <FormItem { ...formItemLayout } label="新密码" name={"newPassword"} rules={[{required: true, message: '请输入新密码'}]}>
+                  <Input placeholder={"请输入新密码"} />
                 </FormItem>
               </Col>
               <Col span={24}>
-                <FormItem { ...formItemLayout } label="确认密码">
-                  { getFieldDecorator('newPassword', { initialValue: "",
-                    rules: [{required: true, message: '请输入确认密码'}]})
-                  (<Input placeholder={"请输入确认密码"} />) }
+                <FormItem { ...formItemLayout } label="确认密码" name={"newPassword"} rules={[{required: true, message: '请输入确认密码'}]}>
+                  <Input placeholder={"请输入确认密码"} />
                 </FormItem>
               </Col>
             </Form>
           </div>
           <div style={{ textAlign: "center" }}>
-            <Button type={"primary"} icon="save" onClick={onSaveUserInfo}>保存</Button>
-            <Button type={"danger"} icon={"close"} style={{ marginLeft: "10px" }} onClick={onCloseUserInfo}>关闭</Button>
+            <Button type={"primary"} icon={<SaveOutlined />} onClick={onSaveUserInfo}>保存</Button>
+            <Button type={"danger"} icon={<CloseCircleOutlined />} style={{ marginLeft: "10px" }} onClick={onCloseUserInfo}>关闭</Button>
           </div>
         </Card>
       </div>

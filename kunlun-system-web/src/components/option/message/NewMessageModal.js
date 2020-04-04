@@ -16,6 +16,8 @@ class NewMessageModal extends React.Component {
     }
   }
 
+  formRef = React.createRef();
+
   componentWillReceiveProps(nextProps, nextContext) {
     // 设置编辑器内容
     const record = nextProps.messageRecord;
@@ -44,8 +46,7 @@ class NewMessageModal extends React.Component {
     const {
       newMessageModalVisible, messageModalType, messageRecord, onCancel, onOk,
     } = this.props;
-    const [form] = Form.useForm();
-    const { getFieldsValue, validateFields, setFieldsValue, resetFields } = form;
+    const { getFieldsValue, validateFields, setFieldsValue, resetFields } = this.formRef;
 
     const formItemLayout = {
       labelCol: {span: 3},
@@ -64,7 +65,7 @@ class NewMessageModal extends React.Component {
           width={"70%"}
           destroyOnClose={true}
         >
-          <Form initialValues={messageRecord}>
+          <Form initialValues={messageRecord} ref={this.formRef}>
             <Row>
               <Col span={24}>
                 <FormItem {...formItemLayout} label="消息标题" name={"title"} rules={[{required: false, message: '请输入消息标题'}]}>

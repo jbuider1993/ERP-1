@@ -1,6 +1,7 @@
 import React from 'react';
 import { Modal, Form, Input, Row, Col, DatePicker, Radio } from 'antd';
 import moment from 'moment';
+import * as Icon from '@ant-design/icons';
 
 const FormItem = Form.Item;
 

@@ -2,7 +2,8 @@ import React from 'react';
 import styles from './Home.less';
 import indexStyles from "../../pages/home/homeIndex.less";
 import { Line } from '@antv/g2plot';
-import {Icon, Tooltip} from 'antd';
+import {Tooltip} from 'antd';
+import * as Icon from '@ant-design/icons';
 
 class MQBrokerChart extends React.Component {
 
@@ -48,7 +49,7 @@ class MQBrokerChart extends React.Component {
           <div className={indexStyles.mqTitleFontDiv}>MQ队列Broker消息数量统计</div>
           <div onClick={() => onShowDetail("rabbitmq")} className={indexStyles.fontWeightHover}>
             <Tooltip title={"查看详情"}>
-              <Icon type="profile" style={{fontSize: "16px", marginTop: "5px", marginRight: "20px"}} />
+              <Icon.ProfileOutlined style={{fontSize: "16px", marginTop: "5px", marginRight: "20px"}} />
             </Tooltip>
           </div>
         </div>

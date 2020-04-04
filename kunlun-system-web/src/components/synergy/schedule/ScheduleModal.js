@@ -9,13 +9,14 @@ const Option = Select.Option;
 
 class ScheduleModal extends React.Component {
 
+  formRef = React.createRef();
+
   render() {
 
     const {
       scheduleModalVisible, operateType, onSave, onCancel, singleSchedule, saveLoading, onCacheThemeColor
     } = this.props;
-    const [form] = Form.useForm();
-    const { getFieldsValue, validateFields, setFieldsValue, resetFields } = form;
+    const { getFieldsValue, validateFields, setFieldsValue, resetFields } = this.formRef;
 
     const formItemLayout = {
       labelCol: {span: 8},
@@ -56,7 +57,7 @@ class ScheduleModal extends React.Component {
           destroyOnClose={true}
           confirmLoading={saveLoading}
         >
-          <Form>
+          <Form ref={this.formRef}>
             <Row initialValues={singleSchedule}>
               <Col span={0}>
                 <FormItem {...formItemLayout} label="主题" name={"id"}>
