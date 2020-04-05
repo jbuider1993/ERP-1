@@ -1,7 +1,7 @@
 import React from 'react';
 import {Table, Tag, Tooltip, Button} from 'antd';
 import indexStyles from "../../pages/home/homeIndex.less";
-import * as Icon from '@ant-design/icons';
+import 'remixicon/fonts/remixicon.css';
 
 class ServiceInvokeList extends React.Component {
 
@@ -25,7 +25,7 @@ class ServiceInvokeList extends React.Component {
           <div className={indexStyles.tableCTitleTool}>
             <div onClick={() => onShowDetail("zipkin")} className={indexStyles.fontWeightHover}>
               <Tooltip title={"查看详情"}>
-                <Icon.ProfileOutlined style={{fontSize: "16px", marginTop: "5px", marginRight: "20px"}} />
+                <i className="ri-article-line" style={{fontSize: "19px", marginRight: "20px"}}></i>
               </Tooltip>
             </div>
           </div>

@@ -34,13 +34,17 @@
   padding: 0px !important;
 }
 
-.scheduleTable > div > table > thead {
+.scheduleTable table thead {
   background: #f5f5f5;
 }
 
-.scheduleTable > div > table > thead > tr > th {
-  padding-top: 15px;
-  padding-bottom: 15px !important;
+.scheduleTable table thead > tr > th {
+  padding-top: 10px !important;
+  padding-bottom: 10px !important;
+}
+
+.scheduleTable [class^=ant-picker-body] {
+  padding: 0px !important;
 }
 
 .toolBarDiv {
@@ -79,7 +83,7 @@
 }
 
 .scheduleStatisticsTotalTitleDiv {
-  display: flex;
+  display: inline-block;
   border-bottom: 1px solid #e8e8e8;
   padding: 15px 15px 15px 15px;
 }

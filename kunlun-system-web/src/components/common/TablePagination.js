@@ -16,10 +16,10 @@ const TablePagination = (props) => {
   };
 
   return (
-    <div>
+    <div style={{float: "right"}}>
       <Pagination
         style={{ marginTop: "15px" }}
-        className="ant-table-pagination"
+        className={styles.paginationDiv}
         showQuickJumper
         showSizeChanger={true}
         onShowSizeChange={onShowSizeChange}

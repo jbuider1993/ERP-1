@@ -3,6 +3,7 @@ import styles from './Process.less';
 import {Table, Icon, Tag, Popconfirm, Switch, Tooltip } from 'antd';
 import moment from 'moment';
 import config from '../../../config/config';
+import 'remixicon/fonts/remixicon.css';
 
 const ProcessList = (props) => {
 
@@ -27,7 +28,9 @@ const ProcessList = (props) => {
       render: (text, record) => (
       <span style={{cursor: "pointer"}}>
         <Tooltip title={"查看流程详情"}>
-          <span onClick={() => onView(record)}><Icon type="snippets" /></span>
+          <span onClick={() => onView(record)}>
+            <i className="ri-file-text-line"></i>
+          </span>
         </Tooltip>
       </span>)
   }];
@@ -36,7 +39,6 @@ const ProcessList = (props) => {
     <div className={ styles.listTable }>
       <Table
         bordered
-        size={"small"}
         rowSelection={rowSelection}
         columns={columns}
         dataSource={processList}

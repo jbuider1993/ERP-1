@@ -1,8 +1,9 @@
 import React from 'react';
-import { Form, Row, Col, Input, Button, AutoComplete, Icon } from 'antd';
+import { Form, Row, Col, Input, Button, AutoComplete } from 'antd';
 import config from '../../../config/config';
 import index from "../../../index.less";
 import commonStyles from '../../../pages/index.css';
+import 'remixicon/fonts/remixicon.css';
 
 const FormItem = Form.Item;
 const Option = AutoComplete.Option;
@@ -34,6 +35,11 @@ class IconSearch extends React.Component {
     const menuLevelOptions = config.MENU_LEVEL.map(item => <Option key={item.key}
                                                                    value={item.name}>{item.name}</Option>);
 
+    const iconStyle = {
+      verticalAlign: "bottom",
+      marginRight: "5px",
+    };
+
     return (
       <div className={commonStyles.singleRowSearch}>
         <Form ref={this.formRef}>
@@ -55,8 +61,8 @@ class IconSearch extends React.Component {
             </Col>
             <Col span={6}>
               <div style={{marginTop: "4px", marginLeft: "10px"}}>
-                <Button type={"primary"} onClick={searchMenuList} icon={"search"}>查询</Button>
-                <Button onClick={() => handleReset()} style={{marginLeft: "10px"}} icon={"rest"}>重置</Button>
+                <Button type={"primary"} onClick={searchMenuList} icon={<i className="ri-search-line" style={iconStyle}></i>}>查询</Button>
+                <Button onClick={() => handleReset()} style={{marginLeft: "10px"}} icon={<i className="ri-restart-line" style={iconStyle}></i>}>重置</Button>
               </div>
             </Col>
           </Row>

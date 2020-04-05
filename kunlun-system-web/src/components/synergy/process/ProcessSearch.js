@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Form, Input, Button, Row, Col, AutoComplete} from 'antd';
 import commonStyles from '../../../pages/index.css';
 import index from '../../../index.less';
+import 'remixicon/fonts/remixicon.css';
 
 const FormItem = Form.Item;
 const Option = AutoComplete.Option;
@@ -27,6 +28,11 @@ const ProcessSearch = (props) => {
     wrapperCol: { span: 14 },
   };
 
+  const iconStyle = {
+    verticalAlign: "bottom",
+    marginRight: "5px",
+  };
+
   return (
     <div className={commonStyles.singleRowSearch}>
       <Form>
@@ -48,8 +54,8 @@ const ProcessSearch = (props) => {
           </Col>
           <Col span={6}>
             <FormItem>
-              <Button type="primary" size="default" icon="search" style={{ marginLeft: "10px"}} onClick={() => handleSearch()}>查询</Button>
-              <Button type="default" size="default" icon="rest" style={{ marginLeft: "10px"}} onClick={() => handleReset()}>重置</Button>
+              <Button type="primary" size="default" icon={<i className="ri-search-line" style={iconStyle}></i>} style={{ marginLeft: "10px"}} onClick={() => handleSearch()}>查询</Button>
+              <Button type="default" size="default" icon={<i className="ri-restart-line" style={iconStyle}></i>} style={{ marginLeft: "10px"}} onClick={() => handleReset()}>重置</Button>
             </FormItem>
           </Col>
         </Row>

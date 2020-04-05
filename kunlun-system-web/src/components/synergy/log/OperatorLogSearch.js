@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Form, Input, Button, Row, Col, AutoComplete} from 'antd';
 import commonStyles from '../../../pages/index.css';
 import index from '../../../index.less';
+import 'remixicon/fonts/remixicon.css';
 
 const FormItem = Form.Item;
 const Option = AutoComplete.Option;
@@ -42,6 +43,11 @@ class OperatorLogSearch extends React.Component {
       wrapperCol: {span: 16},
     };
 
+    const iconStyle = {
+      verticalAlign: "bottom",
+      marginRight: "5px",
+    };
+
     return (
       <div className={this.state.isShowDetailItem ? commonStyles.doubleRowSearch : commonStyles.singleRowSearch}>
         <Form ref={this.formRef}>
@@ -63,9 +69,11 @@ class OperatorLogSearch extends React.Component {
             </Col>
             <Col span={6}>
               <FormItem>
-                <Button type="primary" size="default" icon="search" style={{marginLeft: "10px"}} onClick={() => handleSearch()}>查询</Button>
-                <Button type="default" size="default" icon="rest" style={{marginLeft: "10px"}} onClick={() => handleReset()}>重置</Button>
-                <Button type="dashed" size="default" icon={this.state.isShowDetailItem ? "up" : "down"} style={{ marginLeft: "10px" }} onClick={() => onShowDetail()}>搜索</Button>
+                <Button type="primary" size="default" icon={<i className="ri-search-line" style={iconStyle}></i>} style={{marginLeft: "10px"}} onClick={() => handleSearch()}>查询</Button>
+                <Button type="default" size="default" icon={<i className="ri-restart-line" style={iconStyle}></i>} style={{marginLeft: "10px"}} onClick={() => handleReset()}>重置</Button>
+                <Button type="dashed" size="default" style={{ marginLeft: "10px" }} onClick={() => onShowDetail()}>
+                  <i className={this.state.expand ? "ri-arrow-down-s-line" : "ri-arrow-up-s-line"} style={iconStyle}></i>搜索
+                </Button>
               </FormItem>
             </Col>
           </Row>

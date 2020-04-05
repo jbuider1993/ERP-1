@@ -1,6 +1,7 @@
 import React from 'react';
 import styles from './Role.less';
 import {Table, Icon, Tag, Popconfirm, Switch } from 'antd';
+import 'remixicon/fonts/remixicon.css';
 
 const RoleList = (props) => {
 
@@ -20,13 +21,21 @@ const RoleList = (props) => {
     { title: '操作', key: 'operate', width: '15%',
       render: (text, record) => (
       <span>
-        <a onClick={() => onEdit(record)}><Icon type="edit" style={{color: '#08c'}}/></a>
+        <a onClick={() => onEdit(record)}>
+          <i className="ri-edit-2-line" style={{color: '#08c'}}></i>
+        </a>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <a onClick={() => onEdit(record)}><Icon type="windows" style={{color: '#08c'}}/></a>
+        <a onClick={() => onEdit(record)}>
+          <i className="ri-windows-line" style={{color: '#08c'}}></i>
+        </a>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <a onClick={() => onEdit(record)}><Icon type="team" style={{color: '#08c'}}/></a>
+        <a onClick={() => onEdit(record)}>
+          <i className="ri-team-line" style={{color: '#08c'}}></i>
+        </a>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <a onClick={() => onView(record)}><Icon type="snippets" /></a>
+        <a onClick={() => onView(record)}>
+          <i className="ri-file-text-line"></i>
+        </a>
       </span>)
   }];
 

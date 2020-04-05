@@ -2,6 +2,7 @@ import React from 'react';
 import { Carousel, Card, Descriptions, Divider, Layout, Icon, Timeline } from 'antd';
 import styles from './Introduction.less';
 import config from '../../../config/config';
+import 'remixicon/fonts/remixicon.css';
 
 const DescriptionsItem = DescriptionsItem;
 const { Header, Content, Footer } = Layout;
@@ -11,6 +12,12 @@ const SystemInfo = (props) => {
 
   const { tokenModel } = props;
 
+  const iconStyle = {
+    verticalAlign: "bottom",
+    marginRight: "5px",
+    fontSize: "16px",
+  };
+
   /**
    * 还可增加系统成长史，可罗列出关键时间；系统数次启动操作指南等
    */
@@ -19,9 +26,9 @@ const SystemInfo = (props) => {
     <div>
       <Layout style={{ background: '#fff'}}>
         <Header style={{ background: '#e8e8e88a', padding: 0, marginBottom: "15px", width: "100%" }}>
-          <div style={{ padding: "10px 15px" }}>
-            <Icon type="slack-circle" theme="filled" style={{ fontSize: "35px", color: "blue" }} />
-            <span style={{ padding: "0px 10px", marginTop: "-9px", position: "absolute", fontSize: "20px" }}>{config.name}</span>
+          <div style={{ padding: "10px 15px", display: "inline" }}>
+            <i className="ri-global-fill" style={{ fontSize: "35px", color: "blue" }}></i>
+            <span style={{ padding: "9px 10px", marginTop: "-9px", position: "absolute", fontSize: "20px" }}>{config.name}</span>
           </div>
         </Header>
         <Content>
@@ -62,23 +69,23 @@ const SystemInfo = (props) => {
                 <div className={styles.logContenDiv}>
                   <div className={styles.logServiceDiv}>
                     <Timeline>
-                      <TimeLineItem dot={<Icon type="global" style={{ fontSize: '16px' }} />} color="green">2018-10-04 搭建单服务前台</TimeLineItem>
-                      <TimeLineItem dot={<Icon type="control" style={{ fontSize: '16px' }} />} color="blue">2018-10-04 SpringCloud工程搭建</TimeLineItem>
-                      <TimeLineItem dot={<Icon type="global" style={{ fontSize: '16px' }} />} color="green">2018-10-15 实现初版菜单切换功能（每个页面嵌套在公共菜单框架里）</TimeLineItem>
-                      <TimeLineItem dot={<Icon type="global" style={{ fontSize: '16px' }} />} color="green">2018-11-09 实现第二版菜单切换功能（公共菜单框架嵌套在route.js里）</TimeLineItem>
-                      <TimeLineItem dot={<Icon type="global" style={{ fontSize: '16px' }} />} color="green">2018-12-27实现第三版菜单切换功能（菜单框架与业务服务分开）</TimeLineItem>
+                      <TimeLineItem dot={<i className="ri-global-line" style={iconStyle}></i>} color="green">2018-10-04 搭建单服务前台</TimeLineItem>
+                      <TimeLineItem dot={<i className="ri-stack-line" style={iconStyle}></i>} color="blue">2018-10-04 SpringCloud工程搭建</TimeLineItem>
+                      <TimeLineItem dot={<i className="ri-global-line" style={iconStyle}></i>} color="green">2018-10-15 实现初版菜单切换功能（每个页面嵌套在公共菜单框架里）</TimeLineItem>
+                      <TimeLineItem dot={<i className="ri-global-line" style={iconStyle}></i>} color="green">2018-11-09 实现第二版菜单切换功能（公共菜单框架嵌套在route.js里）</TimeLineItem>
+                      <TimeLineItem dot={<i className="ri-global-line" style={iconStyle}></i>} color="green">2018-12-27实现第三版菜单切换功能（菜单框架与业务服务分开）</TimeLineItem>
                       <TimeLineItem dot={<Icon type="control" style={{ fontSize: '16px' }} />} color="blue">2018-11-04初步搭建SpringCloud工程（服务治理与路由网关）</TimeLineItem>
                     </Timeline>
                   </div>
                   <div className={styles.logWebDiv}>
                     <Timeline>
-                      <TimeLineItem dot={<Icon type="control" style={{ fontSize: '16px' }} />} color="blue">2018-11-24 搭建SpringCloud工程（服务调用链追踪）</TimeLineItem>
-                      <TimeLineItem dot={<Icon type="control" style={{ fontSize: '16px' }} />} color="blue">2019-01-13 前端与后端开始整合</TimeLineItem>
-                      <TimeLineItem dot={<Icon type="control" style={{ fontSize: '16px' }} />} color="blue">2019-03-13 SpringBoot整合RabbitMQ</TimeLineItem>
-                      <TimeLineItem dot={<Icon type="control" style={{ fontSize: '16px' }} />} color="blue">2019-04-05 实现动态数据源切换</TimeLineItem>
-                      <TimeLineItem dot={<Icon type="control" style={{ fontSize: '16px' }} />} color="blue">2019-04-15 Apache Shiro与Jwt实现用户认证与鉴权</TimeLineItem>
-                      <TimeLineItem dot={<Icon type="control" style={{ fontSize: '16px' }} />} color="blue">2019-04-23 系统整合Activiti流程管控组件</TimeLineItem>
-                      <TimeLineItem dot={<Icon type="global" style={{ fontSize: '16px' }} />} color="green">2019-07-02 前台功能逐步完善</TimeLineItem>
+                      <TimeLineItem dot={<i className="ri-stack-line" style={iconStyle}></i>} color="blue">2018-11-24 搭建SpringCloud工程（服务调用链追踪）</TimeLineItem>
+                      <TimeLineItem dot={<i className="ri-stack-line" style={iconStyle}></i>} color="blue">2019-01-13 前端与后端开始整合</TimeLineItem>
+                      <TimeLineItem dot={<i className="ri-stack-line" style={iconStyle}></i>} color="blue">2019-03-13 SpringBoot整合RabbitMQ</TimeLineItem>
+                      <TimeLineItem dot={<i className="ri-stack-line" style={iconStyle}></i>} color="blue">2019-04-05 实现动态数据源切换</TimeLineItem>
+                      <TimeLineItem dot={<i className="ri-stack-line" style={iconStyle}></i>} color="blue">2019-04-15 Apache Shiro与Jwt实现用户认证与鉴权</TimeLineItem>
+                      <TimeLineItem dot={<i className="ri-stack-line" style={iconStyle}></i>} color="blue">2019-04-23 系统整合Activiti流程管控组件</TimeLineItem>
+                      <TimeLineItem dot={<i className="ri-global-line" style={iconStyle}></i>} color="green">2019-07-02 前台功能逐步完善</TimeLineItem>
                     </Timeline>
                   </div>
                 </div>

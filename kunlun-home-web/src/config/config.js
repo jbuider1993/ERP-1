@@ -51,7 +51,7 @@ const config = {
       { key: "user", url: "", icon: "ri-user-line", name: "用户管理", isShow: true },
       { key: "synergy", url: "", icon: "ri-codepen-line", name: "协同管理", isShow: true },
       { key: "resource", url: "", icon: "ri-file-cloud-line", name: "资源管理", isShow: true },
-      { key: "option", url: "", icon: "ri-settings-5-line", name: "系统管理", isShow: true },
+      { key: "option", url: "", icon: "ri-settings-3-line", name: "系统管理", isShow: true },
     ],
     sider: {
       user: [

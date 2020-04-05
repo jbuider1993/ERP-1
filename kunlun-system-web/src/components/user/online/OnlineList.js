@@ -2,6 +2,7 @@ import React from 'react';
 import styles from './Online.less';
 import {Table, Icon, Tag, Popconfirm} from 'antd';
 import moment from 'moment';
+import 'remixicon/fonts/remixicon.css';
 
 const OnlineList = (props) => {
 
@@ -26,10 +27,10 @@ const OnlineList = (props) => {
       render: (text, record) => (
       <span>
         <Popconfirm title="确定删除当前记录？" onConfirm={onDelete.bind(null, record)}>
-          <Icon type="delete" style={{color: 'red'}}/>
+          <i className="ri-delete-bin-7-line" style={{color: 'red'}}></i>
         </Popconfirm>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <a onClick={() => onView(record)}><Icon type="snippets" /></a>
+        <a onClick={() => onView(record)}><i className="ri-file-text-line"></i></a>
       </span>)
   }];
 

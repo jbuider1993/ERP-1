@@ -3,6 +3,7 @@ import styles from './Model.less';
 import {Table, Icon, Tag, Popconfirm, Switch, Tooltip } from 'antd';
 import moment from 'moment';
 import config from '../../../config/config';
+import 'remixicon/fonts/remixicon.css';
 
 const ModelList = (props) => {
 
@@ -24,10 +25,14 @@ const ModelList = (props) => {
       render: (text, record) => (
       <span style={{cursor: "pointer"}}>
         <Tooltip title={"编辑流程模型"}>
-          <span onClick={() => onEdit(record)}><Icon type="edit" /></span>
+          <span onClick={() => onEdit(record)}>
+            <i className="ri-edit-2-line" style={{color: '#08c'}}></i>
+          </span>
         </Tooltip>
         <Tooltip title={"查看流程详情"}>
-          <span style={{marginLeft: "15px"}} onClick={() => onView(record)}><Icon type="snippets" /></span>
+          <span style={{marginLeft: "15px"}} onClick={() => onView(record)}>
+            <i className="ri-file-text-line"></i>
+          </span>
         </Tooltip>
       </span>)
   }];
@@ -36,7 +41,6 @@ const ModelList = (props) => {
     <div className={ styles.listTable }>
       <Table
         bordered
-        size={"small"}
         rowSelection={rowSelection}
         columns={columns}
         dataSource={modelList}

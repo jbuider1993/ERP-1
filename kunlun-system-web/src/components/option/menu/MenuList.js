@@ -1,7 +1,8 @@
 import React from 'react';
-import { Table, Popconfirm, Icon, Tag } from 'antd';
+import { Table, Popconfirm, Tag } from 'antd';
 import config from '../../../config/config';
 import styles from './Menu.less';
+import 'remixicon/fonts/remixicon.css';
 
 const MenuList = (props) => {
 
@@ -30,13 +31,15 @@ const MenuList = (props) => {
     { title: '是否禁用', dataIndex: 'forbid', key: 'forbid', width: '8%', align: "center",
       render: (text, record, index) => text == true ? <Tag color="#f50">{"禁用"}</Tag> : <Tag color="#87d068">{"显示"}</Tag> },
     { title: '图标', dataIndex: 'icon', key: 'icon', width: '8%', align: "center",
-      render: (text, record, index) => <Icon type={text} className="certain-category-icon" /> },
+      render: (text, record, index) => <i className="certain-category-icon" /> },
     { title: '操作', key: 'operate', width: '8%', render: (text, record, index) => (
       <span>
-        <a onClick={() => onEditMenu(record)}><Icon type="edit" style={{color: '#08c'}}/></a>
+        <a onClick={() => onEditMenu(record)}>
+          <i className="ri-edit-2-line" style={{color: '#08c'}}></i>
+        </a>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <Popconfirm title="确定删除当前记录？" onConfirm={onDelete.bind(null, record)}>
-          <Icon type="delete" style={{color: 'red'}}/>
+          <i className="ri-delete-bin-7-line" style={{color: 'red'}}></i>
         </Popconfirm>
       </span>), align: "center"
     }];
@@ -44,11 +47,10 @@ const MenuList = (props) => {
   return (
     <div className={ styles.menuTable }>
       <Table
-        size={"small"}
         columns={columns}
         dataSource={menuList}
         bordered={true}
-        loading={menuListLoading}
+        loading={false}
         rowKey={record => record.id}
         onExpand={onExpandMenuList}
         pagination={false}

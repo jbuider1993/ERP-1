@@ -33,7 +33,6 @@ const OperatorLogList = (props) => {
     <div className={ styles.listTable }>
       <Table
         bordered
-        size={"small"}
         rowSelection={rowSelection}
         columns={columns}
         dataSource={logList}

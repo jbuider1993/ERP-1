@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './User.less';
 import {Table, Tag, Popconfirm} from 'antd';
-import {SnippetsOutlined, EditOutlined, DeleteOutlined} from '@ant-design/icons';
+import 'remixicon/fonts/remixicon.css';
 
 const UserList = (props) => {
 
@@ -20,13 +20,13 @@ const UserList = (props) => {
     { title: '操作', key: 'operate', width: '10%',
       render: (text, record) => (
       <span>
-        <a onClick={() => onEdit(record)}><EditOutlined style={{color: '#08c'}}/></a>
+        <a onClick={() => onEdit(record)}><i className="ri-edit-2-line" style={{color: '#08c'}}></i></a>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <Popconfirm title="确定删除当前记录？" onConfirm={onDelete.bind(null, record)}>
-          <DeleteOutlined style={{color: 'red'}}/>
+          <i className="ri-delete-bin-7-line" style={{color: 'red'}}></i>
         </Popconfirm>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <a onClick={() => onView(record)}><SnippetsOutlined /></a>
+        <a onClick={() => onView(record)}><i className="ri-file-text-line"></i></a>
       </span>)
   }];
 
@@ -34,7 +34,6 @@ const UserList = (props) => {
     <div className={ styles.listTable }>
       <Table
         bordered
-        size={"small"}
         rowSelection={rowSelection}
         columns={columns}
         dataSource={userList}

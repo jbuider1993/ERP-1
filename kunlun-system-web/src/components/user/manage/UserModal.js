@@ -32,7 +32,7 @@ const UserModal = (props) => {
         okText="保存"
         onCancel={onCancel}
         onOk={onOk}
-        width={800}
+        width={650}
         destroyOnClose={true}
       >
         <Form initialValues={userInfoData}>

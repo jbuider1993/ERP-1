@@ -75,13 +75,12 @@ class HeadMenu extends React.Component {
   return (
     <div style={{ height: isShowSubMenu ? "90px" : "55px" }}>
       <Header className="header" style={{ height: "55px", background: themeColor, lineHeight: "0px" }} >
-        <div style={{ height: "55px", float: "left", marginRight: "0%", marginTop: "27px", marginLeft:"15px" }}>
-          <i className="ri-dashboard-line" style={{ fontSize: "35px", color: "aliceblue", marginLeft: "-20%", marginTop: "-17px" }}></i>
+        <div style={{ height: "55px", float: "left", marginRight: "0%", marginTop: "28px", marginLeft:"15px" }}>
+          <i className="ri-global-fill" style={{ fontSize: "35px", color: "aliceblue", marginLeft: "-20%", marginTop: "-17px" }}></i>
           <span className={styles.logContent}>{config.name}</span>
         </div>
         <div title={"缩放左侧菜单"} onClick={e => {toggleSiderMenu()}} className={styles.collapseDiv}>
-          {/*<i className={collapsed ? "ri-indent-decrease" : "ri-indent-increase"} className={styles.trigger} />*/}
-          <i className={collapsed ? "ri-indent-decrease" : "ri-indent-increase"} />
+          <i className={collapsed ? "ri-indent-increase" : "ri-indent-decrease"} />
         </div>
         <ul style={{ float: "right", listStyle: "none", display: "flex", marginRight: "-25px", cursor: "pointer", marginTop: "20px" }}>
           <li className={styles.menuToolBarli}>
@@ -108,7 +107,7 @@ class HeadMenu extends React.Component {
           <li style={{marginTop: "-6px"}}>
             <Dropdown overlay={dropdownInfoOptions} trigger={['click']}>
               <div>
-                <Avatar size={33} icon={<i className="ri-account-circle-fill" style={{fontSize: "19px", verticalAlign: "middle"}}></i>} style={{ marginTop: "-5.5%", background: "#096dd9" }} />
+                <Avatar size={33} icon={<i className="ri-account-circle-line" style={{fontSize: "19px", verticalAlign: "sub"}}></i>} style={{ marginTop: "-5.5%", background: "#096dd9" }} />
                 <span style={{ color: "#fff", marginLeft: "3px" }}>&nbsp;{tokenModel ? tokenModel.userInfo.userName : "SCMP"}</span>
               </div>
             </Dropdown>

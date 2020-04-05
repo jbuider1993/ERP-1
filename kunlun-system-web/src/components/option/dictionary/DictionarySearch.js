@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import {Form, Input, Button, Row, Col, AutoComplete, DatePicker, Icon} from 'antd';
+import {Form, Input, Button, Row, Col, AutoComplete, DatePicker} from 'antd';
 import styles from './Dictionary.less';
 import index from '../../../index.less';
 import commonStyles from '../../../pages/index.css';
+import 'remixicon/fonts/remixicon.css';
 
 const FormItem = Form.Item;
 const Option = AutoComplete.Option;
@@ -31,6 +32,11 @@ class DictionarySearch extends React.Component {
       wrapperCol: {span: 14},
     };
 
+    const iconStyle = {
+      verticalAlign: "bottom",
+      marginRight: "5px",
+    };
+
     return (
       <div className={commonStyles.singleRowSearch}>
         <Form initialValues={{}} ref={this.formRef}>
@@ -52,8 +58,8 @@ class DictionarySearch extends React.Component {
             </Col>
             <Col span={6}>
               <FormItem>
-                <Button type="primary" size="default" icon="search" style={{marginLeft: "10px"}} onClick={() => handleSearch()}>查询</Button>
-                <Button type="default" size="default" icon="rest" style={{marginLeft: "10px"}} onClick={() => handleReset()}>重置</Button>
+                <Button type="primary" size="default" icon={<i className="ri-search-line" style={iconStyle}></i>} style={{marginLeft: "10px"}} onClick={() => handleSearch()}>查询</Button>
+                <Button type="default" size="default" icon={<i className="ri-restart-line" style={iconStyle}></i>} style={{marginLeft: "10px"}} onClick={() => handleReset()}>重置</Button>
               </FormItem>
             </Col>
           </Row>

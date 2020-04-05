@@ -17,9 +17,9 @@ class DictionaryList extends React.Component {
     const {isShowSubTable} = this.state;
 
     const columns = [
-      { title: '序号', width: '5%', render: (text, record, index) => <span>{(index + 1) + (currentPage - 1) * pageSize}</span> },
+      { title: '序号', width: '6%', render: (text, record, index) => <span>{(index + 1) + (currentPage - 1) * pageSize}</span> },
       { title: '字典名称', dataIndex: 'name', key: 'name', width: '20%' },
-      { title: '字典编码', dataIndex: 'code', key: 'code', width: '20%' },
+      { title: '字典编码', dataIndex: 'code', key: 'code', width: '15%' },
       { title: '状态', dataIndex: 'status', key: 'status', width: '10%', filters: [
           { text: '126', value: '126' },{ text: '163', value: '163' },{ text: 'qq', value: 'qq' },{ text: 'gmail', value: 'gmail' }],
         onFilter: (value, record) => record.email.indexOf(value) === 0 },
@@ -63,10 +63,10 @@ class DictionaryList extends React.Component {
 
     return (
       <div style={{marginTop: "15px"}}>
-        <div className={ styles.listTable }>
+        <div >
           <Table
             bordered
-            size={"small"}
+            className={ styles.listTable }
             rowSelection={rowSelection}
             columns={columns}
             dataSource={dictionaryList}

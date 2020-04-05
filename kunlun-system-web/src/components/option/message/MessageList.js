@@ -1,7 +1,8 @@
 import React from 'react';
-import { List, Skeleton, Icon, Tag } from 'antd';
+import { List, Skeleton, Tag } from 'antd';
 import styles from './Message.less';
 import moment from 'moment';
+import 'remixicon/fonts/remixicon.css';
 
 const ListItem = List.Item;
 const ListItemMeta = List.Item.Meta;
@@ -26,7 +27,7 @@ const MessageList = (props) => {
           >
             <Skeleton avatar title={false} loading={item.loading} active>
               <ListItemMeta
-                avatar={<Icon type={item.type == 1 ? "notification" : "message"} style={{fontSize: "20px"}} />}
+                avatar={<i className={item.type == 1 ? "ri-notification-3-line" : "ri-message-3-line"} style={{fontSize: "20px"}} />}
                 title={<div onClick={() => showMessage(item)} className={styles.messageTitle}>{item.title}</div>}
                 description={moment(item.createTime).format("YYYY-MM-DD HH:mm:ss") + "&nbsp;&nbsp;" + item.description}
               />

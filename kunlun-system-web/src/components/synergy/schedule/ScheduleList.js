@@ -1,11 +1,17 @@
 import React from 'react';
 import styles from './Schedule.less';
-import {Icon, Tooltip, Tag, Calendar, Badge } from 'antd';
+import {Tooltip, Tag, Calendar, Badge } from 'antd';
 import moment from 'moment';
+import 'remixicon/fonts/remixicon.css';
 
 const ScheduleList = (props) => {
 
   const { scheduleList, calendarMode, scheduleLoading, operateType, onShowDetail, onCacheCalenarMode } = props;
+
+  const iconStyle = {
+    verticalAlign: "bottom",
+    marginRight: "5px",
+  };
 
   const dateCellRender = (value) => {
     const listData = scheduleList.filter(item => value.year() == moment(item.startTime).year() && value.month() == moment(item.startTime).month() && value.date() == moment(item.startTime).date());
@@ -14,7 +20,7 @@ const ScheduleList = (props) => {
         {
           listData.map(item => (
             <li key={item.id}>
-              <Icon type={moment(item.endTime) < new Date() ? "stop" : "play-circle"} style={{color: item.themeColor}} />
+              <i className={moment(item.endTime) < new Date() ? "ri-forbid-line" : "ri-play-circle-line"} style={{color: item.themeColor, verticalAlign: "bottom", marginRight: "5px",}}></i>
               &nbsp;&nbsp;{item.theme}
             </li>
           ))

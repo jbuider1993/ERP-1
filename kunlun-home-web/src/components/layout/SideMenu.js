@@ -64,17 +64,17 @@ class SideMenu extends React.Component {
     };
 
     const dropdownOptions = (
-      <Menu style={{ marginTop: "-6px", marginRight: "-9px", right: "5px", padding: "5px 10px 5px 0px" }}>
-        <MenuItem style={{ marginTop: "3px", marginLeft: "10px" }}>
+      <Menu style={{ marginTop: "-6px", marginRight: "-9px", right: "5px", padding: "5px 5px 5px 0px" }}>
+        <MenuItem style={{ marginTop: "3px", marginLeft: "5px" }}>
           <div onClick={() => onRefreshTab()}><i className="ri-refresh-line" style={iconStyle}></i>&nbsp;刷新当前页签</div>
         </MenuItem>
-        <MenuItem style={{ marginTop: "3px", marginBottom: "5px", marginLeft: "10px" }}>
+        <MenuItem style={{ marginTop: "3px", marginBottom: "5px", marginLeft: "5px" }}>
           <div onClick={closeCurrentTab}><i className="ri-close-line" style={iconStyle}></i>&nbsp;关闭当前页签</div>
         </MenuItem>
-        <MenuItem style={{ marginTop: "3px", marginBottom: "5px", marginLeft: "10px" }}>
+        <MenuItem style={{ marginTop: "3px", marginBottom: "5px", marginLeft: "5px" }}>
           <div onClick={closeOtherTab}><i className="ri-checkbox-indeterminate-line" style={iconStyle}></i>&nbsp;关闭其他页签</div>
         </MenuItem>
-        <MenuItem style={{ marginTop: "3px", marginBottom: "5px", marginLeft: "10px" }}>
+        <MenuItem style={{ marginTop: "3px", marginBottom: "5px", marginLeft: "5px" }}>
           <div onClick={onCloseTab}><i className="ri-close-circle-line" style={iconStyle}></i>&nbsp;关闭所有页签</div>
         </MenuItem>
       </Menu>

@@ -4,6 +4,7 @@ import {Avatar, Tooltip, Empty } from 'antd';
 import moment from 'moment';
 import indexStyles from '../../pages/home/homeIndex.less';
 import * as Icon from '@ant-design/icons';
+import 'remixicon/fonts/remixicon.css';
 
 class TodaySchedule extends React.Component {
 
@@ -27,7 +28,7 @@ class TodaySchedule extends React.Component {
           <div className={indexStyles.mqTitleFontDiv}>事项日程</div>
           <div onClick={() => onShowDetail("schedule")} className={indexStyles.fontWeightHover}>
             <Tooltip title={"查看详情"}>
-              <Icon.ProfileOutlined style={{fontSize: "16px", marginTop: "5px", marginRight: "20px"}} />
+              <i className="ri-article-line" style={{fontSize: "19px", marginRight: "20px"}}></i>
             </Tooltip>
           </div>
         </div>
@@ -38,19 +39,21 @@ class TodaySchedule extends React.Component {
           {
             !scheduleData ? <Empty /> :
               <div className={styles.scheduleContentDiv}>
-                <div className={styles.arrowLeft}>
-                  <Icon.LeftCircleOutlined className={styles.arrowIcon} onClick={() => onClickArrow("left")}/>
+                <div className={styles.arrowLeft} onClick={() => onClickArrow("left")}>
+                  <i className="ri-arrow-left-circle-line"></i>
                 </div>
-                <div><span>主题：</span><span style={{color: scheduleData.themeColor}}>&nbsp;{scheduleData.theme}</span></div>
-                <div><span>时间：</span><span>&nbsp;{moment(scheduleData.startTime).format(timeFormat) + " - " + moment(scheduleData.endTime).format(timeFormat)}</span></div>
-                <div><span>地点：</span><span>&nbsp;{scheduleData.location}</span></div>
-                <div><span>内容：</span><span>&nbsp;{scheduleData.content}</span></div>
-                <div className={styles.scheduleShowPersonDiv}>
-                  <span>人员：</span>
-                  <span className={styles.personDiv}>{scheduleData.participant}</span>
+                <div>
+                  <div><span>主题：</span><span style={{color: scheduleData.themeColor}}>&nbsp;{scheduleData.theme}</span></div>
+                  <div><span>时间：</span><span>&nbsp;{moment(scheduleData.startTime).format(timeFormat) + " - " + moment(scheduleData.endTime).format(timeFormat)}</span></div>
+                  <div><span>地点：</span><span>&nbsp;{scheduleData.location}</span></div>
+                  <div><span>内容：</span><span>&nbsp;{scheduleData.content}</span></div>
+                  <div className={styles.scheduleShowPersonDiv}>
+                    <span>人员：</span>
+                    <span className={styles.personDiv}>{scheduleData.participant}</span>
+                  </div>
                 </div>
-                <div className={styles.arrowRight}>
-                  <Icon.RightCircleOutlined className={styles.arrowIcon} onClick={() => onClickArrow("right")}/>
+                <div className={styles.arrowRight} onClick={() => onClickArrow("right")}>
+                  <i className="ri-arrow-right-circle-line"></i>
                 </div>
               </div>
           }

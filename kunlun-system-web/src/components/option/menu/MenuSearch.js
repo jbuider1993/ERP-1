@@ -3,6 +3,7 @@ import { Form, Row, Col, Input, Button, AutoComplete, Icon } from 'antd';
 import config from '../../../config/config';
 import commonStyles from '../../../pages/index.css';
 import index from "../../../index.less";
+import 'remixicon/fonts/remixicon.css';
 
 const FormItem = Form.Item;
 const Option = AutoComplete.Option;
@@ -45,6 +46,11 @@ class MenuSearch extends React.Component {
 
     const menuLevelOptions = config.MENU_LEVEL.map(item => <Option key={item.key} value={item.name}>{item.name}</Option>);
 
+    const iconStyle = {
+      verticalAlign: "bottom",
+      marginRight: "5px",
+    };
+
     return (
       <div className={this.state.expand ? commonStyles.singleRowSearch : commonStyles.doubleRowSearch}>
         <Form ref={this.formRef}>
@@ -70,10 +76,12 @@ class MenuSearch extends React.Component {
               </FormItem>
             </Col>
             <Col span={6}>
-              <div style={{marginTop: "4px", marginLeft: "10px"}}>
-                <Button type={"primary"} onClick={searchMenuList} icon={"search"}>查询</Button>
-                <Button onClick={() => handleReset()} style={{marginLeft: "10px"}} icon={"rest"}>重置</Button>
-                <Button type="dashed" style={{marginLeft: "10px"}} onClick={() => toggleCollapse()} icon={this.state.expand ? 'down' : "up"}>搜索</Button>
+              <div style={{marginLeft: "10px"}}>
+                <Button type={"primary"} onClick={searchMenuList} icon={<i className="ri-search-line" style={iconStyle}></i>}>查询</Button>
+                <Button onClick={() => handleReset()} style={{marginLeft: "10px"}} icon={<i className="ri-restart-line" style={iconStyle}></i>}>重置</Button>
+                <Button type="dashed" style={{marginLeft: "10px"}} onClick={() => toggleCollapse()}>
+                  <i className={this.state.expand ? "ri-arrow-down-s-line" : "ri-arrow-up-s-line"} style={iconStyle}></i>搜索
+                </Button>
               </div>
             </Col>
           </Row>

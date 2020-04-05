@@ -6,10 +6,17 @@ const ThemeStyle = (props) => {
 
   const { themeStyle, onChangeStyle } = props;
 
+  const iconStyle = {
+    verticalAlign: "bottom",
+    marginRight: "3px",
+  };
+
   return (
     <div style={{ marginBottom: "15px" }}>
       <ul style={{ listStyle: "none", cursor: "pointer", marginLeft: "-40px" }}>
-        <li style={{ marginBottom: "5px" }}><Icon type="layout" />&nbsp;样式布局：</li>
+        <li style={{ marginBottom: "5px" }}>
+          <i className="ri-layout-line" style={iconStyle}></i>&nbsp;样式布局：
+        </li>
         <li>
           <ul style={{ listStyle: "none", cursor: "pointer", marginLeft: "-40px" }}>
             <li title={"左侧菜单布局"} className={themeStyle == "siderMenu" ? styles.selectedThemeDiv : styles.themeDiv} onClick={() => onChangeStyle("siderMenu")}>

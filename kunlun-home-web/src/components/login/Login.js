@@ -1,8 +1,8 @@
 import React from 'react';
 import styles from './Login.less';
 import config from '../../config/config';
-import {Button, Form, Input, Row, Icon, message, Spin} from 'antd';
-import {WindowsFilled, UserOutlined, LockOutlined, SafetyCertificateOutlined} from '@ant-design/icons';
+import {Button, Form, Input, Row, message, Spin} from 'antd';
+import 'remixicon/fonts/remixicon.css';
 
 const FormItem = Form.Item;
 
@@ -48,9 +48,9 @@ const Login = (props) => {
 
   return (
     <div className={styles.loginDiv}>
-      <div className={styles.loginPicture} style={{ marginLeft: "7.4%", marginTop: "5.2%", height: "90.2%", width: "85%", border: "40px solid #fafafa"}}>
+      <div className={styles.loginPicture} style={{ marginLeft: "7.4%", marginTop: "5.2%", height: "91%", width: "85%", border: "40px solid #fafafa"}}>
         <div className={styles.logoDiv}>
-          <WindowsFilled className={styles.logoIcon} />
+          <i className="ri-global-fill" style={{ fontSize: "35px", marginLeft: "5px", marginTop: "-12px", float: "left" }}></i>
           <div className={styles.logoFont}>{config.name}</div>
         </div>
         <div className={styles.spinSpanDiv}>
@@ -65,17 +65,17 @@ const Login = (props) => {
                 </Row>
                 <Row align="center">
                   <FormItem name={"userName"} rules={[{required: true, message: "请输入用户名!"}]}>
-                    <Input style={{ width: "240px" }} placeholder={"请输入用户名"} prefix={<UserOutlined style={{ color: '#506c86' }} />}/>
+                    <Input style={{ width: "240px" }} placeholder={"请输入用户名"} prefix={<i className="ri-user-3-line" style={{ color: '#506c86' }}></i>}/>
                   </FormItem>
                 </Row>
                 <Row align="center">
                   <FormItem name={"password"} rules={[{ required: true, message: "请输入密码!" }]}>
-                    <Input.Password style={{ width: "240px" }} placeholder={"请输入密码"} prefix={<LockOutlined style={{ color: '#506c86' }} />}/>
+                    <Input.Password style={{ width: "240px" }} placeholder={"请输入密码"} prefix={<i className="ri-lock-password-line" style={{ color: '#506c86' }}></i>}/>
                   </FormItem>
                 </Row>
                 <Row align="center" style={{ marginLeft: "-110px" }}>
                   <FormItem name={"code"} rules={[{ required: true, message: "请输入验证码!" }]}>
-                    <Input placeholder={"请输入验证码"} style={{ width: "130px" }} onPressEnter={onKeyEnter} prefix={<SafetyCertificateOutlined style={{ color: '#506c86' }} />} />
+                    <Input placeholder={"请输入验证码"} style={{ width: "130px" }} onPressEnter={onKeyEnter} prefix={<i className="ri-shield-flash-line" style={{ color: '#506c86' }}></i>} />
                   </FormItem>
                 </Row>
                 <Row style={{ right: "13.5%", marginTop: "-20.4%", float: "right", display: "inline-block" }}>

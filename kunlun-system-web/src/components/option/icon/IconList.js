@@ -2,6 +2,7 @@ import React from 'react';
 import {Table, Icon, Modal} from 'antd';
 import config from '../../../config/config';
 import styles from './Icon.less';
+import 'remixicon/fonts/remixicon.css';
 
 const IconList = (props) => {
 
@@ -13,13 +14,14 @@ const IconList = (props) => {
     {title: '图标key', dataIndex: 'key', key: 'key', width: '25%', align: "center" },
     {title: '图标', key: 'key', align: "center", render: (text, record, index) => <Icon type={record.key} className="certain-category-icon"/> },
     {title: '操作', key: 'key', align: "center",
-      render: (text, record, index) => <div onClick={() => onViewIcon(record)}><Icon type={"form"} style={{ fontSize: "15px", color: "blue" }} className="certain-category-icon" /></div>
+      render: (text, record, index) => <div onClick={() => onViewIcon(record)}>
+        <i className="ri-file-text-line" style={{ fontSize: "15px", color: "blue" }}></i>
+    </div>
     }];
 
   return (
     <div className={styles.menuTable}>
       <Table
-        size={"small"}
         columns={columns}
         dataSource={iconList}
         bordered

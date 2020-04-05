@@ -44,7 +44,7 @@ class UserWorkbenchCard extends React.Component {
           <div className={indexStyles.userCountBlock}>
             <div style={{float: "right"}} onClick={() => onShowDetail("online")} className={indexStyles.fontWeightHover}>
               <Tooltip title={"查看登录用户"}>
-                <i className="ri-user-line" style={{fontSize: "16px", marginRight: "20px"}}></i>
+                <i className="ri-user-line" style={{fontSize: "18px", marginRight: "20px"}}></i>
               </Tooltip>
             </div>
           </div>
@@ -55,8 +55,8 @@ class UserWorkbenchCard extends React.Component {
                   <Statistic title="总访问量"
                              value={userCounts ? userCounts.userCount : 11.28}
                              precision={2}
-                             valueStyle={{color: '#3f8600'}}
-                             prefix={<i className="ri-global-line" style={{marginRight: "10px"}}></i>}
+                             valueStyle={{color: '#3f8600', fontSize: "25px"}}
+                             prefix={<i className="ri-global-line" style={{marginRight: "10px", verticalAlign: "bottom"}}></i>}
                              suffix="人"/>
                 </Card>
               </Col>
@@ -65,8 +65,8 @@ class UserWorkbenchCard extends React.Component {
                   <Statistic title="在线人数"
                              value={userCounts ? userCounts.onlineCount : 9.3}
                              precision={2}
-                             valueStyle={{color: '#cf1322'}}
-                             prefix={<i className="ri-macbook-line" style={{marginRight: "10px"}}></i>}
+                             valueStyle={{color: '#cf1322', fontSize: "25px"}}
+                             prefix={<i className="ri-macbook-line" style={{marginRight: "10px", verticalAlign: "bottom"}}></i>}
                              suffix="人"/>
                 </Card>
               </Col>
@@ -75,8 +75,8 @@ class UserWorkbenchCard extends React.Component {
                   <Statistic title="最近一个月内访问量"
                              value={userCounts ? userCounts.userCount : 11.28}
                              precision={2}
-                             valueStyle={{color: '#3f8600'}}
-                             prefix={<i className="ri-computer-line" style={{marginRight: "10px"}}></i>}
+                             valueStyle={{color: '#3f8600', fontSize: "25px"}}
+                             prefix={<i className="ri-computer-line" style={{marginRight: "10px", verticalAlign: "bottom"}}></i>}
                              suffix="人"/>
                 </Card>
               </Col>

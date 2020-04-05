@@ -2,6 +2,7 @@ import React from 'react';
 import { Form, Row, Col, Input, Button, AutoComplete, Icon } from 'antd';
 import styles from './Message.less';
 import commonStyles from '../../../pages/index.css';
+import 'remixicon/fonts/remixicon.css';
 
 const FormItem = Form.Item;
 const Option = AutoComplete.Option;
@@ -37,6 +38,11 @@ class MessageSearch extends React.Component {
     const messageTypes = [{key: 1, name: "通知"}, {key: 1, name: "消息"}];
     const messageOptions = messageTypes.map(item => <Option key={item.key} value={item.name}>{item.name}</Option>);
 
+    const iconStyle = {
+      verticalAlign: "bottom",
+      marginRight: "5px",
+    };
+
     return (
       <div className={commonStyles.singleRowSearch}>
         <Form ref={this.formRef}>
@@ -62,9 +68,9 @@ class MessageSearch extends React.Component {
               </FormItem>
             </Col>
             <Col span={6}>
-              <div style={{marginTop: "4px", marginLeft: "10px"}}>
-                <Button type={"primary"} onClick={searchMenuList} icon={"search"}>查询</Button>
-                <Button onClick={() => handleReset()} style={{marginLeft: "10px"}} icon={"rest"}>重置</Button>
+              <div style={{marginLeft: "10px"}}>
+                <Button type={"primary"} onClick={searchMenuList} icon={<i className="ri-search-line" style={iconStyle}></i>}>查询</Button>
+                <Button onClick={() => handleReset()} style={{marginLeft: "10px"}} icon={<i className="ri-restart-line" style={iconStyle}></i>}>重置</Button>
               </div>
             </Col>
           </Row>

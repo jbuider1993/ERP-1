@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import {Tabs, Icon, Tag} from "antd";
+import {Tabs, Icon, Tag, Empty} from "antd";
 import styles from './Nofication.less';
 import moment from 'moment';
+import 'remixicon/fonts/remixicon.css';
 
 const TabPane = Tabs.TabPane;
 
@@ -22,6 +23,11 @@ class NoficationPane extends React.Component {
 
     const { noficationList, messageList, todoList, clearPane, onDetail } = this.props;
 
+    const iconStyle = {
+      verticalAlign: "bottom",
+      marginRight: "5px",
+    };
+
     return (
       <div className={styles.noficationPane}>
         <Tabs
@@ -35,9 +41,7 @@ class NoficationPane extends React.Component {
           <TabPane tab={"通知（" + noficationList.length + "）"} key={"notice"} closable={false}>
             <ul className={styles.tabul}>
             {
-              noficationList.length  == 0 ? <div className={styles.emptyDiv}>
-                  <Icon type={"rocket"} className={styles.iconDiv}/><div className={styles.dataDiv}>暂无数据</div>
-                </div> :
+              noficationList.length  == 0 ? <div className={styles.emptyDiv}><Empty /></div> :
               noficationList.map(item =>
                 <li className={styles.tabli}>
                   <Icon type="mail" theme={"filled"} className={styles.noficationIcon} />
@@ -50,9 +54,7 @@ class NoficationPane extends React.Component {
           <TabPane tab={"日程（" + messageList.length + "）"} key={"schedule"} closable={false}>
             <ul className={styles.tabul}>
             {
-              messageList.length  == 0 ? <div className={styles.emptyDiv}>
-                  <Icon type={"rocket"} className={styles.iconDiv}/><div className={styles.dataDiv}>暂无数据</div>
-                </div> :
+              messageList.length  == 0 ? <div className={styles.emptyDiv}><Empty /></div> :
               messageList.map(item =>
                 <li className={styles.tabli}>
                   <Icon type="message" theme={"filled"} className={styles.noficationIcon}/>
@@ -66,9 +68,7 @@ class NoficationPane extends React.Component {
           <TabPane tab={"待办（" + todoList.length + "）"} key={"todo"} closable={false}>
             <ul className={styles.tabul}>
             {
-              todoList.length == 0 ? <div className={styles.emptyDiv}>
-                  <Icon type={"rocket"} className={styles.iconDiv}/><div className={styles.dataDiv}>暂无数据</div>
-                </div> :
+              todoList.length == 0 ? <div className={styles.emptyDiv}><Empty imageStyle={{fontSize: "20px"}}/></div> :
               todoList.map(item =>
                 <li className={styles.tabli}>
                   <Icon type="flag" theme={"filled"} className={styles.noficationIcon} />
