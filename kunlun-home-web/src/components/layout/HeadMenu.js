@@ -23,11 +23,17 @@ class HeadMenu extends React.Component {
     const { collapsed, activeHeadMenuKey, toggleSiderMenu, activeSideMenuKey, onSelectHeadMenu, noficationList, messageList, onSelectSideMenu,
       todoList, onShowUserInfo, onLogout, tokenModel, onSystemInfo, onTheme, themeStyle, themeColor, badgeCount, clearPane, onDetail } = this.props;
 
+    const iconStyle = {
+      paddingRight: "5px",
+      fontSize: "16px",
+      verticalAlign: "bottom",
+    };
+
     // 主菜单项
     const main = config.frame_menu.main;
     const initMainMenu = main.map(item =>
       <MenuItem key={item.key} path={item.url}>
-        <i className={item.icon}/>{item.name}
+        <i className={item.icon} style={iconStyle} />{item.name}
       </MenuItem>);
 
     // 子菜单项
@@ -35,16 +41,16 @@ class HeadMenu extends React.Component {
     const isShowSubMenu = sider && sider.length > 0 && themeStyle == "subMenu" ? true : false;
     const initSubMenu = isShowSubMenu ? sider.filter(item => item.isShow).map(item =>
       (item.children ?
-        <SubMenu key={item.key} title={<span style={{color: "#000000"}}><i className={item.icon}/><span>{item.name}</span><i className="ri-arrow-down-s-line" style={{marginLeft: "5px"}}></i></span>} style={{ background: "#f5f5f5" }}>
+        <SubMenu key={item.key} title={<span style={{color: "#000000"}}><i className={item.icon} style={iconStyle}/><span>{item.name}</span><i className="ri-arrow-down-s-line" style={{marginLeft: "5px"}}></i></span>} style={{ background: "#f5f5f5" }}>
           {
             item.children ? item.children.filter(item => item.isShow).map(subItem => (
               <MenuItem key={subItem.key} path={subItem.url}>
-                <span style={{color: "#ffffff"}}><i className={item.icon}/><span style={{color: activeSideMenuKey == subItem.key ? "#1890ff" : "#ffffff"}}>{subItem.name}</span></span>
+                <span style={{color: "#ffffff"}}><i className={item.icon} style={iconStyle} /><span style={{color: activeSideMenuKey == subItem.key ? "#1890ff" : "#ffffff"}}>{subItem.name}</span></span>
               </MenuItem>)) : null
           }
         </SubMenu> :
         <MenuItem key={item.key} path={item.url}>
-          <span style={{color: "#000000"}}><i className={item.icon}/><span style={{color: activeSideMenuKey == item.key ? "#1890ff" : "#000000"}}>{item.name}</span></span>
+          <span style={{color: "#000000"}}><i className={item.icon} style={iconStyle}/><span style={{color: activeSideMenuKey == item.key ? "#1890ff" : "#000000"}}>{item.name}</span></span>
         </MenuItem>)) : null;
 
     // 消息通知项
@@ -57,11 +63,11 @@ class HeadMenu extends React.Component {
     const dropdownInfoOptions = (
       <Menu style={{ marginTop: "-6px", marginRight: "-1px", right: "-15%", padding: "5px 10px 5px 0px" }}>
         <MenuItem style={{ marginTop: "5px", marginLeft: "10px" }}>
-          <div onClick={onShowUserInfo}><i className="ri-shield-user-line"></i>&nbsp;个人中心</div>
+          <div onClick={onShowUserInfo}><i className="ri-shield-user-line" style={iconStyle}></i>&nbsp;个人中心</div>
         </MenuItem>
         <Divider style={{ margin: "5px" }} />
         <MenuItem style={{ marginTop: "5px", marginBottom: "8px", marginLeft: "10px" }}>
-          <div onClick={onLogout}><i className="ri-logout-circle-r-line"></i>&nbsp;退出系统</div>
+          <div onClick={onLogout}><i className="ri-logout-circle-r-line" style={iconStyle}></i>&nbsp;退出系统</div>
         </MenuItem>
       </Menu>
     );
@@ -69,17 +75,18 @@ class HeadMenu extends React.Component {
   return (
     <div style={{ height: isShowSubMenu ? "90px" : "55px" }}>
       <Header className="header" style={{ height: "55px", background: themeColor, lineHeight: "0px" }} >
-        <div style={{ height: "55px", float: "left", marginRight: "0%", marginTop: "26px", marginLeft:"15px" }}>
+        <div style={{ height: "55px", float: "left", marginRight: "0%", marginTop: "27px", marginLeft:"15px" }}>
           <i className="ri-dashboard-line" style={{ fontSize: "35px", color: "aliceblue", marginLeft: "-20%", marginTop: "-17px" }}></i>
           <span className={styles.logContent}>{config.name}</span>
         </div>
         <div title={"缩放左侧菜单"} onClick={e => {toggleSiderMenu()}} className={styles.collapseDiv}>
-          <i className={collapsed ? "ri-indent-decrease" : "ri-indent-increase"} className={styles.trigger} />
+          {/*<i className={collapsed ? "ri-indent-decrease" : "ri-indent-increase"} className={styles.trigger} />*/}
+          <i className={collapsed ? "ri-indent-decrease" : "ri-indent-increase"} />
         </div>
         <ul style={{ float: "right", listStyle: "none", display: "flex", marginRight: "-25px", cursor: "pointer", marginTop: "20px" }}>
           <li className={styles.menuToolBarli}>
             <Tooltip title={"了解项目"} onClick={onSystemInfo} overlayClassName={styles.messageToolTipA}>
-              <i className="ri-information-line" style={{ fontSize: "15px", color: "#e8e8e8" }}></i>
+              <i className="ri-information-line" style={{ fontSize: "18px", color: "#e8e8e8", verticalAlign: "text-bottom" }}></i>
             </Tooltip>
           </li>
           <li className={styles.menuToolBarliMessage}>
@@ -87,7 +94,7 @@ class HeadMenu extends React.Component {
               <Dropdown overlay={dropdownNoficationOptions} trigger={['click']}>
                 <div>
                   <Badge dot={badgeCount > 0 ? true : false}>
-                    <i className="ri-volume-up-line" style={{ fontSize: "15px", color: "#e8e8e8" }}></i>
+                    <i className="ri-volume-up-line" style={{ fontSize: "18px", color: "#e8e8e8", verticalAlign: "text-bottom" }}></i>
                   </Badge>
                 </div>
               </Dropdown>
@@ -95,13 +102,13 @@ class HeadMenu extends React.Component {
           </li>
           <li className={styles.menuToolBarli} onClick={onTheme}>
             <Tooltip title={"主题"} overlayClassName={styles.messageToolTipA}>
-              <i className="ri-t-shirt-line" style={{ fontSize: "15px", color: "#e8e8e8" }}></i>
+              <i className="ri-t-shirt-line" style={{ fontSize: "18px", color: "#e8e8e8", verticalAlign: "text-bottom" }}></i>
             </Tooltip>
           </li>
           <li style={{marginTop: "-6px"}}>
             <Dropdown overlay={dropdownInfoOptions} trigger={['click']}>
               <div>
-                <Avatar size={33} icon={<i className="ri-account-circle-fill"></i>} style={{ marginTop: "-5.5%", background: "#096dd9" }} />
+                <Avatar size={33} icon={<i className="ri-account-circle-fill" style={{fontSize: "19px", verticalAlign: "middle"}}></i>} style={{ marginTop: "-5.5%", background: "#096dd9" }} />
                 <span style={{ color: "#fff", marginLeft: "3px" }}>&nbsp;{tokenModel ? tokenModel.userInfo.userName : "SCMP"}</span>
               </div>
             </Dropdown>
