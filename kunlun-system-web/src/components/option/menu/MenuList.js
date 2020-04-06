@@ -47,6 +47,7 @@ const MenuList = (props) => {
   return (
     <div className={ styles.menuTable }>
       <Table
+        className={ styles.listTable }
         columns={columns}
         dataSource={menuList}
         bordered={true}

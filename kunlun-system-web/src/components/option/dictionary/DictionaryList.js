@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './Dictionary.less';
-import {Table, Icon, Tag, Popconfirm} from 'antd';
+import {Icon, Popconfirm, Table} from 'antd';
 
 class DictionaryList extends React.Component {
 
@@ -29,15 +29,16 @@ class DictionaryList extends React.Component {
       { title: '操作', key: 'operate', width: '10%',
         render: (text, record) => (
           <span>
-        <a onClick={() => onEdit(record)}><Icon type="edit" style={{color: '#08c'}}/></a>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <Popconfirm title="确定删除当前记录？" onConfirm={onDelete.bind(null, record)}>
-          <Icon type="delete" style={{color: 'red'}}/>
-        </Popconfirm>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <a onClick={() => onView(record)}><Icon type="snippets" /></a>
-      </span>)
-      }];
+          <a onClick={() => onEdit(record)}><Icon type="edit" style={{color: '#08c'}}/></a>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <Popconfirm title="确定删除当前记录？" onConfirm={onDelete.bind(null, record)}>
+            <Icon type="delete" style={{color: 'red'}}/>
+          </Popconfirm>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <a onClick={() => onView(record)}><Icon type="snippets" /></a>
+        </span>)
+      }
+    ];
 
     const subCcolumns = [
       { title: '序号', width: '5%', render: (text, record, index) => <span>{(index + 1) + (currentPage - 1) * pageSize}</span> },
@@ -47,18 +48,23 @@ class DictionaryList extends React.Component {
       { title: '操作', key: 'operate', width: '10%',
         render: (text, record) => (
           <span>
-        <a onClick={() => onEdit(record)}><Icon type="edit" style={{color: '#08c'}}/></a>
+            <a onClick={() => onEdit(record)}><Icon type="edit" style={{color: '#08c'}}/></a>
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <Popconfirm title="确定删除当前记录？" onConfirm={onDelete.bind(null, record)}>
-          <Icon type="delete" style={{color: 'red'}}/>
-        </Popconfirm>
+              <Icon type="delete" style={{color: 'red'}}/>
+            </Popconfirm>
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <a onClick={() => onView(record)}><Icon type="snippets" /></a>
-      </span>)
-      }];
+          </span>)
+        }
+      ];
 
-    const onRowClick = (record, index) => {
-      this.setState({isShowSubTable: !isShowSubTable});
+    const onRow = (record, index) => {
+      return {
+        onClick: () => {
+          this.setState({isShowSubTable: !isShowSubTable});
+        }
+      };
     };
 
     return (
@@ -73,13 +79,12 @@ class DictionaryList extends React.Component {
             pagination={false}
             loading={dictionaryLoading}
             rowKey={record => record.id}
-            onRowClick={onRowClick}
+            onRow={onRow}
           />
         </div>
         <div className={ styles.listTable } style={{marginTop: "15%", display: isShowSubTable ? "block" : "none"}}>
           <Table
             bordered
-            size={"small"}
             rowSelection={rowSelection}
             columns={subCcolumns}
             dataSource={dictionaryList}
