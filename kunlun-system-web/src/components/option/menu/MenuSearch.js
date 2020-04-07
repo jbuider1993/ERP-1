@@ -85,7 +85,7 @@ class MenuSearch extends React.Component {
               </div>
             </Col>
           </Row>
-          <Row style={{display: this.state.expand ? "none" : "block"}} className={index.formRowDiv}>
+          <Row style={{display: this.state.expand ? "none" : "flex"}} className={index.formRowDiv}>
             <Col span={6}>
               <FormItem label={"是否禁用"} {...formItemLayout} name={"forbid"}>
                 <Input placeholder={"请选择是否禁用"}/>

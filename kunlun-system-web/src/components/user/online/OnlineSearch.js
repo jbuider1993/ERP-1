@@ -77,7 +77,7 @@ class OnlineSearch extends React.Component {
               </FormItem>
             </Col>
           </Row>
-          <Row style={{ display: this.state.expand ? "none" : "block"}} className={index.formRowDiv}>
+          <Row style={{ display: this.state.expand ? "none" : "flex"}} className={index.formRowDiv}>
             <Col span={6}>
               <FormItem {...formItemLayout} label='浏览器' name={"usedBrowser"}>
                 <Input placeholder="请输入浏览器" size="default"/>
