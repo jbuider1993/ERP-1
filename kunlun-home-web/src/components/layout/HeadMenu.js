@@ -26,7 +26,7 @@ class HeadMenu extends React.Component {
     const iconStyle = {
       paddingRight: "5px",
       fontSize: "16px",
-      verticalAlign: "bottom",
+      verticalAlign: "sub",
     };
 
     // 主菜单项
