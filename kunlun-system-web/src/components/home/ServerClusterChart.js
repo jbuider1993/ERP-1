@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './Home.less';
 import indexStyles from "../../pages/home/homeIndex.less";
-import { Ring } from '@antv/g2plot';
+import { Donut } from '@antv/g2plot';
 
 class ServerClusterChart extends React.Component {
 
@@ -20,7 +20,7 @@ class ServerClusterChart extends React.Component {
       { type: 'scmp-system-service', value: 4 },
     ];
 
-    const ringPlot = new Ring(document.getElementById('serverCluster'), {
+    const ringPlot = new Donut(document.getElementById('serverCluster'), {
       forceFit: true,
       title: { visible: false, text: '环图-指标卡'},
       description: { visible: false, text: '环图指标卡能够代替tooltip，在环图中心挖空部分显示各分类的详细信息。'},
@@ -35,7 +35,8 @@ class ServerClusterChart extends React.Component {
         visible: true,
       },
       legend: {
-        position: "right-top"
+        position: "right-top",
+        offsetX: -50
       }
     });
 

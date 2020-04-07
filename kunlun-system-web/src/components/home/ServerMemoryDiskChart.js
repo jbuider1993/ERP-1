@@ -24,6 +24,8 @@ class ServerMemoryDiskChart extends React.Component {
       statistic: {
         visible: true,
         text: 'CPU使用率',
+        position: ['50%', '105%'],
+        size: 15
       },
     });
     gaugePlot.render();
@@ -42,6 +44,8 @@ class ServerMemoryDiskChart extends React.Component {
       statistic: {
         visible: true,
         text: '磁盘使用率',
+        position: ['50%', '105%'],
+        size: 15
       },
     });
     gaugePlot.render();
