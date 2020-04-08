@@ -89,7 +89,7 @@ class HeadMenu extends React.Component {
             </Tooltip>
           </li>
           <li className={styles.menuToolBarliMessage}>
-            <Tooltip title={"消息"} overlayClassName={styles.messageToolTip}>
+            <Tooltip title={"消息待办"} overlayClassName={styles.messageToolTip}>
               <Dropdown overlay={dropdownNoficationOptions} trigger={['click']}>
                 <div>
                   <Badge dot={badgeCount > 0 ? true : false}>
@@ -100,7 +100,7 @@ class HeadMenu extends React.Component {
             </Tooltip>
           </li>
           <li className={styles.menuToolBarli} onClick={onTheme}>
-            <Tooltip title={"主题"} overlayClassName={styles.messageToolTipA}>
+            <Tooltip title={"主题样式"} overlayClassName={styles.messageToolTipA}>
               <i className="ri-t-shirt-line" style={{ fontSize: "18px", color: "#e8e8e8", verticalAlign: "text-bottom" }}></i>
             </Tooltip>
           </li>
