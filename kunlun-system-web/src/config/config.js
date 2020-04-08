@@ -105,6 +105,16 @@ const config = {
     { key: "twoTone", name: "双色风格"}
   ],
 
+  SERVICE_NAMES: [
+    {key: "common", value: "kunlun-common-api", description: ""},
+    {key: "register", value: "kunlun-register-service", description: ""},
+    {key: "gateway", value: "kunlun-gateway-service", description: ""},
+    {key: "basedata", value: "kunlun-basedata-service", description: ""},
+    {key: "system-service", value: "kunlun-system-service", description: ""},
+    {key: "home", value: "kunlun-home-web", description: ""},
+    {key: "system-web", value: "kunlun-system-web", description: ""},
+  ],
+
   MENU_ICON: "down, up, left, right, up-circle, down-circle, left-circle, right-circle, login, logout, menu-fold, " +
              "menu-unfold, fullscreen, fullscreen-exit, question-circle, plus, plus-circle, pause, minus, minus-circle," +
              "exclamation-circle, close, close-circle, check, check-circle, stop, warning, clock-circle, edit, form, copy," +

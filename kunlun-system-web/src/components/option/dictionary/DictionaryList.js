@@ -1,6 +1,7 @@
 import React from 'react';
 import styles from './Dictionary.less';
 import {Icon, Popconfirm, Table} from 'antd';
+import TablePagination from "../../common/TablePagination";
 
 class DictionaryList extends React.Component {
 
@@ -13,7 +14,8 @@ class DictionaryList extends React.Component {
 
   render() {
 
-    const { dictionaryList, dictionaryLoading, rowSelection, onView, onEdit, onDelete, currentPage, pageSize } = this.props;
+    const { dictionaryList, dictionaryLoading, rowSelection, onView, onEdit, onDelete, currentPage, pageSize, total,
+      onPageChange, onShowSizeChange, showTotal } = this.props;
     const {isShowSubTable} = this.state;
 
     const columns = [
@@ -67,6 +69,17 @@ class DictionaryList extends React.Component {
       };
     };
 
+    const tablePaginationProps = {
+      total,
+      currentPage,
+      pageSize,
+      onPageChange,
+      onShowSizeChange,
+      showTotal
+    };
+
+    debugger
+
     return (
       <div style={{marginTop: "15px"}}>
         <div >
@@ -79,8 +92,9 @@ class DictionaryList extends React.Component {
             pagination={false}
             loading={dictionaryLoading}
             rowKey={record => record.id}
-            onRow={onRow}
+            onRow={(record, index) => onRow(record, index)}
           />
+          <TablePagination {...tablePaginationProps} />
         </div>
         <div className={ styles.listTable } style={{marginTop: "15%", display: isShowSubTable ? "block" : "none"}}>
           <Table

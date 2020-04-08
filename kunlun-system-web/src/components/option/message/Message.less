@@ -40,56 +40,54 @@
 }
 
 .loadMoreDiv {
-  cursor: pointer;
+  width: 80%;
   text-align: center;
-  background: #e8e8e8;
-  padding-top: 10px;
-  padding-bottom: 10px;
-  border: 1px solid #e1e1e1;
 }
 
 .loadMoreDiv:hover {
   cursor: pointer;
   text-align: center;
-  border: 1px solid #1890ff;
   color: #1890ff;
 }
 
 .listDiv {
-  //border: 1px solid #e8e8e8;
   margin-top: 15px;
-  //padding: 0px 15px 15px 15px;
 }
 
 .listPagationDiv {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-}
-
-.listPagation {
+  width: 100%;
   flex: 1;
   display: flex;
   flex-direction: row;
-  padding: 8px 0px 8px 0px;
+  background: #e8e8e8;
+  padding: 10px;
+  border: 1px solid #e1e1e1;
+}
+
+.listPagationDiv:hover {
+  border: 1px solid #1890ff;
 }
 
 .listPagationA {
   flex: 1;
   display: flex;
+  width: 10%;
 }
 
 .listPagationB {
-  display: flex;
-  margin-right: 8px;
+  text-align: end;
+  width: 10%;
 }
 
 .listContainer {
   border: 1px solid #e8e8e8;
   border-radius: 4px;
   overflow: auto;
-  padding: 8px 24px;
-  height: 335px;
+  height: calc(100% - 20px);
+}
+
+.listContainer [class^=ant-list-footer] {
+  padding: 0px !important;
 }
 
 .formRowDiv > div > div:first-child {

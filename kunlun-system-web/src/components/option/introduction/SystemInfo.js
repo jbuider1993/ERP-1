@@ -14,7 +14,6 @@ const SystemInfo = (props) => {
 
   const iconStyle = {
     verticalAlign: "bottom",
-    marginRight: "5px",
     fontSize: "16px",
   };
 

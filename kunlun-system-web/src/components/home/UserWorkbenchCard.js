@@ -53,8 +53,8 @@ class UserWorkbenchCard extends React.Component {
               <Col span={8}>
                 <Card style={{textAlign: "center"}} className={styles.userVisitTotalDiv}>
                   <Statistic title="总访问量"
-                             value={userCounts ? userCounts.userCount : 11.28}
-                             precision={2}
+                             value={userCounts ? userCounts.userCount : 110}
+                             precision={0}
                              valueStyle={{color: '#3f8600', fontSize: "25px"}}
                              prefix={<i className="ri-global-line" style={{marginRight: "10px", verticalAlign: "bottom"}}></i>}
                              suffix="人"/>
@@ -63,8 +63,8 @@ class UserWorkbenchCard extends React.Component {
               <Col span={8}>
                 <Card style={{textAlign: "center"}} className={styles.userOnlineDiv}>
                   <Statistic title="在线人数"
-                             value={userCounts ? userCounts.onlineCount : 9.3}
-                             precision={2}
+                             value={userCounts ? userCounts.onlineCount : 5}
+                             precision={0}
                              valueStyle={{color: '#cf1322', fontSize: "25px"}}
                              prefix={<i className="ri-macbook-line" style={{marginRight: "10px", verticalAlign: "bottom"}}></i>}
                              suffix="人"/>
@@ -73,8 +73,8 @@ class UserWorkbenchCard extends React.Component {
               <Col span={8}>
                 <Card style={{textAlign: "center"}} className={styles.userVisitLastDiv}>
                   <Statistic title="最近一个月内访问量"
-                             value={userCounts ? userCounts.userCount : 11.28}
-                             precision={2}
+                             value={userCounts ? userCounts.userCount : 28}
+                             precision={0}
                              valueStyle={{color: '#3f8600', fontSize: "25px"}}
                              prefix={<i className="ri-computer-line" style={{marginRight: "10px", verticalAlign: "bottom"}}></i>}
                              suffix="人"/>

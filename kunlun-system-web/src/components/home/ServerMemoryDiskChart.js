@@ -19,8 +19,8 @@ class ServerMemoryDiskChart extends React.Component {
       max: 100,
       range: [0, 25, 50, 75, 100],
       padding: [10, 10, 30, 10],
-      colors: ['#30bf78', '#a0d911', '#faad14', '#f4664a'],
-      tickLabelSize: 5,
+      color: ['#30bf78', '#a0d911', '#faad14', '#f4664a'],
+      tickLabelSize: 15,
       statistic: {
         visible: true,
         text: 'CPU使用率',
@@ -39,8 +39,7 @@ class ServerMemoryDiskChart extends React.Component {
       max: 100,
       range: [0, 25, 50, 75, 100],
       padding: [10, 10, 30, 10],
-      colors: ['#30bf78', '#a0d911', '#faad14', '#f4664a'],
-      tickLabelSize: 5,
+      color: ['#30bf78', '#a0d911', '#faad14', '#f4664a'],
       statistic: {
         visible: true,
         text: '磁盘使用率',

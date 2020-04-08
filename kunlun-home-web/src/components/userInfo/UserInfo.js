@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Layout, Icon, Card, Divider, Avatar, Form, Col, Input, Button } from 'antd';
 import styles from './UserInfo.less';
-import {SaveOutlined, CloseCircleOutlined} from '@ant-design/icons';
+import 'remixicon/fonts/remixicon.css';
 
 const FormItem = Form.Item;
 
@@ -20,36 +20,41 @@ const UserInfo = (props) => {
     wrapperCol: { span: 16 },
   };
 
+  const iconStyle = {
+    verticalAlign: "bottom",
+    marginRight: "5px",
+  };
+
   return (
     <div className={styles.userInfoDiv}>
       <div className={styles.userInfoShow}>
         <Card title="个人资料" className={styles.cardHeader}>
           <div style={{ textAlign: "center" }}>
-            <Avatar shape="square" size={120} icon="user" />
+            <Avatar shape="square" size={120} icon={<i className={"ri-user-line"} />} />
           </div>
           <Divider className={styles.divider} />
           <div>
-            <span><Icon type={"user"} />&nbsp;登录名称：</span>
+            <span><i className={"ri-user-line"} style={iconStyle}/>&nbsp;登录名称：</span>
             <span className={styles.personInfoSpan}>{tokenModel ? tokenModel.userInfo.userName : ""}</span>
           </div>
           <Divider className={styles.divider} />
           <div>
-            <span><Icon type={"user"} />&nbsp;用户角色：</span>
+            <span><i className={"ri-file-user-line"} style={iconStyle}/>&nbsp;用户角色：</span>
             <span className={styles.personInfoSpan}>{tokenModel ? tokenModel.userInfo.userName : ""}</span>
           </div>
           <Divider className={styles.divider} />
           <div>
-            <span><Icon type={"user"} />&nbsp;手机号码：</span>
+            <span><i className={"ri-cellphone-line"} style={iconStyle}/>&nbsp;手机号码：</span>
             <span className={styles.personInfoSpan}>{tokenModel ? tokenModel.userInfo.phoneNumber : ""}</span>
           </div>
           <Divider className={styles.divider} />
           <div>
-            <span><Icon type={"user"} />&nbsp;邮箱地址：</span>
+            <span><i className={"ri-mail-line"} style={iconStyle}/>&nbsp;邮箱地址：</span>
             <span className={styles.personInfoSpan}>{tokenModel ? tokenModel.userInfo.email : ""}</span>
           </div>
           <Divider className={styles.divider} />
           <div>
-            <span><Icon type={"user"} />&nbsp;创建时间：</span>
+            <span><i className={"ri-time-line"} style={iconStyle}/>&nbsp;创建时间：</span>
             <span className={styles.personInfoSpan}>{tokenModel ? tokenModel.userInfo.createTime.substr(0, tokenModel.userInfo.createTime.indexOf("T")) : ""}</span>
           </div>
           <Divider className={styles.divider} />
@@ -92,8 +97,8 @@ const UserInfo = (props) => {
             </Form>
           </div>
           <div style={{ textAlign: "center" }}>
-            <Button type={"primary"} icon={<SaveOutlined />} onClick={onSaveUserInfo}>保存</Button>
-            <Button type={"danger"} icon={<CloseCircleOutlined />} style={{ marginLeft: "10px" }} onClick={onCloseUserInfo}>关闭</Button>
+            <Button type={"primary"} icon={<i className="ri-save-3-line" style={iconStyle}/>} onClick={onSaveUserInfo}>保存</Button>
+            <Button type={"danger"} icon={<i className="ri-close-circle-line" style={iconStyle}/>} style={{ marginLeft: "10px" }} onClick={onCloseUserInfo}>关闭</Button>
           </div>
         </Card>
       </div>

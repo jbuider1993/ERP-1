@@ -108,7 +108,7 @@ class HeadMenu extends React.Component {
             <Dropdown overlay={dropdownInfoOptions} trigger={['click']}>
               <div>
                 <Avatar size={33} icon={<i className="ri-account-circle-line" style={{fontSize: "19px", verticalAlign: "sub"}}></i>} style={{ marginTop: "-5.5%", background: "#096dd9" }} />
-                <span style={{ color: "#fff", marginLeft: "3px" }}>&nbsp;{tokenModel ? tokenModel.userInfo.userName : "SCMP"}</span>
+                <span style={{ color: "#fff", marginLeft: "3px" }}>&nbsp;{tokenModel ? tokenModel.userInfo.userName : "admin"}</span>
               </div>
             </Dropdown>
           </li>

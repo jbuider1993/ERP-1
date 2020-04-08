@@ -12,12 +12,12 @@ class ServerClusterChart extends React.Component {
 
   showLineChart() {
     const data = [
-      { type: 'scmp-home-web', value: 3 },
-      { type: 'scmp-system-web', value: 6 },
-      { type: 'scmp-registry-ampq', value: 8 },
-      { type: 'scmp-gate-way', value: 5 },
-      { type: 'scmp-base-cache', value: 3 },
-      { type: 'scmp-system-service', value: 4 },
+      { type: 'kunlun-home-web', value: 3 },
+      { type: 'kunlun-system-web', value: 6 },
+      { type: 'kunlun-register-service', value: 8 },
+      { type: 'kunlun-gateway-service', value: 5 },
+      { type: 'kunlun-basedata-service', value: 3 },
+      { type: 'kunlun-system-service', value: 4 },
     ];
 
     const ringPlot = new Donut(document.getElementById('serverCluster'), {
@@ -36,7 +36,8 @@ class ServerClusterChart extends React.Component {
       },
       legend: {
         position: "right-top",
-        offsetX: -50
+        offsetX: -70,
+        offsetY: 10
       }
     });
 

@@ -3,7 +3,6 @@ import { connect } from 'dva';
 import DictionarySearch from "../../components/option/dictionary/DictionarySearch";
 import DictionaryToolsBar from "../../components/option/dictionary/DictionaryToolbar";
 import DictionaryList from "../../components/option/dictionary/DictionaryList";
-import TablePagination from '../../components/common/TablePagination';
 import { Modal, message } from "antd";
 
 class DictionaryPage extends React.Component {
@@ -49,6 +48,7 @@ class DictionaryPage extends React.Component {
     const dictionaryListProps = {
       currentPage,
       pageSize,
+      total,
       dictionaryList,
       dictionaryLoading,
       onEdit: (record) => {
@@ -74,13 +74,7 @@ class DictionaryPage extends React.Component {
             },
           })
         },
-      }
-    };
-
-    const tablePaginationProps = {
-      total,
-      currentPage,
-      pageSize,
+      },
       onPageChange: (currentPage, pageSize) => {
         dispatch({type: 'dictionaryModel/getListDatas', payload: {currentPage, pageSize, ...searchParams}});
       },
@@ -97,7 +91,6 @@ class DictionaryPage extends React.Component {
         <DictionarySearch {...dictionarySearchProps} />
         <DictionaryToolsBar {...dictionaryToolbarProps} />
         <DictionaryList {...dictionaryListProps} />
-        <TablePagination {...tablePaginationProps} />
       </div>
     );
   };

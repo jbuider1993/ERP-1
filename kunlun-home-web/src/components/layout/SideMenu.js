@@ -35,25 +35,27 @@ class SideMenu extends React.Component {
       updatePathMap(menuMap);
     }
 
-    const iconStyle = {
-      paddingRight: collapsed ? "32px" : "5px",
-      fontSize: "16px",
-      verticalAlign: "sub",
+    const iconStyle = (iconType) => {
+      return {
+        paddingRight: iconType == "dropdown" ? "5px" : collapsed ? "32px" : "5px",
+        fontSize: "16px",
+        verticalAlign: "sub",
+      }
     };
 
     // 左侧菜单
     const siderFlag = config.frame_menu.sider[activeHeadMenuKey] ? true : false;
     const siderMenu = siderFlag ? config.frame_menu.sider[activeHeadMenuKey].filter(item => item.isShow).map(item => (item.children ?
-      <SubMenu key={item.key} title={<span><i class={item.icon} style={iconStyle}/><span>{item.name}</span></span>} style={{ background: siderColor }}>
+      <SubMenu key={item.key} title={<span><i class={item.icon} style={iconStyle("submenu")}/><span>{item.name}</span></span>} style={{ background: siderColor }}>
         {
           item.children ? item.children.filter(item => item.isShow).map(subItem => (
             <MenuItem key={subItem.key} path={subItem.url}>
-              <i class={subItem.icon} style={iconStyle}/><span>{subItem.name}</span>
+              <i class={subItem.icon} style={iconStyle("submenu")}/><span>{subItem.name}</span>
             </MenuItem>)) : ""
         }
       </SubMenu> :
       <MenuItem key={item.key} path={item.url}>
-        <i class={item.icon} style={iconStyle}/><span>{item.name}</span>
+        <i class={item.icon} style={iconStyle("submenu")}/><span>{item.name}</span>
       </MenuItem>)) : "";
 
     // Tabs页签编辑，即删除
@@ -66,16 +68,16 @@ class SideMenu extends React.Component {
     const dropdownOptions = (
       <Menu style={{ marginTop: "-6px", marginRight: "-9px", right: "5px", padding: "5px 5px 5px 0px" }}>
         <MenuItem style={{ marginTop: "3px", marginLeft: "5px" }}>
-          <div onClick={() => onRefreshTab()}><i className="ri-refresh-line" style={iconStyle}></i>&nbsp;刷新当前页签</div>
+          <div onClick={() => onRefreshTab()}><i className="ri-refresh-line" style={iconStyle("dropdown")}></i>&nbsp;刷新当前页签</div>
         </MenuItem>
         <MenuItem style={{ marginTop: "3px", marginBottom: "5px", marginLeft: "5px" }}>
-          <div onClick={closeCurrentTab}><i className="ri-close-line" style={iconStyle}></i>&nbsp;关闭当前页签</div>
+          <div onClick={closeCurrentTab}><i className="ri-close-line" style={iconStyle("dropdown")}></i>&nbsp;关闭当前页签</div>
         </MenuItem>
         <MenuItem style={{ marginTop: "3px", marginBottom: "5px", marginLeft: "5px" }}>
-          <div onClick={closeOtherTab}><i className="ri-checkbox-indeterminate-line" style={iconStyle}></i>&nbsp;关闭其他页签</div>
+          <div onClick={closeOtherTab}><i className="ri-checkbox-indeterminate-line" style={iconStyle("dropdown")}></i>&nbsp;关闭其他页签</div>
         </MenuItem>
         <MenuItem style={{ marginTop: "3px", marginBottom: "5px", marginLeft: "5px" }}>
-          <div onClick={onCloseTab}><i className="ri-close-circle-line" style={iconStyle}></i>&nbsp;关闭所有页签</div>
+          <div onClick={onCloseTab}><i className="ri-close-circle-line" style={iconStyle("dropdown")}></i>&nbsp;关闭所有页签</div>
         </MenuItem>
       </Menu>
     );
