@@ -36,7 +36,7 @@ class SideMenu extends React.Component {
     }
 
     const iconStyle = {
-      paddingRight: "5px",
+      paddingRight: collapsed ? "32px" : "5px",
       fontSize: "16px",
       verticalAlign: "sub",
     };
