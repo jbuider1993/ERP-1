@@ -1,5 +1,5 @@
-const GATE_WAY_API = 'http://localhost:8015/gate-way';
-const CACHE_TRACE_API = 'http://localhost:8015/base-cache';
+const GATE_WAY_API = 'http://localhost:8015/kunlun-gateway-service';
+const CACHE_TRACE_API = 'http://localhost:8015/kunlun-basedata-service';
 const LOCAL_API = 'http://localhost:8005';
 const EUREKA_MANAGE_API = 'http://localhost:8010/';
 const ZIPKIN_MANAGE_API = 'http://localhost:8020/zipkin/';
@@ -7,7 +7,7 @@ const DRUID_MANGE_API = 'http://localhost:8025/druid/index.html';
 const RABBITMQ_MANGE_API = 'http://localhost:15672/';
 const BASE_SWAGGER_API = 'http://localhost:8020/swagger-ui.html';
 const SYSTEM_SWAGGER_API = 'http://localhost:8025/swagger-ui.html';
-const SYSTEM_SERVICE_API = 'http://localhost:8015/system-service';
+const SYSTEM_SERVICE_API = 'http://localhost:8015/kunlun-system-service';
 const PROCESS_API = "http://localhost:8025";
 const config = {
   name: '昆仑管理系统',

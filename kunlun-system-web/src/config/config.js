@@ -1,8 +1,6 @@
-const REGISTRY_AMQP_API = 'http://localhost:8015/registry-amqp';
-// const CACHE_TRACE_API = 'http://localhost:8015/base-cache';
-const CACHE_TRACE_API = 'http://localhost:8020';
-// const SYSTEM_SERVICE_API = 'http://localhost:8015/system-service';
-const SYSTEM_SERVICE_API = 'http://localhost:8025';
+const REGISTRY_AMQP_API = 'http://localhost:8015/kunlun-register-service';
+const CACHE_TRACE_API = 'http://localhost:8015/kunlun-basedata-service';
+const SYSTEM_SERVICE_API = 'http://localhost:8015/kunlun-system-service';
 const PROCESS_API = "http://localhost:8025";
 const config = {
   name: '昆仑管理系统',
