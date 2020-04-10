@@ -38,14 +38,15 @@ const ModelList = (props) => {
   }];
 
   return (
-    <div className={ styles.listTable }>
+    <div>
       <Table
         bordered
+        className={ styles.listTable }
         rowSelection={rowSelection}
         columns={columns}
         dataSource={modelList}
         pagination={false}
-        loading={modelLoading}
+        loading={false}
         rowKey={record => record.id}
       />
     </div>

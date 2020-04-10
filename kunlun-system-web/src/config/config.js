@@ -104,13 +104,13 @@ const config = {
   ],
 
   SERVICE_NAMES: [
-    {key: "common", value: "kunlun-common-api", description: ""},
-    {key: "register", value: "kunlun-register-service", description: ""},
-    {key: "gateway", value: "kunlun-gateway-service", description: ""},
-    {key: "basedata", value: "kunlun-basedata-service", description: ""},
-    {key: "system-service", value: "kunlun-system-service", description: ""},
-    {key: "home", value: "kunlun-home-web", description: ""},
-    {key: "system-web", value: "kunlun-system-web", description: ""},
+    {key: "common", value: "kunlun-common-api", description: "公共模块"},
+    {key: "register", value: "kunlun-register-service", description: "服务治理"},
+    {key: "gateway", value: "kunlun-gateway-service", description: "服务网关"},
+    {key: "basedata", value: "kunlun-basedata-service", description: "基础数据服务"},
+    {key: "system-service", value: "kunlun-system-service", description: "业务服务"},
+    {key: "home", value: "kunlun-home-web", description: "前端框架"},
+    {key: "system-web", value: "kunlun-system-web", description: "前端业务"},
   ],
 
   MENU_ICON: "down, up, left, right, up-circle, down-circle, left-circle, right-circle, login, logout, menu-fold, " +

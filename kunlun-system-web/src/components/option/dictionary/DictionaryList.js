@@ -78,8 +78,6 @@ class DictionaryList extends React.Component {
       showTotal
     };
 
-    debugger
-
     return (
       <div style={{marginTop: "15px"}}>
         <div >
