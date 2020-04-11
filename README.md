@@ -50,6 +50,7 @@ kunlun-service 基于 SpringBoot 与 Spring Cloud 构建开发，提供后端基
 脚本执行                Flyway
 消息组件                RabbitMQ
 全局搜索                ElasticSearch
+![输入图片说明](https://images.gitee.com/uploads/images/2020/0411/152235_4f7146fd_1894302.png "屏幕截图.png")
 
 ##### 前端框架
 
@@ -63,6 +64,7 @@ kunlun-service 基于 SpringBoot 与 Spring Cloud 构建开发，提供后端基
 富文本编辑器            braft-editor
 HTTP库                  axios
 拾色器                  react-color
+![输入图片说明](https://images.gitee.com/uploads/images/2020/0411/152350_b3f7e035_1894302.png "屏幕截图.png")
 
 
 #### 页面截图
