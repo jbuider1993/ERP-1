@@ -8,36 +8,23 @@ const FormItem = Form.Item;
 
 const Login = (props) => {
 
-  const {
-    codeModel,
-    onLogin,
-    refreshCode,
-    pageLoading,
-  } = props;
+  const {codeModel, onLogin, refreshCode, pageLoading} = props;
 
   const [form] = Form.useForm();
-  const {
-    getFieldsValue,
-    validateFields,
-    resetFields
-  } = form;
+  const {getFieldsValue, validateFields, resetFields} = form;
 
-  const login = () => {
-    validateFields((err, values) => {
-      if (!!err) return;
+  const login = (values) => {
+    if (values["code"].toLowerCase() != codeModel.code.toLowerCase()) {
+      message.warning("输入的验证码有误！");
+      return;
+    }
 
-      if (values["code"].toLowerCase() != codeModel.code.toLowerCase()) {
-        message.warning("输入的验证码有误！");
-        return;
-      }
-
-      if (new Date().getTime() - new Date(codeModel.createTime).getTime() > 1000 * 60) {
-        message.warning("验证码已过期，请重新输入！");
-        resetFields("code");
-        return;
-      }
-      onLogin(values);
-    });
+    if (new Date().getTime() - new Date(codeModel.createTime).getTime() > 1000 * 60) {
+      message.warning("验证码已过期，请重新输入！");
+      resetFields("code");
+      return;
+    }
+    onLogin(values);
   };
 
   const onKeyEnter = (e) => {
@@ -59,7 +46,7 @@ const Login = (props) => {
               <div className={styles.welcomeDiv}>
                 <span className={styles.welcomeFont1}>欢迎使用{config.name}</span>
               </div>
-              <Form initialValues={{}}>
+              <Form initialValues={{}} onFinish={login}>
                 <Row align="center">
                   <div className={styles.loginFont}>用户登录</div>
                 </Row>
@@ -78,7 +65,7 @@ const Login = (props) => {
                     <Input placeholder={"请输入验证码"} style={{ width: "130px" }} onPressEnter={onKeyEnter} prefix={<i className="ri-shield-flash-line" style={{ color: '#506c86' }}></i>} />
                   </FormItem>
                 </Row>
-                <Row style={{ right: "13.5%", marginTop: "-20.4%", float: "right", display: "inline-block" }}>
+                <Row style={{ marginRight: "13%", marginTop: "-18%", float: "right", display: "inline-block" }}>
                   <FormItem>
                     <div onClick={refreshCode}>
                       <img src={codeModel ? "data:image/png;base64," + codeModel.binary : null} />
@@ -86,7 +73,7 @@ const Login = (props) => {
                   </FormItem>
                 </Row>
                 <Row align="center">
-                  <Button type="primary" size="default" style={{ width: "240px" }} onClick={login}>登录</Button>
+                  <Button type="primary" size="default" htmlType="submit" style={{ width: "240px" }}>登录</Button>
                 </Row>
               </Form>
             </div>
