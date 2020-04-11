@@ -2,8 +2,8 @@
 
 <p align="center"> 
     <img src="https://img.shields.io/circleci/project/vuejs/vue/dev.svg" alt="Build Status">
-    <img src="https://img.shields.io/badge/Spring%20Cloud-Greenwich.SR5.RELEASE-blue.svg" alt="Coverage Status">
-    <img src="https://img.shields.io/badge/Spring%20Boot-2.1.12.RELEASE-blue.svg" alt="Downloads">
+    <img src="https://img.shields.io/badge/Spring%20Cloud-Greenwich.RELEASE-blue.svg" alt="Coverage Status">
+    <img src="https://img.shields.io/badge/Spring%20Boot-2.1.0.RELEASE-blue.svg" alt="Downloads">
 </p>
 
 #### 系统介绍
@@ -40,30 +40,10 @@ kunlun-service 基于 SpringBoot 与 Spring Cloud 构建开发，提供后端基
 
 ##### 后端框架
 
-核心框架                Spring Boot
-服务架构                Spring Cloud
-安全框架                apache Shiro、Jwt
-持久层框架              MyBatis
-数据库连接池            Druid
-数据库                  PosgreSQL、Redis
-工作流引擎              Activiti
-脚本执行                Flyway
-消息组件                RabbitMQ
-全局搜索                ElasticSearch
 ![输入图片说明](https://images.gitee.com/uploads/images/2020/0411/152235_4f7146fd_1894302.png "屏幕截图.png")
 
 ##### 前端框架
 
-前端框架                umi
-数据流框架              dva
-前端技术栈              react
-前端UI库                Ant Design
-图表库                  AntV@G2Plot
-图标库                  Remix Icon
-地图组件                react-amap
-富文本编辑器            braft-editor
-HTTP库                  axios
-拾色器                  react-color
 ![输入图片说明](https://images.gitee.com/uploads/images/2020/0411/152350_b3f7e035_1894302.png "屏幕截图.png")
 
 
