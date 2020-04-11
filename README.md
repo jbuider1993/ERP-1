@@ -1,6 +1,16 @@
 # 昆仑管理系统
 
-#### 介绍
+<p align="center"> 
+    <img src="https://img.shields.io/circleci/project/vuejs/vue/dev.svg" alt="Build Status">
+    <img src="https://img.shields.io/badge/Spring%20Cloud-Greenwich.SR5.RELEASE-blue.svg" alt="Coverage Status">
+    <img src="https://img.shields.io/badge/Spring%20Boot-2.1.12.RELEASE-blue.svg" alt="Downloads">
+</p>
+
+[![star](https://gitee.com/owenwangwen/open-capacity-platform/badge/star.svg?theme=white)](https://gitee.com/owenwangwen/open-capacity-platform/stargazers)
+[![Fork me on Gitee](https://gitee.com/owenwangwen/open-capacity-platform/widgets/widget_6.svg)](https://gitee.com/owenwangwen/open-capacity-platform)
+[![fork](https://gitee.com/owenwangwen/open-capacity-platform/badge/fork.svg?theme=white)](https://gitee.com/owenwangwen/open-capacity-platform/members)
+
+#### 系统介绍
 昆仑管理系统基于前后端分离架构，通过Apache Shiro与Jwt组件，用token进行数据交互认证，可快速开发并独立进行Docker容器化部署。
 
 kunlun-web 基于 umi(乌米) 与蚂蚁金服 Ant Design 构建开发，提供前端解决方案，其中kunlun-home-web为前端框架，主要负责登录页面、业务菜单、消息待办、主题皮肤等信息的展示；kunlun-system-web为前端业务服务，主要用于展示各个菜单的业务功能页面，如首页信息、人员管理、用户地图、流程管理、操作日志、事项日程、服务资源管理、菜单管理等。
@@ -10,6 +20,15 @@ kunlun-service 基于 SpringBoot 与 Spring Cloud 构建开发，提供后端基
 
 #### 软件架构
 软件架构说明
+
+
+#### 使用说明
+
+1.  npm安装前端依赖库，并启动kunlun-home-web与kunlun-system-web服务；
+2.  启动注册中心kunlun-register-service；
+3.  依次启动kunlun-gateway-service、kunlun-basedata-service与kunlun-system-service服务；
+4.  访问URL：http://localhost:8000；
+5.  输入账号：admin，密码：admin及验证码。
 
 
 #### 功能说明
