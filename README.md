@@ -6,10 +6,6 @@
     <img src="https://img.shields.io/badge/Spring%20Boot-2.1.12.RELEASE-blue.svg" alt="Downloads">
 </p>
 
-[![star](https://gitee.com/xuesjie/kunlun-service/badge/star.svg?theme=white)](https://gitee.com/owenwangwen/open-capacity-platform/stargazers)
-[![Fork me on Gitee](https://gitee.com/xuesjie/kunlun-service/widgets/widget_6.svg)](https://gitee.com/owenwangwen/open-capacity-platform)
-[![fork](https://gitee.com/xuesjie/kunlun-service/badge/fork.svg?theme=white)](https://gitee.com/owenwangwen/open-capacity-platform/members)
-
 #### 系统介绍
 昆仑管理系统基于前后端分离架构，通过Apache Shiro与Jwt组件，用token进行数据交互认证，可快速开发并独立进行Docker容器化部署。
 
