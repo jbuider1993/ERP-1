@@ -11,7 +11,7 @@ class UserWorkbenchCard extends React.Component {
 
     const {userCounts, onShowDetail} = this.props;
 
-    const tokenModel = window._USERINFO_ ? window._USERINFO_ : null;
+    const loginUserInfo = window._USERINFO_ ? window._USERINFO_ : null;
 
     return (
       <div className={indexStyles.headerDiv}>
@@ -31,11 +31,11 @@ class UserWorkbenchCard extends React.Component {
               <Avatar size={80} icon={<i className="ri-user-line"></i>} src={userLogo} />
             </div>
             <div className={indexStyles.userFontDiv}>
-              <div><span style={{fontWeight: "bold"}}>{tokenModel ? tokenModel.userName : "admin"}</span>&nbsp;&nbsp;&nbsp;&nbsp;{tokenModel ? tokenModel.userInfo.userName : "管理员"}</div>
+              <div><span style={{fontWeight: "bold"}}>{loginUserInfo ? loginUserInfo.userName : "admin"}</span>&nbsp;&nbsp;&nbsp;&nbsp;{loginUserInfo ? loginUserInfo.userName : "管理员"}</div>
               <div>你好！祝你开心每一天！</div>
               <div className={indexStyles.userPhoneAndEmailDiv}>
-                <div>{tokenModel ? tokenModel.userInfo.phoneNumber : "15555555555"}</div>&nbsp;&nbsp;&nbsp;&nbsp;
-                <div>{tokenModel ? tokenModel.userInfo.email : "test@test.com"}</div>
+                <div>{loginUserInfo ? loginUserInfo.phoneNumber : "15555555555"}</div>&nbsp;&nbsp;&nbsp;&nbsp;
+                <div>{loginUserInfo ? loginUserInfo.email : "test@test.com"}</div>
               </div>
             </div>
           </div>

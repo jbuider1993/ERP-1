@@ -11,6 +11,7 @@ window.onload = function() {
     if (e.data.isAuth) {
       window._TOKEN_ = !!e.data && e.data.token || '';
       window._USERINFO_ = !!e.data && e.data.userInfo || '';
+      window.g_app._store.dispatch({type: "globalModel/setTokenModel", payload: {token: window._TOKEN_, userInfo: window._USERINFO_}});
     }
   });
 };
