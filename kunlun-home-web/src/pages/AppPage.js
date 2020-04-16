@@ -70,13 +70,8 @@ const AppPage = (props) => {
       dispatch({ type: "globalModel/updateState", payload: { activeHeadMenuKey: "userInfo" }});
     },
     onLogout: () => {
-      Promise.all([dispatch({
-          type: "globalModel/updateState", payload: {
-          activeHeadMenuKey: "home", activeSideMenuKey: null, paneTabs: [], openedSubMenuKey: null, pageUrl: null, tokenModel: null }}),
-        dispatch({ type: "globalModel/getAuthCode", payload: {}})]).then(() =>
-        Promise.all([dispatch({ type: "globalModel/logout", payload: {}})]).then(() =>
-          history.push({pathname: "/"})
-        )
+      Promise.all([dispatch({ type: "globalModel/logout", payload: {}})]).then(() =>
+        window.g_app._history.push({pathname: "/"})
       );
     },
     onSystemInfo: () => {
