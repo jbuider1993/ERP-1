@@ -1,5 +1,5 @@
 import React from 'react';
-import { Modal, Form, Input, Row, Col, DatePicker, Radio } from 'antd';
+import { Modal, Form, Input, Row, Col, DatePicker, Radio, message } from 'antd';
 import moment from 'moment';
 import * as Icon from '@ant-design/icons';
 
@@ -17,9 +17,12 @@ const UserModal = (props) => {
   };
 
   const onOk = () => {
-    validateFields((err, values) => {
-      if (!err) {
-        operateType == "add" ? onSave(values) : updateUser(values);
+    validateFields().then(values => {
+      operateType == "add" ? onSave(values) : updateUser(values);
+    }).catch(error => {
+      const errors = error.errorFields;
+      for (let i = 0; i < errors.length; i++) {
+        console.log(errors[i].name[0] + " ===>>> " + errors[i].errors[0]);
       }
     });
   };
@@ -35,7 +38,7 @@ const UserModal = (props) => {
         width={650}
         destroyOnClose={true}
       >
-        <Form initialValues={userInfoData}>
+        <Form initialValues={userInfoData} form={form}>
           <Row>
             <Col span={0}>
               <FormItem label="用户ID" name={"id"}>
