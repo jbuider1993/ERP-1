@@ -145,8 +145,8 @@ class SideMenu extends React.Component {
                                 style={{width: "100%", height: "100%"}}
                                 src={(activeHeadMenuKey == "resource" && activeSideMenuKey != "virtual" && activeSideMenuKey != "service")
                                   || (activeHeadMenuKey == "option" && openedSubMenuKey == "interface") || pane.tabType && pane.tabType == "1" ?
-                                  pane.url + (refreshFlag ? ("?refreshView=" + refreshFlag + "&" + iFrameParams) : "?" + iFrameParams) :
-                                  config.LOCAL_API + pane.url + (refreshFlag ? ("?refreshView=" + refreshFlag + "&" + iFrameParams) : "?" + iFrameParams)}
+                                  pane.url + (refreshFlag && activeSideMenuKey == pane.key ? ("?refreshView=" + refreshFlag + "&" + iFrameParams) : "?" + iFrameParams) :
+                                  config.LOCAL_API + pane.url + (refreshFlag && activeSideMenuKey == pane.key ? ("?refreshView=" + refreshFlag + "&" + iFrameParams) : "?" + iFrameParams)}
                         />
                       </div>
                     </TabPane>)
