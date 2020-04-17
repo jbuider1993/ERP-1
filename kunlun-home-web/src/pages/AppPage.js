@@ -1,11 +1,12 @@
 import React from 'react';
-import { Layout, Spin } from 'antd';
+import { Layout, Spin, Modal } from 'antd';
 import config from "../config/config";
 import HeadMenu from '../components/layout/HeadMenu';
 import SideMenu from '../components/layout/SideMenu';
 import UserInfo from '../components/userInfo/UserInfo';
 import ThemeDrawer from '../components/theme/ThemeDrawer';
 import { connect } from 'dva';
+import 'remixicon/fonts/remixicon.css';
 
 const { Content, Footer } = Layout;
 
@@ -70,9 +71,16 @@ const AppPage = (props) => {
       dispatch({ type: "globalModel/updateState", payload: { activeHeadMenuKey: "userInfo" }});
     },
     onLogout: () => {
-      Promise.all([dispatch({ type: "globalModel/logout", payload: {}})]).then(() =>
-        window.g_app._history.push({pathname: "/"})
-      );
+      Modal.confirm({
+        title: '提示',
+        content: <div><i className="ri-error-warning-line" style={{fontSize: "18px", marginRight: "10px", verticalAlign: "sub"}}></i>确定要退出系统？</div>,
+        onOk() {
+          Promise.all([dispatch({ type: "globalModel/logout", payload: {}})]).then(() =>
+            window.g_app._history.push({pathname: "/"})
+          );
+        },
+        onCancel() {},
+      });
     },
     onSystemInfo: () => {
       dispatch({ type: "noficationModel/onDetail", payload: { key: "info" }});

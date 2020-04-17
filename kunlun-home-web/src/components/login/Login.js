@@ -78,7 +78,7 @@ const Login = (props) => {
                   </FormItem>
                 </Row>
                 <Row align="center">
-                  <Button type="primary" size="default" htmlType="submit" style={{ width: "240px" }}>登录</Button>
+                  <Button type="primary" size="default" htmlType="submit" style={{ width: "240px" }} onClick={login}>登录</Button>
                 </Row>
               </Form>
             </div>

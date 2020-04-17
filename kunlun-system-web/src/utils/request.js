@@ -37,7 +37,7 @@ export function get(url, data) {
                 title: '提示',
                 content: <div><i className="ri-error-warning-line" style={{fontSize: "18px", marginRight: "10px", verticalAlign: "sub"}}></i>离开时间太长，请重新登录！</div>,
                 onOk() {
-                  window.parent.postMessage({operateType: "timeout"}, "*")
+                  window.parent.postMessage({operateType: "timeout"}, "*");
                 },
                 onCancel() {},
               });
