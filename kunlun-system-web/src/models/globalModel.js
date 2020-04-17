@@ -1,3 +1,5 @@
+import queryString from 'query-string';
+
 export default {
   namespace: 'globalModel',
   state: {
@@ -23,8 +25,24 @@ export default {
     }
   },
   subscriptions: {
-    init(params) {
+    setup({ dispatch, history }) {
       console.log("===== globalModel subscriptions =====");
-    }
+      history.listen(({pathname, query, search}) => {
+        // 解析父iframe传递的参数，并将token和登陆用户信息缓存到window
+        const params = queryString.parse(search);
+        const {token, userInfo} = JSON.parse(params.tokenModel);
+        window._TOKEN_ = token;
+        window._USERINFO_ = userInfo;
+
+        if (pathname === "/home") {
+          dispatch({ type: 'updateState', payload: { loading: true }});
+          Promise.all([dispatch({ type: 'getUserCount', payload: {} }), dispatch({ type: 'getMessages', payload: {} })]).then(() =>
+            dispatch({ type: 'updateState', payload: { loading: false }})
+          );
+
+          dispatch({ type: 'getSchedules', payload: {}});
+        }
+      });
+    },
   }
 };

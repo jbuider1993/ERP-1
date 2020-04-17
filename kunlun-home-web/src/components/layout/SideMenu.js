@@ -95,23 +95,13 @@ class SideMenu extends React.Component {
       this.setState({ refreshView: new Date().getTime() });
     };
 
-    const loadParamsToIFrame = () => {
-      if (!tokenModel) {
-        umiRouter.push({pathname: "/scmp"});
-        return;
-      }
-      const iFrameParams = { token: tokenModel.token, userInfo: tokenModel.userInfo, isAuth: true };
-      window.frames[0].postMessage(iFrameParams, '*');
-      window.frames[window.frames.length - 1].postMessage(iFrameParams, '*');
-    };
+    const iFrameParams = "tokenModel=" + JSON.stringify(tokenModel);
 
     // 刷新时间戳
     const refreshFlag = this.state.refreshView;
 
     const isShowSider = activeHeadMenuKey != "home" && themeStyle == "siderMenu" ? true : false;
     const pageUrl = siderFlag ? config.frame_menu.sider[activeHeadMenuKey].filter(item => item.key == activeSideMenuKey)[0].url : "/home";
-
-    const height = (document.documentElement.clientHeight - 55 - 40) + "px";
 
     return (
       <Layout style={{height: "100%"}}>
@@ -134,7 +124,10 @@ class SideMenu extends React.Component {
             {/* 引入页面显示组件 */}
             {
               activeHeadMenuKey == config.frame_menu.main[0].key || (activeHeadMenuKey != "home" && themeStyle == "subMenu") ?
-              <iframe id={"homeIFrame"} name={"homeIFrame"} onLoad={loadParamsToIFrame} style={{width: "100%", height: "100%", padding: activeHeadMenuKey != "home" ? "20px" : "0", display: "block"}} frameBorder={"no"} src={config.LOCAL_API + pageUrl}/> :
+              <iframe id={"homeIFrame"} name={"homeIFrame"}
+                      style={{width: "100%", height: "100%", padding: activeHeadMenuKey != "home" ? "20px" : "0", display: "block"}}
+                      frameBorder={"no"}
+                      src={config.LOCAL_API + pageUrl + "?" + iFrameParams}/> :
               <Tabs
                 className={[styles.gapTab, styles.distanceDiv]}
                 type="editable-card"
@@ -150,11 +143,10 @@ class SideMenu extends React.Component {
                       <div className={styles.tabDiv} ref={"iframe" + index}>
                         <iframe id={"tabIFrame" + index} name={"tabIFrame" + index} frameBorder={"no"}
                                 style={{width: "100%", height: "100%"}}
-                                onLoad={loadParamsToIFrame}
                                 src={(activeHeadMenuKey == "resource" && activeSideMenuKey != "virtual" && activeSideMenuKey != "service")
                                   || (activeHeadMenuKey == "option" && openedSubMenuKey == "interface") || pane.tabType && pane.tabType == "1" ?
-                                  pane.url + (refreshFlag ? ("?refreshView=" + refreshFlag) : "") :
-                                  config.LOCAL_API + pane.url + (refreshFlag ? ("?refreshView=" + refreshFlag) : "")}
+                                  pane.url + (refreshFlag ? ("?refreshView=" + refreshFlag + "&" + iFrameParams) : "?" + iFrameParams) :
+                                  config.LOCAL_API + pane.url + (refreshFlag ? ("?refreshView=" + refreshFlag + "&" + iFrameParams) : "?" + iFrameParams)}
                         />
                       </div>
                     </TabPane>)

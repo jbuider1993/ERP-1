@@ -15,7 +15,8 @@
     "remixicon": "^2.3.0",
     "react": "^16.13.0",
     "react-amap": "^1.2.7",
-    "react-dom": "^16.13.0"
+    "react-dom": "^16.13.0",
+    "query-string": "^6.12.0"
   },
   "devDependencies": {
     "babel-eslint": "^9.0.0",
