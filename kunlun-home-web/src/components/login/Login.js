@@ -13,18 +13,23 @@ const Login = (props) => {
   const [form] = Form.useForm();
   const {getFieldsValue, validateFields, resetFields} = form;
 
-  const login = (values) => {
-    if (values["code"].toLowerCase() != codeModel.code.toLowerCase()) {
-      message.warning("输入的验证码有误！");
-      return;
-    }
+  const login = () => {
+    validateFields().then(values => {
+      if (values["code"].toLowerCase() != codeModel.code.toLowerCase()) {
+        message.warning("输入的验证码有误！");
+        return;
+      }
 
-    if (new Date().getTime() - new Date(codeModel.createTime).getTime() > 1000 * 60) {
-      message.warning("验证码已过期，请重新输入！");
-      resetFields("code");
-      return;
-    }
-    onLogin(values);
+      if (new Date().getTime() - new Date(codeModel.createTime).getTime() > 1000 * 60) {
+        message.warning("验证码已过期，请重新输入！");
+        resetFields("code");
+        return;
+      }
+      onLogin(values);
+    }).catch(error => {
+      console.log("===== 登陆验证失败 =====");
+    })
+
   };
 
   const onKeyEnter = (e) => {
@@ -46,7 +51,7 @@ const Login = (props) => {
               <div className={styles.welcomeDiv}>
                 <span className={styles.welcomeFont1}>欢迎使用{config.name}</span>
               </div>
-              <Form initialValues={{}} onFinish={login}>
+              <Form initialValues={{}} form={form}>
                 <Row align="center">
                   <div className={styles.loginFont}>用户登录</div>
                 </Row>

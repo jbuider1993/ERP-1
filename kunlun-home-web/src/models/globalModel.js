@@ -104,6 +104,12 @@ export default {
   subscriptions: {
     onListenIFrameMessage({ dispatch, history }) {
       window.addEventListener("message", function (e) {
+        // 监听页面超时事件，确定后直接跳转到登陆界面
+        if (e.data && e.data.operateType == "timeout") {
+          window.g_app._history.push({pathname: "/"});
+        }
+
+        // kunlun-system-web请求打开菜单页面的监听
         const message = !!e && !!e.data && JSON.parse(e.data) || {};
         message.isAddRoute && dispatch({ type: "addActiveRoute", payload: message });
       });

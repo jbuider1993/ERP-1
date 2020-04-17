@@ -1,6 +1,7 @@
 import axios from 'axios';
-import { message } from 'antd';
+import { message, Modal } from 'antd';
 import qs from 'qs';
+import 'remixicon/fonts/remixicon.css';
 
 axios.defaults.timeout = 300000;
 axios.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded";
@@ -29,9 +30,21 @@ export function get(url, data) {
         return resolve(res.data);
       }).catch(error => {
         if (error.response) {
-          if (error.response.status == "400" || error.response.status == "404") {
-            message.error("客户端请求错误！");
-          } else if (error.response.status == "500") {
+          const status = error.response.status;
+          if (status == "400" || status == "404") {
+            if (error.response.data.path && error.response.data.path == "/timeout") {
+              Modal.confirm({
+                title: '提示',
+                content: <div><i className="ri-error-warning-line" style={{fontSize: "18px", marginRight: "10px", verticalAlign: "sub"}}></i>离开时间太长，请重新登录！</div>,
+                onOk() {
+                  window.parent.postMessage({operateType: "timeout"}, "*")
+                },
+                onCancel() {},
+              });
+            } else {
+              message.error("客户端请求错误！");
+            }
+          } else if (status == "500") {
             message.error("服务器内部错误！");
           }
         } else {
