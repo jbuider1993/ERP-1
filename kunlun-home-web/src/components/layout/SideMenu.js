@@ -101,7 +101,7 @@ class SideMenu extends React.Component {
     const refreshFlag = this.state.refreshView;
 
     const isShowSider = activeHeadMenuKey != "home" && themeStyle == "siderMenu" ? true : false;
-    const pageUrl = siderFlag ? config.frame_menu.sider[activeHeadMenuKey].filter(item => item.key == activeSideMenuKey)[0].url : "/home";
+    const pageUrl = siderFlag ? config.frame_menu.sider[activeHeadMenuKey].filter(item => item.key == activeSideMenuKey)[0].url : config.frame_menu.main[0].url;
 
     return (
       <Layout style={{height: "100%"}}>
@@ -127,7 +127,7 @@ class SideMenu extends React.Component {
               <iframe id={"homeIFrame"} name={"homeIFrame"}
                       style={{width: "100%", height: "100%", padding: activeHeadMenuKey != "home" ? "20px" : "0", display: "block"}}
                       frameBorder={"no"}
-                      src={config.LOCAL_API + pageUrl + "?" + iFrameParams}/> :
+                      src={pageUrl + "?" + iFrameParams}/> :
               <Tabs
                 className={[styles.gapTab, styles.distanceDiv]}
                 type="editable-card"
@@ -143,10 +143,7 @@ class SideMenu extends React.Component {
                       <div className={styles.tabDiv} ref={"iframe" + index}>
                         <iframe id={"tabIFrame" + index} name={"tabIFrame" + index} frameBorder={"no"}
                                 style={{width: "100%", height: "100%"}}
-                                src={(activeHeadMenuKey == "resource" && activeSideMenuKey != "virtual" && activeSideMenuKey != "service")
-                                  || (activeHeadMenuKey == "option" && openedSubMenuKey == "interface") || pane.tabType && pane.tabType == "1" ?
-                                  pane.url + (refreshFlag && activeSideMenuKey == pane.key ? ("?refreshView=" + refreshFlag + "&" + iFrameParams) : "?" + iFrameParams) :
-                                  config.LOCAL_API + pane.url + (refreshFlag && activeSideMenuKey == pane.key ? ("?refreshView=" + refreshFlag + "&" + iFrameParams) : "?" + iFrameParams)}
+                                src={pane.url + (pane.isHeaderToken ? "?" + iFrameParams : "") + (refreshFlag && activeSideMenuKey == pane.key ? (pane.isHeaderToken ? "&" : "" + "refreshView=" + refreshFlag) : "")}
                         />
                       </div>
                     </TabPane>)

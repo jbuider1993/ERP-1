@@ -30,7 +30,7 @@ export default {
       history.listen(({pathname, query, search}) => {
         // 解析父iframe传递的参数，并将token和登陆用户信息缓存到window
         const params = queryString.parse(search);
-        if (!!params && params.tokenModel != "null") {
+        if (!!params && params.tokenModel && params.tokenModel != "null") {
           const {token, userInfo} = JSON.parse(params.tokenModel);
           window._TOKEN_ = token;
           window._USERINFO_ = userInfo;

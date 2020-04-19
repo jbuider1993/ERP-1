@@ -43,7 +43,7 @@ export default {
       const childs = tempss.flatMap(obj => obj.children);
       const array = [...main1, ...temps, ...childs];
       for (let i = 0; i < array.length; i++) {
-        if (array[i].key != "") pathUrlList.push({ key: array[i].key, name: array[i].name, url: array[i].url });
+        if (array[i].key != "") pathUrlList.push({...array[i]});
       }
       yield put({ type: "updateState", payload: { pathUrlList, paneTabs }});
     },

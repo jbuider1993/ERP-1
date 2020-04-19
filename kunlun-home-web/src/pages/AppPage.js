@@ -44,13 +44,13 @@ const AppPage = (props) => {
         const isHasChild = sideMenu[0].children ? true : false;
         if (!isExist && !isHasChild) {
           activeSideMenuKey = sideMenu[0].key;
-          paneTabs.push({key: sideMenu[0].key, name: sideMenu[0].name, url: sideMenu[0].url});
+          paneTabs.push({...sideMenu[0]});
         } else if (isHasChild) {
           openedSubMenuKey = sideMenu[0].key;
           activeSideMenuKey = sideMenu[0].children[0].key;
           const isExistChild = paneTabs.filter(item => activeSideMenuKey == item.key).length > 0 ? true : false;
           if (!isExistChild) {
-            paneTabs.push({key: activeSideMenuKey, name: sideMenu[0].children[0].name, url: sideMenu[0].children[0].url});
+            paneTabs.push({...sideMenu[0].children[0], key: activeSideMenuKey});
           }
         }
       }
@@ -63,7 +63,7 @@ const AppPage = (props) => {
       const pathUrl = pathUrlList.filter(item => key == item.key);
       const isExist = paneTabs.filter(item => item.key == pathUrl[0].key).length > 0 ? true : false;
       if (!isExist) {
-        paneTabs.push({key: pathUrl[0].key, name: pathUrl[0].name, url: pathUrl[0].url});
+        paneTabs.push({...pathUrl[0]});
       }
       dispatch({ type: "globalModel/updateState", payload: { activeSideMenuKey: key, paneTabs, pageUrl: item.props.path }});
     },
@@ -127,7 +127,7 @@ const AppPage = (props) => {
       const pathUrl = pathUrlList.filter(item => key == item.key);
       const isExist = paneTabs.filter(item => item.key == pathUrl[0].key).length > 0 ? true : false;
       if (!isExist) {
-        paneTabs.push({key: pathUrl[0].key, name: pathUrl[0].name, url: pathUrl[0].url});
+        paneTabs.push({...pathUrl[0]});
       }
       dispatch({ type: "globalModel/updateState", payload: { activeSideMenuKey: key, paneTabs, pageUrl: item.props.path }});
     },
