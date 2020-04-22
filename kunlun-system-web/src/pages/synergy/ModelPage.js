@@ -96,7 +96,7 @@ const ModelPage = (props) => {
         return;
       }
 
-      commonUtil.sendRequestToHome(true, "update", record.id);
+      commonUtil.sendRequestToHome(true, "update", {id: record.id});
     },
     onView: (record) => {
       dispatch({ type: 'modelModel/getModelNodeList', payload: { modelId: record.id }});

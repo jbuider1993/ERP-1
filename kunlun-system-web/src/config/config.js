@@ -53,7 +53,7 @@ const config = {
     batchDeleteUser: `${CACHE_TRACE_API}/user/batchDeleteUser`,
 
     // 在线用户
-    getModelList: `${SYSTEM_SERVICE_API}/modelList`,
+    getModelList: `${SYSTEM_SERVICE_API}/service/modelList`,
 
     // 角色管理
     getRoleList: `${CACHE_TRACE_API}/role/getAllRole`,

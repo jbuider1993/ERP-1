@@ -60,7 +60,7 @@ const config = {
       ],
       synergy: [
         { key: "model", url: LOCAL_API + "/synergy/model", icon: "ri-government-line", name: "模型管理", isHeaderToken: true, isShow: true },
-        { key: "create", url: PROCESS_API + "/create", icon: "ri-community-line", name: "模型创建", isHeaderToken: false, isShow: false },
+        { key: "create", url: PROCESS_API + "/service/create", icon: "ri-community-line", name: "模型创建", isHeaderToken: false, isShow: false },
         { key: "update", url: PROCESS_API + "/static/modeler.html?modelId=", icon: "ri-hotel-line", isHeaderToken: false, name: "模型编辑", isShow: false },
         { key: "process", url: LOCAL_API + "/synergy/process", icon: "ri-qr-scan-line", name: "流程管理", isHeaderToken: true, isShow: true },
         { key: "todo", url: LOCAL_API + "/synergy/todo", icon: "ri-todo-line", name: "待办任务", isHeaderToken: true, isShow: false },

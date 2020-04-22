@@ -143,7 +143,7 @@ class SideMenu extends React.Component {
                       <div className={styles.tabDiv} ref={"iframe" + index}>
                         <iframe id={"tabIFrame" + index} name={"tabIFrame" + index} frameBorder={"no"}
                                 style={{width: "100%", height: "100%"}}
-                                src={pane.url + (pane.isHeaderToken ? "?" + iFrameParams : "") + (refreshFlag && activeSideMenuKey == pane.key ? (pane.isHeaderToken ? "&" : "" + "refreshView=" + refreshFlag) : "")}
+                                src={pane.url + (pane.isHeaderToken ? "?" + iFrameParams : "") + (refreshFlag && activeSideMenuKey == pane.key ? ((pane.isHeaderToken ? "&" : "") + "refreshView=" + refreshFlag) : "")}
                         />
                       </div>
                     </TabPane>)

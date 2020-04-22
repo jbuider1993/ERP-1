@@ -95,10 +95,19 @@ export default {
     },
 
     *addActiveRoute({ payload: params }, { select, call, put }) {
-      let { paneTabs } = yield select(state => state.globalModel);
+      let { paneTabs, pathUrlList } = yield select(state => state.globalModel);
       const {activeHeadMenuKey, paneTabList } = yield call(globalService.getActivedMenu, params, paneTabs);
+
+      const urlMap = new Map();
+      pathUrlList.forEach((item, index) => {
+        urlMap.set(item.key, item);
+      });
+      const urlArrays = new Array();
+      paneTabs.forEach((item, index) => {
+        urlArrays.push(urlMap.get(item.key));
+      });
       console.log("open tab, activeHeadMenuKey ===>>> " + activeHeadMenuKey + ", activeSideMenuKey ===>>> " + params.key);
-      yield put({ type: "updateState", payload: { paneTabs: paneTabList, activeHeadMenuKey, activeSideMenuKey: params.key }});
+      yield put({ type: "updateState", payload: { paneTabs: urlArrays, activeHeadMenuKey, activeSideMenuKey: params.key }});
     },
   },
   subscriptions: {
