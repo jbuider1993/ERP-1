@@ -35,7 +35,8 @@ export function getActivedMenu(params, paneTabList) {
       if (menuObj.key == params.key) {
         activeHeadMenuKey = siderKey;
         if (params.key == "update") {
-          menuObj["url"] = menuObj["url"] + params.params.id;
+          const url = menuObj["url"].substring(0, menuObj["url"].indexOf("=") + 1);
+          menuObj["url"] = url + params.params.id;
         }
 
         // 如Tab已经打开，则直接跳转到已打卡的Tab
