@@ -22,6 +22,10 @@ class SideMenu extends React.Component {
     }
   }
 
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    if (!!this.state.refreshView) this.setState({refreshView: null});
+  }
+
   render() {
 
     const { history,
