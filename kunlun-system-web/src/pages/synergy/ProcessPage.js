@@ -36,23 +36,27 @@ const ProcessPage = (props) => {
 
   const processToolbarProps = {
     onSubmit: () => {
-      if (selectedRowKeys.length == 0 || selectedRowKeys.length > 1) {
+      if (selectedRows.length == 0 || selectedRows.length > 1) {
         message.error("请选择要提交的流程记录！");
       } else if (selectedRowKeys.length == 1) {
+        const status = selectedRows[0].processStatus;
+        if (status != config.PROCESS_STATUS[0].key && status != config.PROCESS_STATUS[4].key) {
+          message.info("选择的流程已新建了一个实例，再次提交将重新新建一个实例！");
+        }
         Modal.confirm({
           title: "提交流程",
           content: "确定提交选中的流程模型？",
           okText: '确认',
           cancelText: '取消',
           onOk() {
-            dispatch({ type: "processModel/submitProcess", payload: { keyName: "未定义" }});
+            dispatch({ type: "processModel/submitProcess", payload: { keyName: selectedRows[0].key }});
           },
           onCancel() {}
         });
       }
     },
     onAudit: () => {
-      if (selectedRowKeys.length == 0 || selectedRowKeys.length > 1) {
+      if (selectedRows.length == 0 || selectedRows.length > 1) {
         message.error("请选择要审核的流程记录！");
       } else if (selectedRowKeys.length == 1) {
         Modal.confirm({

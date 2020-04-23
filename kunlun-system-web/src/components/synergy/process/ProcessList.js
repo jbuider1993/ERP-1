@@ -12,7 +12,7 @@ const ProcessList = (props) => {
   const columns = [
     { title: '序号', width: '5%', render: (text, record, index) => <span>{(index + 1) + (currentPage - 1) * pageSize}</span> },
     { title: '模型名称', dataIndex: 'modelName', key: 'modelName', width: '15%' },
-    { title: '启动节点', dataIndex: 'currentExecuteName', key: 'currentExecuteName', width: '15%' },
+    { title: '当前节点', dataIndex: 'currentExecuteName', key: 'currentExecuteName', width: '15%' },
     { title: '审核节点', dataIndex: 'nextExecuteName', key: 'nextExecuteName', width: '15%' },
     { title: '流程状态', dataIndex: 'processStatus', key: 'processStatus', width: '10%',
       render: (text, record, index) => {
