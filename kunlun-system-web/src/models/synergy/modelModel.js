@@ -72,8 +72,8 @@ export default {
       }
     },
 
-    *batchDeleteModel({payload: ids}, {put, call}) {
-      const res = yield call(modelService.batchDeleteUser, ids);
+    *batchDeleteModel({payload: modelIds}, {put, call}) {
+      const res = yield call(modelService.batchDeleteModel, modelIds);
       if (res.code == "200") {
         message.info("删除成功！");
         yield put({ type: 'getListDatas', payload: {}});

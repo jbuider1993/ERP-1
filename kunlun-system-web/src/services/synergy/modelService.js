@@ -17,8 +17,8 @@ export function deployModel(params) {
   return request.post(`${config.system_api.deployModel}`, params);
 }
 
-export function batchDeleteUser(params) {
-  return request.post(`${config.system_api.batchDeleteUser}`, params);
+export function batchDeleteModel(params) {
+  return request.post(`${config.system_api.batchDeleteModel}`, params);
 }
 
 export function getModelNodeList(params) {

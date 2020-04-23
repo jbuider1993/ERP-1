@@ -65,6 +65,7 @@ const config = {
     getOnlineUserList: `${CACHE_TRACE_API}/onlineUser/getAllOnlineUser`,
     deployModel: `${SYSTEM_SERVICE_API}/deploy`,
     getModelNodeList: `${SYSTEM_SERVICE_API}/service/model/XXX/json`,
+    batchDeleteModel: `${SYSTEM_SERVICE_API}/service/batchDelete`,
 
     // 流程管理
     getAllProcess: `${SYSTEM_SERVICE_API}/processList`,

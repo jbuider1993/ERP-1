@@ -77,8 +77,8 @@ const ModelPage = (props) => {
         title: "删除",
         content: "确定删除选中的记录？",
         onOk() {
-          const ids = selectedRowKeys.join(",");
-          dispatch({type: "modelModel/batchDeleteModel", payload: {ids}});
+          const modelIds = selectedRowKeys.join(",");
+          dispatch({type: "modelModel/batchDeleteModel", payload: {modelIds}});
         },
         onCancel() {
         }
