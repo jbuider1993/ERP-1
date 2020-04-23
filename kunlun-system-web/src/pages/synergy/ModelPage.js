@@ -1,19 +1,21 @@
 import React from 'react';
-import { connect } from 'dva';
+import {connect} from 'dva';
 import ModelSearch from "../../components/synergy/model/ModelSearch";
 import ModelToolsBar from "../../components/synergy/model/ModelToolbar";
 import ModelModal from "../../components/synergy/model/ModelModal";
 import ModelList from "../../components/synergy/model/ModelList";
 import TablePagination from '../../components/common/TablePagination';
-import { Modal, message } from "antd";
+import {Modal, message, Spin} from "antd";
 import config from '../../config/config';
 import * as commonUtil from '../../utils/commonUtil';
 
 const ModelPage = (props) => {
 
-  const { dispatch, modelModel } = props;
-  const { modelList, total, modelLoading, operateType, modelModalVisible, currentPage, pageSize,
-          selectedRowKeys, selectedRows, modelInfoData, searchParams, modelRecord, modelNodeList } = modelModel;
+  const {dispatch, modelModel} = props;
+  const {
+    modelList, total, modelLoading, operateType, modelModalVisible, currentPage, pageSize,
+    selectedRowKeys, selectedRows, modelInfoData, searchParams, modelRecord, modelNodeList
+  } = modelModel;
 
   const modelSearchProps = {
     onSearch: (searchParams) => {
@@ -53,9 +55,10 @@ const ModelPage = (props) => {
           okText: '确认',
           cancelText: '取消',
           onOk() {
-            dispatch({ type: "modelModel/deployModel", payload: { modelId: selectedRowKeys[0] }});
+            dispatch({type: "modelModel/deployModel", payload: {modelId: selectedRowKeys[0]}});
           },
-          onCancel() {}
+          onCancel() {
+          }
         });
       }
     },
@@ -75,14 +78,16 @@ const ModelPage = (props) => {
         content: "确定删除选中的记录？",
         onOk() {
           const ids = selectedRowKeys.join(",");
-          dispatch({ type: "modelModel/batchDeleteModel", payload: { ids }});
+          dispatch({type: "modelModel/batchDeleteModel", payload: {ids}});
         },
         onCancel() {
         }
       });
     },
-    onExport: () => {},
-    onImport: () => {},
+    onExport: () => {
+    },
+    onImport: () => {
+    },
   };
 
   const modelListProps = {
@@ -99,8 +104,8 @@ const ModelPage = (props) => {
       commonUtil.sendRequestToHome(true, "update", {id: record.id});
     },
     onView: (record) => {
-      dispatch({ type: 'modelModel/getModelNodeList', payload: { modelId: record.id }});
-      dispatch({ type: 'modelModel/updateState', payload: { modelModalVisible: true, modelRecord: record }});
+      dispatch({type: 'modelModel/getModelNodeList', payload: {modelId: record.id}});
+      dispatch({type: 'modelModel/updateState', payload: {modelModalVisible: true, modelRecord: record}});
     },
     rowSelection: {
       selectedRowKeys,
@@ -131,17 +136,19 @@ const ModelPage = (props) => {
 
   return (
     <div>
-      <ModelSearch {...modelSearchProps} />
-      <ModelToolsBar {...modelToolbarProps} />
-      <ModelModal {...modelModalProps} />
-      <ModelList {...modelListProps} />
-      <TablePagination {...tablePaginationProps} />
+      <Spin spinning={modelLoading}>
+        <ModelSearch {...modelSearchProps} />
+        <ModelToolsBar {...modelToolbarProps} />
+        <ModelModal {...modelModalProps} />
+        <ModelList {...modelListProps} />
+        <TablePagination {...tablePaginationProps} />
+      </Spin>
     </div>
   );
 };
 
-function mapStateToProps({ modelModel }){
-  return { modelModel };
+function mapStateToProps({modelModel}) {
+  return {modelModel};
 }
 
 export default connect(mapStateToProps)(ModelPage);

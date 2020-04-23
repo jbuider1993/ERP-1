@@ -23,7 +23,7 @@ const ModelModal = (props) => {
         onCancel={onCancel}
         title={"模型编辑"}
         width={800}
-        height={400}
+        bodyStyle={{height: "550px"}}
         destroyOnClose={true}
         footer={null}
         mask={false}
@@ -48,12 +48,12 @@ const ModelModal = (props) => {
               <Row>
                 <Col span={12}>
                   <FormItem { ...formItemLayout } label="创建时间">
-                    <div>{modelRecord ? moment(modelRecord.createTime).format("YYYY-MM-DD") : ""}</div>
+                    <div>{modelRecord && modelRecord.createTime ? moment(modelRecord.createTime).format("YYYY-MM-DD") : ""}</div>
                   </FormItem>
                 </Col>
                 <Col span={12}>
                   <FormItem { ...formItemLayout } label="部署时间">
-                    <div>{modelRecord ? moment(modelRecord.deployTime).format("YYYY-MM-DD") : ""}</div>
+                    <div>{modelRecord && modelRecord.deployTime ? moment(modelRecord.deployTime).format("YYYY-MM-DD") : ""}</div>
                   </FormItem>
                 </Col>
               </Row>

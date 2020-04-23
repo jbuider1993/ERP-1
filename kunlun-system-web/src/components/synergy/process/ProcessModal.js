@@ -29,7 +29,7 @@ const ProcessModal = (props) => {
         onCancel={onCancel}
         title={"模型流程"}
         width={800}
-        height={400}
+        bodyStyle={{height: "400px"}}
         destroyOnClose={true}
         footer={null}
         mask={false}

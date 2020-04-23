@@ -5,7 +5,7 @@ import ProcessToolsBar from "../../components/synergy/process/ProcessToolbar";
 import ProcessModal from "../../components/synergy/process/ProcessModal";
 import ProcessList from "../../components/synergy/process/ProcessList";
 import TablePagination from '../../components/common/TablePagination';
-import { Modal, message } from "antd";
+import { Modal, message, Spin } from "antd";
 import config from '../../config/config';
 import * as commonUtil from '../../utils/commonUtil';
 
@@ -123,11 +123,13 @@ const ProcessPage = (props) => {
 
   return (
     <div>
-      <ProcessSearch {...processSearchProps} />
-      <ProcessToolsBar {...processToolbarProps} />
-      <ProcessModal {...processModalProps} />
-      <ProcessList {...processListProps} />
-      <TablePagination {...tablePaginationProps} />
+      <Spin spinning={processLoading}>
+        <ProcessSearch {...processSearchProps} />
+        <ProcessToolsBar {...processToolbarProps} />
+        <ProcessModal {...processModalProps} />
+        <ProcessList {...processListProps} />
+        <TablePagination {...tablePaginationProps} />
+      </Spin>
     </div>
   );
 };

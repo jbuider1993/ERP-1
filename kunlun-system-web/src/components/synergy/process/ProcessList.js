@@ -7,7 +7,7 @@ import 'remixicon/fonts/remixicon.css';
 
 const ProcessList = (props) => {
 
-  const { processList, processLoading, rowSelection, onView, currentPage, pageSize } = props;
+  const { processList, rowSelection, onView, currentPage, pageSize } = props;
 
   const columns = [
     { title: '序号', width: '5%', render: (text, record, index) => <span>{(index + 1) + (currentPage - 1) * pageSize}</span> },
@@ -29,7 +29,7 @@ const ProcessList = (props) => {
       <span style={{cursor: "pointer"}}>
         <Tooltip title={"查看流程详情"}>
           <span onClick={() => onView(record)}>
-            <i className="ri-file-text-line"></i>
+            <i className="ri-file-text-line" style={{fontSize: "18px"}}></i>
           </span>
         </Tooltip>
       </span>)
@@ -43,7 +43,6 @@ const ProcessList = (props) => {
         columns={columns}
         dataSource={processList}
         pagination={false}
-        loading={processLoading}
         rowKey={record => record.id}
       />
     </div>
