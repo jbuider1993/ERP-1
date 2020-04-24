@@ -64,12 +64,12 @@ const ProcessModal = (props) => {
             <Row>
               <Col span={12}>
                 <FormItem { ...formItemLayout } label="启动时间">
-                  <div>{processRecord ? moment(processRecord.startTime).format("YYYY-MM-DD") : ""}</div>
+                  <div>{processRecord && processRecord.startTime ? moment(processRecord.startTime).format("YYYY-MM-DD") : ""}</div>
                 </FormItem>
               </Col>
               <Col span={12}>
                 <FormItem { ...formItemLayout } label="完成时间">
-                  <div>{processRecord ? moment(processRecord.endTime).format("YYYY-MM-DD") : ""}</div>
+                  <div>{processRecord && processRecord.endTime ? moment(processRecord.endTime).format("YYYY-MM-DD") : ""}</div>
                 </FormItem>
               </Col>
             </Row>

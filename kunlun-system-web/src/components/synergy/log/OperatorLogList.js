@@ -39,6 +39,7 @@ const OperatorLogList = (props) => {
         pagination={false}
         loading={logLoading}
         rowKey={record => record.id}
+        scroll={{ y: 550 }}
       />
     </div>
   );

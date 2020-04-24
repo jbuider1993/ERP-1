@@ -21,7 +21,7 @@ const ModelModal = (props) => {
       <Modal
         visible={modelModalVisible}
         onCancel={onCancel}
-        title={"模型编辑"}
+        title={"模型详情"}
         width={800}
         bodyStyle={{height: "550px"}}
         destroyOnClose={true}

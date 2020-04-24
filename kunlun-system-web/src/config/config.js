@@ -91,11 +91,11 @@ const config = {
   ],
 
   PROCESS_STATUS: [
-    { key: "0", name: "未提交" },
-    { key: "1", name: "审核中" },
-    { key: "2", name: "驳回" },
-    { key: "3", name: "废止" },
-    { key: "4", name: "已完成" },
+    { key: "0", name: "未提交", color: "#1382e8" },
+    { key: "1", name: "审核中", color: "#e8dd09" },
+    { key: "2", name: "驳回", color: "#e81b24" },
+    { key: "3", name: "废止", color: "#e8e8e8" },
+    { key: "4", name: "已完成", color: "#25e832" },
   ],
 
   ICON_STYLE: [

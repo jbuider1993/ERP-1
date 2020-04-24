@@ -17,7 +17,7 @@ const ProcessList = (props) => {
     { title: '流程状态', dataIndex: 'processStatus', key: 'processStatus', width: '10%',
       render: (text, record, index) => {
         const status = config.PROCESS_STATUS.filter(item => item.key == text);
-        return (<Tag color={text ? "#87d068" : "#f50"}>{status[0].name}</Tag>);
+        return (<Tag color={status[0].color}><span style={{color: "#000000"}}>{status[0].name}</span></Tag>);
     }
     },
     { title: '启动时间', dataIndex: 'startTime', key: 'startTime', width: '15%', sorter: (x, y) => x.startTime - y.startTime,

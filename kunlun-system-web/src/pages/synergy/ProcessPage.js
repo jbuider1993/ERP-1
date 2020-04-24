@@ -40,12 +40,10 @@ const ProcessPage = (props) => {
         message.error("请选择要提交的流程记录！");
       } else if (selectedRowKeys.length == 1) {
         const status = selectedRows[0].processStatus;
-        if (status != config.PROCESS_STATUS[0].key && status != config.PROCESS_STATUS[4].key) {
-          message.info("选择的流程已新建了一个实例，再次提交将重新新建一个实例！");
-        }
+        const flag = status != config.PROCESS_STATUS[0].key && status != config.PROCESS_STATUS[4].key;
         Modal.confirm({
           title: "提交流程",
-          content: "确定提交选中的流程模型？",
+          content: flag ? "选择的流程已新建了一个实例，再次提交将重新新建一个实例！" : "确定提交选中的流程模型？",
           okText: '确认',
           cancelText: '取消',
           onOk() {
