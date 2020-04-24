@@ -21,6 +21,6 @@ export function auditProcess(params) {
   return request.post(`${config.system_api.auditProcess}`, params);
 }
 
-export function batchDeleteUser(params) {
-  return request.post(`${config.system_api.batchDeleteUser}`, params);
+export function getCurrentProcessNode(params) {
+  return request.get(`${config.system_api.getCurrentProcessNode}`, params);
 }

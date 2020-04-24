@@ -10,7 +10,7 @@ const Step = Steps.Step;
 
 const ProcessModal = (props) => {
 
-  const { processModalVisible, processRecord, onCancel, modelName, modelNodeList } = props;
+  const { processModalVisible, processRecord, onCancel, modelName, modelNodeList, currentNode } = props;
 
   const formItemLayout = {
     labelCol: { span: 8 },
@@ -20,6 +20,12 @@ const ProcessModal = (props) => {
   let processStatus;
   if (processRecord && processRecord.processStatus) {
     processStatus = config.PROCESS_STATUS.filter(item => item.key == processRecord.processStatus);
+  }
+
+  let currentIndex = 0;
+  const len = modelNodeList.length;
+  for (let i = 0; i < len; i++) {
+    currentIndex = modelNodeList[i].id == currentNode.taskDefKey ? i + 1 : currentIndex;
   }
 
   return (
@@ -85,7 +91,7 @@ const ProcessModal = (props) => {
           >
             <TabPane tab={"流程模型"} key={"style"} closable={false} style={{ marginLeft: "15px", marginRight: "15px", marginBottom: "15px" }}>
               <div className={styles.processStep}>
-                <Steps direction="vertical" current={1}>
+                <Steps direction="vertical" current={currentIndex}>
                   {
                     modelNodeList.map(item =>
                       <Step title={item.name} description="" />

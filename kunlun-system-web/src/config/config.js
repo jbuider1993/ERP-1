@@ -71,6 +71,7 @@ const config = {
     getAllProcess: `${SYSTEM_SERVICE_API}/processList`,
     submitProcess: `${SYSTEM_SERVICE_API}/start`,
     auditProcess: `${SYSTEM_SERVICE_API}/run`,
+    getCurrentProcessNode: `${SYSTEM_SERVICE_API}/getCurrentProcessNode`,
 
     // 资源管理
     getMachineList: `${SYSTEM_SERVICE_API}/machine/getAllMachine`,

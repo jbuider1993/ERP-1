@@ -13,7 +13,7 @@ const ProcessPage = (props) => {
 
   const { dispatch, processModel } = props;
   const { processList, total, processLoading, operateType, processModalVisible, currentPage, pageSize, selectedRowKeys,
-    selectedRows, processInfoData, searchParams, processRecord, modelNodeList } = processModel;
+    selectedRows, processInfoData, searchParams, processRecord, modelNodeList, currentNode } = processModel;
 
   const processSearchProps = {
     onSearch: (searchParams) => {
@@ -29,6 +29,7 @@ const ProcessPage = (props) => {
     processRecord,
     processModalVisible,
     modelNodeList,
+    currentNode,
     onCancel: () => {
       dispatch({type: "processModel/updateState", payload: {processModalVisible: false}});
     }
@@ -93,7 +94,7 @@ const ProcessPage = (props) => {
     processList,
     processLoading,
     onView: (record) => {
-      dispatch({ type: 'processModel/getModelNodeList', payload: { modelId: record.modelId }});
+      dispatch({ type: 'processModel/getModelNodeList', payload: record});
       dispatch({ type: 'processModel/updateState', payload: { processModalVisible: true, processRecord: record }});
     },
     rowSelection: {
