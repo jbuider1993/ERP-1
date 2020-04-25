@@ -35,6 +35,10 @@ export default {
       }
       yield put({ type: "updateState", payload: { logLoading: false }});
     },
+
+    *downloadOperateLog({payload: params}, {select, call, put}) {
+      const res = yield call(operatorLogService.downloadOperateLog, params);
+    },
   },
 
   subscriptions: {

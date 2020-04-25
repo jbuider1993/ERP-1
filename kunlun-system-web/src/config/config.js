@@ -51,6 +51,7 @@ const config = {
     addUser: `${CACHE_TRACE_API}/user/addUser`,
     updateUser: `${CACHE_TRACE_API}/user/updateUser`,
     batchDeleteUser: `${CACHE_TRACE_API}/user/batchDeleteUser`,
+    downloadUsers: `${CACHE_TRACE_API}/user/downloadUsers`,
 
     // 在线用户
     getModelList: `${SYSTEM_SERVICE_API}/service/modelList`,
@@ -79,6 +80,7 @@ const config = {
 
     // 操作日志
     getLogList: `${SYSTEM_SERVICE_API}/log/getLogList`,
+    exportOperateLog: `${SYSTEM_SERVICE_API}/log/exportOperateLog`,
   },
 
   MENU_LEVEL: [

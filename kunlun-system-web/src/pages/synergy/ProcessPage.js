@@ -8,6 +8,7 @@ import TablePagination from '../../components/common/TablePagination';
 import { Modal, message, Spin } from "antd";
 import config from '../../config/config';
 import * as commonUtil from '../../utils/commonUtil';
+import 'remixicon/fonts/remixicon.css';
 
 const ProcessPage = (props) => {
 
@@ -35,6 +36,12 @@ const ProcessPage = (props) => {
     }
   };
 
+  const iconStyle = {
+    fontSize: "18px",
+    verticalAlign: "sub",
+    marginRight: "5px",
+  };
+
   const processToolbarProps = {
     onSubmit: () => {
       if (selectedRows.length == 0 || selectedRows.length > 1) {
@@ -44,7 +51,7 @@ const ProcessPage = (props) => {
         const flag = status != config.PROCESS_STATUS[0].key && status != config.PROCESS_STATUS[4].key;
         Modal.confirm({
           title: "提交流程",
-          content: flag ? "选择的流程已新建了一个实例，再次提交将重新新建一个实例！" : "确定提交选中的流程模型？",
+          content: <div><i className="ri-error-warning-line" style={iconStyle}/>{flag ? "选择的流程已新建了一个实例，再次提交将重新新建一个实例！" : "确定提交选中的流程模型？"}</div>,
           okText: '确认',
           cancelText: '取消',
           onOk() {
@@ -58,9 +65,13 @@ const ProcessPage = (props) => {
       if (selectedRows.length == 0 || selectedRows.length > 1) {
         message.error("请选择要审核的流程记录！");
       } else if (selectedRowKeys.length == 1) {
+        if (selectedRows[0].processStatus == config.PROCESS_STATUS[4].key) {
+          message.warning("流程已审核完成！");
+          return;
+        }
         Modal.confirm({
           title: "审核流程",
-          content: "确定审核选中的流程模型？",
+          content: <div><i className="ri-error-warning-line" style={iconStyle}/>"确定审核选中的流程模型？"</div>,
           okText: '确认',
           cancelText: '取消',
           onOk() {

@@ -2,6 +2,7 @@ import React from 'react';
 import styles from './OperatorLog.less';
 import {Table, Icon, Tooltip, Tag } from 'antd';
 import moment from 'moment';
+import 'remixicon/fonts/remixicon.css';
 
 const OperatorLogList = (props) => {
 
@@ -24,7 +25,7 @@ const OperatorLogList = (props) => {
       render: (text, record) => (
       <span style={{cursor: "pointer"}}>
         <Tooltip title={"查看日志详情"}>
-          <span onClick={() => onView(record)}><Icon type="snippets" /></span>
+          <span onClick={() => onView(record)}><i className="ri-file-text-line" style={{fontSize: "18px"}}/></span>
         </Tooltip>
       </span>)
   }];

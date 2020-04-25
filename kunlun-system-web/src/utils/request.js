@@ -109,7 +109,7 @@ export function download(url, data, type) {
 
   if (url && data) {
     const instance = axios.create();
-    instance.defaults.headers["Token"] = window.app._store.getState().globalModel.token || "";
+    instance.defaults.headers["Authorization"] = window._TOKEN_ || "";
     let response = new Promise((resolve, reject) => {
       instance.request(obj).then(res => {
         if (res.data instanceof Blob) {

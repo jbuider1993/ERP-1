@@ -26,7 +26,9 @@ const OperatorLogPage = (props) => {
   };
 
   const operatorLogToolBarProps = {
-    onExport: () => {}
+    onExport: () => {
+      dispatch({type: "operatorLogModel/downloadOperateLog", payload: {id: "12345"}});
+    }
   };
 
   const operatorLogModalProps = {

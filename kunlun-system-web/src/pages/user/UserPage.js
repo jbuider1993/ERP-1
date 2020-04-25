@@ -59,7 +59,9 @@ class UserPage extends React.Component {
           onCancel() {}
         });
       },
-      onExport: () => {}
+      onExport: () => {
+        dispatch({type: "userModel/downloadUsers", payload: {id: "12345"}});
+      }
     };
 
     const userListProps = {

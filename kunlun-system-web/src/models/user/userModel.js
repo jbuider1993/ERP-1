@@ -1,6 +1,7 @@
 import * as userService from '../../services/user/userService';
 import { message } from "antd";
 import config from '../../config/config';
+import * as operatorLogService from "../../services/synergy/operatorLogService";
 
 export default {
   namespace: "userModel",
@@ -66,6 +67,10 @@ export default {
       } else {
         message.info("删除失败！");
       }
+    },
+
+    *downloadUsers({payload: params}, {select, call, put}) {
+      const res = yield call(userService.downloadUsers, params);
     },
   },
 
