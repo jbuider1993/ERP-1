@@ -60,7 +60,7 @@ class IconSearch extends React.Component {
               </FormItem>
             </Col>
             <Col span={6}>
-              <div style={{marginTop: "4px", marginLeft: "10px"}}>
+              <div style={{marginLeft: "10px"}}>
                 <Button type={"primary"} onClick={searchMenuList} icon={<i className="ri-search-line" style={iconStyle}></i>}>查询</Button>
                 <Button onClick={() => handleReset()} style={{marginLeft: "10px"}} icon={<i className="ri-restart-line" style={iconStyle}></i>}>重置</Button>
               </div>

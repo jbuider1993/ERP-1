@@ -5,12 +5,12 @@ import IconModal from '../../components/option/icon/IconModal';
 import IconToolBar from '../../components/option/icon/IconToolBar';
 import IconSearch from '../../components/option/icon/IconSearch';
 import TablePagination from '../../components/common/TablePagination';
-import { Modal } from 'antd';
+import { Modal, Spin } from 'antd';
 
 const IconPage = (props) => {
 
   const { dispatch, iconModel } = props;
-  const { iconListLoading, iconList, iconModalVisible, iconInfoData, total, currentPage, pageSize, searchParams } = iconModel;
+  const { iconLoading, iconList, iconModalVisible, iconInfoData, total, currentPage, pageSize, searchParams } = iconModel;
 
   const iconSearchProps = {
     onSearch: (searchParams) => {
@@ -26,7 +26,7 @@ const IconPage = (props) => {
     fetchIcons: () => {
       Modal.confirm({
         title: "抓取图标",
-        content: <div>是否确定从<a href='https://ant.design/index-cn' target='_blank'> Ant Design </a>抓取图标数据？ 注意：抓取图标时，将打开Google浏览器进行自动操作，请勿关闭！</div>,
+        content: <div><i className="ri-error-warning-line" style={{fontSize: "18px", marginRight: "10px", verticalAlign: "sub"}}/>是否确定从<a href='https://remixicon.com/' target='_blank'> Remix Icon </a>官网抓取图标数据？注意：抓取图标过程中请耐心等待！</div>,
         onOk() {
           dispatch({ type: "iconModel/fetchIcons", payload: {}});
         },
@@ -37,7 +37,6 @@ const IconPage = (props) => {
   };
 
   const iconListProps = {
-    iconListLoading,
     iconList,
     currentPage,
     pageSize,
@@ -74,11 +73,13 @@ const IconPage = (props) => {
 
   return (
     <div>
-      <IconSearch {...iconSearchProps} />
-      <IconToolBar {...iconToolBarProps} />
-      <IconList {...iconListProps} />
-      <IconModal {...iconModalProps} />
-      <TablePagination {...tablePaginationProps} />
+      <Spin spinning={iconLoading}>
+        <IconSearch {...iconSearchProps} />
+        <IconToolBar {...iconToolBarProps} />
+        <IconList {...iconListProps} />
+        <IconModal {...iconModalProps} />
+        <TablePagination {...tablePaginationProps} />
+      </Spin>
     </div>
   );
 };

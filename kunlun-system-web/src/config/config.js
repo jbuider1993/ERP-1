@@ -44,7 +44,7 @@ const config = {
     getIconList: `${CACHE_TRACE_API}/icon/getAllIcon`,
     addIcon: `${CACHE_TRACE_API}/icon/addIcon`,
     getIconInfo: `${CACHE_TRACE_API}/icon/getIconInfo`,
-    fetchIcons: `${CACHE_TRACE_API}/icon/fetchIconsFromAntd`,
+    fetchIcons: `${CACHE_TRACE_API}/icon/fetchIcons`,
 
     // 用户管理
     getUserList: `${CACHE_TRACE_API}/user/getAllUser`,
