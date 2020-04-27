@@ -85,13 +85,13 @@ const config = {
   },
 
   MENU_LEVEL: [
-    { key: "1", name: "菜单" },
-    { key: "2", name: "目录" },
+    { key: "menu", name: "菜单" },
+    { key: "catalog", name: "目录" },
   ],
 
   STATUS_FLAG: [
-    { key: "1", name: "是", value: true },
-    { key: "2", name: "否", value: false },
+    { key: "show", name: "是", value: true },
+    { key: "hide", name: "否", value: false },
   ],
 
   PROCESS_STATUS: [
@@ -103,9 +103,8 @@ const config = {
   ],
 
   ICON_STYLE: [
-    { key: "filled", name: "实底风格"},
-    { key: "outlined", name: "线框风格"},
-    { key: "twoTone", name: "双色风格"}
+    { key: "line", name: "线框风格"},
+    { key: "fill", name: "实底风格"},
   ],
 
   SERVICE_NAMES: [

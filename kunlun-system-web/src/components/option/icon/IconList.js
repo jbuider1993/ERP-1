@@ -12,7 +12,7 @@ const IconList = (props) => {
     {title: '序号', key: 'name', width: '15%', render: (text, record, index) => (index + 1) + (currentPage - 1) * pageSize, align: "center" },
     {title: '图标名称', dataIndex: 'name', key: 'name', width: '25%', align: "center" },
     {title: '图标key', dataIndex: 'key', key: 'key', width: '25%', align: "center" },
-    {title: '图标', key: 'key', align: "center", render: (text, record, index) => <i className={record.key} style={{fontSize: "18px"}}/> },
+    {title: '图标', key: 'key', align: "center", render: (text, record, index) => <i className={record.key} style={{fontSize: "25px"}}/> },
     {title: '操作', key: 'key', align: "center",
       render: (text, record, index) => <div onClick={() => onViewIcon(record)}>
         <i className="ri-file-text-line" style={{ fontSize: "18px", color: "blue" }}></i>

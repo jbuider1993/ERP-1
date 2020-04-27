@@ -1,23 +1,25 @@
 import React from 'react';
-import { Modal, Form, Input, Row, Col, DatePicker, Radio, Spin, AutoComplete, Icon } from 'antd';
+import { Modal, Form, Row, Col, Radio } from 'antd';
 import config from '../../../config/config';
+import 'remixicon/fonts/remixicon.css';
 
 const FormItem = Form.Item;
 const RadioGroup = Radio.Group;
-const Option = AutoComplete.Option;
 
 class IconModal extends React.Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      iconStyle: "outlined"
+      iconStyle: "line"
     }
   }
 
   render() {
 
     const {iconModalVisible, onCancel, iconInfoData} = this.props;
+
+    debugger
 
     const formRadioLayout = {
       labelCol: {span: 4},
@@ -63,7 +65,7 @@ class IconModal extends React.Component {
               </Col>
               <Col span={12}>
                 <FormItem {...formItemLayout} label="图标">
-                  <div><Icon type={iconInfoData ? iconInfoData.key : ""} theme={this.state.iconStyle} /></div>
+                  <div><i className={iconInfoData ? "ri-" + iconInfoData.name + "-" + this.state.iconStyle : ""} style={{fontSize: "20px"}}/></div>
                 </FormItem>
               </Col>
             </Row>

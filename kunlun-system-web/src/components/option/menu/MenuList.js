@@ -6,12 +6,10 @@ import 'remixicon/fonts/remixicon.css';
 
 const MenuList = (props) => {
 
-  const { menuListLoading, menuList, onDelete, unfoldCollapseKeys, onExpandMenuList, onEditMenu, currentPage, pageSize } = props;
+  const { menuList, onDelete, unfoldCollapseKeys, onExpandMenuList, onEditMenu, currentPage, pageSize } = props;
 
   const columns = [
-    { title: '', key: '', width: '1.5%' },
-    { title: '序号', key: '', width: '5%',
-      render: (text, record, index) => (index + 1) + (currentPage - 1) * pageSize },
+    { title: '', key: '', width: '3%', align: "center" },
     { title: '菜单名称', dataIndex: 'name', key: 'name', width: '20%',
       render: (text, record, index) => {
         const longCodes = record.longCode.split("_");
@@ -23,23 +21,22 @@ const MenuList = (props) => {
       }
     },
     { title: '菜单key', dataIndex: 'key', key: 'key', width: '15%' },
-    { title: '访问路径', dataIndex: 'url', key: 'url', width: '15%',
-      sorter: (x, y) => x.age - y.age },
+    { title: '访问路径', dataIndex: 'url', key: 'url', width: '15%' },
     { title: '级别', dataIndex: 'level', key: 'level', width: '8%',
       render: (text, record, index) => <span>{
-        <Tag style={{ borderRadius: "20px" }} color={text == "1" ? "blue" : "purple"}>{text == "1" ? "菜单" : "目录"}</Tag>}</span> },
-    { title: '是否禁用', dataIndex: 'forbid', key: 'forbid', width: '8%',
-      render: (text, record, index) => text == true ? <Tag color="#f50">{"禁用"}</Tag> : <Tag color="#87d068">{"显示"}</Tag> },
+        <Tag style={{ borderRadius: "20px" }} color={record.children ? "blue" : "purple"}>{record.children ? "菜单" : "目录"}</Tag>}</span> },
+    { title: '是否显示', dataIndex: 'show', key: 'show', width: '8%',
+      render: (text, record, index) => text == true ? <Tag color="#f50">{"显示"}</Tag> : <Tag color="#87d068">{"隐藏"}</Tag> },
     { title: '图标', dataIndex: 'icon', key: 'icon', width: '8%',
-      render: (text, record, index) => <i className="certain-category-icon" /> },
+      render: (text, record, index) => <i className={record.icon} style={{fontSize: "20px"}}/> },
     { title: '操作', key: 'operate', width: '8%', render: (text, record, index) => (
       <span>
         <a onClick={() => onEditMenu(record)}>
-          <i className="ri-edit-2-line" style={{color: '#08c'}}></i>
+          <i className="ri-edit-2-line" style={{color: '#08c', fontSize: "18px"}}></i>
         </a>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <Popconfirm title="确定删除当前记录？" onConfirm={onDelete.bind(null, record)}>
-          <i className="ri-delete-bin-7-line" style={{color: 'red'}}></i>
+          <i className="ri-delete-bin-7-line" style={{color: 'red', fontSize: "18px"}}></i>
         </Popconfirm>
       </span>)
     }];
@@ -51,11 +48,11 @@ const MenuList = (props) => {
         className={styles.listTable}
         dataSource={menuList}
         bordered={true}
-        loading={menuListLoading}
         rowKey={record => record.id}
         onExpand={onExpandMenuList}
         pagination={false}
         expandedRowKeys={unfoldCollapseKeys}
+        scroll={{ y: 550 }}
       />
     </div>
   );

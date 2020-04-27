@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'dva';
+import {Spin} from 'antd';
 import MenuList from "../../components/option/menu/MenuList";
 import MenuToolBar from '../../components/option/menu/MenuToolBar';
 import MenuModal from '../../components/option/menu/MenuModal';
@@ -11,7 +12,7 @@ import TablePagination from '../../components/common/TablePagination';
 const MenuPage = (props) => {
 
   const { dispatch, menuModel } = props;
-  const { menuListLoading, menuList, menuModalVisible, saveLoading, selectMenuModalVisible, selectMenuLoading,
+  const { menuLoading, menuList, menuModalVisible, saveLoading, selectMenuModalVisible, selectMenuLoading,
     checkedTreeNodeKeys, expandedTreeNodeKeys, unfoldCollapseKeys, menuIconModalVisible, menuIconLoading, total, currentPage, pageSize,
     menuIconList, selectedIconRows, selectedIconRowKeys, selectedTreeNode, menuInfoData, menuModalType, searchParams } = menuModel;
 
@@ -102,7 +103,6 @@ const MenuPage = (props) => {
   };
 
   const menuListProps = {
-    menuListLoading,
     menuList,
     unfoldCollapseKeys,
     currentPage,
@@ -138,13 +138,15 @@ const MenuPage = (props) => {
 
   return (
     <div>
-      <MenuSearch {...menuSearchProps} />
-      <MenuToolBar {...menuToolBarProps} />
-      <MenuModal {...menuModalProps} />
-      <SelectMenuDrawer {...selectMenuDrawerProps} />
-      <MenuIconModal {...menuIconModalProps} />
-      <MenuList {...menuListProps} />
-      <TablePagination {...tablePaginationProps} />
+      <Spin spinning={menuLoading}>
+        <MenuSearch {...menuSearchProps} />
+        <MenuToolBar {...menuToolBarProps} />
+        <MenuModal {...menuModalProps} />
+        <SelectMenuDrawer {...selectMenuDrawerProps} />
+        <MenuIconModal {...menuIconModalProps} />
+        <MenuList {...menuListProps} />
+        <TablePagination {...tablePaginationProps} />
+      </Spin>
     </div>
   );
 };

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Modal, Form, Input, Row, Col, DatePicker, Radio, Spin, AutoComplete, Icon } from 'antd';
+import { Modal, Form, Input, Row, Col, Radio, Spin, AutoComplete, Icon } from 'antd';
 import config from '../../../config/config';
 import styles from './Menu.less';
 
@@ -12,7 +12,7 @@ class MenuModal extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      radioCheckedValue: config.MENU_LEVEL[0].key
+      radioCheckedValue: config.MENU_LEVEL[0].value
     }
   }
 
@@ -25,8 +25,10 @@ class MenuModal extends React.Component {
       menuModalVisible, onCancel, onSave, saveLoading, onSelectParentMenu, onShowIconModal, onRadioChange,
       selectedTreeNode, selectedIconRows, menuInfoData, menuModalType,
     } = this.props;
-    const { radioCheckedValue } = this.state;
+    const { isChecked, radioCheckedValue } = this.state;
     const { getFieldsValue, validateFields, setFieldsValue, resetFields } = this.formRef;
+
+    debugger
 
     const formItemLayout = {
       labelCol: {span: 8},
@@ -42,7 +44,7 @@ class MenuModal extends React.Component {
       });
     };
 
-    const onLevelChange = (e) => {
+    const onChangeType = (e) => {
       this.setState({ radioCheckedValue: e.target.value });
     };
 
@@ -83,9 +85,9 @@ class MenuModal extends React.Component {
       return "";
     };
 
-    const levelOptions = config.MENU_LEVEL.map(item => <Radio key={item.key} value={item.key}>{item.name}</Radio>);
+    const levelOptions = config.MENU_LEVEL.map(item => <Radio key={item.key} value={item.value}>{item.name}</Radio>);
 
-    const forbidOptions = config.STATUS_FLAG.map(item => <Radio key={item.key} value={item.value}>{item.name}</Radio>);
+    const showOptions = config.STATUS_FLAG.map(item => <Radio key={item.key} value={item.value}>{item.name}</Radio>);
 
     // 返回工具栏新增、批量删除按钮
     return (
@@ -107,16 +109,16 @@ class MenuModal extends React.Component {
                   <FormItem {...formItemLayout} label="" name={"id"} rules={[{required: false, message: ''}]}/>
                 </Col>
                 <Col span={12}>
-                  <FormItem {...formItemLayout} label="菜单类型" name={"level"} rules={[{required: false, message: '请选择菜单类型'}]}>
-                    <RadioGroup value={radioCheckedValue} onChange={onLevelChange}>
+                  <FormItem {...formItemLayout} label="菜单类型" name={"level"} rules={[{required: false, message: ''}]}>
+                    <RadioGroup value={radioCheckedValue} onChange={onChangeType}>
                       {levelOptions}
                     </RadioGroup>
                   </FormItem>
                 </Col>
                 <Col span={12}>
-                  <FormItem {...formItemLayout} label="是否禁用" name={"forbid"} rules={[{required: false, message: '请选择菜单类型'}]}>
+                  <FormItem {...formItemLayout} label="是否显示" name={"show"} rules={[{required: false, message: ''}]}>
                     <RadioGroup value={radioCheckedValue}>
-                      {forbidOptions}
+                      {showOptions}
                     </RadioGroup>
                   </FormItem>
                 </Col>

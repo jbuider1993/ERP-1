@@ -5,7 +5,7 @@ import config from '../../config/config';
 export default {
   namespace: 'menuModel',
   state: {
-    menuListLoading: false,
+    menuLoading: false,
     menuList: [],
     saveLoading: false,
     total: 0,
@@ -37,12 +37,12 @@ export default {
   },
   effects: {
     *getMenuTreeList({ payload: {currentPage = 1, pageSize = config.PAGE_SIZE, params} }, { select, call, put }) {
-      yield put({ type: "updateState", payload: { menuListLoading: true }});
+      yield put({ type: "updateState", payload: { menuLoading: true }});
       const res = yield call(menuService.getMenuList, { params, currentPage, pageSize });
       if (res.code == "200") {
         yield put({ type: "updateState", payload: { menuList: res.data.records, total: res.data.total, currentPage, pageSize }});
       }
-      yield put({ type: "updateState", payload: { menuListLoading: false }});
+      yield put({ type: "updateState", payload: { menuLoading: false }});
     },
 
     *getMenuIconList({ payload: params }, { select, call, put}) {
