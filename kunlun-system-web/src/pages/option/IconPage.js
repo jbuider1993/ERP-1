@@ -34,6 +34,9 @@ const IconPage = (props) => {
         }
       });
     },
+    onExport: () => {
+      dispatch({ type: "iconModel/onExportIcons", payload: {}});
+    },
   };
 
   const iconListProps = {

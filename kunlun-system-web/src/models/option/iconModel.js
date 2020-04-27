@@ -61,6 +61,12 @@ export default {
       }
       yield put({ type: "updateState", payload: { iconLoading: false }});
       yield put({ type: "getListDatas", payload: {currentPage: 1, pageSize: config.PAGE_SIZE}});
+    },
+
+    *onExportIcons({ payload: params }, { select, call, put }) {
+      yield put({ type: "updateState", payload: { iconLoading: true }});
+      const res = yield call(iconService.onExportIcons, params);
+      yield put({ type: "updateState", payload: { iconLoading: false }});
     }
   },
   subscriptions: {
