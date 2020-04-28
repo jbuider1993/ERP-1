@@ -7,7 +7,7 @@ const config = {
   footerText: '昆仑管理系统 © 2018-2028 KunLun Copyright | Version 2.0',
   logo: '/logo.png',
   PAGE_SIZE: 5,
-  PAGE_SIZE_LIST: ['5', '10', '15', '20', '50', '100'],
+  PAGE_SIZE_LIST: ['10', '15', '20', '50', '100'],
   REGISTRY_AMQP_API,
   CACHE_TRACE_API,
   SYSTEM_SERVICE_API,
@@ -85,13 +85,18 @@ const config = {
   },
 
   MENU_LEVEL: [
-    { key: "menu", name: "菜单" },
-    { key: "catalog", name: "目录" },
+    { key: "1", value: "menu", name: "菜单" },
+    { key: "2", value: "catalog", name: "目录" },
   ],
 
   STATUS_FLAG: [
-    { key: "show", name: "是", value: true },
-    { key: "hide", name: "否", value: false },
+    { key: "1", value: true, name: "是", desc: "show" },
+    { key: "2", value: false, name: "否", desc: "hide" },
+  ],
+
+  USER_SEX: [
+    { key: "1", value: "man", name: "男" },
+    { key: "2", value: "woman", name: "女" },
   ],
 
   PROCESS_STATUS: [

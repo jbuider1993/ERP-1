@@ -10,7 +10,7 @@ const MenuList = (props) => {
 
   const columns = [
     { title: '', key: '', width: '3%', align: "center" },
-    { title: '菜单名称', dataIndex: 'name', key: 'name', width: '20%',
+    { title: '菜单名称', dataIndex: 'name', key: 'name', width: '15%',
       render: (text, record, index) => {
         const longCodes = record.longCode.split("_");
         let sum = 0;
@@ -21,14 +21,14 @@ const MenuList = (props) => {
       }
     },
     { title: '菜单key', dataIndex: 'key', key: 'key', width: '15%' },
-    { title: '访问路径', dataIndex: 'url', key: 'url', width: '15%' },
+    { title: '访问路径', dataIndex: 'url', key: 'url', width: '25%' },
     { title: '级别', dataIndex: 'level', key: 'level', width: '8%',
       render: (text, record, index) => <span>{
         <Tag style={{ borderRadius: "20px" }} color={record.children ? "blue" : "purple"}>{record.children ? "菜单" : "目录"}</Tag>}</span> },
     { title: '是否显示', dataIndex: 'show', key: 'show', width: '8%',
       render: (text, record, index) => text == true ? <Tag color="#f50">{"显示"}</Tag> : <Tag color="#87d068">{"隐藏"}</Tag> },
     { title: '图标', dataIndex: 'icon', key: 'icon', width: '8%',
-      render: (text, record, index) => <i className={record.icon} style={{fontSize: "20px"}}/> },
+      render: (text, record, index) => <i className={record.icon} style={{fontSize: "19px"}}/> },
     { title: '操作', key: 'operate', width: '8%', render: (text, record, index) => (
       <span>
         <a onClick={() => onEditMenu(record)}>
@@ -42,10 +42,9 @@ const MenuList = (props) => {
     }];
 
   return (
-    <div>
+    <div className={styles.listTable}>
       <Table
         columns={columns}
-        className={styles.listTable}
         dataSource={menuList}
         bordered={true}
         rowKey={record => record.id}

@@ -25,7 +25,7 @@ export default {
   },
 
   effects: {
-    *getListDatas({payload: {currentPage = 1, pageSize = config.PAGE_SIZE, params}}, { select, call, put }) {
+    *getListDatas({payload: {currentPage = 1, pageSize = config.PAGE_SIZE_LIST[0], params}}, { select, call, put }) {
       yield put({ type: "updateState", payload: { userLoading: true }});
       const res = yield call(userService.getAllUser, { params, currentPage, pageSize });
       if (res.code == "200") {

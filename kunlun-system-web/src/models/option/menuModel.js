@@ -25,6 +25,8 @@ export default {
     menuIconList: [],
     selectedIconRows: [],
     selectedIconRowKeys: [],
+    iconCurrentPage: 0,
+    iconTotal: 0,
 
     selectedTreeNode: null,
     menuInfoData: null,
@@ -36,7 +38,7 @@ export default {
     },
   },
   effects: {
-    *getMenuTreeList({ payload: {currentPage = 1, pageSize = config.PAGE_SIZE, params} }, { select, call, put }) {
+    *getMenuTreeList({ payload: {currentPage = 1, pageSize = config.PAGE_SIZE_LIST[0], params} }, { select, call, put }) {
       yield put({ type: "updateState", payload: { menuLoading: true }});
       const res = yield call(menuService.getMenuList, { params, currentPage, pageSize });
       if (res.code == "200") {
@@ -56,9 +58,10 @@ export default {
       }
       params.currentPage = currentPage;
       params.pageSize = pageSize;
+
       const res = yield call(menuService.getMenuIconList, params);
       if (res.code == "200") {
-        yield put({ type: "updateState", payload: { menuIconList: res.data.records }});
+        yield put({ type: "updateState", payload: { menuIconList: res.data.records, iconCurrentPage: res.data.currentPage, iconTotal: res.data.total }});
       }
       yield put({ type: "updateState", payload: { menuIconLoading: false }});
     },

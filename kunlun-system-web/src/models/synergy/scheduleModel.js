@@ -1,4 +1,5 @@
 import * as scheduleService from '../../services/synergy/scheduleService';
+import config from '../../config/config';
 
 export default {
   namespace: 'scheduleModel',
@@ -21,7 +22,7 @@ export default {
   },
 
   effects: {
-    *getListDatas({payload: {currentPage = 1, pageSize = 15, params}}, { call, put }) {
+    *getListDatas({payload: {currentPage = 1, pageSize = config.PAGE_SIZE_LIST[0], params}}, { call, put }) {
       yield put({ type: "updateState", payload: { logLoading: true }});
       const res = yield call(scheduleService.getScheduleList, { ...params, currentPage, pageSize });
       if (res.code == "200") {
@@ -33,7 +34,7 @@ export default {
       yield put({ type: "updateState", payload: { logLoading: false }});
     },
 
-    *initDatas({payload: {currentPage = 1, pageSize = 15, params}}, { call, put }) {
+    *initDatas({payload: {currentPage = 1, pageSize = config.PAGE_SIZE_LIST[0], params}}, { call, put }) {
       yield put({ type: "updateState", payload: { logLoading: true }});
       const scheduleList = [
         {id: "11111", type: 'warning', theme: "11111", themeColor: "red", startTime: "2019-11-05 00:00:00", endTime: "2019-11-07 00:00:00", participant: "11111", content: "1111111111"},

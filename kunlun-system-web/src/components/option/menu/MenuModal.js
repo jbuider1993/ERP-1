@@ -2,6 +2,7 @@ import React from 'react';
 import { Modal, Form, Input, Row, Col, Radio, Spin, AutoComplete, Icon } from 'antd';
 import config from '../../../config/config';
 import styles from './Menu.less';
+import 'remixicon/fonts/remixicon.css';
 
 const FormItem = Form.Item;
 const RadioGroup = Radio.Group;
@@ -12,6 +13,7 @@ class MenuModal extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      isChecked: false,
       radioCheckedValue: config.MENU_LEVEL[0].value
     }
   }
@@ -45,7 +47,7 @@ class MenuModal extends React.Component {
     };
 
     const onChangeType = (e) => {
-      this.setState({ radioCheckedValue: e.target.value });
+      this.setState({ radioCheckedValue: e.target.value, isChecked: true });
     };
 
     const initMenuTitle = (selectedTreeNode, menuInfoData, field) => {
@@ -109,8 +111,8 @@ class MenuModal extends React.Component {
                   <FormItem {...formItemLayout} label="" name={"id"} rules={[{required: false, message: ''}]}/>
                 </Col>
                 <Col span={12}>
-                  <FormItem {...formItemLayout} label="菜单类型" name={"level"} rules={[{required: false, message: ''}]}>
-                    <RadioGroup value={radioCheckedValue} onChange={onChangeType}>
+                  <FormItem {...formItemLayout} label="菜单类型" rules={[{required: false, message: ''}]}>
+                    <RadioGroup value={isChecked ? radioCheckedValue : (menuInfoData && menuInfoData.children ? config.MENU_LEVEL[0].value : config.MENU_LEVEL[1].value)} onChange={onChangeType}>
                       {levelOptions}
                     </RadioGroup>
                   </FormItem>
@@ -132,8 +134,8 @@ class MenuModal extends React.Component {
                 <Col span={12}>
                   <FormItem {...formItemLayout} label="父级菜单" name={"parent"} rules={[{required: false, message: '请选择父级菜单'}]}>
                     <Input onClick={onSelectParentMenu}
-                            disabled={radioCheckedValue == config.MENU_LEVEL[0].key ? true : false}
-                            suffix={<Icon type="down" className="certain-category-icon"/>}/>
+                            disabled={isChecked ? (radioCheckedValue == config.MENU_LEVEL[0].key ? true : false) : (menuInfoData && menuInfoData.children ? true : false)}
+                            suffix={<i className="ri-arrow-down-s-line" style={{fontSize: "20px"}}/>}/>
                   </FormItem>
                 </Col>
                 <Col span={0}>

@@ -1,13 +1,15 @@
 import React from 'react';
-import { Modal, Form, Input, Row, Col, DatePicker, Radio, message } from 'antd';
+import { Modal, Form, Input, Row, Col, DatePicker, Radio, message, Select } from 'antd';
 import moment from 'moment';
-import * as Icon from '@ant-design/icons';
+import config from "../../../config/config";
 
 const FormItem = Form.Item;
+const RadioGroup = Radio.Group;
+const Option = Select.Option;
 
 const UserModal = (props) => {
 
-  const { userModalVisible, userInfoData, operateType, onSave, updateUser, onCancel } = props;
+  const { userModalVisible, userInfoData, operateType, onSave, updateUser, onCancel, radioChangeSex } = props;
   const [form] = Form.useForm();
   const { getFieldsValue, validateFields, setFieldsValue, resetFields } = form;
 
@@ -27,6 +29,19 @@ const UserModal = (props) => {
     });
   };
 
+  const userSexOptions = config.USER_SEX.map(item => <Radio key={item.key} value={item.value}>{item.name}</Radio>);
+
+  const selectAfter = (
+    <Select defaultValue="@126.com" className="select-after">
+      <Option value=".com">@126.com</Option>
+      <Option value=".jp">@163.com</Option>
+      <Option value=".cn">@qq.com</Option>
+      <Option value=".cn">@foxmail.com</Option>
+      <Option value=".cn">@sina.com</Option>
+      <Option value=".cn">@139.com</Option>
+    </Select>
+  );
+
   return (
     <div>
       <Modal
@@ -35,7 +50,7 @@ const UserModal = (props) => {
         okText="保存"
         onCancel={onCancel}
         onOk={onOk}
-        width={650}
+        width={700}
         destroyOnClose={true}
       >
         <Form initialValues={userInfoData} form={form}>
@@ -51,7 +66,21 @@ const UserModal = (props) => {
               </FormItem>
             </Col>
             <Col span={12}>
+              <FormItem { ...formItemLayout } label="性别" name={"password"} rules={[{required: true, message: '请输入密码'}]}>
+                <RadioGroup value={radioChangeSex}>
+                  {userSexOptions}
+                </RadioGroup>
+              </FormItem>
+            </Col>
+          </Row>
+          <Row>
+            <Col span={12}>
               <FormItem { ...formItemLayout } label="密码" name={"password"} rules={[{required: true, message: '请输入密码'}]}>
+                <Input placeholder={"请输入密码"} />
+              </FormItem>
+            </Col>
+            <Col span={12}>
+              <FormItem { ...formItemLayout } label="确认密码" name={"password"} rules={[{required: true, message: '请输入密码'}]}>
                 <Input placeholder={"请输入密码"} />
               </FormItem>
             </Col>
@@ -64,7 +93,7 @@ const UserModal = (props) => {
             </Col>
             <Col span={12}>
               <FormItem { ...formItemLayout } label="邮箱" name={"email"} rules={[{required: true, message: '请输入邮箱'}]}>
-                <Input placeholder={"请输入邮箱"} />
+                <Input placeholder={"请输入邮箱"} addonAfter={selectAfter}/>
               </FormItem>
             </Col>
           </Row>

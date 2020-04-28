@@ -12,7 +12,7 @@ import TablePagination from '../../components/common/TablePagination';
 const MenuPage = (props) => {
 
   const { dispatch, menuModel } = props;
-  const { menuLoading, menuList, menuModalVisible, saveLoading, selectMenuModalVisible, selectMenuLoading,
+  const { menuLoading, menuList, menuModalVisible, saveLoading, selectMenuModalVisible, selectMenuLoading, iconCurrentPage, iconTotal,
     checkedTreeNodeKeys, expandedTreeNodeKeys, unfoldCollapseKeys, menuIconModalVisible, menuIconLoading, total, currentPage, pageSize,
     menuIconList, selectedIconRows, selectedIconRowKeys, selectedTreeNode, menuInfoData, menuModalType, searchParams } = menuModel;
 
@@ -93,12 +93,17 @@ const MenuPage = (props) => {
     menuIconModalVisible,
     menuIconLoading,
     menuIconList,
+    iconCurrentPage,
+    iconTotal,
     onselectMenuIcon: (selectedIconRowKeys, selectedIconRows) => {
       dispatch({ type: 'menuModel/updateState', payload: { selectedIconRowKeys, selectedIconRows, menuIconModalVisible: false },
       })
     },
     onCancel: () => {
       dispatch({ type: "menuModel/updateState", payload: { menuIconModalVisible: false }});
+    },
+    onIconPageChange: (currentPage, pageSize) => {
+      dispatch({ type: "menuModel/getMenuIconList", payload: { currentPage, pageSize }});
     },
   };
 

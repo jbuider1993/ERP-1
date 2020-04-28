@@ -22,7 +22,7 @@ export default {
     },
   },
   effects: {
-    *getListDatas({ payload: {currentPage = 1, pageSize = config.PAGE_SIZE, params} }, { select, call, put }) {
+    *getListDatas({ payload: {currentPage = 1, pageSize = config.PAGE_SIZE_LIST[0], params} }, { select, call, put }) {
       yield put({type: "updateState", payload: {messageLoading: true}});
       const res = yield call(messageService.getAllMessages, { params, currentPage, pageSize });
       let messageList = [], currentSize = "", total = "", size = "";
@@ -52,7 +52,7 @@ export default {
     *loadMoreMessage({ payload: params }, { select, call, put }) {
       yield put({type: "updateState", payload: {messageLoading: true}});
       const {pageSize} = yield select(state => state.messageModel);
-      let totalSize = pageSize + config.PAGE_SIZE;
+      let totalSize = pageSize + config.PAGE_SIZE_LIST[0];
       const res = yield call(messageService.getAllMessages, {currentPage: 1, pageSize: totalSize, params});
       let messageList = [], currentSize = "", total = "", size = "";
       if (res.code == 200) {
