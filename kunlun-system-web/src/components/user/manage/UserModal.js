@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { Modal, Form, Input, Row, Col, DatePicker, Radio, message, Select } from 'antd';
 import moment from 'moment';
 import config from "../../../config/config";
@@ -9,9 +9,13 @@ const Option = Select.Option;
 
 const UserModal = (props) => {
 
-  const { userModalVisible, userInfoData, operateType, onSave, updateUser, onCancel, radioChangeSex } = props;
+  const { userModalVisible, userInfoData, operateType, onSave, updateUser, onCancel } = props;
   const [form] = Form.useForm();
   const { getFieldsValue, validateFields, setFieldsValue, resetFields } = form;
+
+  const [email, setEmail] = useState(null);
+  const [emailSuffix, setEmailSuffix] = useState("@126.com");
+  const [confirmPassword, setConfirmPassword] = useState(null);
 
   const formItemLayout = {
     labelCol: { span: 8 },
@@ -20,6 +24,11 @@ const UserModal = (props) => {
 
   const onOk = () => {
     validateFields().then(values => {
+      if (values.password != confirmPassword) {
+        message.warning("两次输入的密码不一致！");
+        return;
+      }
+      values.email = email + emailSuffix;
       operateType == "add" ? onSave(values) : updateUser(values);
     }).catch(error => {
       const errors = error.errorFields;
@@ -29,16 +38,16 @@ const UserModal = (props) => {
     });
   };
 
-  const userSexOptions = config.USER_SEX.map(item => <Radio key={item.key} value={item.value}>{item.name}</Radio>);
+  const userSexOptions = config.USER_SEX.map(item => <Radio key={item.name} value={item.name}>{item.name}</Radio>);
 
   const selectAfter = (
-    <Select defaultValue="@126.com" className="select-after">
-      <Option value=".com">@126.com</Option>
-      <Option value=".jp">@163.com</Option>
-      <Option value=".cn">@qq.com</Option>
-      <Option value=".cn">@foxmail.com</Option>
-      <Option value=".cn">@sina.com</Option>
-      <Option value=".cn">@139.com</Option>
+    <Select defaultValue="@126.com" className="select-after" onChange={value => setEmailSuffix(value)}>
+      <Option value="@126.com">@126.com</Option>
+      <Option value="@163.com">@163.com</Option>
+      <Option value="@qq.com">@qq.com</Option>
+      <Option value="@foxmail.com">@foxmail.com</Option>
+      <Option value="@sina.com">@sina.com</Option>
+      <Option value="@139.com">@139.com</Option>
     </Select>
   );
 
@@ -50,10 +59,11 @@ const UserModal = (props) => {
         okText="保存"
         onCancel={onCancel}
         onOk={onOk}
-        width={700}
+        width={800}
         destroyOnClose={true}
+        bodyStyle={{height: "260px"}}
       >
-        <Form initialValues={userInfoData} form={form}>
+        <Form initialValues={userInfoData} form={form} style={{marginLeft: "-45px"}}>
           <Row>
             <Col span={0}>
               <FormItem label="用户ID" name={"id"}>
@@ -66,8 +76,8 @@ const UserModal = (props) => {
               </FormItem>
             </Col>
             <Col span={12}>
-              <FormItem { ...formItemLayout } label="性别" name={"password"} rules={[{required: true, message: '请输入密码'}]}>
-                <RadioGroup value={radioChangeSex}>
+              <FormItem { ...formItemLayout } label="性别" name={"sex"} rules={[{required: true, message: '请输入密码'}]}>
+                <RadioGroup>
                   {userSexOptions}
                 </RadioGroup>
               </FormItem>
@@ -80,8 +90,8 @@ const UserModal = (props) => {
               </FormItem>
             </Col>
             <Col span={12}>
-              <FormItem { ...formItemLayout } label="确认密码" name={"password"} rules={[{required: true, message: '请输入密码'}]}>
-                <Input placeholder={"请输入密码"} />
+              <FormItem { ...formItemLayout } label="确认密码" rules={[{required: true, message: '请输入密码'}]}>
+                <Input placeholder={"请输入密码"} value={confirmPassword ? confirmPassword : (userInfoData && userInfoData.password ? userInfoData.password : null)} onChange={e => setConfirmPassword(e.target.value)}/>
               </FormItem>
             </Col>
           </Row>
@@ -92,8 +102,9 @@ const UserModal = (props) => {
               </FormItem>
             </Col>
             <Col span={12}>
-              <FormItem { ...formItemLayout } label="邮箱" name={"email"} rules={[{required: true, message: '请输入邮箱'}]}>
-                <Input placeholder={"请输入邮箱"} addonAfter={selectAfter}/>
+              <FormItem { ...formItemLayout } label="邮箱" rules={[{required: true, message: '请输入邮箱'}]}>
+                <Input placeholder={"请输入邮箱"} addonAfter={selectAfter} onChange={e => setEmail(e.target.value)}
+                       value={email ? email : (userInfoData && userInfoData.email ? userInfoData.email.substr(0, userInfoData.email.indexOf("@")) : null)}/>
               </FormItem>
             </Col>
           </Row>

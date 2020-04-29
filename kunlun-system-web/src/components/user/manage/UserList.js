@@ -9,8 +9,9 @@ const UserList = (props) => {
 
   const columns = [
     { title: '序号', width: '5%', render: (text, record, index) => <span>{(index + 1) + (currentPage - 1) * pageSize}</span> },
-    { title: '姓名', dataIndex: 'userName', key: 'userName', width: '15%' },
+    { title: '用户名', dataIndex: 'userName', key: 'userName', width: '15%' },
     { title: '密码', dataIndex: 'password', key: 'password', width: '15%' },
+    { title: '性别', dataIndex: 'sex', key: 'sex', width: '10%' },
     { title: '电话号码', dataIndex: 'phoneNumber', key: 'phoneNumber', width: '15%', sorter: (x, y) => x.phoneNumber - y.phoneNumber },
     { title: '邮箱', dataIndex: 'email', key: 'email', width: '20%', filters: [
       { text: '126', value: '126' },{ text: '163', value: '163' },{ text: 'qq', value: 'qq' },{ text: 'gmail', value: 'gmail' }],

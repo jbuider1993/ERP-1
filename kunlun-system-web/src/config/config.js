@@ -7,7 +7,7 @@ const config = {
   footerText: '昆仑管理系统 © 2018-2028 KunLun Copyright | Version 2.0',
   logo: '/logo.png',
   PAGE_SIZE: 5,
-  PAGE_SIZE_LIST: ['10', '15', '20', '50', '100'],
+  PAGE_SIZE_LIST: ['10', '20', '50', '100'],
   REGISTRY_AMQP_API,
   CACHE_TRACE_API,
   SYSTEM_SERVICE_API,
