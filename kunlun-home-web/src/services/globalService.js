@@ -50,3 +50,19 @@ export function getActivedMenu(params, paneTabList) {
   }
   return {activeHeadMenuKey, paneTabList};
 }
+
+export function getAppMenuFromConfig() {
+  let menuList = new Array();
+  const main1 = config.frame_menu.main;
+  const sider1 = config.frame_menu.sider;
+  const siderKeys = main1.map(obj => obj.key);
+  const siders = siderKeys.slice(1, siderKeys.length).map(obj => sider1[obj]);
+  const temps = siders.flatMap(obj => obj);
+  const tempss = temps.filter(obj => obj.children && obj.children.length);
+  const childs = tempss.flatMap(obj => obj.children);
+  const array = [...main1, ...temps, ...childs];
+  for (let i = 0; i < array.length; i++) {
+    if (array[i].key != "") menuList.push({...array[i]});
+  }
+  return menuList;
+}

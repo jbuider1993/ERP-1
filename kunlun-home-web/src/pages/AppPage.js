@@ -16,15 +16,19 @@ const { Content, Footer } = Layout;
 const AppPage = (props) => {
 
   const { dispatch, history, globalModel, noficationModel } = props;
-  const { collapsed, activeHeadMenuKey, activeSideMenuKey, pathUrlList, paneTabs, themeStyle, siderColor,
+  let { collapsed, activeHeadMenuKey, activeSideMenuKey, menuData, paneTabs, themeStyle, siderColor,
           openedSubMenuKey, homeView, tokenModel, themeDrawerVisible, themeColor, selectedStyle, menuMap } = globalModel;
+  menuData = menuData ? menuData : JSON.parse(sessionStorage.menuData);
 
   const { noficationList, messageList, todoList, badgeCount } = noficationModel;
+
+  debugger
 
   const headMenuProps = {
     collapsed,
     activeHeadMenuKey,
     activeSideMenuKey,
+    menuData,
     tokenModel,
     themeStyle,
     themeColor,
@@ -37,7 +41,7 @@ const AppPage = (props) => {
     },
     onSelectHeadMenu: (params) => {
       const { item, key, keyPath } = params;
-      const sideMenu = config.frame_menu.sider[key];
+      const sideMenu = menuData.sider[key];
       let openedSubMenuKey, activeSideMenuKey;
       if (sideMenu) {
         const isExist = paneTabs.filter(item => item.key == sideMenu[0].key).length > 0 ? true : false;
@@ -60,7 +64,7 @@ const AppPage = (props) => {
     },
     onSelectSideMenu: (params) => {
       const { item, key, keyPath } = params;
-      const pathUrl = pathUrlList.filter(item => key == item.key);
+      const pathUrl = menuData.list.filter(item => key == item.key);
       const isExist = paneTabs.filter(item => item.key == pathUrl[0].key).length > 0 ? true : false;
       if (!isExist) {
         paneTabs.push({...pathUrl[0]});
@@ -111,6 +115,7 @@ const AppPage = (props) => {
     collapsed,
     activeHeadMenuKey,
     activeSideMenuKey,
+    menuData,
     paneTabs,
     openedSubMenuKey,
     homeView,
@@ -124,7 +129,7 @@ const AppPage = (props) => {
     },
     onSelectSideMenu: (params) => {
       const { item, key, keyPath } = params;
-      const pathUrl = pathUrlList.filter(item => key == item.key);
+      const pathUrl = menuData.list.filter(item => key == item.key);
       const isExist = paneTabs.filter(item => item.key == pathUrl[0].key).length > 0 ? true : false;
       if (!isExist) {
         paneTabs.push({...pathUrl[0]});
@@ -140,7 +145,7 @@ const AppPage = (props) => {
       const activeKey = activedPane.length > 0 ? activeTabKey : panes.length == 0 ? null : panes[panes.length - 1].key;
       let activeHomeKey = activeHeadMenuKey;
       if (panes.length == 0) {
-        activeHomeKey = config.frame_menu.main[0].key;
+        activeHomeKey = menuData.main[0].key;
       }
       dispatch({ type: "globalModel/updateState", payload: { paneTabs: panes, activeSideMenuKey: activeKey, activeHeadMenuKey: activeHomeKey }});
     },
@@ -149,7 +154,7 @@ const AppPage = (props) => {
       const activeTabKey = closeTabs.length > 0 ? closeTabs[closeTabs.length - 1].key : null;
       let activeKey = activeHeadMenuKey;
       if (closeTabs.length == 0) {
-        activeKey = config.frame_menu.main[0].key;
+        activeKey = menuData.main[0].key;
       }
       dispatch({ type: "globalModel/updateState", payload: { paneTabs: closeTabs, activeSideMenuKey: activeTabKey, activeHeadMenuKey: activeKey }});
     },
@@ -157,12 +162,12 @@ const AppPage = (props) => {
       let closeTabs = paneTabs.filter(item => item.key == activeSideMenuKey);
       let activeKey = activeHeadMenuKey;
       if (closeTabs.length == 0) {
-        activeKey = config.frame_menu.main[0].key;
+        activeKey = menuData.main[0].key;
       }
       dispatch({ type: "globalModel/updateState", payload: { paneTabs: closeTabs, activeHeadMenuKey: activeKey }});
     },
     onCloseTab: () => {
-      dispatch({ type: "globalModel/updateState", payload: { paneTabs: [], activeHeadMenuKey: config.frame_menu.main[0].key }});
+      dispatch({ type: "globalModel/updateState", payload: { paneTabs: [], activeHeadMenuKey: menuData.main[0].key }});
     },
     updatePathMap: (pathMap) => {
       dispatch({ type: "globalModel/updateState", payload: { menuMap: pathMap }});

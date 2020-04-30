@@ -10,7 +10,7 @@ const MachineList = (props) => {
   const columns = [
     { title: '', key: '', width: '1.5%', align: "center" },
     { title: '序号', key: '', width: '5%',
-      render: (text, record, index) => (index + 1) * config.PAGE_SIZE, align: "center" },
+      render: (text, record, index) => (index + 1) * config.LIMIT_SIZE, align: "center" },
     { title: '菜单名称', dataIndex: 'name', key: 'name', width: '20%', align: "center",
       render: (text, record, index) => {
         const longCodes = record.longCode.split("_");

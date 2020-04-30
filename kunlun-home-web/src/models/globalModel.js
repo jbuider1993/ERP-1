@@ -9,6 +9,7 @@ export default {
     collapsed: false,
     activeHeadMenuKey: "home",
     activeSideMenuKey: null,
+    menuData: null,
     pageUrl: null,
     pathUrlList: [],
     paneTabs: [],
@@ -31,23 +32,6 @@ export default {
     }
   },
   effects: {
-    *initMenu({ payload }, { select, call, put }) {
-      let { pathUrlList, paneTabs } = yield select(state => state.globalModel);
-      if (pathUrlList.length > 0) return;
-      const main1 = config.frame_menu.main;
-      const sider1 = config.frame_menu.sider;
-      const siderKeys = main1.map(obj => obj.key);
-      const siders = siderKeys.slice(1, siderKeys.length).map(obj => sider1[obj]);
-      const temps = siders.flatMap(obj => obj);
-      const tempss = temps.filter(obj => obj.children && obj.children.length);
-      const childs = tempss.flatMap(obj => obj.children);
-      const array = [...main1, ...temps, ...childs];
-      for (let i = 0; i < array.length; i++) {
-        if (array[i].key != "") pathUrlList.push({...array[i]});
-      }
-      yield put({ type: "updateState", payload: { pathUrlList, paneTabs }});
-    },
-
     *getAuthCode({ payload: params }, { select, call, put }) {
       const res = yield call(globalService.getAuthCode, params);
       if (res.code == "200") {
@@ -65,10 +49,10 @@ export default {
         console.log(res);
         window._USERINFO_ = res.data.userInfo;
         window._TOKEN_ = res.data.token;
-        const {dispatch} = yield select(state => state.globalModel);
+        sessionStorage.token = window._TOKEN_;
+        sessionStorage.userInfo = JSON.stringify(window._USERINFO_);
         yield put({ type: "updateState", payload: { tokenModel: res.data }});
-        dispatch(routerRedux.push({pathname: "/scmp"}));
-        yield put({ type: "getAppMenu", payload: {}});
+        dispatch({ type: "getAppMenu", payload: {}}).then(() => dispatch(routerRedux.push({pathname: "/scmp"})));
       } else {
         message.error(res.message);
         console.log(res.error);
@@ -79,8 +63,17 @@ export default {
     *getAppMenu({ payload: params }, { select, call, put }) {
       const res = yield call(globalService.getAppMenu, params);
       if (res.code == "200") {
-        console.log("getAppMenu menuList ===> " + res.data);
-        yield put({ type: "updateState", payload: { menuList: res.data }});
+        console.log("getAppMenu menuData ===> " + res.data);
+        sessionStorage.menuData = JSON.stringify(res.data);
+        yield put({ type: "updateState", payload: { menuData: res.data }});
+      } else {
+        console.log("config menuData ===> " + res.data);
+        const menuList = yield call(globalService.getAppMenuFromConfig);
+        let menuData = {};
+        menuData["list"] = menuList;
+        menuData = {...menuData, ...config.frame_menu};
+        sessionStorage.menuData = JSON.stringify(menuData);
+        yield put({ type: "updateState", payload: { menuData }});
       }
     },
 
@@ -91,7 +84,7 @@ export default {
       if (res.code == "200") {
         console.log(res);
       }
-      yield put({ type: "updateState", payload: { pageLoading: false }});
+      yield put({ type: "updateState", payload: { pageLoading: false, paneTabs: [] }});
     },
 
     *addActiveRoute({ payload: params }, { select, call, put }) {
@@ -106,7 +99,9 @@ export default {
       window.addEventListener("message", function (e) {
         // 监听页面超时事件，确定后直接跳转到登陆界面
         if (e.data && e.data.operateType == "timeout") {
-          window.g_app._history.push({pathname: "/"});
+          dispatch({type: "logout", payload: {}}).then(() =>
+            window.g_app._history.push({pathname: "/"})
+          );
         }
 
         // kunlun-system-web请求打开菜单页面的监听
@@ -120,11 +115,6 @@ export default {
         if (location.pathname == "/") {
           dispatch({type: "getAuthCode", payload: {}});
         }
-
-        if (location.pathname == "/scmp") {
-          dispatch({type: "initMenu", payload: {}});
-        }
-
         dispatch({type: "updateState", payload: {dispatch}});
       });
     },

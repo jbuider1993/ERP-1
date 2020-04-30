@@ -25,7 +25,7 @@ export default {
   },
 
   effects: {
-    *getListDatas({payload: {currentPage = 1, pageSize = config.PAGE_SIZE_LIST[0], params}}, { call, put }) {
+    *getListDatas({payload: {currentPage = 1, pageSize = config.PAGE_SIZE, params}}, { call, put }) {
       yield put({ type: "updateState", payload: { logLoading: true }});
       const res = yield call(operatorLogService.getLogList, { ...params, currentPage, pageSize });
       if (res.code == "200") {

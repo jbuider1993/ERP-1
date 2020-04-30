@@ -35,7 +35,7 @@ class MenuIconModal extends React.Component {
     };
 
     const columns = [
-      {title: '序号', key: 'name', width: '15%', render: (text, record, index) => (index + 1) + (iconCurrentPage - 1) * config.PAGE_SIZE, align: "center" },
+      {title: '序号', key: 'name', width: '15%', render: (text, record, index) => (index + 1) + (iconCurrentPage - 1) * config.LIMIT_SIZE, align: "center" },
       {title: '图标名称', dataIndex: 'name', key: 'name', width: '25%'},
       {title: '图标key', dataIndex: 'key', key: 'key', width: '25%'},
       {title: '图标', key: 'key', align: "center", render: (text, record, index) => <i className={record.key} style={{fontSize: "19px"}}/> }];
@@ -43,7 +43,7 @@ class MenuIconModal extends React.Component {
     const pagination = {
       total: iconTotal,
       current: iconCurrentPage,
-      pageSize: config.PAGE_SIZE,
+      pageSize: config.LIMIT_SIZE,
       onChange: onIconPageChange,
       showSizeChanger: false
     };

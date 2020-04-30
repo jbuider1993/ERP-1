@@ -20,7 +20,7 @@ export default {
     },
   },
   effects: {
-    *getListDatas({ payload: {currentPage = 1, pageSize = config.PAGE_SIZE_LIST[0], params} }, { select, call, put}) {
+    *getListDatas({ payload: {currentPage = 1, pageSize = config.PAGE_SIZE, params} }, { select, call, put}) {
       yield put({ type: "updateState", payload: { iconLoading: true }});
       const res = yield call(iconService.getIconList, { params, currentPage, pageSize });
       if (res.code == "200") {
@@ -60,7 +60,7 @@ export default {
         message.info("抓取失败！");
       }
       yield put({ type: "updateState", payload: { iconLoading: false }});
-      yield put({ type: "getListDatas", payload: {currentPage: 1, pageSize: config.PAGE_SIZE_LIST[0]}});
+      yield put({ type: "getListDatas", payload: {currentPage: 1, pageSize: config.PAGE_SIZE}});
     },
 
     *onExportIcons({ payload: params }, { select, call, put }) {

@@ -20,7 +20,7 @@ class HeadMenu extends React.Component {
 
   render() {
 
-    const { collapsed, activeHeadMenuKey, toggleSiderMenu, activeSideMenuKey, onSelectHeadMenu, noficationList, messageList, onSelectSideMenu,
+    const { collapsed, activeHeadMenuKey, toggleSiderMenu, activeSideMenuKey, onSelectHeadMenu, menuData, noficationList, messageList, onSelectSideMenu,
       todoList, onShowUserInfo, onLogout, tokenModel, onSystemInfo, onTheme, themeStyle, themeColor, badgeCount, clearPane, onDetail } = this.props;
 
     const iconStyle = {
@@ -30,14 +30,14 @@ class HeadMenu extends React.Component {
     };
 
     // 主菜单项
-    const main = config.frame_menu.main;
+    const main = menuData.main;
     const initMainMenu = main.map(item =>
       <MenuItem key={item.key} path={item.url}>
         <i className={item.icon} style={iconStyle} />{item.name}
       </MenuItem>);
 
     // 子菜单项
-    const sider = config.frame_menu.sider[activeHeadMenuKey];
+    const sider = menuData.sider[activeHeadMenuKey];
     const isShowSubMenu = sider && sider.length > 0 && themeStyle == "subMenu" ? true : false;
     const initSubMenu = isShowSubMenu ? sider.filter(item => item.isShow).map(item =>
       (item.children ?

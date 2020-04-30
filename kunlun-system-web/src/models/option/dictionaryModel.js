@@ -9,7 +9,7 @@ export default {
     dictionaryList: [{name: "11111", code: "11111", remark: "11111"}],
     total: 0,
     currentPage: 1,
-    pageSize: config.PAGE_SIZE_LIST[0],
+    pageSize: config.PAGE_SIZE,
     dictionaryModalVisible: false,
     operateType: 'add',
     dictionaryInfoData: null,
@@ -24,7 +24,7 @@ export default {
   },
 
   effects: {
-    *getListDatas({payload: {currentPage = 1, pageSize = config.PAGE_SIZE_LIST[0], params}}, { select, call, put }) {
+    *getListDatas({payload: {currentPage = 1, pageSize = config.PAGE_SIZE, params}}, { select, call, put }) {
       yield put({ type: "updateState", payload: { dictionaryLoading: true }});
       const res = yield call(dictionaryService.getAllUser, { params, currentPage, pageSize });
       if (res.code == "200") {

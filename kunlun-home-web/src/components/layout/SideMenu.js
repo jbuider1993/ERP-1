@@ -28,8 +28,7 @@ class SideMenu extends React.Component {
 
   render() {
 
-    const { history,
-      collapsed, activeHeadMenuKey, onSelectSideMenu, activeSideMenuKey, paneTabs, onTabChange, updatePathMap, menuMap,
+    const { history, collapsed, activeHeadMenuKey, onSelectSideMenu, activeSideMenuKey, menuData, paneTabs, onTabChange, updatePathMap, menuMap,
       onOpenSubMenu, openedSubMenuKey, removeTab, closeCurrentTab, closeOtherTab, onCloseTab, tokenModel, themeStyle, siderColor
     } = this.props;
 
@@ -48,8 +47,8 @@ class SideMenu extends React.Component {
     };
 
     // 左侧菜单
-    const siderFlag = config.frame_menu.sider[activeHeadMenuKey] ? true : false;
-    const siderMenu = siderFlag ? config.frame_menu.sider[activeHeadMenuKey].filter(item => item.isShow).map(item => (item.children ?
+    const siderFlag = menuData.sider[activeHeadMenuKey] ? true : false;
+    const siderMenu = siderFlag ? menuData.sider[activeHeadMenuKey].filter(item => item.show).map(item => (item.children ?
       <SubMenu key={item.key} title={<span><i class={item.icon} style={iconStyle("submenu")}/><span>{item.name}</span></span>} style={{ background: siderColor }}>
         {
           item.children ? item.children.filter(item => item.isShow).map(subItem => (
@@ -101,11 +100,13 @@ class SideMenu extends React.Component {
 
     const iFrameParams = "tokenModel=" + JSON.stringify(tokenModel);
 
+    debugger
+
     // 刷新时间戳
     const refreshFlag = this.state.refreshView;
 
     const isShowSider = activeHeadMenuKey != "home" && themeStyle == "siderMenu" ? true : false;
-    const pageUrl = siderFlag ? config.frame_menu.sider[activeHeadMenuKey].filter(item => item.key == activeSideMenuKey)[0].url : config.frame_menu.main[0].url;
+    const pageUrl = siderFlag ? menuData.sider[activeHeadMenuKey].filter(item => item.key == activeSideMenuKey)[0].url : menuData.main[0].url;
 
     return (
       <Layout style={{height: "100%"}}>
@@ -127,7 +128,7 @@ class SideMenu extends React.Component {
           <Content>
             {/* 引入页面显示组件 */}
             {
-              activeHeadMenuKey == config.frame_menu.main[0].key || (activeHeadMenuKey != "home" && themeStyle == "subMenu") ?
+              activeHeadMenuKey == menuData.main[0].key || (activeHeadMenuKey != "home" && themeStyle == "subMenu") ?
               <iframe id={"homeIFrame"} name={"homeIFrame"}
                       style={{width: "100%", height: "100%", padding: activeHeadMenuKey != "home" ? "20px" : "0", display: "block"}}
                       frameBorder={"no"}
@@ -147,7 +148,7 @@ class SideMenu extends React.Component {
                       <div className={styles.tabDiv} ref={"iframe" + index}>
                         <iframe id={"tabIFrame" + index} name={"tabIFrame" + index} frameBorder={"no"}
                                 style={{width: "100%", height: "100%"}}
-                                src={pane.url + (pane.isHeaderToken ? "?" + iFrameParams : "") + (refreshFlag && activeSideMenuKey == pane.key ? ((pane.isHeaderToken ? "&" : "") + "refreshView=" + refreshFlag) : "")}
+                                src={pane.url + (pane.carryToken ? "?" + iFrameParams : "") + (refreshFlag && activeSideMenuKey == pane.key ? ((pane.carryToken ? "&" : "") + "refreshView=" + refreshFlag) : "")}
                         />
                       </div>
                     </TabPane>)

@@ -9,7 +9,7 @@ const MachineList = (props) => {
 
   const columns = [
     { title: '序号', key: '', width: '5%',
-      render: (text, record, index) => (index + 1) * config.PAGE_SIZE, align: "center" },
+      render: (text, record, index) => (index + 1) * config.LIMIT_SIZE, align: "center" },
     { title: '虚拟机名称', dataIndex: 'machineName', key: 'machineName', width: '10%', align: "center" },
     { title: '主机IP', dataIndex: 'machineIp', key: 'machineIp', width: '10%', align: "center" },
     { title: '虚拟IP', dataIndex: 'virtualIp', key: 'virtualIp', width: '10%', align: "center" },

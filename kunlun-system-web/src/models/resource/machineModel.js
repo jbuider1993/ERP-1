@@ -20,7 +20,7 @@ export default {
   effects: {
     *getMachineList({ payload: params }, { select, call, put }) {
       yield put({ type: "updateState", payload: { machineLoading: true }});
-      const res = yield call(machineService.getMachineList, { currentPage: 0, pageSize: config.PAGE_SIZE_LIST[0] });
+      const res = yield call(machineService.getMachineList, { currentPage: 0, pageSize: config.PAGE_SIZE });
       if (res.code == "200") {
         yield put({ type: "updateState", payload: { machineList: res.data }});
       }
