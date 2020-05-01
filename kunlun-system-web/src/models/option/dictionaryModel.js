@@ -44,7 +44,7 @@ export default {
 
     *getListSubDatas({payload: {currentPage = 1, pageSize = config.PAGE_SIZE, params}}, { select, call, put }) {
       yield put({ type: "updateState", payload: { dictionarySubLoading: true }});
-      const res = yield call(dictionaryService.getAllDictionarySub, { params, currentPage, pageSize });
+      const res = yield call(dictionaryService.getAllDictionarySub, { ...params, currentPage, pageSize });
       if (res.code == "200") {
         yield put({
           type: 'updateState',

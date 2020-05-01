@@ -92,7 +92,8 @@ class DictionaryPage extends React.Component {
         return `从 ${range[0]}-${range[1]} 条，共 ${total} 条`;
       },
       onShowDictionarySub:(record) => {
-        dispatch({type: 'dictionaryModel/getListSubDatas', payload: {currentPage, pageSize, dictId: record.dictId}});
+        const params = {dictId: record.id};
+        dispatch({type: 'dictionaryModel/getListSubDatas', payload: {currentPage, pageSize, params}});
       },
     };
 
