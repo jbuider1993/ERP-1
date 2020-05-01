@@ -7,6 +7,7 @@ import UserInfo from '../components/userInfo/UserInfo';
 import ThemeDrawer from '../components/theme/ThemeDrawer';
 import { connect } from 'dva';
 import 'remixicon/fonts/remixicon.css';
+import * as globalService from '../services/globalService';
 
 const { Content, Footer } = Layout;
 
@@ -18,11 +19,20 @@ const AppPage = (props) => {
   const { dispatch, history, globalModel, noficationModel } = props;
   let { collapsed, activeHeadMenuKey, activeSideMenuKey, menuData, paneTabs, themeStyle, siderColor,
           openedSubMenuKey, homeView, tokenModel, themeDrawerVisible, themeColor, selectedStyle, menuMap } = globalModel;
-  menuData = menuData ? menuData : JSON.parse(sessionStorage.menuData);
+
+  // 兼容单独运行前端服务
+  if (menuData) {
+    menuData = menuData;
+  } else if (sessionStorage.menuData) {
+    menuData = JSON.parse(sessionStorage.menuData);
+  } else {
+    const menuList = globalService.getAppMenuFromConfig();
+    menuData = {};
+    menuData["list"] = menuList;
+    menuData = {...menuData, ...config.frame_menu};
+  }
 
   const { noficationList, messageList, todoList, badgeCount } = noficationModel;
-
-  debugger
 
   const headMenuProps = {
     collapsed,

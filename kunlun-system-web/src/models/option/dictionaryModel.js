@@ -15,6 +15,12 @@ export default {
     dictionaryInfoData: null,
     selectedRowKeys: [],
     searchParams: null,
+
+    dictionarySubLoading: false,
+    dictionarySubList: [],
+    dictSubCurrentPage: 0,
+    dictSubPageSize: config.PAGE_SIZE,
+    dictSubTotal: 0,
   },
 
   reducers: {
@@ -26,7 +32,7 @@ export default {
   effects: {
     *getListDatas({payload: {currentPage = 1, pageSize = config.PAGE_SIZE, params}}, { select, call, put }) {
       yield put({ type: "updateState", payload: { dictionaryLoading: true }});
-      const res = yield call(dictionaryService.getAllUser, { params, currentPage, pageSize });
+      const res = yield call(dictionaryService.getAllDictionary, { params, currentPage, pageSize });
       if (res.code == "200") {
         yield put({
           type: 'updateState',
@@ -34,6 +40,18 @@ export default {
         });
       }
       yield put({ type: "updateState", payload: { dictionaryLoading: false }});
+    },
+
+    *getListSubDatas({payload: {currentPage = 1, pageSize = config.PAGE_SIZE, params}}, { select, call, put }) {
+      yield put({ type: "updateState", payload: { dictionarySubLoading: true }});
+      const res = yield call(dictionaryService.getAllDictionarySub, { params, currentPage, pageSize });
+      if (res.code == "200") {
+        yield put({
+          type: 'updateState',
+          payload: { dictionarySubList: res.data.records, dictSubTotal: res.data.total, dictSubCurrentPage: currentPage, dictSubPageSize: pageSize },
+        });
+      }
+      yield put({ type: "updateState", payload: { dictionarySubLoading: false }});
     },
 
     *addUser({payload: params}, {put, call}) {
@@ -72,8 +90,8 @@ export default {
   subscriptions: {
     setup({ dispatch, history }) {
       return history.listen(location => {
-        if (location.pathname === "/dictionary/list") {
-          dispatch({ type: 'getListDatas', payload: {} });
+        if (location.pathname === "/option/dictionary") {
+          dispatch({ type: 'getListDatas', payload: {}});
         }
       });
     },

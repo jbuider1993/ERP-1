@@ -48,6 +48,10 @@ const config = {
     fetchIcons: `${CACHE_TRACE_API}/icon/fetchIcons`,
     onExportIcons: `${CACHE_TRACE_API}/icon/onExportIcons`,
 
+    // 菜单管理
+    getAllDictionary: `${SYSTEM_SERVICE_API}/dict/getAllDictionary`,
+    getAllDictionarySub: `${SYSTEM_SERVICE_API}/dict/getAllDictionarySub`,
+
     // 用户管理
     getUserList: `${CACHE_TRACE_API}/user/getAllUser`,
     addUser: `${CACHE_TRACE_API}/user/addUser`,

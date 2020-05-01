@@ -1,8 +1,12 @@
 import * as request from '../../utils/request';
 import config from '../../config/config';
 
-export function getAllUser(params) {
-  return request.get(`${config.system_api.getUserList}`, params);
+export function getAllDictionary(params) {
+  return request.get(`${config.system_api.getAllDictionary}`, params);
+}
+
+export function getAllDictionarySub(params) {
+  return request.get(`${config.system_api.getAllDictionarySub}`, params);
 }
 
 export function addUser(params) {

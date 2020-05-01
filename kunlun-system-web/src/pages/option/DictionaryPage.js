@@ -4,6 +4,7 @@ import DictionarySearch from "../../components/option/dictionary/DictionarySearc
 import DictionaryToolsBar from "../../components/option/dictionary/DictionaryToolbar";
 import DictionaryList from "../../components/option/dictionary/DictionaryList";
 import { Modal, message } from "antd";
+import config from "../../config/config";
 
 class DictionaryPage extends React.Component {
 
@@ -11,7 +12,8 @@ class DictionaryPage extends React.Component {
 
     let {dispatch, location, dictionaryModel} = this.props;
     const { dictionaryList, total, dictionaryLoading, operateType, dictionaryModalVisible, currentPage, pageSize,
-            selectedRowKeys, selectedRows, dictionaryInfoData, searchParams } = dictionaryModel;
+          selectedRowKeys, selectedRows, dictionaryInfoData, searchParams, dictionarySubLoading,
+          dictionarySubList, dictSubCurrentPage, dictSubPageSize, dictSubTotal } = dictionaryModel;
 
     const dictionarySearchProps = {
       onSearch: (searchParams) => {
@@ -51,6 +53,11 @@ class DictionaryPage extends React.Component {
       total,
       dictionaryList,
       dictionaryLoading,
+      dictionarySubLoading,
+      dictionarySubList,
+      dictSubCurrentPage,
+      dictSubPageSize,
+      dictSubTotal,
       onEdit: (record) => {
         dispatch({
           type: "dictionaryModel/updateState",
@@ -83,7 +90,10 @@ class DictionaryPage extends React.Component {
       },
       showTotal: (total, range) => {
         return `从 ${range[0]}-${range[1]} 条，共 ${total} 条`;
-      }
+      },
+      onShowDictionarySub:(record) => {
+        dispatch({type: 'dictionaryModel/getListSubDatas', payload: {currentPage, pageSize, dictId: record.dictId}});
+      },
     };
 
     return (
