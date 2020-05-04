@@ -3,6 +3,8 @@ import { connect } from 'dva';
 import DictionarySearch from "../../components/option/dictionary/DictionarySearch";
 import DictionaryToolsBar from "../../components/option/dictionary/DictionaryToolbar";
 import DictionaryList from "../../components/option/dictionary/DictionaryList";
+import DictionaryModal from "../../components/option/dictionary/DictionaryModal";
+import DictionaryDrawer from "../../components/option/dictionary/DictionaryDrawer";
 import { Modal, message } from "antd";
 import config from "../../config/config";
 
@@ -11,9 +13,10 @@ class DictionaryPage extends React.Component {
   render() {
 
     let {dispatch, location, dictionaryModel} = this.props;
-    const { dictionaryList, total, dictionaryLoading, operateType, dictionaryModalVisible, currentPage, pageSize,
-          selectedRowKeys, selectedRows, dictionaryInfoData, searchParams, dictionarySubLoading,
-          dictionarySubList, dictSubCurrentPage, dictSubPageSize, dictSubTotal } = dictionaryModel;
+    const { dictionaryList, total, dictionaryLoading, operateType, modalType, dictionaryModalVisible, currentPage, pageSize,
+          selectedRowKeys, selectedRows, dictionaryInfoData, searchParams, dictSubDrawerVisible, dictionarySubLoading,
+          dictionarySubList, dictSubCurrentPage, dictSubPageSize, dictSubTotal, showDictRow
+    } = dictionaryModel;
 
     const dictionarySearchProps = {
       onSearch: (searchParams) => {
@@ -53,21 +56,11 @@ class DictionaryPage extends React.Component {
       total,
       dictionaryList,
       dictionaryLoading,
-      dictionarySubLoading,
-      dictionarySubList,
-      dictSubCurrentPage,
-      dictSubPageSize,
-      dictSubTotal,
       onEdit: (record) => {
         dispatch({
           type: "dictionaryModel/updateState",
           payload: {dictionaryModalVisible: true, operateType: "edit", dictionaryInfoData: record}
         });
-      },
-      onView: (record) => {
-      },
-      onDelete: (record) => {
-        dispatch({type: "dictionaryModel/batchDeleteDictionary", payload: {ids: record.id}});
       },
       rowSelection: {
         selectedRowKeys,
@@ -93,8 +86,39 @@ class DictionaryPage extends React.Component {
       },
       onShowDictionarySub:(record) => {
         const params = {dictId: record.id};
+        dispatch({type: 'dictionaryModel/updateState', payload: {showDictRow: record, dictSubDrawerVisible: true}});
         dispatch({type: 'dictionaryModel/getListSubDatas', payload: {currentPage, pageSize, params}});
       },
+    };
+
+    const dictionaryModalProps = {
+      dictionaryModalVisible,
+      modalType,
+      onCancel: () => {
+        dispatch({type: "dictionaryModel/updateState", payload: {dictionaryModalVisible: false}});
+      },
+      onSave: (values) => {
+        const type = modalType == "item" ? "dictionaryModel/saveDictionary" : "dictionaryModel/saveDictionaryValue";
+        dispatch({type, payload: values});
+      },
+    };
+
+    const dictionaryDrawerProps = {
+      dictSubDrawerVisible,
+      dictionarySubLoading,
+      dictionarySubList,
+      dictSubCurrentPage,
+      dictSubPageSize,
+      dictSubTotal,
+      showDictRow,
+      rowDictSubSelection: () => {},
+      onClose: () => {
+        dispatch({type: 'dictionaryModel/updateState', payload: {dictSubDrawerVisible: false}});
+      },
+      onAdd: () => {
+        dispatch({type: "dictionaryModel/updateState", payload: {modalType: "value", dictionaryModalVisible: true}});
+      },
+      onEdit: (record, index) => {},
     };
 
     return (
@@ -102,6 +126,8 @@ class DictionaryPage extends React.Component {
         <DictionarySearch {...dictionarySearchProps} />
         <DictionaryToolsBar {...dictionaryToolbarProps} />
         <DictionaryList {...dictionaryListProps} />
+        <DictionaryModal {...dictionaryModalProps} />
+        <DictionaryDrawer {...dictionaryDrawerProps} />
       </div>
     );
   };

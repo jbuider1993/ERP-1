@@ -28,8 +28,7 @@ const Login = (props) => {
       onLogin(values);
     }).catch(error => {
       console.log("===== 登陆验证失败 =====");
-    })
-
+    });
   };
 
   const onKeyEnter = (e) => {

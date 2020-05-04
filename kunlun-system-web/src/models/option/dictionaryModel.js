@@ -10,17 +10,21 @@ export default {
     total: 0,
     currentPage: 1,
     pageSize: config.PAGE_SIZE,
-    dictionaryModalVisible: false,
     operateType: 'add',
     dictionaryInfoData: null,
     selectedRowKeys: [],
     searchParams: null,
+    modalType: "item",
 
+    showDictRow: null,
+    dictSubDrawerVisible: false,
     dictionarySubLoading: false,
     dictionarySubList: [],
     dictSubCurrentPage: 0,
     dictSubPageSize: config.PAGE_SIZE,
     dictSubTotal: 0,
+
+    dictionaryModalVisible: false,
   },
 
   reducers: {
@@ -32,7 +36,7 @@ export default {
   effects: {
     *getListDatas({payload: {currentPage = 1, pageSize = config.PAGE_SIZE, params}}, { select, call, put }) {
       yield put({ type: "updateState", payload: { dictionaryLoading: true }});
-      const res = yield call(dictionaryService.getAllDictionary, { params, currentPage, pageSize });
+      const res = yield call(dictionaryService.getAllDictionaryItem, { params, currentPage, pageSize });
       if (res.code == "200") {
         yield put({
           type: 'updateState',
@@ -44,7 +48,7 @@ export default {
 
     *getListSubDatas({payload: {currentPage = 1, pageSize = config.PAGE_SIZE, params}}, { select, call, put }) {
       yield put({ type: "updateState", payload: { dictionarySubLoading: true }});
-      const res = yield call(dictionaryService.getAllDictionarySub, { ...params, currentPage, pageSize });
+      const res = yield call(dictionaryService.getAllDictionaryValue, { ...params, currentPage, pageSize });
       if (res.code == "200") {
         yield put({
           type: 'updateState',
@@ -84,6 +88,33 @@ export default {
       } else {
         message.info("删除失败！");
       }
+    },
+
+    *saveDictionary({payload: params}, {select, call, put}) {
+      yield put({ type: "updateState", payload: { dictionaryLoading: true }});
+      const res = yield call(dictionaryService.addDictionaryItem, params);
+      if (res.code == 200 || res.code == 201) {
+        message.info("新增成功！");
+        yield put({ type: 'getListDatas', payload: {}});
+        yield put({ type: "updateState", payload: { dictionaryModalVisible: false }});
+      } else {
+        message.info("新增失败！");
+      }
+      yield put({ type: "updateState", payload: { dictionaryLoading: false }});
+    },
+
+    *saveDictionaryValue({payload: params}, {select, call, put}) {
+      yield put({ type: "updateState", payload: { dictionarySubLoading: true }});
+      const {showDictRow} = yield select(state => state.dictionaryModel);
+      const res = yield call(dictionaryService.addDictionaryValue, {...params, dictId: showDictRow.id});
+      if (res.code == 200 || res.code == 201) {
+        message.info("新增成功！");
+        yield put({ type: 'getListDatas', payload: {}});
+        yield put({ type: "updateState", payload: { dictionaryModalVisible: false }});
+      } else {
+        message.info("新增失败！");
+      }
+      yield put({ type: "updateState", payload: { dictionarySubLoading: false }});
     },
   },
 

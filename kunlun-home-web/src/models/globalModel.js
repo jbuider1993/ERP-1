@@ -79,7 +79,7 @@ export default {
 
     *logout({ payload: params }, { select, call, put }) {
       yield put({ type: "updateState", payload: { pageLoading: true }});
-      const { userName, password } = window._USERINFO_;
+      const { userName, password } = window._USERINFO_ ? window._USERINFO_ : sessionStorage.userInfo;
       const res = yield call(globalService.logout, { userName, password });
       if (res.code == "200") {
         console.log(res);
@@ -102,11 +102,11 @@ export default {
           dispatch({type: "logout", payload: {}}).then(() =>
             window.g_app._history.push({pathname: "/"})
           );
+        } else {
+          // kunlun-system-web请求打开菜单页面的监听
+          const message = !!e && !!e.data && JSON.parse(e.data) || {};
+          message.isAddRoute && dispatch({type: "addActiveRoute", payload: message});
         }
-
-        // kunlun-system-web请求打开菜单页面的监听
-        const message = !!e && !!e.data && JSON.parse(e.data) || {};
-        message.isAddRoute && dispatch({ type: "addActiveRoute", payload: message });
       });
     },
     setup({ dispatch, history }) {
