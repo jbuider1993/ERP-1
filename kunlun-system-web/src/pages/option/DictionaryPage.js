@@ -14,8 +14,8 @@ class DictionaryPage extends React.Component {
 
     let {dispatch, location, dictionaryModel} = this.props;
     const { dictionaryList, total, dictionaryLoading, operateType, modalType, dictionaryModalVisible, currentPage, pageSize,
-          selectedRowKeys, selectedRows, dictionaryInfoData, searchParams, dictSubDrawerVisible, dictionarySubLoading,
-          dictionarySubList, dictSubCurrentPage, dictSubPageSize, dictSubTotal, showDictRow
+      selectedItemRows, selectedItemRowKeys, dictionaryInfoData, searchParams, dictSubDrawerVisible, dictionarySubLoading,
+          dictionarySubList, dictSubCurrentPage, dictSubPageSize, dictSubTotal, showDictRow, selectedValueRowKeys, selectedValueRows,
     } = dictionaryModel;
 
     const dictionarySearchProps = {
@@ -33,7 +33,7 @@ class DictionaryPage extends React.Component {
         dispatch({type: "dictionaryModel/updateState", payload: {modalType: "item", dictionaryModalVisible: true}});
       },
       batchDelete: () => {
-        if (selectedRowKeys.length == 0) {
+        if (selectedItemRowKeys.length == 0) {
           message.error("请选择要删除的记录！");
           return;
         }
@@ -41,8 +41,8 @@ class DictionaryPage extends React.Component {
           title: "删除",
           content: "确定删除选中的记录？",
           onOk() {
-            const ids = selectedRowKeys.join(",");
-            dispatch({type: "dictionaryModel/batchDeleteDictionary", payload: {ids}});
+            const ids = selectedItemRowKeys.join(",");
+            dispatch({type: "dictionaryModel/deleteDictionaryItem", payload: {ids}});
           },
           onCancel() {}
         });
@@ -59,18 +59,18 @@ class DictionaryPage extends React.Component {
       onEdit: (record) => {
         dispatch({
           type: "dictionaryModel/updateState",
-          payload: {dictionaryModalVisible: true, operateType: "edit", dictionaryInfoData: record}
+          payload: {dictionaryModalVisible: true, modalType: "item", operateType: "edit", dictionaryInfoData: record}
         });
       },
       rowSelection: {
-        selectedRowKeys,
-        selectedRows,
+        selectedItemRowKeys,
+        selectedItemRows,
         onChange: (keys, selectedRows) => {
           dispatch({
             type: 'dictionaryModel/updateState',
             payload: {
-              selectedRows: selectedRows,
-              selectedRowKeys: keys,
+              selectedItemRows: selectedRows,
+              selectedItemRowKeys: keys,
             },
           })
         },
@@ -94,6 +94,8 @@ class DictionaryPage extends React.Component {
     const dictionaryModalProps = {
       dictionaryModalVisible,
       modalType,
+      operateType,
+      dictionaryInfoData,
       onCancel: () => {
         dispatch({type: "dictionaryModel/updateState", payload: {dictionaryModalVisible: false}});
       },
@@ -111,14 +113,51 @@ class DictionaryPage extends React.Component {
       dictSubPageSize,
       dictSubTotal,
       showDictRow,
-      rowDictSubSelection: () => {},
+      rowDictSubSelection: {
+        selectedValueRowKeys,
+        selectedValueRows,
+        onChange: (keys, selectedRows) => {
+          dispatch({
+            type: 'dictionaryModel/updateState',
+            payload: {
+              selectedValueRows: selectedRows,
+              selectedValueRowKeys: keys,
+            },
+          });
+        }
+      },
       onClose: () => {
         dispatch({type: 'dictionaryModel/updateState', payload: {dictSubDrawerVisible: false}});
       },
       onAdd: () => {
         dispatch({type: "dictionaryModel/updateState", payload: {modalType: "value", dictionaryModalVisible: true}});
       },
-      onEdit: (record, index) => {},
+      onSave: (record, index) => {
+
+        debugger
+
+        record["createTime"] = null;
+        record["modifiedTime"] = null;
+
+        debugger
+
+        dispatch({type: "dictionaryModel/updateDictionaryValue", payload: record});
+      },
+      onDelete: () => {
+        if (selectedValueRowKeys.length == 0) {
+          message.error("请选择要删除的记录！");
+          return;
+        }
+        Modal.confirm({
+          title: "删除",
+          content: "确定删除选中的记录？",
+          onOk() {
+            const ids = selectedValueRowKeys.join(",");
+            dispatch({type: "dictionaryModel/deleteDictionaryValue", payload: {ids}});
+          },
+          onCancel() {}
+        });
+      },
     };
 
     return (

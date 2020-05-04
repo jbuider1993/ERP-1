@@ -6,13 +6,14 @@ export default {
   namespace: "dictionaryModel",
   state: {
     dictionaryLoading: false,
-    dictionaryList: [{name: "11111", code: "11111", remark: "11111"}],
+    dictionaryList: [],
     total: 0,
     currentPage: 1,
     pageSize: config.PAGE_SIZE,
     operateType: 'add',
     dictionaryInfoData: null,
-    selectedRowKeys: [],
+    selectedItemRows: [],
+    selectedItemRowKeys: [],
     searchParams: null,
     modalType: "item",
 
@@ -23,6 +24,8 @@ export default {
     dictSubCurrentPage: 0,
     dictSubPageSize: config.PAGE_SIZE,
     dictSubTotal: 0,
+    selectedValueRows: [],
+    selectedValueRowKeys: [],
 
     dictionaryModalVisible: false,
   },
@@ -58,40 +61,7 @@ export default {
       yield put({ type: "updateState", payload: { dictionarySubLoading: false }});
     },
 
-    *addUser({payload: params}, {put, call}) {
-      const res = yield call(dictionaryService.addUser, params);
-      if (res.code == "200") {
-        message.info("新增成功！");
-        yield put({ type: 'updateState', payload: { dictionaryModalVisible: false }});
-        yield put({ type: 'getListDatas', payload: {}});
-      } else {
-        message.info("新增失败！");
-      }
-    },
-
-    *updateUser({payload: params}, {put, call}) {
-      const res = yield call(dictionaryService.updateUser, params);
-      if (res.code == "200") {
-        message.info("修改成功！");
-        yield put({ type: 'updateState', payload: { dictionaryModalVisible: false }});
-        yield put({ type: 'getListDatas', payload: {}});
-      } else {
-        message.info("修改失败！");
-      }
-    },
-
-    *batchDeleteUser({payload: ids}, {put, call}) {
-      const res = yield call(dictionaryService.batchDeleteUser, ids);
-      if (res.code == "200") {
-        message.info("删除成功！");
-        yield put({ type: 'getListDatas', payload: {}});
-      } else {
-        message.info("删除失败！");
-      }
-    },
-
     *saveDictionary({payload: params}, {select, call, put}) {
-      yield put({ type: "updateState", payload: { dictionaryLoading: true }});
       const res = yield call(dictionaryService.addDictionaryItem, params);
       if (res.code == 200 || res.code == 201) {
         message.info("新增成功！");
@@ -100,11 +70,9 @@ export default {
       } else {
         message.info("新增失败！");
       }
-      yield put({ type: "updateState", payload: { dictionaryLoading: false }});
     },
 
     *saveDictionaryValue({payload: params}, {select, call, put}) {
-      yield put({ type: "updateState", payload: { dictionarySubLoading: true }});
       const {showDictRow} = yield select(state => state.dictionaryModel);
       const res = yield call(dictionaryService.addDictionaryValue, {...params, dictId: showDictRow.id});
       if (res.code == 200 || res.code == 201) {
@@ -114,7 +82,48 @@ export default {
       } else {
         message.info("新增失败！");
       }
-      yield put({ type: "updateState", payload: { dictionarySubLoading: false }});
+    },
+
+    *deleteDictionaryItem({payload: params}, {select, call, put}) {
+      const res = yield call(dictionaryService.deleteDictionaryItem, params);
+      if (res.code == 200) {
+        message.info("删除成功！");
+        yield put({ type: 'getListDatas', payload: {}});
+      } else {
+        message.info("删除失败！");
+      }
+    },
+
+    *deleteDictionaryValue({payload: params}, {select, call, put}) {
+      const {showDictRow} = yield select(state => state.dictionaryModel);
+      const res = yield call(dictionaryService.deleteDictionaryValue, params);
+      if (res.code == 200) {
+        message.info("删除成功！");
+        yield put({ type: 'getListSubDatas', payload: {params: {dictId: showDictRow.id}}});
+      } else {
+        message.info("删除失败！");
+      }
+    },
+
+    *updateDictionaryItem({payload: params}, {select, call, put}) {
+      const res = yield call(dictionaryService.updateDictionaryItem, params);
+      if (res.code == 200) {
+        message.info("编辑成功！");
+        yield put({ type: 'getListDatas', payload: {}});
+      } else {
+        message.info("编辑失败！");
+      }
+    },
+
+    *updateDictionaryValue({payload: params}, {select, call, put}) {
+      const {showDictRow} = yield select(state => state.dictionaryModel);
+      const res = yield call(dictionaryService.updateDictionaryValue, params);
+      if (res.code == 200) {
+        message.info("编辑成功！");
+        yield put({ type: 'getListSubDatas', payload: {params: {dictId: showDictRow.id}}});
+      } else {
+        message.info("编辑失败！");
+      }
     },
   },
 

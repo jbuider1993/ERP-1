@@ -10,10 +10,12 @@ const Option = Select.Option;
 const DictionaryModal = (props) => {
 
   const {
-    dictionaryModalVisible, onCancel, onSave, saveLoading, menuInfoData, modalType,
+    dictionaryModalVisible, onCancel, onSave, dictionaryInfoData, modalType, operateType,
   } = props;
   const [form] = Form.useForm();
   const { getFieldsValue, validateFields, setFieldsValue, resetFields } = form;
+
+  debugger
 
   const formItemLayout = {
     labelCol: {span: 5},
@@ -35,14 +37,14 @@ const DictionaryModal = (props) => {
       <Modal
         className={styles.modal}
         visible={dictionaryModalVisible}
-        title={"新增菜单"}
+        title={(operateType == "add" ? "新增" : "编辑") + (modalType == "item" ? "字典项" : "字典值")}
         okText="保存"
         onCancel={onCancel}
         onOk={onOk}
         width={500}
         destroyOnClose={true}
       >
-        <Form align="center" initialValues={{}} form={form}>
+        <Form align="center" initialValues={dictionaryInfoData} form={form}>
           <Row>
             <Col span={24}>
               <FormItem {...formItemLayout}

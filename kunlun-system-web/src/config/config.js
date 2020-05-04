@@ -53,6 +53,10 @@ const config = {
     getAllDictionaryValue: `${SYSTEM_SERVICE_API}/dict/getAllDictionaryValue`,
     addDictionaryItem: `${SYSTEM_SERVICE_API}/dict/insertDictionaryItem`,
     addDictionaryValue: `${SYSTEM_SERVICE_API}/dict/insertDictionaryValue`,
+    deleteDictionaryItem: `${SYSTEM_SERVICE_API}/dict/deleteDictionaryItem`,
+    deleteDictionaryValue: `${SYSTEM_SERVICE_API}/dict/deleteDictionaryValue`,
+    updateDictionaryItem: `${SYSTEM_SERVICE_API}/dict/updateDictionaryItem`,
+    updateDictionaryValue: `${SYSTEM_SERVICE_API}/dict/updateDictionaryValue`,
 
     // 用户管理
     getUserList: `${CACHE_TRACE_API}/user/getAllUser`,

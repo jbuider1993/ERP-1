@@ -21,7 +21,7 @@ class DictionaryDrawer extends React.Component {
     const {
       dictSubDrawerVisible, onClose, selectMenuLoading, rowDictSubSelection,
       dictionarySubLoading, dictionarySubList, dictSubCurrentPage, dictSubPageSize,
-      dictSubTotal, showDictRow, onAdd,
+      dictSubTotal, showDictRow, onAdd, onDelete, onSave
     } = this.props;
     const {editedRowIndex, editedRecord} = this.state;
     const { getFieldsValue, validateFields, setFieldsValue, resetFields } = this.formRef;
@@ -34,24 +34,29 @@ class DictionaryDrawer extends React.Component {
       this.setState({editedRowIndex: null, editedRecord: null});
     };
 
+    const onValueChange = (e, fieldName) => {
+      editedRecord[fieldName] = e.target.value;
+      this.setState({editedRecord});
+    };
+
     const columns = [
       { title: '序号', width: '10%', render: (text, record, index) => <span>{(index + 1) + (dictSubCurrentPage - 1) * dictSubPageSize}</span> },
       { title: '编码', dataIndex: 'dictSubCode', key: 'dictSubCode', width: '20%',
         render: (text, record, index) => editedRowIndex == index ?
-          <Input value={editedRecord && editedRecord.dictSubCode ? editedRecord.dictSubCode : null} style={{height: "30px"}}/> : <span>{text}</span> },
+          <Input value={editedRecord && editedRecord.dictSubCode ? editedRecord.dictSubCode : null} style={{height: "30px"}} onChange={e => (onValueChange(e, "dictSubCode"))}/> : <span>{text}</span> },
       { title: '字典值', dataIndex: 'dictValue', key: 'dictValue', width: '20%',
         render: (text, record, index) => editedRowIndex == index ?
-          <Input value={editedRecord && editedRecord.dictValue ? editedRecord.dictValue : null} style={{height: "30px"}}/> : <span>{text}</span> },
+          <Input value={editedRecord && editedRecord.dictValue ? editedRecord.dictValue : null} style={{height: "30px"}} onChange={e => (onValueChange(e, "dictValue"))}/> : <span>{text}</span> },
       { title: '备注', dataIndex: 'description', key: 'description', width: '30%',
         render: (text, record, index) => editedRowIndex == index ?
-          <Input value={editedRecord && editedRecord.description ? editedRecord.description : null} style={{height: "30px"}}/> : <span>{text}</span> },
+          <Input value={editedRecord && editedRecord.description ? editedRecord.description : null} style={{height: "30px"}} onChange={e => (onValueChange(e, "description"))}/> : <span>{text}</span> },
       { title: '操作', key: 'operate', width: '15%',
         render: (text, record, index) => (
           <span>
             {
               editedRowIndex == index ?
                 <span>
-                  <a onClick={() => onEdit(record, index)}><i className={"ri-save-3-line"} style={{color: '#08c', fontSize: "18px"}}/></a>
+                  <a onClick={() => onSave(record, index)}><i className={"ri-save-3-line"} style={{color: '#08c', fontSize: "18px"}}/></a>
                   <a onClick={() => onCancelEdit(record, index)}><i className={"ri-close-circle-line"} style={{color: '#08c', fontSize: "18px", marginLeft: "10px"}}/></a>
                 </span> :
                 <a onClick={() => onEdit(record, index)}><i className={"ri-edit-line"} style={{color: '#08c', fontSize: "18px"}}/></a>
@@ -84,7 +89,7 @@ class DictionaryDrawer extends React.Component {
           >
             <div style={{margin: "-5px 0px 15px 0px"}}>
               <Button type={"primary"} icon={<i className="ri-add-line" style={iconStyle}/>} onClick={onAdd}>新增</Button>
-              <Button style={{marginLeft: "15px"}} icon={<i className="ri-delete-bin-line" style={iconStyle}/>}>刪除</Button>
+              <Button style={{marginLeft: "15px"}} icon={<i className="ri-delete-bin-line" style={iconStyle}/>} onClick={onDelete}>刪除</Button>
             </div>
             <div className={ editedRecord ? styles.subTable_edit : styles.subTable }>
               <Table
