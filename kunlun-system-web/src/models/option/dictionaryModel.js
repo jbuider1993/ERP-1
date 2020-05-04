@@ -109,7 +109,7 @@ export default {
       const res = yield call(dictionaryService.addDictionaryValue, {...params, dictId: showDictRow.id});
       if (res.code == 200 || res.code == 201) {
         message.info("新增成功！");
-        yield put({ type: 'getListDatas', payload: {}});
+        yield put({ type: 'getListSubDatas', payload: {params: {dictId: showDictRow.id}}});
         yield put({ type: "updateState", payload: { dictionaryModalVisible: false }});
       } else {
         message.info("新增失败！");

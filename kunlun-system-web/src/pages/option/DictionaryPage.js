@@ -30,7 +30,7 @@ class DictionaryPage extends React.Component {
 
     const dictionaryToolbarProps = {
       addSave: () => {
-        dispatch({type: "dictionaryModel/updateState", payload: {dictionaryModalVisible: true}});
+        dispatch({type: "dictionaryModel/updateState", payload: {modalType: "item", dictionaryModalVisible: true}});
       },
       batchDelete: () => {
         if (selectedRowKeys.length == 0) {
