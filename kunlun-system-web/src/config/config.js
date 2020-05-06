@@ -29,10 +29,10 @@ const config = {
     getUserCount: `${CACHE_TRACE_API}/home/getUserCount`,
 
     // 消息管理
-    getAllMessages: `${CACHE_TRACE_API}/message/getAllMessages`,
-    addMessage: `${CACHE_TRACE_API}/message/addMessage`,
-    updateMessage: `${CACHE_TRACE_API}/message/updateMessage`,
-    batchDeleteMessage: `${CACHE_TRACE_API}/message/batchDeleteMessage`,
+    getAllMessages: `${SYSTEM_SERVICE_API}/message/getAllMessages`,
+    addMessage: `${SYSTEM_SERVICE_API}/message/addMessage`,
+    updateMessage: `${SYSTEM_SERVICE_API}/message/updateMessage`,
+    batchDeleteMessage: `${SYSTEM_SERVICE_API}/message/batchDeleteMessage`,
   },
   system_api: {
     // 菜单管理
