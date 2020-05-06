@@ -1,5 +1,5 @@
 import React from 'react';
-import {Drawer, Form, Button, Divider, Modal, Row, Col, Input, Icon} from 'antd';
+import {Form, Button, Modal, Row, Col, Input} from 'antd';
 import 'braft-editor/dist/index.css';
 import BraftEditor from 'braft-editor';
 import styles from './Message.less';
@@ -29,16 +29,16 @@ class NewMessageModal extends React.Component {
   }
 
   handleSubmit(validateFields) {
-    validateFields((error, values) => {
-      if (!error) {
-        const submitData = {
-          title: values.title,
-          content: values.content.toHTML(), // or values.content.toRAW()
-          description: values.description
-        };
-        this.props.onOk(submitData);
-      }
-    })
+    validateFields().then(values => {
+      const submitData = {
+        title: values.title,
+        content: values.content.toHTML(), // or values.content.toRAW()
+        description: values.description
+      };
+      this.props.onOk(submitData);
+    }).catch(error => {
+      console.log("NewMessageModal error ===>>> " + error)
+    });
   }
 
   render() {
@@ -46,7 +46,10 @@ class NewMessageModal extends React.Component {
     const {
       newMessageModalVisible, messageModalType, messageRecord, onCancel, onOk,
     } = this.props;
-    const { getFieldsValue, validateFields, setFieldsValue, resetFields } = this.formRef;
+
+    debugger
+
+    // const { getFieldsValue, validateFields, setFieldsValue, resetFields } = this.formRef.current;
 
     const formItemLayout = {
       labelCol: {span: 3},
@@ -60,12 +63,12 @@ class NewMessageModal extends React.Component {
           title={messageModalType == "add" ? "新增菜单" : "编辑菜单"}
           okText="保存"
           onCancel={onCancel}
-          onOk={() => this.handleSubmit(validateFields)}
-          height={600}
+          onOk={() => this.handleSubmit(this.formRef.current.validateFields)}
+          height={500}
           width={"70%"}
           destroyOnClose={true}
         >
-          <Form initialValues={messageRecord} ref={this.formRef}>
+          <Form initialValues={messageRecord} ref={this.formRef} name={"messageRef"}>
             <Row>
               <Col span={24}>
                 <FormItem {...formItemLayout} label="消息标题" name={"title"} rules={[{required: false, message: '请输入消息标题'}]}>

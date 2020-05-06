@@ -78,7 +78,7 @@ class DictionaryDrawer extends React.Component {
       <div className={styles.drawerDiv}>
         <Spin spinning={dictionarySubLoading}>
           <Drawer
-            title={(showDictRow ? showDictRow.dictName + "_" : "") + "字典字段值"}
+            title={(showDictRow ? showDictRow.dictName + "_" : "") + "字典值"}
             width={"55%"}
             placement="right"
             onClose={onClose}
