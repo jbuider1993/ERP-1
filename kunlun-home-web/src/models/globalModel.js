@@ -93,6 +93,17 @@ export default {
       console.log("open tab, activeHeadMenuKey ===>>> " + activeHeadMenuKey + ", activeSideMenuKey ===>>> " + params.key);
       yield put({ type: "updateState", payload: { paneTabs: paneTabList, activeHeadMenuKey, activeSideMenuKey: params.key }});
     },
+
+    *refreshPage({payload: params}, {select, call, put}) {
+      const tokenModel = {};
+      const token = sessionStorage.token;
+      window._TOKEN_ = token;
+      const userInfo = sessionStorage.userInfo;
+      window._USERINFO_ = userInfo;
+      tokenModel["token"] = token;
+      tokenModel["userInfo"] = userInfo;
+      yield put({type: "updateState", payload: {tokenModel, menuData: JSON.parse(sessionStorage.menuData)}});
+    },
   },
   subscriptions: {
     onListenIFrameMessage({ dispatch, history }) {
@@ -114,6 +125,11 @@ export default {
         console.log("=====program start running=====");
         if (location.pathname == "/") {
           dispatch({type: "getAuthCode", payload: {}});
+        }
+
+        // 刷新页面处理
+        if (location.pathname == "/scmp") {
+          dispatch({type: "refreshPage", payload: {}});
         }
         dispatch({type: "updateState", payload: {dispatch}});
       });

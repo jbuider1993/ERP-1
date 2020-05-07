@@ -19,11 +19,11 @@ export function get(url, data) {
     }
 
     const instance = axios.create();
-    // instance.interceptors.request.use(config => {
-    //   config.headers["Authorization"] = window._TOKEN_ || "";
-    //   config.timeout = 300000;
-    //   return config;
-    // });
+    instance.interceptors.request.use(config => {
+      config.headers["Authorization"] = window._TOKEN_ || "";
+      config.timeout = 300000;
+      return config;
+    });
 
     let response = new Promise((resolve, reject) => {
       instance.get(url).then(res => {

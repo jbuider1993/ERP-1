@@ -23,8 +23,6 @@ class NoficationPane extends React.Component {
 
     const { noficationList, messageList, todoList, clearPane, onDetail } = this.props;
 
-    debugger
-
     const iconStyle = {
       verticalAlign: "sub",
       marginRight: "8px",
@@ -48,12 +46,12 @@ class NoficationPane extends React.Component {
               noficationList.length  == 0 ? <div className={styles.emptyDiv}><Empty /></div> :
               noficationList.map(item =>
                 <li className={styles.tabli}>
-                  <div>
+                  <div style={{marginTop: "5px"}}>
                     <i className={"ri-notification-3-line"} style={iconStyle} />
                     <span>{item.title}</span>
                     <span>{item.createTime ? moment(item.createTime).format("YYYY-MM-DD HH:mm:ss") : ""}</span>
                   </div>
-                  <div style={{width: "300px"}}>
+                  <div style={{width: "300px", margin: "-15px 0px 0px 24px"}} className={styles.messageContentDiv}>
                     <span style={{whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis"}}>{item.content.replace(/<[^>]*>|/g,"")}</span>
                   </div>
                 </li>)
@@ -66,12 +64,12 @@ class NoficationPane extends React.Component {
               messageList.length  == 0 ? <div className={styles.emptyDiv}><Empty /></div> :
               messageList.map(item =>
                 <li className={styles.tabli}>
-                  <div>
+                  <div style={{marginTop: "5px"}}>
                     <i className={"ri-message-3-line"} style={iconStyle} />
                     <span>{item.title}</span>
                     <span>{item.createTime ? moment(item.createTime).format("YYYY-MM-DD HH:mm:ss") : ""}</span>
                   </div>
-                  <div>
+                  <div style={{width: "300px", margin: "-15px 0px 0px 24px"}} className={styles.messageContentDiv}>
                     <span>{item.content.replace(/<[^>]*>|/g,"")}</span>
                   </div>
                 </li>)

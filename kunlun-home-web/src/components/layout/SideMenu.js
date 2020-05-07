@@ -28,7 +28,7 @@ class SideMenu extends React.Component {
 
   render() {
 
-    const { history, collapsed, activeHeadMenuKey, onSelectSideMenu, activeSideMenuKey, menuData, paneTabs, onTabChange, updatePathMap, menuMap,
+    const { collapsed, activeHeadMenuKey, onSelectSideMenu, activeSideMenuKey, menuData, paneTabs, onTabChange, updatePathMap, menuMap,
       onOpenSubMenu, openedSubMenuKey, removeTab, closeCurrentTab, closeOtherTab, onCloseTab, tokenModel, themeStyle, siderColor
     } = this.props;
 
