@@ -23,9 +23,13 @@ class NoficationPane extends React.Component {
 
     const { noficationList, messageList, todoList, clearPane, onDetail } = this.props;
 
+    debugger
+
     const iconStyle = {
-      verticalAlign: "bottom",
-      marginRight: "5px",
+      verticalAlign: "sub",
+      marginRight: "8px",
+      fontSize: "16px",
+      color: "red",
     };
 
     return (
@@ -44,9 +48,14 @@ class NoficationPane extends React.Component {
               noficationList.length  == 0 ? <div className={styles.emptyDiv}><Empty /></div> :
               noficationList.map(item =>
                 <li className={styles.tabli}>
-                  <Icon type="mail" theme={"filled"} className={styles.noficationIcon} />
-                  <span>{item.title}</span>
-                  <span>{item.time ? moment(item.time).format("YYYY-MM-DD HH:mm:ss") : ""}</span>
+                  <div>
+                    <i className={"ri-notification-3-line"} style={iconStyle} />
+                    <span>{item.title}</span>
+                    <span>{item.createTime ? moment(item.createTime).format("YYYY-MM-DD HH:mm:ss") : ""}</span>
+                  </div>
+                  <div style={{width: "300px"}}>
+                    <span style={{whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis"}}>{item.content.replace(/<[^>]*>|/g,"")}</span>
+                  </div>
                 </li>)
             }
             </ul>
@@ -57,10 +66,14 @@ class NoficationPane extends React.Component {
               messageList.length  == 0 ? <div className={styles.emptyDiv}><Empty /></div> :
               messageList.map(item =>
                 <li className={styles.tabli}>
-                  <Icon type="message" theme={"filled"} className={styles.noficationIcon}/>
-                  <span>{item.title}</span>
-                  <span>{item.content}</span>
-                  <span>{item.time ? moment(item.time).format("YYYY-MM-DD HH:mm:ss") : ""}</span>
+                  <div>
+                    <i className={"ri-message-3-line"} style={iconStyle} />
+                    <span>{item.title}</span>
+                    <span>{item.createTime ? moment(item.createTime).format("YYYY-MM-DD HH:mm:ss") : ""}</span>
+                  </div>
+                  <div>
+                    <span>{item.content.replace(/<[^>]*>|/g,"")}</span>
+                  </div>
                 </li>)
             }
             </ul>
@@ -71,7 +84,7 @@ class NoficationPane extends React.Component {
               todoList.length == 0 ? <div className={styles.emptyDiv}><Empty imageStyle={{fontSize: "20px"}}/></div> :
               todoList.map(item =>
                 <li className={styles.tabli}>
-                  <Icon type="flag" theme={"filled"} className={styles.noficationIcon} />
+                  <i className="ri-profile-line" style={iconStyle} />
                   <span>{item.modelName}</span>
                   <span className={styles.todoStatus}>
                     <Tag color="#f50">{"审核中"}</Tag>

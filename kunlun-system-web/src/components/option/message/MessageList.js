@@ -30,13 +30,17 @@ const MessageList = (props) => {
         }
         renderItem={item => (
           <ListItem
+            className={styles.messageListItem}
             actions={[<div className={styles.operator} onClick={(e) => editMessage(item)}>edit</div>, <div className={styles.operator} onClick={() => showMessage(item)}>more</div>]}
           >
             <Skeleton avatar title={false} loading={item.loading} active>
               <ListItemMeta
-                avatar={<i className={item.type == 1 ? "ri-notification-3-line" : "ri-message-3-line"} style={{fontSize: "20px"}} />}
-                title={<div onClick={() => showMessage(item)} className={styles.messageTitle}>{item.title}</div>}
-                description={moment(item.createTime).format("YYYY-MM-DD HH:mm:ss") + "&nbsp;&nbsp;" + item.description}
+                avatar={<i className={item.type == 1 ? "ri-notification-3-line" : "ri-message-3-line"} style={{marginLeft: "15px", fontSize: "20px"}} />}
+                title={<span>
+                        <span onClick={() => showMessage(item)} className={styles.messageTitle}>{item.title}</span>
+                        <span style={{float: "right", marginRight: "30%"}}>{moment(item.createTime).format("YYYY-MM-DD HH:mm:ss")}</span>
+                      </span>}
+                description={<span>{item.description}</span>}
               />
               <div style={{marginRight: "5%"}}>
                 <Tag style={{ borderRadius: "20px" }} color={item.type == 1 ? "blue" : "purple"}>{item.type == 1 ? "通知" : "消息"}</Tag>

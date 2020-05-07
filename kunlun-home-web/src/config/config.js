@@ -32,7 +32,7 @@ const config = {
     getAppMenu: `${CACHE_TRACE_API}/menu/getAppMenu`,
 
     // 消息管理
-    getAllMessages: `${CACHE_TRACE_API}/message/getAllMessages`,
+    getAllMessages: `${SYSTEM_SERVICE_API}/message/getAllMessages`,
   },
   gate_way_api: {
     // 登录

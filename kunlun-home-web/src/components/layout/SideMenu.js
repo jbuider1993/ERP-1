@@ -100,8 +100,6 @@ class SideMenu extends React.Component {
 
     const iFrameParams = "tokenModel=" + JSON.stringify(tokenModel);
 
-    debugger
-
     // 刷新时间戳
     const refreshFlag = this.state.refreshView;
 

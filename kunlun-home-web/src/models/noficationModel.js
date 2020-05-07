@@ -17,7 +17,7 @@ export default {
   effects: {
     *getMessageInfo({ payload: params }, { select, call, put }) {
       // 通知消息
-      const resMsg = yield call(globalService.getMessageList, {currentPage: 0, pageSize: 50000, params});
+      const resMsg = yield call(globalService.getMessageList, {currentPage: 0, pageSize: 50000, ...params});
       const noficationList = new Array();
       const messageList = new Array();
       if (resMsg.code == 200) {
