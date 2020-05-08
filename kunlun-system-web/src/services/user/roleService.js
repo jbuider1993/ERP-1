@@ -16,3 +16,7 @@ export function updateRole(params) {
 export function batchDeleteRole(params) {
   return request.post(`${config.system_api.batchDeleteRole}`, params);
 }
+
+export function getMenuList(params) {
+  return request.get(`${config.system_api.getMenuList}`, params);
+}

@@ -4,6 +4,7 @@ import RoleSearch from "../../components/user/role/RoleSearch";
 import RoleToolsBar from "../../components/user/role/RoleToolbar";
 import RoleModal from "../../components/user/role/RoleModal";
 import RoleList from "../../components/user/role/RoleList";
+import MenuLimitDrawer from "../../components/user/role/MenuLimitDrawer";
 import TablePagination from '../../components/common/TablePagination';
 import { Modal, message } from "antd";
 
@@ -11,7 +12,8 @@ const RolePage = (props) => {
 
   let { location, history, dispatch, roleModel } = props;
   const { roleList, total, roleLoading, operateType, roleModalVisible, currentPage, pageSize,
-    selectedRowKeys, selectedRows, roleInfoData, searchParams } = roleModel;
+    selectedRowKeys, selectedRows, roleInfoData, searchParams, menuLimitDrawerVisible,
+    menuLimitLoading, menuList,  } = roleModel;
 
   const roleSearchProps = {
     onSearch: (searchParams) => {
@@ -34,7 +36,10 @@ const RolePage = (props) => {
       dispatch({ type: "roleModel/updateRole", payload: values});
     },
     onCancel: () => {
-      dispatch({ type: "roleModel/updateState", payload: { roleModalVisible: false }});
+
+      debugger
+
+      dispatch({ type: "roleModel/updateState", payload: { roleModalVisible: false, roleInfoData: null }});
     },
   };
 
@@ -68,6 +73,13 @@ const RolePage = (props) => {
     onEdit: (record) => {
       dispatch({ type: "roleModel/updateState", payload: { roleModalVisible: true, operateType: "edit", roleInfoData: record }});
     },
+    onMenuLimit: (record) => {
+      dispatch({type: "roleModel/getMenuList", payload: {currentPage: 1, pageSize: 999999}});
+      dispatch({type: "roleModel/updateState", payload: {menuLimitDrawerVisible: true}});
+    },
+    onDataLimit: (record) => {
+      dispatch({type: "roleModel/updateState", payload: {menuLimitDrawerVisible: true}});
+    },
     onView: (record) => {
     },
     onDelete: (record) => {
@@ -88,6 +100,16 @@ const RolePage = (props) => {
     }
   };
 
+  const menuLimitDrawerProps = {
+    menuLimitDrawerVisible,
+    menuLimitLoading,
+    menuList,
+    onClose: () => {
+      dispatch({type: "roleModel/updateState", payload: {menuLimitDrawerVisible: false}});
+    },
+    onSelectTreeNode: () => {}
+  };
+
   const tablePaginationProps = {
     total,
     currentPage,
@@ -106,6 +128,7 @@ const RolePage = (props) => {
       <RoleToolsBar {...roleToolbarProps} />
       <RoleModal {...roleModalProps} />
       <RoleList {...roleListProps} />
+      <MenuLimitDrawer {...menuLimitDrawerProps}/>
       <TablePagination {...tablePaginationProps} />
     </div>
   );

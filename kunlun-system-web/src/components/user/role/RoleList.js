@@ -1,11 +1,11 @@
 import React from 'react';
 import styles from './Role.less';
-import {Table, Icon, Tag, Popconfirm, Switch } from 'antd';
+import {Table, Icon, Tag, Popconfirm, Switch, Tooltip} from 'antd';
 import 'remixicon/fonts/remixicon.css';
 
 const RoleList = (props) => {
 
-  const { roleList, roleLoading, rowSelection, onView, onEdit, onDelete, currentPage, pageSize } = props;
+  const { roleList, roleLoading, rowSelection, onView, onEdit, onMenuLimit, onDataLimit, onDelete, currentPage, pageSize } = props;
 
   const columns = [
     { title: '序号', width: '10%', render: (text, record, index) => <span>{(index + 1) + (currentPage - 1) * pageSize}</span> },
@@ -21,21 +21,29 @@ const RoleList = (props) => {
     { title: '操作', key: 'operate', width: '15%',
       render: (text, record) => (
       <span>
-        <a onClick={() => onEdit(record)}>
-          <i className="ri-edit-2-line" style={{color: '#08c'}}></i>
-        </a>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <a onClick={() => onEdit(record)}>
-          <i className="ri-windows-line" style={{color: '#08c'}}></i>
-        </a>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <a onClick={() => onEdit(record)}>
-          <i className="ri-team-line" style={{color: '#08c'}}></i>
-        </a>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <a onClick={() => onView(record)}>
-          <i className="ri-file-text-line"></i>
-        </a>
+        <Tooltip title={"编辑"}>
+          <a onClick={() => onEdit(record)}>
+            <i className="ri-edit-2-line" style={{color: '#08c', fontSize: "16px"}}></i>
+          </a>
+        </Tooltip>
+        &nbsp;&nbsp;&nbsp;&nbsp;
+        <Tooltip title={"菜单权限"}>
+          <a onClick={() => onMenuLimit(record)}>
+            <i className="ri-windows-line" style={{color: '#08c', fontSize: "16px"}}></i>
+          </a>
+        </Tooltip>
+        &nbsp;&nbsp;&nbsp;&nbsp;
+        <Tooltip title={"数据权限"}>
+          <a onClick={() => onDataLimit(record)}>
+            <i className="ri-team-line" style={{color: '#08c', fontSize: "16px"}}></i>
+          </a>
+        </Tooltip>
+        &nbsp;&nbsp;&nbsp;&nbsp;
+        <Tooltip title={"查看"}>
+          <a onClick={() => onView(record)}>
+            <i className="ri-file-text-line" style={{fontSize: "16px"}}></i>
+          </a>
+        </Tooltip>
       </span>)
   }];
 

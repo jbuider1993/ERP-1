@@ -15,6 +15,9 @@ export default {
     roleInfoData: null,
     selectedRowKeys: [],
     searchParams: null,
+    menuLimitDrawerVisible: false,
+    menuLimitLoading: false,
+    menuList: [],
   },
 
   reducers: {
@@ -35,6 +38,7 @@ export default {
       }
       yield put({ type: "updateState", payload: { roleLoading: false }});
     },
+
     *addRole({payload: params}, {put, call}) {
       const res = yield call(roleService.addRole, params);
       if (res.code == "200") {
@@ -45,6 +49,7 @@ export default {
         message.info("新增失败！");
       }
     },
+
     *updateRole({payload: params}, {put, call}) {
       const res = yield call(roleService.updateRole, params);
       if (res.code == "200") {
@@ -55,6 +60,7 @@ export default {
         message.info("修改失败！");
       }
     },
+
     *batchDeleteRole({payload: ids}, {put, call}) {
       const res = yield call(roleService.batchDeleteRole, ids);
       if (res.code == "200") {
@@ -63,6 +69,11 @@ export default {
       } else {
         message.info("删除失败！");
       }
+    },
+
+    *getMenuList({payload: params}, {select, put, call}) {
+      const res = yield call(roleService.getMenuList, params);
+      yield put({type: "updateState", payload: {menuList: res.data.records}});
     },
   },
 

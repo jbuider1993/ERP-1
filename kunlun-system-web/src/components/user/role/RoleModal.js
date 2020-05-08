@@ -7,6 +7,7 @@ const FormItem = Form.Item;
 const RoleModal = (props) => {
 
   const { roleModalVisible, roleInfoData, operateType, onSave, updateUser, onCancel } = props;
+
   const [form] = Form.useForm();
   const { getFieldsValue, validateFields, setFieldsValue, resetFields } = form;
 
@@ -23,16 +24,21 @@ const RoleModal = (props) => {
     });
   };
 
+  const onClose = () => {
+    // resetFields();
+    onCancel();
+  };
+
   return (
     <div>
       <Modal
         visible={roleModalVisible}
         title={operateType == "add" ? "新增" : "修改"}
         okText="保存"
-        onCancel={onCancel}
+        onCancel={onClose}
         onOk={onOk}
         width={500}
-        destroyOnClose={true}
+        destroyOnClose={false}
       >
         <Form initialValues={roleInfoData} form={form}>
           <Row>
