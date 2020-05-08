@@ -11,15 +11,15 @@ const RoleModal = (props) => {
   const { getFieldsValue, validateFields, setFieldsValue, resetFields } = form;
 
   const formItemLayout = {
-    labelCol: { span: 8 },
-    wrapperCol: { span: 16 },
+    labelCol: { span: 4 },
+    wrapperCol: { span: 20 },
   };
 
   const onOk = () => {
-    validateFields((err, values) => {
-      if (!err) {
-        operateType == "add" ? onSave(values) : updateUser(values);
-      }
+    validateFields().then(values => {
+      operateType == "add" ? onSave(values) : updateUser(values);
+    }).catch(error => {
+      console.log("RoleModal Error ===>>> " + error);
     });
   };
 
@@ -31,36 +31,29 @@ const RoleModal = (props) => {
         okText="保存"
         onCancel={onCancel}
         onOk={onOk}
-        width={800}
+        width={500}
         destroyOnClose={true}
       >
-        <Form initialValues={roleInfoData}>
+        <Form initialValues={roleInfoData} form={form}>
           <Row>
             <Col span={0}>
               <FormItem label="用户ID" name={"id"}>
                 <Input />
               </FormItem>
             </Col>
-            <Col span={12}>
+            <Col span={24}>
               <FormItem { ...formItemLayout } label="角色名称" name={"roleName"} rules={[{required: true, message: '请输入角色名称'}]}>
                 <Input placeholder={"请输入角色名称"} />
               </FormItem>
             </Col>
-            <Col span={12}>
-              <FormItem { ...formItemLayout } label="密码" name={"roleWord"} rules={[{required: true, message: '请输入密码'}]}>
-                <Input placeholder={"请输入密码"} />
+            <Col span={24}>
+              <FormItem { ...formItemLayout } label="权限字符" name={"roleWord"} rules={[{required: true, message: '请输入权限字符'}]}>
+                <Input placeholder={"请输入权限字符"} />
               </FormItem>
             </Col>
-          </Row>
-          <Row>
-            <Col span={12}>
-              <FormItem { ...formItemLayout } label="电话号码" name={"phoneNumber"} rules={[{required: true, message: '请输入电话号码'}]}>
-                <Input placeholder={"请输入电话号码"} />
-              </FormItem>
-            </Col>
-            <Col span={12}>
-              <FormItem { ...formItemLayout } label="邮箱" name={"email"} rules={[{required: true, message: '请输入邮箱'}]}>
-                <Input placeholder={"请输入邮箱"} />
+            <Col span={24}>
+              <FormItem { ...formItemLayout } label="是否启用" name={"status"} rules={[{required: true, message: '请选择是否启用'}]}>
+                <Input placeholder={"请选择是否启用"} />
               </FormItem>
             </Col>
           </Row>

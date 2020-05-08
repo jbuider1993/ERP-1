@@ -24,14 +24,8 @@ export default {
 
   effects: {
     *getListDatas({payload: params}, { call, put }) {
-
-      debugger
-
       yield put({ type: "updateState", payload: { scheduleLoading: true }});
       const res = yield call(scheduleService.getAllSchedules, params);
-
-      debugger
-
       if (res.code == "200") {
         yield put({type: 'updateState', payload: { scheduleList: res.data }});
       }
@@ -55,9 +49,6 @@ export default {
     setup({ dispatch, history }) {
       history.listen(location => {
         let params = {};
-
-        debugger
-
         if (location.pathname === "/synergy/schedule") {
           dispatch({ type: 'getListDatas', payload: params });
         }
