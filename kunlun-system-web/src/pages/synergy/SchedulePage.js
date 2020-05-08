@@ -55,7 +55,7 @@ const SchedulePage = (props) => {
       dispatch({ type: 'scheduleModel/updateState', payload: { singleSchedule: obj }});
     },
     onSave: (values) => {
-      dispatch({ type: 'scheduleModel/onSave', payload: { ...values }});
+      dispatch({ type: 'scheduleModel/onSave', payload: values});
     },
     onCancel: () => {
       dispatch({ type: 'scheduleModel/updateState', payload: { scheduleModalVisible: false }});

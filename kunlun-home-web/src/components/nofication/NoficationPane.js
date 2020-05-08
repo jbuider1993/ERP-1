@@ -48,7 +48,7 @@ class NoficationPane extends React.Component {
                 <li className={styles.tabli}>
                   <div style={{marginTop: "5px"}}>
                     <i className={"ri-notification-3-line"} style={iconStyle} />
-                    <span>{item.title}</span>
+                    <span>{item.title}</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <span>{item.createTime ? moment(item.createTime).format("YYYY-MM-DD HH:mm:ss") : ""}</span>
                   </div>
                   <div style={{width: "300px", margin: "-15px 0px 0px 24px"}} className={styles.messageContentDiv}>
@@ -66,7 +66,7 @@ class NoficationPane extends React.Component {
                 <li className={styles.tabli}>
                   <div style={{marginTop: "5px"}}>
                     <i className={"ri-message-3-line"} style={iconStyle} />
-                    <span>{item.title}</span>
+                    <span>{item.title}</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <span>{item.createTime ? moment(item.createTime).format("YYYY-MM-DD HH:mm:ss") : ""}</span>
                   </div>
                   <div style={{width: "300px", margin: "-15px 0px 0px 24px"}} className={styles.messageContentDiv}>

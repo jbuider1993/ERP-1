@@ -93,6 +93,12 @@ const config = {
     // 操作日志
     getLogList: `${SYSTEM_SERVICE_API}/log/getLogList`,
     exportOperateLog: `${SYSTEM_SERVICE_API}/log/exportOperateLog`,
+
+    // 事项日程
+    getAllSchedules: `${SYSTEM_SERVICE_API}/schedule/getAllSchedules`,
+    addSchedule: `${SYSTEM_SERVICE_API}/schedule/addSchedule`,
+    updateSchedule: `${SYSTEM_SERVICE_API}/schedule/updateSchedule`,
+    deleteSchedule: `${SYSTEM_SERVICE_API}/schedule/deleteSchedule`,
   },
 
   MENU_LEVEL: [

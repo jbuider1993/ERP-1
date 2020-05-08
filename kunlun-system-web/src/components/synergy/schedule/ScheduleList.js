@@ -20,7 +20,7 @@ const ScheduleList = (props) => {
         {
           listData.map(item => (
             <li key={item.id}>
-              <i className={moment(item.endTime) < new Date() ? "ri-forbid-line" : "ri-play-circle-line"} style={{color: item.themeColor, verticalAlign: "bottom", marginRight: "5px",}}></i>
+              <i className={moment(item.endTime) < new Date() ? "ri-forbid-line" : "ri-play-circle-line"} style={{fontSize: "16px", color: item.themeColor, verticalAlign: "sub", marginRight: "5px",}}></i>
               &nbsp;&nbsp;{item.theme}
             </li>
           ))

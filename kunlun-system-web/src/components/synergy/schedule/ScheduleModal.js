@@ -1,7 +1,8 @@
 import React from 'react';
-import {Modal, Form, Row, Col, Input, DatePicker, Select, Icon } from 'antd';
+import {Modal, Form, Row, Col, Input, DatePicker, Select } from 'antd';
 import moment from 'moment';
 import styles from "./Schedule.less";
+import 'braft-editor/dist/index.css';
 
 const FormItem = Form.Item;
 const TextArea = Input.TextArea;
@@ -16,7 +17,6 @@ class ScheduleModal extends React.Component {
     const {
       scheduleModalVisible, operateType, onSave, onCancel, singleSchedule, saveLoading, onCacheThemeColor
     } = this.props;
-    const { getFieldsValue, validateFields, setFieldsValue, resetFields } = this.formRef;
 
     const formItemLayout = {
       labelCol: {span: 8},
@@ -29,10 +29,10 @@ class ScheduleModal extends React.Component {
     };
 
     const onOk = () => {
-      validateFields((err, values) => {
-        if (!err) {
-          onSave(values);
-        }
+      this.formRef.current.validateFields().then(values => {
+        onSave(values);
+      }).catch(error => {
+        console.log("ScheduleModal Error ===>>> " + error);
       });
     };
 
@@ -40,7 +40,7 @@ class ScheduleModal extends React.Component {
     const themeColorOptions = themeColors.map(item =>
       <li className={styles.scheduleThemeLi}>
         <div style={{background: item}} className={styles.scheduleThemeLiDiv} onClick={() => onCacheThemeColor(item)}>
-          <Icon type={singleSchedule && item == singleSchedule.themeColor ? "check" : ""} style={{fontSize: "20px", color: "#ffffff"}}/>
+          <i className={singleSchedule && item == singleSchedule.themeColor ? "ri-check-fill" : ""} style={{fontSize: "25px", color: "#ffffff", margin: "-9px 0px 0px -3px"}} />
         </div>
       </li>
     );
@@ -57,20 +57,20 @@ class ScheduleModal extends React.Component {
           destroyOnClose={true}
           confirmLoading={saveLoading}
         >
-          <Form ref={this.formRef}>
+          <Form ref={this.formRef} name={"scheduleModalRef"}>
             <Row initialValues={singleSchedule}>
               <Col span={0}>
-                <FormItem {...formItemLayout} label="主题" name={"id"}>
+                <FormItem {...formItemLayout} name={"id"}>
                   <Input />
                 </FormItem>
               </Col>
               <Col span={12}>
-                <FormItem {...formItemLayout} label="主题" name={"theme"} rules={[{required: true, message: '请输入用户名'}]}>
-                  <Input placeholder={"请输入用户名"}/>
+                <FormItem {...formItemLayout} label="主题" name={"theme"} rules={[{required: true, message: '请输入日程主题'}]}>
+                  <Input placeholder={"请输入日程主题"}/>
                 </FormItem>
               </Col>
               <Col span={12}>
-                <FormItem {...formItemLayout} label="主题颜色" label="主题" name={"themeColor"} rules={[{required: true, message: '请选择主题颜色'}]}>
+                <FormItem {...formItemLayout} label="主题颜色" name={"themeColor"} rules={[{required: true, message: '请选择主题颜色'}]}>
                   <div>
                     <ul className={styles.scheduleThemeUl}>
                       {themeColorOptions}
@@ -81,7 +81,7 @@ class ScheduleModal extends React.Component {
             </Row>
             <Row>
               <Col span={12}>
-                <FormItem {...formItemLayout} label="开始时间" label="主题" name={"startTime"} rules={[{required: true, message: '请输入开始时间'}]}>
+                <FormItem {...formItemLayout} label="开始时间" name={"startTime"} rules={[{required: true, message: '请输入开始时间'}]}>
                   <DatePicker
                     style={{width: "100%"}}
                     format="YYYY-MM-DD HH:mm:ss"
@@ -90,7 +90,7 @@ class ScheduleModal extends React.Component {
                 </FormItem>
               </Col>
               <Col span={12}>
-                <FormItem {...formItemLayout} label="结束时间" label="主题" name={"endTime"} rules={[{required: true, message: '请输入结束时间'}]}>
+                <FormItem {...formItemLayout} label="结束时间" name={"endTime"} rules={[{required: true, message: '请输入结束时间'}]}>
                   <DatePicker
                     style={{width: "100%"}}
                     format="YYYY-MM-DD HH:mm:ss"
@@ -101,7 +101,7 @@ class ScheduleModal extends React.Component {
             </Row>
             <Row>
               <Col span={12}>
-                <FormItem {...formItemLayout} label="参与人" label="主题" name={"participant"} rules={[{required: true, message: '请选择参与人'}]}>
+                <FormItem {...formItemLayout} label="参与人" name={"participant"} rules={[{required: true, message: '请选择参与人'}]}>
                   <Select mode="tags" style={{width: '100%'}} tokenSeparators={[',']}>
                   </Select>
                 </FormItem>
@@ -109,8 +109,8 @@ class ScheduleModal extends React.Component {
             </Row>
             <Row>
               <Col span={24}>
-                <FormItem {...formItemRemarkLayout} label="备注" label="主题" name={"content"} rules={[{required: true, message: '请输入主题内容'}]}>
-                  <TextArea placeholder={"请输入主题内容"}/>
+                <FormItem {...formItemRemarkLayout} label="日程内容" name={"content"} rules={[{required: true, message: '请输入日程内容'}]}>
+                  <TextArea placeholder={"请输入日程内容"}/>
                 </FormItem>
               </Col>
             </Row>
