@@ -21,7 +21,7 @@ class MenuLimitDrawer extends React.Component {
 
     // 从传递过来的props中获取参数
     const {
-      menuLimitDrawerVisible, onClose, menuLimitLoading, menuList, onSelectTreeNode
+      menuLimitDrawerVisible, onClose, menuLimitLoading, menuList, onSelectTreeNode, roleInfoData
     } = this.props;
     const { checkedTreeNodeKeys, expandedTreeNodeKeys, selectedTreeNode } = this.state;
     const { getFieldsValue, validateFields, setFieldsValue, resetFields } = this.formRef;
@@ -60,7 +60,7 @@ class MenuLimitDrawer extends React.Component {
       <div className={styles.drawerDiv}>
         <Spin spinning={menuLimitLoading}>
           <Drawer
-            title="菜单权限"
+            title={(roleInfoData && roleInfoData.roleName ? roleInfoData.roleName + "_" : "") + "菜单权限"}
             width={"25%"}
             placement="right"
             onClose={onClose}

@@ -77,13 +77,13 @@ const RolePage = (props) => {
     },
     onMenuLimit: (record) => {
       dispatch({type: "roleModel/getMenuList", payload: {currentPage: 1, pageSize: 999999}});
-      dispatch({type: "roleModel/updateState", payload: {menuLimitDrawerVisible: true}});
+      dispatch({type: "roleModel/updateState", payload: {menuLimitDrawerVisible: true, roleInfoData: record}});
     },
     onDataLimit: (record) => {
       dispatch({type: "roleModel/updateState", payload: {menuLimitDrawerVisible: true}});
     },
-    onAllotUser: () => {
-      dispatch({type: "roleModel/updateState", payload: {userAllotTransferVisible: true}});
+    onAllotUser: (record) => {
+      dispatch({type: "roleModel/updateState", payload: {userAllotTransferVisible: true, roleInfoData: record}});
     },
     onView: (record) => {
       dispatch({type: "roleModel/updateState", payload: {viewRoleModalVisible: true}});
@@ -108,6 +108,7 @@ const RolePage = (props) => {
 
   const menuLimitDrawerProps = {
     menuLimitDrawerVisible,
+    roleInfoData,
     menuLimitLoading,
     menuList,
     onClose: () => {
@@ -128,6 +129,7 @@ const RolePage = (props) => {
 
   const userAllotTransferProps = {
     userAllotTransferVisible,
+    roleInfoData,
     operateType,
     onOk: () => {},
     onCancel: () => {

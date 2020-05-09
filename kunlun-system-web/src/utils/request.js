@@ -35,6 +35,8 @@ export function get(url, data) {
             if (error.response.data.path && error.response.data.path == "/timeout") {
               Modal.confirm({
                 title: '提示',
+                okText: "确认",
+                cancelText: "取消",
                 content: <div><i className="ri-error-warning-line" style={{fontSize: "18px", marginRight: "10px", verticalAlign: "sub"}}></i>离开时间太长，请重新登录！</div>,
                 onOk() {
                   window.parent.postMessage({operateType: "timeout"}, "*");

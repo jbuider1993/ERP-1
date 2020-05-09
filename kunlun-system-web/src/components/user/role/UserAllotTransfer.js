@@ -1,6 +1,6 @@
 import React from 'react';
 import { Modal, Form, Input, Row, Col, DatePicker, Radio, Transfer } from 'antd';
-import moment from 'moment';
+import styles from './Role.less';
 
 const FormItem = Form.Item;
 
@@ -45,20 +45,21 @@ class UserAllotTransfer extends React.Component {
 
   render() {
 
-    const {userAllotTransferVisible, operateType, onOk, onCancel} = this.props;
+    const {userAllotTransferVisible, roleInfoData, operateType, onOk, onCancel} = this.props;
 
     return (
       <div>
         <Modal
           visible={userAllotTransferVisible}
-          title={"分配用户"}
+          title={(roleInfoData && roleInfoData.roleName ? roleInfoData.roleName + "_" : "") + "分配用户"}
           onCancel={onCancel}
           onOk={onOk}
-          width={500}
+          width={450}
           destroyOnClose={false}
-          bodyStyle={{height: "300px"}}
+          bodyStyle={{height: "450px"}}
         >
           <Transfer
+            listStyle={{height: "400px"}}
             titles={["全部用户", "权限用户"]}
             dataSource={this.state.mockData}
             showSearch

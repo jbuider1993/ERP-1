@@ -1,5 +1,6 @@
 import React from 'react';
 import { Modal, Form, Input, Row, Col, DatePicker, Radio, Tree } from 'antd';
+import 'remixicon/fonts/remixicon.css';
 import moment from 'moment';
 
 const FormItem = Form.Item;
@@ -36,6 +37,12 @@ const ViewRoleModal = (props) => {
     return <TreeNode title={item.name} key={item.key} dataRef={item}/>;
   });
 
+  const iconStyle = {
+    fontSize: "16px",
+    verticalAlign: "sub",
+    marginRight: "8px"
+  };
+
   return (
     <div>
       <Modal
@@ -50,7 +57,7 @@ const ViewRoleModal = (props) => {
       >
         <Form initialValues={roleInfoData} form={form}>
           <Row>
-            <div>基本信息</div>
+            <div><i className="ri-shield-user-line" style={iconStyle}/>基本信息</div>
           </Row>
           <Row>
             <Col span={8}>
@@ -71,13 +78,13 @@ const ViewRoleModal = (props) => {
           </Row>
           <Row>
             <Col span={8}>
-              <div>菜单权限</div>
+              <div><i className="ri-windows-line" style={iconStyle}/>菜单权限</div>
             </Col>
             <Col span={8}>
-              <div>数据权限</div>
+              <div><i className="ri-database-line" style={iconStyle}/>数据权限</div>
             </Col>
             <Col span={8}>
-              <div>分配用户</div>
+              <div><i className="ri-team-line" style={iconStyle}/>分配用户</div>
             </Col>
           </Row>
           <Row>

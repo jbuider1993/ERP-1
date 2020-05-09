@@ -87,6 +87,8 @@ const AppPage = (props) => {
     onLogout: () => {
       Modal.confirm({
         title: '提示',
+        okText: "确认",
+        cancelText: "取消",
         content: <div><i className="ri-error-warning-line" style={{fontSize: "18px", marginRight: "10px", verticalAlign: "sub"}}></i>确定要退出系统？</div>,
         onOk() {
           Promise.all([dispatch({ type: "globalModel/logout", payload: {}})]).then(() =>
