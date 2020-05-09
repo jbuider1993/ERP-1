@@ -43,11 +43,11 @@ class IconModal extends React.Component {
           visible={iconModalVisible}
           title={"查看图标"}
           onCancel={onCancel}
-          width={650}
+          width={450}
           destroyOnClose={true}
           footer={[]}
         >
-          <Form align="center" style={{marginLeft: "-4%"}}>
+          <Form align="left" style={{marginLeft: "20px"}}>
             <Row>
               <Col span={24}>
                 <FormItem {...formRadioLayout} label="主题风格">

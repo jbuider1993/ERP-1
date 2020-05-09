@@ -1,6 +1,7 @@
 import * as roleService from '../../services/user/roleService';
 import { message } from "antd";
 import config from '../../config/config';
+import * as userService from '../../services/user/userService';
 
 export default {
   namespace: 'roleModel',
@@ -20,6 +21,8 @@ export default {
     menuList: [],
     viewRoleModalVisible: false,
     userAllotTransferVisible: false,
+    userList: [],
+    allotedUsers: null,
   },
 
   reducers: {
@@ -76,6 +79,19 @@ export default {
     *getMenuList({payload: params}, {select, put, call}) {
       const res = yield call(roleService.getMenuList, params);
       yield put({type: "updateState", payload: {menuList: res.data.records}});
+    },
+
+    *getUserList({payload: params}, {select, put, call}) {
+      const res = yield call(userService.getAllUser, params);
+      yield put({type: "updateState", payload: {userList: res.data.records}});
+    },
+
+    *onAllotUser({payload: params}, {select, put, call}) {
+      const {roleInfoData} = yield select(state => state.roleModel);
+      const roleModel = {id: roleInfoData.id, userIds: params.join(",")};
+      const res = yield call(roleService.updateAllotUser, roleModel);
+      yield put({type: "updateState", payload: {roleInfoData: res.data}});
+      yield put({type: "getUserList", payload: {currentPage: 1, pageSize: 999999}});
     },
   },
 

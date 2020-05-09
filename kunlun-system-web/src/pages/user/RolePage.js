@@ -15,7 +15,7 @@ const RolePage = (props) => {
   let { location, history, dispatch, roleModel } = props;
   const { roleList, total, roleLoading, operateType, roleModalVisible, currentPage, pageSize,
     selectedRowKeys, selectedRows, roleInfoData, searchParams, menuLimitDrawerVisible, viewRoleModalVisible,
-    userAllotTransferVisible, menuLimitLoading, menuList,  } = roleModel;
+    userAllotTransferVisible, menuLimitLoading, menuList, userList, allotedUsers } = roleModel;
 
   const roleSearchProps = {
     onSearch: (searchParams) => {
@@ -76,17 +76,23 @@ const RolePage = (props) => {
       dispatch({ type: "roleModel/updateState", payload: { roleModalVisible: true, operateType: "edit", roleInfoData: record }});
     },
     onMenuLimit: (record) => {
-      dispatch({type: "roleModel/getMenuList", payload: {currentPage: 1, pageSize: 999999}});
-      dispatch({type: "roleModel/updateState", payload: {menuLimitDrawerVisible: true, roleInfoData: record}});
+      dispatch({type: "roleModel/getMenuList", payload: {currentPage: 1, pageSize: 999999}}).then(() =>
+        dispatch({type: "roleModel/updateState", payload: {menuLimitDrawerVisible: true, roleInfoData: record}})
+      );
     },
     onDataLimit: (record) => {
       dispatch({type: "roleModel/updateState", payload: {menuLimitDrawerVisible: true}});
     },
     onAllotUser: (record) => {
-      dispatch({type: "roleModel/updateState", payload: {userAllotTransferVisible: true, roleInfoData: record}});
+      dispatch({type: "roleModel/getUserList", payload: {currentPage: 1, pageSize: 999999}}).then(() =>
+        dispatch({type: "roleModel/updateState", payload: {userAllotTransferVisible: true, roleInfoData: record}})
+      );
     },
     onView: (record) => {
-      dispatch({type: "roleModel/updateState", payload: {viewRoleModalVisible: true}});
+      dispatch({type: "roleModel/getMenuList", payload: {currentPage: 1, pageSize: 999999}}).then(() => {
+        const allotedUsers = userList.filter(item => roleInfoData && roleInfoData.userIds ? roleInfoData.userIds.indexOf(item.id) > -1 : false);
+        dispatch({type: "roleModel/updateState", payload: {viewRoleModalVisible: true, roleInfoData: record, allotedUsers}});
+      });
     },
     onDelete: (record) => {
       dispatch({ type: "roleModel/batchDeleteRole", payload: { ids: record.id }});
@@ -122,6 +128,7 @@ const RolePage = (props) => {
     roleInfoData,
     operateType,
     menuList,
+    allotedUsers,
     onCancel: () => {
       dispatch({type: "roleModel/updateState", payload: {viewRoleModalVisible: false}});
     },
@@ -130,8 +137,10 @@ const RolePage = (props) => {
   const userAllotTransferProps = {
     userAllotTransferVisible,
     roleInfoData,
-    operateType,
-    onOk: () => {},
+    userList,
+    onAllotUser: (allotUsers) => {
+      dispatch({type: "roleModel/onAllotUser", payload: allotUsers});
+    },
     onCancel: () => {
       dispatch({type: "roleModel/updateState", payload: {userAllotTransferVisible: false}});
     },

@@ -13,6 +13,14 @@ export function updateRole(params) {
   return request.post(`${config.system_api.updateRole}`, params);
 }
 
+export function updateMenuLimit(params) {
+  return request.post(`${config.system_api.updateMenuLimit}`, params);
+}
+
+export function updateAllotUser(params) {
+  return request.post(`${config.system_api.updateAllotUser}`, params);
+}
+
 export function batchDeleteRole(params) {
   return request.post(`${config.system_api.batchDeleteRole}`, params);
 }

@@ -12,9 +12,7 @@ const RoleList = (props) => {
     { title: '角色名称', dataIndex: 'roleName', key: 'roleName', width: '20%' },
     { title: '权限字符', dataIndex: 'roleWord', key: 'roleWord', width: '20%' },
     { title: '是否启用', dataIndex: 'status', key: 'status', width: '15%',
-      render: () => (
-        <Switch checkedChildren={<Icon type="check" />} unCheckedChildren={<Icon type="close" />} defaultChecked />
-      )
+      render: (text, record, index) => record && record.status ? <Tag color="#87d068" style={{padding: "0px 10px 0px 10px"}}>是</Tag> : <Tag style={{padding: "0px 10px 0px 10px"}}>否</Tag>
     },
     { title: '创建时间', dataIndex: 'createTime', key: 'createTime', width: '15%', sorter: (x, y) => x.createTime - y.createTime,
       render: (text, record, index) => <span>{text.substr(0, text.indexOf("T"))}</span> },

@@ -72,6 +72,8 @@ const config = {
     getRoleList: `${CACHE_TRACE_API}/role/getAllRole`,
     addRole: `${CACHE_TRACE_API}/role/addRole`,
     updateRole: `${CACHE_TRACE_API}/role/updateRole`,
+    updateMenuLimit: `${CACHE_TRACE_API}/role/updateMenuLimit`,
+    updateAllotUser: `${CACHE_TRACE_API}/role/updateAllotUser`,
     batchDeleteRole: `${CACHE_TRACE_API}/role/batchDeleteRole`,
 
     // 协同管理

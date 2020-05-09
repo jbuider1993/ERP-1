@@ -1,5 +1,5 @@
 import React from 'react';
-import {Modal, Form, Input, Row, Col, Spin, Tree, Drawer, Button, Divider} from 'antd';
+import {Form, Input, Row, Col, Spin, Tree, Drawer, Button} from 'antd';
 import styles from './Role.less';
 
 const FormItem = Form.Item;

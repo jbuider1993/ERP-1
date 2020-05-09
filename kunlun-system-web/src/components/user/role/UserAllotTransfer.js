@@ -1,51 +1,49 @@
 import React from 'react';
-import { Modal, Form, Input, Row, Col, DatePicker, Radio, Transfer } from 'antd';
+import { Modal, Form, Row, Col, Transfer } from 'antd';
 import styles from './Role.less';
 
-const FormItem = Form.Item;
 
 class UserAllotTransfer extends React.Component {
 
   state = {
-    mockData: [],
+    targetDatas: [],
     targetKeys: [],
   };
 
-  componentDidMount() {
-    this.getMock();
+  componentWillReceiveProps() {
+    this.generateDatas();
   }
 
-  getMock = () => {
+  generateDatas = () => {
+    const {roleInfoData, userList} = this.props;
     const targetKeys = [];
-    const mockData = [];
-    for (let i = 0; i < 20; i++) {
+    const targetDatas = [];
+    for (let i = 0; i < userList.length; i++) {
+      const item = userList[i];
       const data = {
-        key: i.toString(),
-        title: `content${i + 1}`,
-        description: `description of content${i + 1}`,
-        chosen: Math.random() * 2 > 1,
+        key: item.id,
+        title: item.userName,
+        description: item.userName,
+        chosen: roleInfoData && roleInfoData.userIds ? roleInfoData.userIds.indexOf(item.id) > -1 : false,
       };
       if (data.chosen) {
         targetKeys.push(data.key);
       }
-      mockData.push(data);
+      targetDatas.push(data);
     }
-    this.setState({ mockData, targetKeys });
+    this.setState({ targetDatas, targetKeys });
   };
 
   filterOption = (inputValue, option) => option.description.indexOf(inputValue) > -1;
 
   handleChange = targetKeys => {
-    this.setState({ targetKeys });
-  };
-
-  handleSearch = (dir, value) => {
-    console.log('search:', dir, value);
+    this.setState({targetKeys});
   };
 
   render() {
 
-    const {userAllotTransferVisible, roleInfoData, operateType, onOk, onCancel} = this.props;
+    const {userAllotTransferVisible, roleInfoData, onCancel, onAllotUser} = this.props;
+    const { targetDatas, targetKeys } = this.state;
 
     return (
       <div>
@@ -53,20 +51,19 @@ class UserAllotTransfer extends React.Component {
           visible={userAllotTransferVisible}
           title={(roleInfoData && roleInfoData.roleName ? roleInfoData.roleName + "_" : "") + "分配用户"}
           onCancel={onCancel}
-          onOk={onOk}
+          onOk={() => onAllotUser(targetKeys)}
           width={450}
           destroyOnClose={false}
-          bodyStyle={{height: "450px"}}
+          bodyStyle={{height: "400px"}}
         >
           <Transfer
-            listStyle={{height: "400px"}}
+            listStyle={{height: "350px"}}
             titles={["全部用户", "权限用户"]}
-            dataSource={this.state.mockData}
+            dataSource={targetDatas}
             showSearch
             filterOption={this.filterOption}
-            targetKeys={this.state.targetKeys}
+            targetKeys={targetKeys}
             onChange={this.handleChange}
-            onSearch={this.handleSearch}
             render={item => item.title}
           />
         </Modal>

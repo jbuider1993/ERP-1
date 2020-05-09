@@ -1,29 +1,26 @@
-import React from 'react';
-import { Modal, Form, Input, Row, Col, DatePicker, Radio, Tree } from 'antd';
+import React, {useState} from 'react';
+import { Modal, Form, Row, Col, Tree, Tag } from 'antd';
 import 'remixicon/fonts/remixicon.css';
-import moment from 'moment';
 
 const FormItem = Form.Item;
 const TreeNode = Tree.TreeNode;
 
 const ViewRoleModal = (props) => {
 
-  const { viewRoleModalVisible, roleInfoData, operateType, onCancel, menuList } = props;
+  const { viewRoleModalVisible, roleInfoData, operateType, onCancel, menuList, allotedUsers } = props;
 
   const [form] = Form.useForm();
   const { getFieldsValue, validateFields, setFieldsValue, resetFields } = form;
+
+  const [expandedTreeNodeKeys, setExpandedTreeNodeKeys] = useState(null);
 
   const formItemLayout = {
     labelCol: { span: 8 },
     wrapperCol: { span: 16 },
   };
 
-  const onCheckTreeNode = (checkedTreeNodeKeys, item) => {
-    this.setState({ checkedTreeNodeKeys, selectedTreeNode: item.node.props.dataRef })
-  };
-
   const onExpandTreeNode = (expandedTreeNodeKeys, item) => {
-    this.setState({ expandedTreeNodeKeys })
+    setExpandedTreeNodeKeys({ expandedTreeNodeKeys })
   };
 
   const generateTreeNodes = (data) => data.map((item) => {
@@ -50,29 +47,29 @@ const ViewRoleModal = (props) => {
         title={"查看详情"}
         onCancel={onCancel}
         onOk={() => {}}
-        width={800}
+        width={700}
         destroyOnClose={false}
         footer={null}
-        bodyStyle={{height: "500px"}}
+        bodyStyle={{height: "450px"}}
       >
-        <Form initialValues={roleInfoData} form={form}>
+        <Form form={form}>
           <Row>
             <div><i className="ri-shield-user-line" style={iconStyle}/>基本信息</div>
           </Row>
           <Row>
             <Col span={8}>
               <FormItem { ...formItemLayout } label="角色名称" name={"roleName"}>
-                <div></div>
+                <div>{roleInfoData && roleInfoData.roleName ? roleInfoData.roleName : ""}</div>
               </FormItem>
             </Col>
             <Col span={8}>
               <FormItem { ...formItemLayout } label="权限字符" name={"roleWord"}>
-                <div></div>
+                <div>{roleInfoData && roleInfoData.roleWord ? roleInfoData.roleWord : ""}</div>
               </FormItem>
             </Col>
             <Col span={8}>
               <FormItem { ...formItemLayout } label="是否启用" name={"status"}>
-                <div></div>
+                <div>{roleInfoData && roleInfoData.status ? <Tag color="#87d068" style={{padding: "0px 10px 0px 10px"}}>是</Tag> : <Tag style={{padding: "0px 10px 0px 10px"}}>否</Tag>}</div>
               </FormItem>
             </Col>
           </Row>
@@ -89,20 +86,21 @@ const ViewRoleModal = (props) => {
           </Row>
           <Row>
             <Col span={8}>
-              <Tree
-                checkable
-                autoExpandParent={true}
-                onCheck={onCheckTreeNode}
-                onExpand={onExpandTreeNode}
-              >
+              <Tree onExpand={onExpandTreeNode} style={{width: "93%", overflowY: "scroll", height: "300px"}}>
                 {
                   menuList && menuList.length > 0 ? generateTreeNodes(menuList) : null
                 }
               </Tree>
             </Col>
             <Col span={8}>
+              <div style={{width: "93%", overflowY: "scroll", height: "300px"}}>暂无数据</div>
             </Col>
             <Col span={8}>
+              <ul style={{width: "93%", overflowY: "scroll", height: "300px", lineHeight: 1.8}}>
+                {
+                  allotedUsers ? allotedUsers.map(item => <li>{item.userName}</li>) : null
+                }
+              </ul>
             </Col>
           </Row>
         </Form>
