@@ -18,6 +18,8 @@ export default {
     menuLimitDrawerVisible: false,
     menuLimitLoading: false,
     menuList: [],
+    viewRoleModalVisible: false,
+    userAllotTransferVisible: false,
   },
 
   reducers: {

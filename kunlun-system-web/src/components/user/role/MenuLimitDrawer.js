@@ -27,8 +27,8 @@ class MenuLimitDrawer extends React.Component {
     const { getFieldsValue, validateFields, setFieldsValue, resetFields } = this.formRef;
 
     const formItemLayout = {
-      labelCol: {span: 8},
-      wrapperCol: {span: 16},
+      labelCol: {span: 6},
+      wrapperCol: {span: 18},
     };
 
     const onCheckTreeNode = (checkedTreeNodeKeys, item) => {

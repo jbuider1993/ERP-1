@@ -12,8 +12,8 @@ const RoleModal = (props) => {
   const { getFieldsValue, validateFields, setFieldsValue, resetFields } = form;
 
   const formItemLayout = {
-    labelCol: { span: 4 },
-    wrapperCol: { span: 20 },
+    labelCol: { span: 6 },
+    wrapperCol: { span: 15 },
   };
 
   const onOk = () => {
@@ -34,7 +34,6 @@ const RoleModal = (props) => {
       <Modal
         visible={roleModalVisible}
         title={operateType == "add" ? "新增" : "修改"}
-        okText="保存"
         onCancel={onClose}
         onOk={onOk}
         width={500}

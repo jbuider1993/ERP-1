@@ -5,6 +5,8 @@ import RoleToolsBar from "../../components/user/role/RoleToolbar";
 import RoleModal from "../../components/user/role/RoleModal";
 import RoleList from "../../components/user/role/RoleList";
 import MenuLimitDrawer from "../../components/user/role/MenuLimitDrawer";
+import ViewRoleModal from "../../components/user/role/ViewRoleModal";
+import UserAllotTransfer from "../../components/user/role/UserAllotTransfer";
 import TablePagination from '../../components/common/TablePagination';
 import { Modal, message } from "antd";
 
@@ -12,8 +14,8 @@ const RolePage = (props) => {
 
   let { location, history, dispatch, roleModel } = props;
   const { roleList, total, roleLoading, operateType, roleModalVisible, currentPage, pageSize,
-    selectedRowKeys, selectedRows, roleInfoData, searchParams, menuLimitDrawerVisible,
-    menuLimitLoading, menuList,  } = roleModel;
+    selectedRowKeys, selectedRows, roleInfoData, searchParams, menuLimitDrawerVisible, viewRoleModalVisible,
+    userAllotTransferVisible, menuLimitLoading, menuList,  } = roleModel;
 
   const roleSearchProps = {
     onSearch: (searchParams) => {
@@ -80,7 +82,11 @@ const RolePage = (props) => {
     onDataLimit: (record) => {
       dispatch({type: "roleModel/updateState", payload: {menuLimitDrawerVisible: true}});
     },
+    onAllotUser: () => {
+      dispatch({type: "roleModel/updateState", payload: {userAllotTransferVisible: true}});
+    },
     onView: (record) => {
+      dispatch({type: "roleModel/updateState", payload: {viewRoleModalVisible: true}});
     },
     onDelete: (record) => {
       dispatch({ type: "roleModel/batchDeleteRole", payload: { ids: record.id }});
@@ -110,6 +116,25 @@ const RolePage = (props) => {
     onSelectTreeNode: () => {}
   };
 
+  const viewRoleModalProps = {
+    viewRoleModalVisible,
+    roleInfoData,
+    operateType,
+    menuList,
+    onCancel: () => {
+      dispatch({type: "roleModel/updateState", payload: {viewRoleModalVisible: false}});
+    },
+  };
+
+  const userAllotTransferProps = {
+    userAllotTransferVisible,
+    operateType,
+    onOk: () => {},
+    onCancel: () => {
+      dispatch({type: "roleModel/updateState", payload: {userAllotTransferVisible: false}});
+    },
+  };
+
   const tablePaginationProps = {
     total,
     currentPage,
@@ -129,6 +154,8 @@ const RolePage = (props) => {
       <RoleModal {...roleModalProps} />
       <RoleList {...roleListProps} />
       <MenuLimitDrawer {...menuLimitDrawerProps}/>
+      <ViewRoleModal {...viewRoleModalProps}/>
+      <UserAllotTransfer {...userAllotTransferProps}/>
       <TablePagination {...tablePaginationProps} />
     </div>
   );

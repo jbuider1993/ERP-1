@@ -5,7 +5,7 @@ import 'remixicon/fonts/remixicon.css';
 
 const RoleList = (props) => {
 
-  const { roleList, roleLoading, rowSelection, onView, onEdit, onMenuLimit, onDataLimit, onDelete, currentPage, pageSize } = props;
+  const { roleList, roleLoading, rowSelection, onView, onEdit, onMenuLimit, onDataLimit, onAllotUser, onDelete, currentPage, pageSize } = props;
 
   const columns = [
     { title: '序号', width: '10%', render: (text, record, index) => <span>{(index + 1) + (currentPage - 1) * pageSize}</span> },
@@ -35,11 +35,17 @@ const RoleList = (props) => {
         &nbsp;&nbsp;&nbsp;&nbsp;
         <Tooltip title={"数据权限"}>
           <a onClick={() => onDataLimit(record)}>
+            <i className="ri-database-line" style={{color: '#08c', fontSize: "16px"}}></i>
+          </a>
+        </Tooltip>
+        &nbsp;&nbsp;&nbsp;&nbsp;
+        <Tooltip title={"分配用户"}>
+          <a onClick={() => onAllotUser(record)}>
             <i className="ri-team-line" style={{color: '#08c', fontSize: "16px"}}></i>
           </a>
         </Tooltip>
         &nbsp;&nbsp;&nbsp;&nbsp;
-        <Tooltip title={"查看"}>
+        <Tooltip title={"查看详情"}>
           <a onClick={() => onView(record)}>
             <i className="ri-file-text-line" style={{fontSize: "16px"}}></i>
           </a>
