@@ -11,8 +11,17 @@ class MenuLimitDrawer extends React.Component {
     super(props);
     this.state = {
       checkedTreeNodeKeys: [],
-      selectedTreeNode: null
+      expandedTreeNodeKeys: []
     };
+  }
+
+  componentWillReceiveProps(nextProps, nextContext) {
+    const keys = nextProps.roleInfoData && nextProps.roleInfoData.menuIds ? nextProps.roleInfoData.menuIds : null;
+    if (keys && keys.length > 0) {
+      this.setState({checkedTreeNodeKeys: keys.split(",")});
+    } else {
+      this.setState({checkedTreeNodeKeys: []});
+    }
   }
 
   formRef = React.createRef();
@@ -23,7 +32,7 @@ class MenuLimitDrawer extends React.Component {
     const {
       menuLimitDrawerVisible, onClose, menuLimitLoading, menuList, onSelectTreeNode, roleInfoData
     } = this.props;
-    const { checkedTreeNodeKeys, expandedTreeNodeKeys, selectedTreeNode } = this.state;
+    const { checkedTreeNodeKeys, expandedTreeNodeKeys } = this.state;
     const { getFieldsValue, validateFields, setFieldsValue, resetFields } = this.formRef;
 
     const formItemLayout = {
@@ -32,7 +41,7 @@ class MenuLimitDrawer extends React.Component {
     };
 
     const onCheckTreeNode = (checkedTreeNodeKeys, item) => {
-      this.setState({ checkedTreeNodeKeys, selectedTreeNode: item.node.props.dataRef })
+      this.setState({ checkedTreeNodeKeys })
     };
 
     const onExpandTreeNode = (expandedTreeNodeKeys, item) => {
@@ -40,8 +49,9 @@ class MenuLimitDrawer extends React.Component {
     };
 
     const onOk = () => {
-      onSelectTreeNode(selectedTreeNode);
+      onSelectTreeNode(checkedTreeNodeKeys);
       this.setState({ checkedTreeNodeKeys: [], expandedTreeNodeKeys: [] });
+      onClose();
     };
 
     const generateTreeNodes = (data) => data.map((item) => {

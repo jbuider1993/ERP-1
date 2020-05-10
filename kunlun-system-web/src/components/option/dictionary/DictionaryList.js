@@ -40,9 +40,12 @@ class DictionaryList extends React.Component {
 
     const onRow = (record, index) => {
       return {
-        onClick: () => {
-          onShowDictionarySub(record);
-          this.setState({isShowSubTable: !isShowSubTable});
+        onClick: (e) => {
+          const clz = e._targetInst.memoizedProps.className;
+          if (clz.indexOf("edit") < 0) {
+            onShowDictionarySub(record);
+            this.setState({isShowSubTable: !isShowSubTable});
+          }
         }
       };
     };

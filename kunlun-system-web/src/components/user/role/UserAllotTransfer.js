@@ -10,12 +10,12 @@ class UserAllotTransfer extends React.Component {
     targetKeys: [],
   };
 
-  componentWillReceiveProps() {
-    this.generateDatas();
+  componentWillReceiveProps(nextProps, nextContext) {
+    this.generateDatas(nextProps);
   }
 
-  generateDatas = () => {
-    const {roleInfoData, userList} = this.props;
+  generateDatas = (nextProps) => {
+    const {roleInfoData, userList} = nextProps;
     const targetKeys = [];
     const targetDatas = [];
     for (let i = 0; i < userList.length; i++) {

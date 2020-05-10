@@ -22,7 +22,6 @@ export default {
     viewRoleModalVisible: false,
     userAllotTransferVisible: false,
     userList: [],
-    allotedUsers: null,
   },
 
   reducers: {
@@ -86,12 +85,23 @@ export default {
       yield put({type: "updateState", payload: {userList: res.data.records}});
     },
 
+    *onMenuLimit({payload: params}, {select, put, call}) {
+      const {roleInfoData} = yield select(state => state.roleModel);
+      const roleModel = {id: roleInfoData.id, menuIds: params.join(",")};
+      const res = yield call(roleService.updateMenuLimit, roleModel);
+      yield put({type: "updateState", payload: {roleInfoData: res.data}});
+    },
+
     *onAllotUser({payload: params}, {select, put, call}) {
       const {roleInfoData} = yield select(state => state.roleModel);
       const roleModel = {id: roleInfoData.id, userIds: params.join(",")};
       const res = yield call(roleService.updateAllotUser, roleModel);
       yield put({type: "updateState", payload: {roleInfoData: res.data}});
-      yield put({type: "getUserList", payload: {currentPage: 1, pageSize: 999999}});
+    },
+
+    *getRoleById({payload: params}, {select, put, call}) {
+      const res = yield call(roleService.getRoleById, params);
+      yield put({type: "updateState", payload: {roleInfoData: res.data}});
     },
   },
 

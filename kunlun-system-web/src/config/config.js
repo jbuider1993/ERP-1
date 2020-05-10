@@ -75,6 +75,7 @@ const config = {
     updateMenuLimit: `${CACHE_TRACE_API}/role/updateMenuLimit`,
     updateAllotUser: `${CACHE_TRACE_API}/role/updateAllotUser`,
     batchDeleteRole: `${CACHE_TRACE_API}/role/batchDeleteRole`,
+    getRoleById: `${CACHE_TRACE_API}/role/getRoleById`,
 
     // 协同管理
     getOnlineUserList: `${CACHE_TRACE_API}/onlineUser/getAllOnlineUser`,

@@ -15,7 +15,7 @@ const RolePage = (props) => {
   let { location, history, dispatch, roleModel } = props;
   const { roleList, total, roleLoading, operateType, roleModalVisible, currentPage, pageSize,
     selectedRowKeys, selectedRows, roleInfoData, searchParams, menuLimitDrawerVisible, viewRoleModalVisible,
-    userAllotTransferVisible, menuLimitLoading, menuList, userList, allotedUsers } = roleModel;
+    userAllotTransferVisible, menuLimitLoading, menuList, userList } = roleModel;
 
   const roleSearchProps = {
     onSearch: (searchParams) => {
@@ -76,22 +76,27 @@ const RolePage = (props) => {
       dispatch({ type: "roleModel/updateState", payload: { roleModalVisible: true, operateType: "edit", roleInfoData: record }});
     },
     onMenuLimit: (record) => {
-      dispatch({type: "roleModel/getMenuList", payload: {currentPage: 1, pageSize: 999999}}).then(() =>
-        dispatch({type: "roleModel/updateState", payload: {menuLimitDrawerVisible: true, roleInfoData: record}})
-      );
+      dispatch({type: "roleModel/getMenuList", payload: {currentPage: 1, pageSize: 999999}}).then(() => {
+        dispatch({type: "roleModel/getRoleById", payload: {id: record.id}});
+        dispatch({type: "roleModel/updateState", payload: {menuLimitDrawerVisible: true}});
+      });
     },
     onDataLimit: (record) => {
+      dispatch({type: "roleModel/getRoleById", payload: {id: record.id}});
       dispatch({type: "roleModel/updateState", payload: {menuLimitDrawerVisible: true}});
     },
     onAllotUser: (record) => {
-      dispatch({type: "roleModel/getUserList", payload: {currentPage: 1, pageSize: 999999}}).then(() =>
-        dispatch({type: "roleModel/updateState", payload: {userAllotTransferVisible: true, roleInfoData: record}})
-      );
+      dispatch({type: "roleModel/getUserList", payload: {currentPage: 1, pageSize: 999999}}).then(() => {
+          dispatch({type: "roleModel/getRoleById", payload: {id: record.id}});
+        dispatch({type: "roleModel/updateState", payload: {userAllotTransferVisible: true}});
+      });
     },
     onView: (record) => {
-      dispatch({type: "roleModel/getMenuList", payload: {currentPage: 1, pageSize: 999999}}).then(() => {
+      Promise.all([dispatch({type: "roleModel/getMenuList", payload: {currentPage: 1, pageSize: 999999}}),
+        dispatch({type: "roleModel/getUserList", payload: {currentPage: 1, pageSize: 999999}})]).then(() => {
+        dispatch({type: "roleModel/getRoleById", payload: {id: record.id}});
         const allotedUsers = userList.filter(item => roleInfoData && roleInfoData.userIds ? roleInfoData.userIds.indexOf(item.id) > -1 : false);
-        dispatch({type: "roleModel/updateState", payload: {viewRoleModalVisible: true, roleInfoData: record, allotedUsers}});
+        dispatch({type: "roleModel/updateState", payload: {viewRoleModalVisible: true, allotedUsers}});
       });
     },
     onDelete: (record) => {
@@ -118,9 +123,11 @@ const RolePage = (props) => {
     menuLimitLoading,
     menuList,
     onClose: () => {
-      dispatch({type: "roleModel/updateState", payload: {menuLimitDrawerVisible: false}});
+      dispatch({type: "roleModel/updateState", payload: {menuLimitDrawerVisible: false, roleInfoData: null}});
     },
-    onSelectTreeNode: () => {}
+    onSelectTreeNode: (selectedMenuKeys) => {
+      dispatch({type: "roleModel/onMenuLimit", payload: selectedMenuKeys});
+    }
   };
 
   const viewRoleModalProps = {
@@ -128,9 +135,9 @@ const RolePage = (props) => {
     roleInfoData,
     operateType,
     menuList,
-    allotedUsers,
+    userList,
     onCancel: () => {
-      dispatch({type: "roleModel/updateState", payload: {viewRoleModalVisible: false}});
+      dispatch({type: "roleModel/updateState", payload: {viewRoleModalVisible: false, roleInfoData: null}});
     },
   };
 
@@ -140,6 +147,7 @@ const RolePage = (props) => {
     userList,
     onAllotUser: (allotUsers) => {
       dispatch({type: "roleModel/onAllotUser", payload: allotUsers});
+      dispatch({type: "roleModel/updateState", payload: {userAllotTransferVisible: false}});
     },
     onCancel: () => {
       dispatch({type: "roleModel/updateState", payload: {userAllotTransferVisible: false}});

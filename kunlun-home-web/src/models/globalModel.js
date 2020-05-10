@@ -52,7 +52,7 @@ export default {
         sessionStorage.token = window._TOKEN_;
         sessionStorage.userInfo = JSON.stringify(window._USERINFO_);
         yield put({ type: "updateState", payload: { tokenModel: res.data }});
-        dispatch({ type: "getAppMenu", payload: {}}).then(() => dispatch(routerRedux.push({pathname: "/scmp"})));
+        dispatch({ type: "getAppMenu", payload: {userId: res.data.userInfo.id}}).then(() => dispatch(routerRedux.push({pathname: "/scmp"})));
       } else {
         message.error(res.message);
         console.log(res.error);
