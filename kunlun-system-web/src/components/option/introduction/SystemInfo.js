@@ -106,6 +106,7 @@ const SystemInfo = (props) => {
                     <DescriptionsItem label="数据库">PosgreSQL、<a target = "_blank" href={"https://redis.io/"}>Redis</a></DescriptionsItem>
                     <DescriptionsItem label="工作流引擎"><a target = "_blank" href={"https://www.activiti.org/documentation"}>Activiti-5.22.0</a></DescriptionsItem>
                     <DescriptionsItem label="脚本执行">Flyway</DescriptionsItem>
+                    <DescriptionsItem label="资源爬取"><a target = "_blank" href={"https://www.selenium.dev/"}>Selenium</a></DescriptionsItem>
                     <DescriptionsItem label="消息组件"><a target = "_blank" href={"https://www.rabbitmq.com/"}>RabbitMQ</a></DescriptionsItem>
                     <DescriptionsItem label="全局搜索"><a target = "_blank" href={"https://www.elastic.co/"}>ElasticSearch</a></DescriptionsItem>
                   </Descriptions>

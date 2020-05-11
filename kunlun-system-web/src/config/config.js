@@ -141,18 +141,6 @@ const config = {
     {key: "home", value: "kunlun-home-web", description: "前端框架"},
     {key: "system-web", value: "kunlun-system-web", description: "前端业务"},
   ],
-
-  MENU_ICON: "down, up, left, right, up-circle, down-circle, left-circle, right-circle, login, logout, menu-fold, " +
-             "menu-unfold, fullscreen, fullscreen-exit, question-circle, plus, plus-circle, pause, minus, minus-circle," +
-             "exclamation-circle, close, close-circle, check, check-circle, stop, warning, clock-circle, edit, form, copy," +
-             "delete, snippets, diff, highlight, redo, radar-chart, lock, unlock, bars, book, calender, cloud, cloud-download," +
-             "credit-card, desktop, download, file, file-text, folder, folder-open, folder-add, hdd, laptop, appstore, link," +
-             "mail, mobile, notification, picture, poweroff, reload, search, setting, share-alt, shopping-cart, tablet, tag," +
-             "tags, upload, user, video-camera, home, loading, cloud-upload, star, heart, eye, eye-invisible, camera, save, team," +
-             "solution, phone, filter, exception, import, export, qrcode, scan, like, message, pay-circle, calculator, bulb, select," +
-             "switcher, rocket, bell, database, compass, barcode, key, flag, layout, printer, sound, usb, skin, tool, sync, wifi," +
-             "schedule, user-add, user-delete, gift, bank, contacts, global, table, profile, audit, read, cluster, block, project," +
-             "dollar, file-done, gateway, ie, chrome, windows, apple, android, qq, wechat, codepen, code-sandbox, ant-design",
 };
 
 export default config;
