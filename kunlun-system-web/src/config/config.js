@@ -1,7 +1,7 @@
-const REGISTRY_AMQP_API = 'http://localhost:8015/kunlun-register-service';
-const CACHE_TRACE_API = 'http://localhost:8015/kunlun-basedata-service';
+const REGISTER_SERVICE_API = 'http://localhost:8015/kunlun-register-service';
+const BASEDATA_SERVICE_API = 'http://localhost:8015/kunlun-basedata-service';
 const SYSTEM_SERVICE_API = 'http://localhost:8015/kunlun-system-service';
-const PROCESS_API = "http://localhost:8025";
+const ACTIVITI_PROCESS_API = "http://localhost:8025";
 const config = {
   name: '昆仑管理系统',
   footerText: '昆仑管理系统 © 2018-2028 KunLun Copyright | Version 2.0',
@@ -9,12 +9,12 @@ const config = {
   LIMIT_SIZE: 5,
   PAGE_SIZE: 10,
   PAGE_SIZE_LIST: ['10', '20', '50', '100', '200'],
-  REGISTRY_AMQP_API,
-  CACHE_TRACE_API,
+  REGISTER_SERVICE_API,
+  BASEDATA_SERVICE_API,
   SYSTEM_SERVICE_API,
-  PROCESS_API,
-  NEW_PROCESS_API: PROCESS_API + "/create",
-  EDIT_PROCESS_API: PROCESS_API + "/static/modeler.html?modelId=",
+  ACTIVITI_PROCESS_API,
+  NEW_PROCESS_API: ACTIVITI_PROCESS_API + "/create",
+  EDIT_PROCESS_API: ACTIVITI_PROCESS_API + "/static/modeler.html?modelId=",
   amap_info: {
     amapkey: "0d78256ea89beeb8c25d1cd047549d1f",
     // amapkey: "788e08def03f95c670944fe2c78fa76f",
@@ -22,11 +22,11 @@ const config = {
   },
   registry_api: {
     // 获取MQ队列及交换器
-    getMessages: `${REGISTRY_AMQP_API}/mq/getMessages`,
+    getMessages: `${REGISTER_SERVICE_API}/mq/getMessages`,
   },
   base_api: {
     // 首页数据
-    getUserCount: `${CACHE_TRACE_API}/home/getUserCount`,
+    getUserCount: `${BASEDATA_SERVICE_API}/home/getUserCount`,
 
     // 消息管理
     getAllMessages: `${SYSTEM_SERVICE_API}/message/getAllMessages`,
@@ -36,17 +36,17 @@ const config = {
   },
   system_api: {
     // 菜单管理
-    getMenuList: `${CACHE_TRACE_API}/menu/getAllMenu`,
-    addMenu: `${CACHE_TRACE_API}/menu/addMenu`,
-    editMenu: `${CACHE_TRACE_API}/menu/editMenu`,
-    deleteMenu: `${CACHE_TRACE_API}/menu/deleteMenu`,
+    getMenuList: `${BASEDATA_SERVICE_API}/menu/getAllMenu`,
+    addMenu: `${BASEDATA_SERVICE_API}/menu/addMenu`,
+    editMenu: `${BASEDATA_SERVICE_API}/menu/editMenu`,
+    deleteMenu: `${BASEDATA_SERVICE_API}/menu/deleteMenu`,
 
     // 图标管理
-    getIconList: `${CACHE_TRACE_API}/icon/getAllIcon`,
-    addIcon: `${CACHE_TRACE_API}/icon/addIcon`,
-    getIconInfo: `${CACHE_TRACE_API}/icon/getIconInfo`,
-    fetchIcons: `${CACHE_TRACE_API}/icon/fetchIcons`,
-    onExportIcons: `${CACHE_TRACE_API}/icon/onExportIcons`,
+    getIconList: `${BASEDATA_SERVICE_API}/icon/getAllIcon`,
+    addIcon: `${BASEDATA_SERVICE_API}/icon/addIcon`,
+    getIconInfo: `${BASEDATA_SERVICE_API}/icon/getIconInfo`,
+    fetchIcons: `${BASEDATA_SERVICE_API}/icon/fetchIcons`,
+    onExportIcons: `${BASEDATA_SERVICE_API}/icon/onExportIcons`,
 
     // 数据字典
     getAllDictionaryItem: `${SYSTEM_SERVICE_API}/dict/getAllDictionaryItem`,
@@ -59,26 +59,26 @@ const config = {
     updateDictionaryValue: `${SYSTEM_SERVICE_API}/dict/updateDictionaryValue`,
 
     // 用户管理
-    getUserList: `${CACHE_TRACE_API}/user/getAllUser`,
-    addUser: `${CACHE_TRACE_API}/user/addUser`,
-    updateUser: `${CACHE_TRACE_API}/user/updateUser`,
-    batchDeleteUser: `${CACHE_TRACE_API}/user/batchDeleteUser`,
-    downloadUsers: `${CACHE_TRACE_API}/user/downloadUsers`,
+    getUserList: `${BASEDATA_SERVICE_API}/user/getAllUser`,
+    addUser: `${BASEDATA_SERVICE_API}/user/addUser`,
+    updateUser: `${BASEDATA_SERVICE_API}/user/updateUser`,
+    batchDeleteUser: `${BASEDATA_SERVICE_API}/user/batchDeleteUser`,
+    downloadUsers: `${BASEDATA_SERVICE_API}/user/downloadUsers`,
 
     // 在线用户
     getModelList: `${SYSTEM_SERVICE_API}/service/modelList`,
 
     // 角色管理
-    getRoleList: `${CACHE_TRACE_API}/role/getAllRole`,
-    addRole: `${CACHE_TRACE_API}/role/addRole`,
-    updateRole: `${CACHE_TRACE_API}/role/updateRole`,
-    updateMenuLimit: `${CACHE_TRACE_API}/role/updateMenuLimit`,
-    updateAllotUser: `${CACHE_TRACE_API}/role/updateAllotUser`,
-    batchDeleteRole: `${CACHE_TRACE_API}/role/batchDeleteRole`,
-    getRoleById: `${CACHE_TRACE_API}/role/getRoleById`,
+    getRoleList: `${BASEDATA_SERVICE_API}/role/getAllRole`,
+    addRole: `${BASEDATA_SERVICE_API}/role/addRole`,
+    updateRole: `${BASEDATA_SERVICE_API}/role/updateRole`,
+    updateMenuLimit: `${BASEDATA_SERVICE_API}/role/updateMenuLimit`,
+    updateAllotUser: `${BASEDATA_SERVICE_API}/role/updateAllotUser`,
+    batchDeleteRole: `${BASEDATA_SERVICE_API}/role/batchDeleteRole`,
+    getRoleById: `${BASEDATA_SERVICE_API}/role/getRoleById`,
 
     // 协同管理
-    getOnlineUserList: `${CACHE_TRACE_API}/onlineUser/getAllOnlineUser`,
+    getOnlineUserList: `${BASEDATA_SERVICE_API}/onlineUser/getAllOnlineUser`,
     deployModel: `${SYSTEM_SERVICE_API}/deploy`,
     getModelNodeList: `${SYSTEM_SERVICE_API}/service/model/XXX/json`,
     batchDeleteModel: `${SYSTEM_SERVICE_API}/service/batchDelete`,

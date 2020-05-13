@@ -1,43 +1,33 @@
-const GATE_WAY_API = 'http://localhost:8015/kunlun-gateway-service';
-const CACHE_TRACE_API = 'http://localhost:8015/kunlun-basedata-service';
-const LOCAL_API = 'http://localhost:8005';
-const EUREKA_MANAGE_API = 'http://localhost:8010/';
-const ZIPKIN_MANAGE_API = 'http://localhost:8020/zipkin/';
-const DRUID_MANGE_API = 'http://localhost:8025/druid/index.html';
-const RABBITMQ_MANGE_API = 'http://localhost:15672/';
-const SWAGGER_API = 'http://localhost:8015/swagger-ui.html';
+const GATEWAY_SERVICE_API = 'http://localhost:8015/kunlun-gateway-service';
+const BASEDATA_SERVICE_API = 'http://localhost:8015/kunlun-basedata-service';
 const SYSTEM_SERVICE_API = 'http://localhost:8015/kunlun-system-service';
-const PROCESS_API = "http://localhost:8025";
+const WEB_SYSTEM_API = 'http://localhost:8005';
+const ACTIVITI_PROCESS_API = "http://localhost:8025";
 const config = {
   name: '昆仑管理系统',
   footerText: '昆仑管理系统 © 2018-2028 KunLun Copyright | Version 2.0',
   logo: '/logo.png',
   LIMIT_SIZE: 5,
   PAGE_SIZE: 10,
-  LOCAL_API,
-  GATE_WAY_API,
-  CACHE_TRACE_API,
-  EUREKA_MANAGE_API,
-  ZIPKIN_MANAGE_API,
-  DRUID_MANGE_API,
-  RABBITMQ_MANGE_API,
-  SWAGGER_API,
+  WEB_SYSTEM_API,
+  GATEWAY_SERVICE_API,
+  BASEDATA_SERVICE_API,
   SYSTEM_SERVICE_API,
-  PROCESS_API,
+  ACTIVITI_PROCESS_API,
   base_cache_api: {
     // 验证码
-    getAuthCode: `${CACHE_TRACE_API}/code/getAuthCode`,
+    getAuthCode: `${BASEDATA_SERVICE_API}/code/getAuthCode`,
 
     // 系统菜单
-    getAppMenu: `${CACHE_TRACE_API}/menu/getAppMenu`,
+    getAppMenu: `${BASEDATA_SERVICE_API}/menu/getAppMenu`,
 
     // 消息管理
     getAllMessages: `${SYSTEM_SERVICE_API}/message/getAllMessages`,
   },
   gate_way_api: {
     // 登录
-    login: `${GATE_WAY_API}/shiro/login`,
-    logout: `${GATE_WAY_API}/shiro/logout`,
+    login: `${GATEWAY_SERVICE_API}/shiro/login`,
+    logout: `${GATEWAY_SERVICE_API}/shiro/logout`,
   },
   system_api: {
     // 待办
@@ -45,7 +35,7 @@ const config = {
   },
   frame_menu: {
     main: [
-      { key: "home", url: LOCAL_API + "/home", icon: "ri-home-4-line", name: "首页", carryToken: true, show: true },
+      { key: "home", url: WEB_SYSTEM_API + "/home", icon: "ri-home-4-line", name: "首页", carryToken: true, show: true },
       { key: "user", url: "", icon: "ri-user-line", name: "用户管理", carryToken: true, show: true },
       { key: "synergy", url: "", icon: "ri-codepen-line", name: "协同管理", carryToken: true, show: true },
       { key: "resource", url: "", icon: "ri-file-cloud-line", name: "资源管理", carryToken: true, show: true },
@@ -53,35 +43,36 @@ const config = {
     ],
     sider: {
       user: [
-        { key: "list", url: LOCAL_API + "/user/list", icon: "ri-team-line", name: "人员用户", carryToken: true, show: true },
-        { key: "role", url: LOCAL_API + "/user/role", icon: "ri-file-user-line", name: "角色权限", carryToken: true, show: true },
-        { key: "online", url: LOCAL_API + "/user/online", icon: "ri-global-line", name: "在线用户", carryToken: true, show: true },
-        { key: "amap", url: LOCAL_API + "/user/amap", icon: "ri-map-pin-user-line", name: "用户地图", carryToken: true, show: true },
+        { key: "list", url: WEB_SYSTEM_API + "/user/list", icon: "ri-team-line", name: "人员用户", carryToken: true, show: true },
+        { key: "role", url: WEB_SYSTEM_API + "/user/role", icon: "ri-file-user-line", name: "角色权限", carryToken: true, show: true },
+        { key: "online", url: WEB_SYSTEM_API + "/user/online", icon: "ri-global-line", name: "在线用户", carryToken: true, show: true },
+        { key: "amap", url: WEB_SYSTEM_API + "/user/amap", icon: "ri-map-pin-user-line", name: "用户地图", carryToken: true, show: true },
       ],
       synergy: [
-        { key: "model", url: LOCAL_API + "/synergy/model", icon: "ri-government-line", name: "模型管理", carryToken: true, show: true },
-        { key: "create", url: PROCESS_API + "/service/create", icon: "ri-community-line", name: "模型创建", carryToken: false, show: false },
-        { key: "update", url: PROCESS_API + "/static/modeler.html?modelId=", icon: "ri-hotel-line", carryToken: false, name: "模型编辑", show: false },
-        { key: "process", url: LOCAL_API + "/synergy/process", icon: "ri-qr-scan-line", name: "流程管理", carryToken: true, show: true },
-        { key: "todo", url: LOCAL_API + "/synergy/todo", icon: "ri-todo-line", name: "待办任务", carryToken: true, show: false },
-        { key: "log", url: LOCAL_API + "/synergy/log", icon: "ri-article-line", name: "操作日志", carryToken: true, show: true },
-        { key: "schedule", url: LOCAL_API + "/synergy/schedule", icon: "ri-calendar-todo-line", carryToken: true, name: "事项日程", show: true },
+        { key: "model", url: WEB_SYSTEM_API + "/synergy/model", icon: "ri-government-line", name: "模型管理", carryToken: true, show: true },
+        { key: "create", url: ACTIVITI_PROCESS_API + "/service/create", icon: "ri-community-line", name: "模型创建", carryToken: false, show: false },
+        { key: "update", url: ACTIVITI_PROCESS_API + "/static/modeler.html?modelId=", icon: "ri-hotel-line", carryToken: false, name: "模型编辑", show: false },
+        { key: "process", url: WEB_SYSTEM_API + "/synergy/process", icon: "ri-qr-scan-line", name: "流程管理", carryToken: true, show: true },
+        { key: "todo", url: WEB_SYSTEM_API + "/synergy/todo", icon: "ri-todo-line", name: "待办任务", carryToken: true, show: false },
+        { key: "log", url: WEB_SYSTEM_API + "/synergy/log", icon: "ri-article-line", name: "操作日志", carryToken: true, show: true },
+        { key: "schedule", url: WEB_SYSTEM_API + "/synergy/schedule", icon: "ri-calendar-todo-line", carryToken: true, name: "事项日程", show: true },
       ],
       resource: [
-        { key: "druid", url: DRUID_MANGE_API, icon: "ri-database-2-line", name: "Druid数据库", carryToken: false, show: true },
-        { key: "eureka", url: EUREKA_MANAGE_API, icon: "ri-cloud-line", name: "Eureka中心", carryToken: false, show: true },
-        { key: "zipkin", url: ZIPKIN_MANAGE_API, icon: "ri-file-search-line", name: "调用链追踪", carryToken: false, show: true },
-        { key: "rabbitmq", url: RABBITMQ_MANGE_API, icon: "ri-message-2-line", name: "RabbitMQ管理", carryToken: false, show: true },
-        { key: "virtual", url: LOCAL_API + "/resource/virtual", icon: "ri-eye-line", name: "环境监控", carryToken: true, show: true },
-        { key: "service", url: LOCAL_API + "/resource/service", icon: "ri-customer-service-line", name: "服务监控", carryToken: true, show: true },
+        { key: "druid", url: "http://localhost:8025/druid/index.html", icon: "ri-database-2-line", name: "Druid数据库", carryToken: false, show: true },
+        { key: "eureka", url: "http://localhost:8010/", icon: "ri-cloud-line", name: "Eureka中心", carryToken: false, show: true },
+        { key: "zipkin", url: "http://localhost:8020/zipkin/", icon: "ri-file-search-line", name: "调用链追踪", carryToken: false, show: true },
+        { key: "rabbitmq", url: "http://localhost:15672/", icon: "ri-message-2-line", name: "RabbitMQ管理", carryToken: false, show: true },
+        { key: "hystrix", url: "http://localhost:8015/hystrix", icon: "ri-search-eye-line", name: "Hystrix监控", carryToken: false, show: true },
+        { key: "virtual", url: WEB_SYSTEM_API + "/resource/virtual", icon: "ri-eye-line", name: "环境监控", carryToken: false, show: true },
+        { key: "service", url: WEB_SYSTEM_API + "/resource/service", icon: "ri-customer-service-line", name: "服务监控", carryToken: true, show: true },
       ],
       option: [
-        { key: "menu", url: LOCAL_API + "/option/menu", icon: "ri-windows-line", name: "菜单管理", carryToken: true, show: true },
-        { key: "icon", url: LOCAL_API + "/option/icon", icon: "ri-remixicon-line", name: "图标管理", carryToken: true, show: true },
-        { key: "dictionary", url: LOCAL_API + "/option/dictionary", icon: "ri-book-read-line", name: "数据字典", carryToken: true, show: true },
-        { key: "notice", url: LOCAL_API + "/option/notice", icon: "ri-notification-line", name: "通知公告", carryToken: true, show: true },
-        { key: "interface", url: SWAGGER_API, icon: "ri-file-text-line", name: "接口文档", show: true, carryToken: false},
-        { key: "info", url: LOCAL_API + "/option/info", icon: "ri-information-line", name: "关于我们", carryToken: true, show: true },
+        { key: "menu", url: WEB_SYSTEM_API + "/option/menu", icon: "ri-windows-line", name: "菜单管理", carryToken: true, show: true },
+        { key: "icon", url: WEB_SYSTEM_API + "/option/icon", icon: "ri-remixicon-line", name: "图标管理", carryToken: true, show: true },
+        { key: "dictionary", url: WEB_SYSTEM_API + "/option/dictionary", icon: "ri-book-read-line", name: "数据字典", carryToken: true, show: true },
+        { key: "notice", url: WEB_SYSTEM_API + "/option/notice", icon: "ri-notification-line", name: "通知公告", carryToken: true, show: true },
+        { key: "interface", url: "http://localhost:8015/swagger-ui.html", icon: "ri-file-text-line", name: "接口文档", show: true, carryToken: false},
+        { key: "info", url: WEB_SYSTEM_API + "/option/info", icon: "ri-information-line", name: "关于我们", carryToken: true, show: true },
       ]
     }
   },
