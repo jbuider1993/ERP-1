@@ -19,7 +19,7 @@ export default {
     codeModel: null,
     pageLoading: false,
     themeDrawerVisible: false,
-    themeColor: "#000000",
+    themeColor: "#31ac90",
     siderColor: "#fff",
     themeStyle: "siderMenu",
     selectedStyle: "theme",

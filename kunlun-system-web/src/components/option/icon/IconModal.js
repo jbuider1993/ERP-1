@@ -19,8 +19,6 @@ class IconModal extends React.Component {
 
     const {iconModalVisible, onCancel, iconInfoData} = this.props;
 
-    debugger
-
     const formRadioLayout = {
       labelCol: {span: 4},
       wrapperCol: {span: 20},

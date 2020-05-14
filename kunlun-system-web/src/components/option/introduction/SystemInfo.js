@@ -17,6 +17,10 @@ const SystemInfo = (props) => {
     fontSize: "16px",
   };
 
+  const iconTitleStyle = {
+    marginRight: "6px"
+  };
+
   /**
    * 还可增加系统成长史，可罗列出关键时间；系统数次启动操作指南等
    */
@@ -35,7 +39,7 @@ const SystemInfo = (props) => {
             <div className={styles.introductionDiv}>
               <div className={styles.infoShowDiv}>
                 <div className={styles.briefDiv}>
-                  <div className={styles.infoFontSize}>系统简介</div>
+                  <div className={styles.infoFontSize}><i className="ri-bookmark-3-line" style={iconTitleStyle}></i>系统简介</div>
                   <Divider className={styles.dividerDiv} />
                 </div>
                 <div className={styles.briefContentDiv}>
@@ -62,7 +66,7 @@ const SystemInfo = (props) => {
               </div>
               <div className={styles.logDiv}>
                 <div className={styles.logFontDiv}>
-                  <div className={styles.infoFontSize}>系统开发升级日志</div>
+                  <div className={styles.infoFontSize}><i className="ri-stack-line" style={iconTitleStyle}></i>系统开发升级日志</div>
                   <Divider className={styles.dividerDiv} />
                 </div>
                 <div className={styles.logContenDiv}>
@@ -93,7 +97,7 @@ const SystemInfo = (props) => {
             <div className={styles.structureDiv}>
               <div className={styles.serviceDiv}>
                 <div className={styles.serviceInfoDiv}>
-                  <div className={styles.infoFontSize}>后端框架</div>
+                  <div className={styles.infoFontSize}><i className="ri-code-box-line" style={iconTitleStyle}></i>后端框架</div>
                   <Divider className={styles.dividerDiv} />
                 </div>
                 <div className={styles.serviceDetailDiv}>
@@ -114,7 +118,7 @@ const SystemInfo = (props) => {
               </div>
               <div className={styles.webDiv}>
                 <div className={styles.webInfoDiv}>
-                  <div className={styles.infoFontSize}>前端框架</div>
+                  <div className={styles.infoFontSize}><i className="ri-html5-line" style={iconTitleStyle}></i>前端框架</div>
                   <Divider className={styles.dividerDiv} />
                 </div>
                 <div className={styles.webDetailDiv}>
@@ -134,10 +138,10 @@ const SystemInfo = (props) => {
               </div>
               <div className={styles.linkDiv}>
                 <div className={styles.linkFontDiv}>
-                  <div className={styles.infoFontSize}>友情链接</div>
+                  <div className={styles.infoFontSize}><i className="ri-base-station-line" style={iconTitleStyle}></i>友情链接</div>
                 </div>
                 <div className={styles.linkUrlDiv}>
-                  <Carousel dotPosition={"top"} className={styles.carousel} autoplay={true}>
+                  <Carousel dotPosition={"bottom"} className={styles.carousel} autoplay={true}>
                     <div className={styles.carsouselOne}>
                       <h3 className={styles.carsouselFont}>
                         <a href={"http://59.110.164.254:8066/login.html"} target = "_blank">OCP微服务能力开放平台</a>

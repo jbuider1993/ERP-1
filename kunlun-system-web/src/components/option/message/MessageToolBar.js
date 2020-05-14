@@ -25,7 +25,7 @@ const MessageToolBar = (props) => {
       <Dropdown overlay={menuButton}>
         <Button type={"primary"} icon={<i className="ri-add-line" style={iconStyle}/>}>新增<i className="ri-arrow-down-s-line" style={{verticalAlign: "bottom", marginLeft: "5px"}}></i></Button>
       </Dropdown>
-      <Button style={{ marginLeft: "15px" }} icon={<i className="ri-delete-bin-line" style={iconStyle}></i>} onClick={deleteMessage}>删除</Button>
+      <Button type="dashed" danger style={{ marginLeft: "15px", color: "red" }} icon={<i className="ri-delete-bin-line" style={iconStyle}></i>} onClick={deleteMessage}>删除</Button>
     </div>
   );
 };
