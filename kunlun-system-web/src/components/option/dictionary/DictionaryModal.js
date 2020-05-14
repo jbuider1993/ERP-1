@@ -15,8 +15,6 @@ const DictionaryModal = (props) => {
   const [form] = Form.useForm();
   const { getFieldsValue, validateFields, setFieldsValue, resetFields } = form;
 
-  debugger
-
   const formItemLayout = {
     labelCol: {span: 5},
     wrapperCol: {span: 19},

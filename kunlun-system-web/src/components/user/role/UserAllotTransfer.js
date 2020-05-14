@@ -54,10 +54,10 @@ class UserAllotTransfer extends React.Component {
           onOk={() => onAllotUser(targetKeys)}
           width={450}
           destroyOnClose={false}
-          bodyStyle={{height: "400px"}}
+          bodyStyle={{height: "450px"}}
         >
           <Transfer
-            listStyle={{height: "350px"}}
+            listStyle={{height: "400px"}}
             titles={["全部用户", "权限用户"]}
             dataSource={targetDatas}
             showSearch

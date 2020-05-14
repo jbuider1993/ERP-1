@@ -89,7 +89,7 @@ class DictionaryDrawer extends React.Component {
           >
             <div style={{margin: "-5px 0px 15px 0px"}}>
               <Button type={"primary"} icon={<i className="ri-add-line" style={iconStyle}/>} onClick={onAdd}>新增</Button>
-              <Button style={{marginLeft: "15px"}} icon={<i className="ri-delete-bin-line" style={iconStyle}/>} onClick={onDelete}>刪除</Button>
+              <Button type="dashed" danger style={{marginLeft: "15px"}} icon={<i className="ri-delete-bin-line" style={iconStyle}/>} onClick={onDelete}>刪除</Button>
             </div>
             <div className={ editedRecord ? styles.subTable_edit : styles.subTable }>
               <Table

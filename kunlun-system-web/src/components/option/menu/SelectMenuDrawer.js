@@ -61,7 +61,7 @@ class SelectMenuDrawer extends React.Component {
         <Spin spinning={selectMenuLoading}>
           <Drawer
             title="父级菜单"
-            width={"22%"}
+            width={350}
             placement="right"
             onClose={onClose}
             maskClosable={false}

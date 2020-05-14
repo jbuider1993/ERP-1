@@ -71,7 +71,7 @@ class MenuLimitDrawer extends React.Component {
         <Spin spinning={menuLimitLoading}>
           <Drawer
             title={(roleInfoData && roleInfoData.roleName ? roleInfoData.roleName + "_" : "") + "菜单权限"}
-            width={"25%"}
+            width={350}
             placement="right"
             onClose={onClose}
             maskClosable={false}
