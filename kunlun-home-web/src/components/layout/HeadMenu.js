@@ -72,6 +72,8 @@ class HeadMenu extends React.Component {
       </Menu>
     );
 
+  const userInfo = tokenModel && tokenModel.userInfo ? JSON.parse(tokenModel.userInfo) : "";
+
   return (
     <div style={{ height: isShowSubMenu ? "90px" : "55px" }}>
       <Header className="header" style={{ height: "55px", background: themeColor, lineHeight: "0px" }} >
@@ -108,7 +110,7 @@ class HeadMenu extends React.Component {
             <Dropdown overlay={dropdownInfoOptions} trigger={['click']}>
               <div>
                 <Avatar size={33} icon={<i className="ri-account-circle-line" style={{fontSize: "19px", verticalAlign: "sub"}}></i>} style={{ marginTop: "-5.5%", background: "#096dd9" }} />
-                <span style={{ color: "#fff", marginLeft: "3px" }}>&nbsp;{tokenModel ? tokenModel.userInfo.userName : "admin"}</span>
+                <span style={{ color: "#fff", marginLeft: "3px" }}>&nbsp;{userInfo ? userInfo.userName : "admin"}</span>
               </div>
             </Dropdown>
           </li>

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Layout, Icon, Card, Divider, Avatar, Form, Col, Input, Button } from 'antd';
+import { Card, Divider, Avatar, Form, Col, Input, Button } from 'antd';
 import styles from './UserInfo.less';
 import 'remixicon/fonts/remixicon.css';
 
@@ -16,14 +16,16 @@ const UserInfo = (props) => {
   const {getFieldDecorator, getFieldsValue, validateFields, resetFields} = form;
 
   const formItemLayout = {
-    labelCol: { span: 8 },
-    wrapperCol: { span: 16 },
+    labelCol: { span: 3 },
+    wrapperCol: { span: 21 },
   };
 
   const iconStyle = {
     verticalAlign: "bottom",
     marginRight: "5px",
   };
+
+  const userInfo = tokenModel && tokenModel.userInfo ? JSON.parse(tokenModel.userInfo) : "";
 
   return (
     <div className={styles.userInfoDiv}>
@@ -35,67 +37,65 @@ const UserInfo = (props) => {
           <Divider className={styles.divider} />
           <div>
             <span><i className={"ri-user-line"} style={iconStyle}/>&nbsp;登录名称：</span>
-            <span className={styles.personInfoSpan}>{tokenModel ? tokenModel.userInfo.userName : ""}</span>
+            <span className={styles.personInfoSpan}>{userInfo ? userInfo.userName : ""}</span>
           </div>
           <Divider className={styles.divider} />
           <div>
             <span><i className={"ri-file-user-line"} style={iconStyle}/>&nbsp;用户角色：</span>
-            <span className={styles.personInfoSpan}>{tokenModel ? tokenModel.userInfo.userName : ""}</span>
+            <span className={styles.personInfoSpan}>{userInfo ? userInfo.userName : ""}</span>
           </div>
           <Divider className={styles.divider} />
           <div>
             <span><i className={"ri-cellphone-line"} style={iconStyle}/>&nbsp;手机号码：</span>
-            <span className={styles.personInfoSpan}>{tokenModel ? tokenModel.userInfo.phoneNumber : ""}</span>
+            <span className={styles.personInfoSpan}>{userInfo ? userInfo.phoneNumber : ""}</span>
           </div>
           <Divider className={styles.divider} />
           <div>
             <span><i className={"ri-mail-line"} style={iconStyle}/>&nbsp;邮箱地址：</span>
-            <span className={styles.personInfoSpan}>{tokenModel ? tokenModel.userInfo.email : ""}</span>
+            <span className={styles.personInfoSpan}>{userInfo ? userInfo.email : ""}</span>
           </div>
           <Divider className={styles.divider} />
           <div>
             <span><i className={"ri-time-line"} style={iconStyle}/>&nbsp;创建时间：</span>
-            <span className={styles.personInfoSpan}>{tokenModel ? tokenModel.userInfo.createTime.substr(0, tokenModel.userInfo.createTime.indexOf("T")) : ""}</span>
+            <span className={styles.personInfoSpan}>{userInfo ? userInfo.createTime.substr(0, userInfo.createTime.indexOf("T")) : ""}</span>
           </div>
           <Divider className={styles.divider} />
         </Card>
       </div>
       <div className={styles.userInfoUpdate}>
         <Card title="基本资料" className={styles.cardHeader}>
-          <div style={{ marginLeft: "-35%" }}>
-            <Form initialValues={tokenModel ? tokenModel.userInfo : null}>
-              <Col span={24}>
-                <FormItem { ...formItemLayout } label="用户名称" name={"userName"} rules={[{required: true, message: '请输入用户名称'}]}>
-                  <Input placeholder={"请输入用户名称"} />
-                </FormItem>
-              </Col>
-              <Col span={24}>
-                <FormItem { ...formItemLayout } label="手机号码" name={"phoneNumber"} rules={[{required: true, message: '请输入手机号码'}]}>
-                  <Input placeholder={"请输入手机号码"} />
-                </FormItem>
-              </Col>
-              <Col span={24}>
-                <FormItem { ...formItemLayout } label="邮箱地址" name={"email"} rules={[{required: true, message: '请输入用户名'}]}>
-                  <Input placeholder={"请输入用户名"} />
-                </FormItem>
-              </Col>
-              <Col span={24}>
-                <FormItem { ...formItemLayout } label="旧密码" name={"password"} rules={[{required: true, message: '请输入旧密码'}]}>
-                  <Input placeholder={"请输入旧密码"} />
-                </FormItem>
-              </Col>
-              <Col span={24}>
-                <FormItem { ...formItemLayout } label="新密码" name={"newPassword"} rules={[{required: true, message: '请输入新密码'}]}>
-                  <Input placeholder={"请输入新密码"} />
-                </FormItem>
-              </Col>
-              <Col span={24}>
-                <FormItem { ...formItemLayout } label="确认密码" name={"newPassword"} rules={[{required: true, message: '请输入确认密码'}]}>
-                  <Input placeholder={"请输入确认密码"} />
-                </FormItem>
-              </Col>
-            </Form>
-          </div>
+          <Form initialValues={userInfo ? userInfo : null}>
+            <Col span={24}>
+              <FormItem { ...formItemLayout } label="用户名称" name={"userName"} rules={[{required: true, message: '请输入用户名称'}]}>
+                <Input placeholder={"请输入用户名称"} disabled={"disabled"}/>
+              </FormItem>
+            </Col>
+            <Col span={24}>
+              <FormItem { ...formItemLayout } label="手机号码" name={"phoneNumber"} rules={[{required: true, message: '请输入手机号码'}]}>
+                <Input placeholder={"请输入手机号码"} />
+              </FormItem>
+            </Col>
+            <Col span={24}>
+              <FormItem { ...formItemLayout } label="邮箱地址" name={"email"} rules={[{required: true, message: '请输入用户名'}]}>
+                <Input placeholder={"请输入用户名"} />
+              </FormItem>
+            </Col>
+            <Col span={24}>
+              <FormItem { ...formItemLayout } label="旧密码" name={"password"} rules={[{required: true, message: '请输入旧密码'}]}>
+                <Input placeholder={"请输入旧密码"} />
+              </FormItem>
+            </Col>
+            <Col span={24}>
+              <FormItem { ...formItemLayout } label="新密码" name={"newPassword"} rules={[{required: true, message: '请输入新密码'}]}>
+                <Input placeholder={"请输入新密码"} />
+              </FormItem>
+            </Col>
+            <Col span={24}>
+              <FormItem { ...formItemLayout } label="确认密码" name={"newPassword"} rules={[{required: true, message: '请输入确认密码'}]}>
+                <Input placeholder={"请输入确认密码"} />
+              </FormItem>
+            </Col>
+          </Form>
           <div style={{ textAlign: "center" }}>
             <Button type={"primary"} icon={<i className="ri-save-3-line" style={iconStyle}/>} onClick={onSaveUserInfo}>保存</Button>
             <Button type={"danger"} icon={<i className="ri-close-circle-line" style={iconStyle}/>} style={{ marginLeft: "10px" }} onClick={onCloseUserInfo}>关闭</Button>

@@ -155,7 +155,12 @@ const AppPage = (props) => {
       let panes = paneTabs.filter(item => item.key != targetKey);
       const activedPane = panes.filter(item => activeTabKey == item.key);
       const activeKey = activedPane.length > 0 ? activeTabKey : panes.length == 0 ? null : panes[panes.length - 1].key;
-      let activeHomeKey = activeHeadMenuKey;
+      let activeHomeKey = menuData.main[0].key;
+      if (activeKey) {
+        const activeSubMenu = menuData.list.filter(item => item.key == activeKey)[0];
+        const activeMenu = menuData.list.filter(item => item.id == activeSubMenu.parentId)[0];
+        activeHomeKey = activeMenu.key;
+      }
       if (panes.length == 0) {
         activeHomeKey = menuData.main[0].key;
       }

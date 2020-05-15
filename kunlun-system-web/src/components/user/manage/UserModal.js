@@ -72,7 +72,7 @@ const UserModal = (props) => {
             </Col>
             <Col span={12}>
               <FormItem { ...formItemLayout } label="用户名" name={"userName"} rules={[{required: true, message: '请输入用户名'}]}>
-                <Input placeholder={"请输入用户名"} />
+                <Input placeholder={"请输入用户名"} disabled={operateType == "edit" ? "disabled" : false}/>
               </FormItem>
             </Col>
             <Col span={12}>

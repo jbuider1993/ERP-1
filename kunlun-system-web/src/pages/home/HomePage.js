@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'dva';
-import {Button, Spin} from 'antd';
+import {Spin} from 'antd';
 import FunctionNavigation from '../../components/home/FunctionNavigation';
 import UserStatisticsChart from '../../components/home/UserStatisticsChart';
 import RedisInfoChart from '../../components/home/RedisInfoChart';

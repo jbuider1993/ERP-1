@@ -1,8 +1,6 @@
 import React from 'react';
 import {Layout, Menu, Tabs, Dropdown} from 'antd';
-import config from "../../config/config";
 import styles from './Menu.less';
-import umiRouter from 'umi/router';
 import 'remixicon/fonts/remixicon.css';
 
 const { Sider, Content } = Layout;
@@ -102,6 +100,8 @@ class SideMenu extends React.Component {
 
     // 刷新时间戳
     const refreshFlag = this.state.refreshView;
+
+    debugger
 
     const isShowSider = activeHeadMenuKey != "home" && themeStyle == "siderMenu" ? true : false;
     const pageUrl = siderFlag ? menuData.sider[activeHeadMenuKey].filter(item => item.key == activeSideMenuKey)[0].url : menuData.main[0].url;

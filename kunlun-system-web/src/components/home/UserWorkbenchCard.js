@@ -11,7 +11,7 @@ class UserWorkbenchCard extends React.Component {
 
     const {userCounts, onShowDetail} = this.props;
 
-    const loginUserInfo = window._USERINFO_ ? window._USERINFO_ : null;
+    const loginUserInfo = window._USERINFO_ ? JSON.parse(window._USERINFO_) : null;
 
     return (
       <div className={indexStyles.headerDiv}>
@@ -31,8 +31,8 @@ class UserWorkbenchCard extends React.Component {
               <Avatar size={80} icon={<i className="ri-user-line"></i>} src={userLogo} />
             </div>
             <div className={indexStyles.userFontDiv}>
-              <div><span style={{fontWeight: "bold"}}>{loginUserInfo ? loginUserInfo.userName : "admin"}</span>&nbsp;&nbsp;&nbsp;&nbsp;{loginUserInfo ? loginUserInfo.userName : "管理员"}</div>
-              <div>你好！祝你开心每一天！</div>
+              <div><span style={{fontWeight: "bold"}}>{loginUserInfo ? loginUserInfo.userName : "admin"}</span>&nbsp;&nbsp;&nbsp;&nbsp;欢迎使用本系统！</div>
+              <div>祝你开心每一天！</div>
               <div className={indexStyles.userPhoneAndEmailDiv}>
                 <div>{loginUserInfo ? loginUserInfo.phoneNumber : "15555555555"}</div>&nbsp;&nbsp;&nbsp;&nbsp;
                 <div>{loginUserInfo ? loginUserInfo.email : "test@test.com"}</div>
