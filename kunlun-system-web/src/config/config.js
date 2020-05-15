@@ -14,6 +14,7 @@ const config = {
   ACTIVITI_PROCESS_API,
   NEW_PROCESS_API: ACTIVITI_PROCESS_API + "/create",
   EDIT_PROCESS_API: ACTIVITI_PROCESS_API + "/static/modeler.html?modelId=",
+  VIEW_COLOR: "#a3a7b1",
   amap_info: {
     amapkey: "0d78256ea89beeb8c25d1cd047549d1f",
     // amapkey: "788e08def03f95c670944fe2c78fa76f",

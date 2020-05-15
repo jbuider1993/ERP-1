@@ -172,6 +172,13 @@ class MenuModal extends React.Component {
                     <Input/>
                   </FormItem>
                 </Col>
+                <Col span={12}>
+                  <FormItem {...formItemLayout} label="携带Token" name={"carryToken"} rules={[{required: false, message: ''}]}>
+                    <RadioGroup value={radioCheckedValue}>
+                      {showOptions}
+                    </RadioGroup>
+                  </FormItem>
+                </Col>
               </Row>
             </Form>
           </Modal>

@@ -43,12 +43,12 @@ class IconModal extends React.Component {
           onCancel={onCancel}
           width={450}
           destroyOnClose={true}
-          footer={[]}
+          footer={null}
         >
-          <Form align="left" style={{marginLeft: "20px"}}>
+          <Form style={{marginLeft: "20px"}}>
             <Row>
               <Col span={24}>
-                <FormItem {...formRadioLayout} label="主题风格">
+                <FormItem {...formRadioLayout} label={<span style={{color: config.VIEW_COLOR}}>主题风格</span>}>
                   <RadioGroup value={this.state.iconStyle} onChange={onRadioChange}>
                     {iconStyleOptions}
                   </RadioGroup>
@@ -57,20 +57,20 @@ class IconModal extends React.Component {
             </Row>
             <Row>
               <Col span={12}>
-                <FormItem {...formItemLayout} label="图标名称">
-                  <div>{iconInfoData ? iconInfoData.name : ""}</div>
+                <FormItem {...formItemLayout} label={<span style={{color: config.VIEW_COLOR}}>图标名称</span>}>
+                  <div style={{color: config.VIEW_COLOR}}>{iconInfoData ? iconInfoData.name : ""}</div>
                 </FormItem>
               </Col>
               <Col span={12}>
-                <FormItem {...formItemLayout} label="图标">
-                  <div><i className={iconInfoData ? "ri-" + iconInfoData.name + "-" + this.state.iconStyle : ""} style={{fontSize: "20px"}}/></div>
+                <FormItem {...formItemLayout} label={<span style={{color: config.VIEW_COLOR}}>图标key</span>}>
+                  <div style={{color: config.VIEW_COLOR}}>{iconInfoData ? iconInfoData.key : ""}</div>
                 </FormItem>
               </Col>
             </Row>
             <Row>
               <Col span={12}>
-                <FormItem {...formItemLayout} label="图标key">
-                  <div>{iconInfoData ? iconInfoData.key : ""}</div>
+                <FormItem {...formItemLayout} label={<span style={{color: config.VIEW_COLOR}}>图标</span>}>
+                  <div><i className={iconInfoData ? "ri-" + iconInfoData.name + "-" + this.state.iconStyle : ""} style={{fontSize: "20px"}}/></div>
                 </FormItem>
               </Col>
             </Row>
