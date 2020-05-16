@@ -58,12 +58,12 @@ class IconModal extends React.Component {
             <Row>
               <Col span={12}>
                 <FormItem {...formItemLayout} label={<span style={{color: config.VIEW_COLOR}}>图标名称</span>}>
-                  <div style={{color: config.VIEW_COLOR}}>{iconInfoData ? iconInfoData.name : ""}</div>
+                  <div>{iconInfoData ? iconInfoData.name : ""}</div>
                 </FormItem>
               </Col>
               <Col span={12}>
                 <FormItem {...formItemLayout} label={<span style={{color: config.VIEW_COLOR}}>图标key</span>}>
-                  <div style={{color: config.VIEW_COLOR}}>{iconInfoData ? iconInfoData.key : ""}</div>
+                  <div>{iconInfoData ? iconInfoData.key : ""}</div>
                 </FormItem>
               </Col>
             </Row>

@@ -101,8 +101,6 @@ class SideMenu extends React.Component {
     // 刷新时间戳
     const refreshFlag = this.state.refreshView;
 
-    debugger
-
     const isShowSider = activeHeadMenuKey != "home" && themeStyle == "siderMenu" ? true : false;
     const pageUrl = siderFlag ? menuData.sider[activeHeadMenuKey].filter(item => item.key == activeSideMenuKey)[0].url : menuData.main[0].url;
 
@@ -127,7 +125,7 @@ class SideMenu extends React.Component {
             {/* 引入页面显示组件 */}
             {
               activeHeadMenuKey == menuData.main[0].key || (activeHeadMenuKey != "home" && themeStyle == "subMenu") ?
-              <iframe id={"homeIFrame"} name={"homeIFrame"}
+              <iframe id={"homeIFrame_" + activeHeadMenuKey} name={"homeIFrame_" + activeHeadMenuKey}
                       style={{width: "100%", height: "100%", padding: activeHeadMenuKey != "home" ? "20px" : "0", display: "block"}}
                       frameBorder={"no"}
                       src={pageUrl + "?" + iFrameParams}/> :
@@ -144,8 +142,9 @@ class SideMenu extends React.Component {
                   paneTabs.map((pane, index) =>
                     <TabPane key={pane.key} tab={pane.name}>
                       <div className={styles.tabDiv} ref={"iframe" + index}>
-                        <iframe id={"tabIFrame" + index} name={"tabIFrame" + index} frameBorder={"no"}
-                                style={{width: "100%", height: "100%"}}
+                        <iframe id={"tabIFrame_" + activeHeadMenuKey + "_" + activeSideMenuKey + index}
+                                name={"tabIFrame_" + activeHeadMenuKey + "_" + activeSideMenuKey + index}
+                                frameBorder={"no"} style={{width: "100%", height: "100%"}}
                                 src={pane.url + (pane.carryToken ? "?" + iFrameParams : "") + (refreshFlag && activeSideMenuKey == pane.key ? ((pane.carryToken ? "&" : "") + "refreshView=" + refreshFlag) : "")}
                         />
                       </div>
