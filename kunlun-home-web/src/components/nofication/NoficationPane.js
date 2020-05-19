@@ -46,7 +46,7 @@ class NoficationPane extends React.Component {
               noficationList.length  == 0 ? <div className={styles.emptyDiv}><Empty /></div> :
               noficationList.map(item =>
                 <li className={styles.tabli}>
-                  <div style={{marginTop: "5px"}}>
+                  <div>
                     <i className={"ri-notification-3-line"} style={iconStyle} />
                     <span>{item.title}</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <span>{item.createTime ? moment(item.createTime).format("YYYY-MM-DD HH:mm:ss") : ""}</span>
@@ -64,7 +64,7 @@ class NoficationPane extends React.Component {
               messageList.length  == 0 ? <div className={styles.emptyDiv}><Empty /></div> :
               messageList.map(item =>
                 <li className={styles.tabli}>
-                  <div style={{marginTop: "5px"}}>
+                  <div>
                     <i className={"ri-message-3-line"} style={iconStyle} />
                     <span>{item.title}</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <span>{item.createTime ? moment(item.createTime).format("YYYY-MM-DD HH:mm:ss") : ""}</span>
@@ -85,7 +85,7 @@ class NoficationPane extends React.Component {
                   <i className="ri-profile-line" style={iconStyle} />
                   <span>{item.modelName}</span>
                   <span className={styles.todoStatus}>
-                    <Tag color="#f50">{"审核中"}</Tag>
+                    <Tag color="#f50" style={{marginRight: "0px"}}>{"审核中"}</Tag>
                   </span>
                   <div className={styles.todoTime}>
                     <span>{item.startTime ? moment(item.startTime).format("YYYY-MM-DD HH:mm:ss") : ""}</span>

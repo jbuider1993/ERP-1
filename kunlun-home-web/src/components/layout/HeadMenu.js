@@ -66,17 +66,17 @@ class HeadMenu extends React.Component {
         <div style={{background: themeColor, width: "260px", height: "185px", textAlign: "center", padding: "15px 0px 10px 0px"}}>
           <Avatar size={80} icon={<i className={"ri-user-line"} />} />
           <div style={{marginTop: "10px"}}>
-            <span>admin</span>
+            <span style={{fontWeight: "bolder"}}>admin</span>
             <span style={{marginLeft: "20px"}}>系统管理员</span>
             <div>15555555555</div>
             <div>{moment(new Date()).format("yyyy-MM-DD HH:mm:ss")}</div>
           </div>
         </div>
-        <MenuItem style={{ marginTop: "5px", marginLeft: "10px" }}>
+        <MenuItem style={{ margin: "5px 10px 0px 10px" }}>
           <div onClick={onShowUserInfo}><i className="ri-shield-user-line" style={iconStyle}></i>&nbsp;个人中心</div>
         </MenuItem>
         <Divider style={{ margin: "5px" }} />
-        <MenuItem style={{ marginTop: "5px", marginBottom: "8px", marginLeft: "10px" }}>
+        <MenuItem style={{ margin: "5px 10px 0px 10px", marginBottom: "10px" }}>
           <div onClick={onLogout}><i className="ri-logout-circle-r-line" style={iconStyle}></i>&nbsp;退出系统</div>
         </MenuItem>
       </Menu>
