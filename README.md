@@ -2,8 +2,8 @@
 
 <p align="center"> 
     <img src="https://img.shields.io/circleci/project/vuejs/vue/dev.svg" alt="Build Status">
-    <img src="https://img.shields.io/badge/Spring%20Cloud-Greenwich.RELEASE-blue.svg" alt="Coverage Status">
-    <img src="https://img.shields.io/badge/Spring%20Boot-2.1.0.RELEASE-blue.svg" alt="Downloads">
+    <img src="https://img.shields.io/badge/Spring%20Cloud-Greenwich.SR5-blue.svg" alt="Coverage Status">
+    <img src="https://img.shields.io/badge/Spring%20Boot-2.1.7.RELEASE-blue.svg" alt="Downloads">
 </p>
 
 #### 系统介绍
@@ -48,75 +48,105 @@ kunlun-service 基于 SpringBoot 与 Spring Cloud 构建开发，提供后端基
 <table>
     <tr>
         <td>后端框架</td>
-        <td></td>
         <td>前端框架</td>
-        <td></td>                
     </tr>
     <tr>
-        <td>核心框架</td>
-        <td>Spring Boot</td>
-        <td>前端技术栈</td>
-        <td><a target = "_blank" href={"https://github.com/facebook/react"}>react</a></td>
-    </tr>
-    <tr>
-        <td>服务架构</td>
-        <td>Spring Cloud</td>
-        <td>前端框架</td>
-        <td>Umi</td>
-    </tr>
-    <tr>
-        <td>安全框架</td>
-        <td>apache Shiro、Jwt</td>
-        <td>数据流框架</td>
-        <td>Dva</td>
-    </tr>
-    <tr>
-        <td>持久层框架</td>
-        <td>MyBatis</td>
-        <td>前端UI库</td>
-        <td>Ant Design</td>
-    </tr>
-    <tr>
-        <td>数据库连接池</td>
-        <td>Druid</td>
-        <td>图表库</td>
-        <td>AntV@G2</td>
-    </tr>
-    <tr>
-        <td>数据库</td>
-        <td>PosgreSQL、Redis</td>
-        <td>图标库</td>
-        <td>Remix Icon</td>
-    </tr>
-    <tr>
-        <td>工作流引擎</td>
-        <td>Activiti-5.22.0</td>
-        <td>地图组件</td>
-        <td>react-amap</td>
-    </tr>
-    <tr>
-        <td>脚本执行</td>
-        <td>Flyway</td>
-        <td>富文本编辑器</td>
-        <td>braft-editor</td>
-    </tr>
-    <tr>
-        <td>资源爬取</td>
-        <td>Selenium</td>
-        <td>HTTP库</td>
-        <td>axios</td>
-    </tr>
-    <tr>
-        <td>消息组件</td>
-        <td>RabbitMQ</td>
-        <td>拾色器</td>
-        <td>react-color</td>
-    </tr>
-    <tr>
-        <td>全局搜索</td>
-        <td>ElasticSearch</td>
-        <td></td>
-        <td></td>
+        <td>
+            <table>
+                <tr>
+                    <td>核心框架</td>
+                    <td><a target = "_blank" href={"https://spring.io/projects/spring-boot"}>Spring Boot</a></td>
+                </tr>
+                <tr>
+                    <td>服务架构</td>
+                    <td><a target = "_blank" href={"https://spring.io/projects/spring-cloud"}>Spring Cloud</a></td>
+                </tr>
+                <tr>
+                    <td>安全框架</td>
+                    <td><a target = "_blank" href={"http://shiro.apache.org/"}>apache Shiro</a>、<a target = "_blank" href={"https://jwt.io/"}>Jwt</a></td>
+                </tr>
+                <tr>
+                    <td>持久层框架</td>
+                    <td><a target = "_blank" href={"http://www.mybatis.org/mybatis-3/zh/index.html"}>MyBatis</a></td>
+                </tr>
+                <tr>
+                    <td>数据库连接池</td>
+                    <td><a target = "_blank" href={"https://github.com/alibaba/druid"}>Druid</a></td>
+                </tr>
+                <tr>
+                    <td>数据库</td>
+                    <td>PosgreSQL、<a target = "_blank" href={"https://redis.io/"}>Redis</a></td>
+                </tr>
+                <tr>
+                    <td>工作流引擎</td>
+                    <td><a target = "_blank" href={"https://www.activiti.org/documentation"}>Activiti-5.22.0</a></td>
+                </tr>
+                <tr>
+                    <td>脚本执行</td>
+                    <td>Flyway</td>
+                </tr>
+                <tr>
+                    <td>资源爬取</td>
+                    <td><a target = "_blank" href={"https://www.selenium.dev/"}>Selenium</a></td>
+                </tr>
+                <tr>
+                    <td>消息组件</td>
+                    <td><a target = "_blank" href={"https://www.rabbitmq.com/"}>RabbitMQ</a></td>
+                </tr>
+                <tr>
+                    <td>全局搜索</td>
+                    <td><a target = "_blank" href={"https://www.elastic.co/"}>ElasticSearch</a></td>
+                </tr>
+            </table>
+        </td>
+        <td>
+            <table>
+                <tr>
+                    <td>前端技术栈</td>
+                    <td><a target = "_blank" href={"https://github.com/facebook/react"}>react</a></td>
+                </tr>
+                <tr>
+                    <td>前端框架</td>
+                    <td><a target = "_blank" href={"https://umijs.org/"}>Umi</a></td>
+                </tr>
+                <tr>
+                    <td>数据流框架</td>
+                    <td><a target = "_blank" href={"https://dvajs.com/guide/"}>Dva</a></td>
+                </tr>
+                <tr>
+                    <td>前端UI库</td>
+                    <td><a target = "_blank" href={"https://ant.design/index-cn"}>Ant Design</a></td>
+                </tr>
+                <tr>
+                    <td>图表库</td>
+                    <td><a target = "_blank" href={"https://antv.alipay.com/zh-cn/index.html"}>AntV@G2</a></td>
+                </tr>
+                <tr>
+                    <td>图标库</td>
+                    <td><a target = "_blank" href={"https://remixicon.com/"}>Remix Icon</a></td>
+                </tr>
+                <tr>
+                    <td>地图组件</td>
+                    <td><a target = "_blank" href={"https://github.com/ElemeFE/react-amap"}>React-amap</a></td>
+                </tr>
+                <tr>
+                    <td>富文本编辑器</td>
+                    <td><a target = "_blank" href={"https://braft.margox.cn/"}>Braft-editor</a></td>
+                </tr>
+                <tr>
+                    <td>HTTP库</td>
+                    <td><a target = "_blank" href={"http://www.axios-js.com/"}>Axios</a></td>
+                </tr>
+                <tr>
+                    <td>拾色器</td>
+                    <td><a target = "_blank" href={"http://casesandberg.github.io/react-color/"}>React-color</a></td>
+                </tr>
+                <tr>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                </tr>
+            </table>
+        </td>
     </tr>
 </table>
 
