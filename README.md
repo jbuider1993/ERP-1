@@ -9,7 +9,7 @@
 #### 系统介绍
 昆仑管理系统基于前后端分离架构，通过Apache Shiro与Jwt组件，用token进行数据交互认证，可快速开发并独立进行Docker容器化部署。
 
-kunlun-web 基于 umi(乌米) 与蚂蚁金服 Ant Design 构建开发，提供前端解决方案，其中kunlun-home-web为前端框架，主要负责登录页面、业务菜单、消息待办、主题皮肤等信息的展示；kunlun-system-web为前端业务服务，主要用于展示各个菜单的业务功能页面，如首页信息、人员管理、用户地图、流程管理、操作日志、事项日程、服务资源管理、菜单管理等。
+kunlun-web 基于React + Umi(乌米) + Ant Design (蚂蚁金服) 构建开发，提供前端解决方案，其中kunlun-home-web为前端框架，主要负责登录页面、业务菜单、消息待办、主题皮肤等信息的展示；kunlun-system-web为前端业务服务，主要用于展示各个菜单的业务功能页面，如首页信息、人员管理、用户地图、流程管理、操作日志、事项日程、服务资源管理、菜单管理等。
 
 kunlun-service 基于 SpringBoot 与 Spring Cloud 构建开发，提供后端基于微服务架构的解决方案，其中kunlun-common-api为公共模块，提供公共基础模型、工具、自动配置等，kunlun-register-service为服务治理模块，提供服务注册、服务发现、服务心跳检测及高级消息队列等，kunlun-gateway-service为服务网关模块，提供服务路由及分布式服务配置中心等，kunlun-basedata-service为基础数据模块，提供基础数据支持，如菜单、角色、权限等，并提供分布式缓存功能等，kunlun-system-service为业务服务模块，提供业务功能支持服务。
 
@@ -26,7 +26,7 @@ kunlun-service 基于 SpringBoot 与 Spring Cloud 构建开发，提供后端基
 #### 使用说明
 
 1.  npm安装前端依赖库，并启动kunlun-home-web与kunlun-system-web服务；
-2.  启动PostgreSQL，执行kunlun-basedata-service与kunlun-system-service服务resources下的Sql文件；
+2.  启动PostgreSQL，执行kunlun-basedata-service与kunlun-system-service服务resources下的sql文件；
 3.  启动RabbitMQ和Redis；
 4.  启动注册中心kunlun-register-service；
 5.  依次启动kunlun-gateway-service、kunlun-basedata-service与kunlun-system-service服务；
@@ -48,11 +48,75 @@ kunlun-service 基于 SpringBoot 与 Spring Cloud 构建开发，提供后端基
 <table>
     <tr>
         <td>后端框架</td>
+        <td></td>
         <td>前端框架</td>
+        <td></td>                
     </tr>
     <tr>
-        <td><img src="https://images.gitee.com/uploads/images/2020/0411/152235_4f7146fd_1894302.png"/></td>
-        <td><img src="https://images.gitee.com/uploads/images/2020/0411/152350_b3f7e035_1894302.png"/></td>
+        <td>核心框架</td>
+        <td>Spring Boot</td>
+        <td>前端技术栈</td>
+        <td><a target = "_blank" href={"https://github.com/facebook/react"}>react</a></td>
+    </tr>
+    <tr>
+        <td>服务架构</td>
+        <td>Spring Cloud</td>
+        <td>前端框架</td>
+        <td>Umi</td>
+    </tr>
+    <tr>
+        <td>安全框架</td>
+        <td>apache Shiro、Jwt</td>
+        <td>数据流框架</td>
+        <td>Dva</td>
+    </tr>
+    <tr>
+        <td>持久层框架</td>
+        <td>MyBatis</td>
+        <td>前端UI库</td>
+        <td>Ant Design</td>
+    </tr>
+    <tr>
+        <td>数据库连接池</td>
+        <td>Druid</td>
+        <td>图表库</td>
+        <td>AntV@G2</td>
+    </tr>
+    <tr>
+        <td>数据库</td>
+        <td>PosgreSQL、Redis</td>
+        <td>图标库</td>
+        <td>Remix Icon</td>
+    </tr>
+    <tr>
+        <td>工作流引擎</td>
+        <td>Activiti-5.22.0</td>
+        <td>地图组件</td>
+        <td>react-amap</td>
+    </tr>
+    <tr>
+        <td>脚本执行</td>
+        <td>Flyway</td>
+        <td>富文本编辑器</td>
+        <td>braft-editor</td>
+    </tr>
+    <tr>
+        <td>资源爬取</td>
+        <td>Selenium</td>
+        <td>HTTP库</td>
+        <td>axios</td>
+    </tr>
+    <tr>
+        <td>消息组件</td>
+        <td>RabbitMQ</td>
+        <td>拾色器</td>
+        <td>react-color</td>
+    </tr>
+    <tr>
+        <td>全局搜索</td>
+        <td>ElasticSearch</td>
+        <td></td>
+        <td></td>
     </tr>
 </table>
 

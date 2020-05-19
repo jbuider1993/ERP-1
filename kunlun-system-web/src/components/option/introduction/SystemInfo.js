@@ -123,9 +123,9 @@ const SystemInfo = (props) => {
                 </div>
                 <div className={styles.webDetailDiv}>
                   <Descriptions title="" layout="horizontal" bordered column={1} className={styles.technicalDescription} style={{ flex: 1}}>
+                    <DescriptionsItem label="前端技术栈"><a target = "_blank" href={"https://github.com/facebook/react"}>react</a></DescriptionsItem>
                     <DescriptionsItem label="前端框架"><a target = "_blank" href={"https://umijs.org/"}>umi</a></DescriptionsItem>
                     <DescriptionsItem label="数据流框架"><a target = "_blank" href={"https://dvajs.com/guide/"}>dva</a></DescriptionsItem>
-                    <DescriptionsItem label="前端技术栈"><a target = "_blank" href={"https://github.com/facebook/react"}>react</a></DescriptionsItem>
                     <DescriptionsItem label="前端UI库"><a target = "_blank" href={"https://ant.design/index-cn"}>Ant Design</a></DescriptionsItem>
                     <DescriptionsItem label="图表库"><a target = "_blank" href={"https://antv.alipay.com/zh-cn/index.html"}>AntV@G2</a></DescriptionsItem>
                     <DescriptionsItem label="图标库"><a target = "_blank" href={"https://remixicon.com/"}>Remix Icon</a></DescriptionsItem>
