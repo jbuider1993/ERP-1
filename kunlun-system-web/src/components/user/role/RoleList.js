@@ -21,31 +21,31 @@ const RoleList = (props) => {
       <span>
         <Tooltip title={"编辑"}>
           <a onClick={() => onEdit(record)}>
-            <i className="ri-edit-2-line" style={{color: '#08c', fontSize: "16px"}}></i>
+            <i className="ri-edit-2-line" style={{color: '#1890FF', fontSize: "16px"}}></i>
           </a>
         </Tooltip>
         &nbsp;&nbsp;&nbsp;&nbsp;
         <Tooltip title={"菜单权限"}>
           <a onClick={() => onMenuLimit(record)}>
-            <i className="ri-windows-line" style={{color: '#08c', fontSize: "16px"}}></i>
+            <i className="ri-windows-line" style={{color: '#F95E5A', fontSize: "16px"}}></i>
           </a>
         </Tooltip>
         &nbsp;&nbsp;&nbsp;&nbsp;
         <Tooltip title={"数据权限"}>
           <a onClick={() => onDataLimit(record)}>
-            <i className="ri-database-line" style={{color: '#08c', fontSize: "16px"}}></i>
+            <i className="ri-database-line" style={{color: '#4BD863', fontSize: "16px"}}></i>
           </a>
         </Tooltip>
         &nbsp;&nbsp;&nbsp;&nbsp;
         <Tooltip title={"分配用户"}>
           <a onClick={() => onAllotUser(record)}>
-            <i className="ri-team-line" style={{color: '#08c', fontSize: "16px"}}></i>
+            <i className="ri-team-line" style={{color: '#FE9400', fontSize: "16px"}}></i>
           </a>
         </Tooltip>
         &nbsp;&nbsp;&nbsp;&nbsp;
         <Tooltip title={"查看详情"}>
           <a onClick={() => onView(record)}>
-            <i className="ri-file-text-line" style={{fontSize: "16px"}}></i>
+            <i className="ri-file-text-line" style={{color: '#13C2C2', fontSize: "16px"}}></i>
           </a>
         </Tooltip>
       </span>)

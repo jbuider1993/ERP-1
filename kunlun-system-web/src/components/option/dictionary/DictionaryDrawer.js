@@ -82,6 +82,7 @@ class DictionaryDrawer extends React.Component {
             width={"55%"}
             placement="right"
             onClose={onClose}
+            mask={false}
             closable={true}
             destroyOnClose={true}
             visible={dictSubDrawerVisible}

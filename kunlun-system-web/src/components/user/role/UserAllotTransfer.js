@@ -52,12 +52,12 @@ class UserAllotTransfer extends React.Component {
           title={(roleInfoData && roleInfoData.roleName ? roleInfoData.roleName + "_" : "") + "分配用户"}
           onCancel={onCancel}
           onOk={() => onAllotUser(targetKeys)}
-          width={450}
+          width={650}
           destroyOnClose={false}
           bodyStyle={{height: "450px"}}
         >
           <Transfer
-            listStyle={{height: "400px"}}
+            listStyle={{height: "400px", width: "280px"}}
             titles={["全部用户", "权限用户"]}
             dataSource={targetDatas}
             showSearch

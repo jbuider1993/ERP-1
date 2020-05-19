@@ -16,8 +16,8 @@ const ModelToolbar = (props) => {
       <Button type="primary" size="default" icon={<i className="ri-add-line" style={iconStyle}></i>} onClick={() => addSave()}>新增</Button>
       <Button type="danger" size="default" icon={<i className="ri-play-circle-line" style={iconStyle}></i>} style={{ marginLeft: "15px" }} onClick={() => onDeploy()}>部署</Button>
       <Button type="dashed" danger size="default" icon={<i className="ri-delete-bin-line" style={iconStyle}></i>} style={{ marginLeft: "15px", color: "red" }} onClick={() => onDelete()}>删除</Button>
-      <Button type="default" size="default" icon={<i className="ri-download-2-line" style={iconStyle}></i>} style={{ marginLeft: "15px" }} onClick={() => onExport()}>导出</Button>
-      <Button type="default" size="default" icon={<i className="ri-upload-2-line" style={iconStyle}></i>} style={{ marginLeft: "15px" }} onClick={() => onImport()}>导入</Button>
+      <Button type="default" size="default" icon={<i className="ri-download-2-line" style={iconStyle}></i>} style={{ marginLeft: "15px", border: "1px solid #786CE7", color: "#786CE7" }} onClick={() => onExport()}>导出</Button>
+      <Button type="default" size="default" icon={<i className="ri-upload-2-line" style={iconStyle}></i>} style={{ marginLeft: "15px", border: "1px solid #13C2C2", color: "#13C2C2" }} onClick={() => onImport()}>导入</Button>
     </div>
   );
 };

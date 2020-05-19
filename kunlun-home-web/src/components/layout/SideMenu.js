@@ -1,5 +1,5 @@
 import React from 'react';
-import {Layout, Menu, Tabs, Dropdown} from 'antd';
+import {Layout, Menu, Tabs, Dropdown, Tooltip} from 'antd';
 import styles from './Menu.less';
 import 'remixicon/fonts/remixicon.css';
 
@@ -67,7 +67,7 @@ class SideMenu extends React.Component {
     };
 
     const dropdownOptions = (
-      <Menu style={{ marginTop: "-6px", marginRight: "-9px", right: "5px", padding: "5px 5px 5px 0px" }}>
+      <Menu style={{ marginTop: "10px", marginRight: "-9px", right: "5px", padding: "5px 5px 5px 0px" }}>
         <MenuItem style={{ marginTop: "3px", marginLeft: "5px" }}>
           <div onClick={() => onRefreshTab()}><i className="ri-refresh-line" style={iconStyle("dropdown")}></i>&nbsp;刷新当前页签</div>
         </MenuItem>
@@ -85,9 +85,9 @@ class SideMenu extends React.Component {
 
     const tabOperateOptions = <div style={{marginTop: "2px", marginRight: "10px", marginLeft: "10px"}}>
       <Dropdown overlay={dropdownOptions} className={styles.down}>
-        <div>
+        <Tooltip title={"页签操作"} placement={"left"}>
           <i className="ri-menu-line" style={{ fontSize: "20px" }}></i>
-        </div>
+        </Tooltip>
       </Dropdown>
     </div>;
 

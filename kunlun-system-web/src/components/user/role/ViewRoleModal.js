@@ -96,7 +96,7 @@ const ViewRoleModal = (props) => {
         width={700}
         destroyOnClose={false}
         footer={null}
-        bodyStyle={{height: "450px"}}
+        bodyStyle={{height: "500px"}}
       >
         <Form form={form}>
           <Row>
@@ -132,17 +132,17 @@ const ViewRoleModal = (props) => {
           </Row>
           <Row>
             <Col span={8}>
-              <Tree onExpand={onExpandTreeNode} style={{width: "93%", overflowY: "scroll", height: "300px"}}>
+              <Tree onExpand={onExpandTreeNode} style={{width: "93%", overflow: "auto", height: "350px"}}>
                 {
                   menuList && menuList.length > 0 ? generateTreeNodes(selectedMenuList) : null
                 }
               </Tree>
             </Col>
             <Col span={8}>
-              <div style={{width: "93%", overflowY: "scroll", height: "300px"}}>暂无数据</div>
+              <div style={{width: "93%", overflow: "auto", height: "350px"}}>暂无数据</div>
             </Col>
             <Col span={8}>
-              <ul style={{width: "93%", overflowY: "scroll", height: "300px", lineHeight: 1.8}}>
+              <ul style={{width: "93%", overflow: "auto", height: "350px", lineHeight: 1.8}}>
                 {
                   allotedUsers ? allotedUsers.map(item => <li>{item.userName}</li>) : null
                 }

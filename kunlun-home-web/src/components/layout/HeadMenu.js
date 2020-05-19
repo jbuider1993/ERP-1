@@ -4,6 +4,7 @@ import styles from './Menu.less';
 import config from "../../config/config";
 import NoficationPane from '../nofication/NoficationPane';
 import 'remixicon/fonts/remixicon.css';
+import moment from 'moment';
 
 const { Header } = Layout;
 const MenuItem = Menu.Item;
@@ -61,7 +62,16 @@ class HeadMenu extends React.Component {
 
     // 个人信息项
     const dropdownInfoOptions = (
-      <Menu style={{ marginTop: "-6px", marginRight: "-1px", right: "-15%", padding: "5px 10px 5px 0px" }}>
+      <Menu style={{ marginTop: "16px", right: "-5%", padding: "0px 0px 1px 0px" }}>
+        <div style={{background: themeColor, width: "260px", height: "185px", textAlign: "center", padding: "15px 0px 10px 0px"}}>
+          <Avatar size={80} icon={<i className={"ri-user-line"} />} />
+          <div style={{marginTop: "10px"}}>
+            <span>admin</span>
+            <span style={{marginLeft: "20px"}}>系统管理员</span>
+            <div>15555555555</div>
+            <div>{moment(new Date()).format("yyyy-MM-DD HH:mm:ss")}</div>
+          </div>
+        </div>
         <MenuItem style={{ marginTop: "5px", marginLeft: "10px" }}>
           <div onClick={onShowUserInfo}><i className="ri-shield-user-line" style={iconStyle}></i>&nbsp;个人中心</div>
         </MenuItem>
@@ -108,10 +118,10 @@ class HeadMenu extends React.Component {
           </li>
           <li style={{marginTop: "-6px"}}>
             <Dropdown overlay={dropdownInfoOptions} trigger={['click']}>
-              <div>
+              <Tooltip title={"个人中心"} overlayClassName={styles.messageToolTipPerson}>
                 <Avatar size={33} icon={<i className="ri-account-circle-line" style={{fontSize: "19px", verticalAlign: "sub"}}></i>} style={{ marginTop: "-5.5%", background: "#096dd9" }} />
                 <span style={{ color: "#fff", marginLeft: "3px" }}>&nbsp;{userInfo ? userInfo.userName : "admin"}</span>
-              </div>
+              </Tooltip>
             </Dropdown>
           </li>
         </ul>
