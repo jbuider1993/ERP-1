@@ -1,5 +1,5 @@
 import React from 'react';
-import { Carousel, Card, Descriptions, Divider, Layout, Icon, Timeline } from 'antd';
+import { Carousel, Descriptions, Divider, Layout, Timeline } from 'antd';
 import styles from './Introduction.less';
 import config from '../../../config/config';
 import 'remixicon/fonts/remixicon.css';
@@ -9,8 +9,6 @@ const { Header, Content, Footer } = Layout;
 const TimeLineItem = Timeline.Item;
 
 const SystemInfo = (props) => {
-
-  const { tokenModel } = props;
 
   const iconStyle = {
     verticalAlign: "bottom",
@@ -77,15 +75,15 @@ const SystemInfo = (props) => {
                       <TimeLineItem dot={<i className="ri-global-line" style={iconStyle}></i>} color="green">2018-10-15 实现初版菜单切换功能（每个页面嵌套在公共菜单框架里）</TimeLineItem>
                       <TimeLineItem dot={<i className="ri-global-line" style={iconStyle}></i>} color="green">2018-11-09 实现第二版菜单切换功能（公共菜单框架嵌套在route.js里）</TimeLineItem>
                       <TimeLineItem dot={<i className="ri-global-line" style={iconStyle}></i>} color="green">2018-12-27实现第三版菜单切换功能（菜单框架与业务服务分开）</TimeLineItem>
-                      <TimeLineItem dot={<Icon type="control" style={{ fontSize: '16px' }} />} color="blue">2018-11-04初步搭建SpringCloud工程（服务治理与路由网关）</TimeLineItem>
-                    </Timeline>
-                  </div>
-                  <div className={styles.logWebDiv}>
-                    <Timeline>
+                      <TimeLineItem dot={<i className="ri-stack-line" style={iconStyle}></i>} color="blue">2018-11-04初步搭建SpringCloud工程（服务治理与路由网关）</TimeLineItem>
                       <TimeLineItem dot={<i className="ri-stack-line" style={iconStyle}></i>} color="blue">2018-11-24 搭建SpringCloud工程（服务调用链追踪）</TimeLineItem>
                       <TimeLineItem dot={<i className="ri-stack-line" style={iconStyle}></i>} color="blue">2019-01-13 前端与后端开始整合</TimeLineItem>
                       <TimeLineItem dot={<i className="ri-stack-line" style={iconStyle}></i>} color="blue">2019-03-13 SpringBoot整合RabbitMQ</TimeLineItem>
                       <TimeLineItem dot={<i className="ri-stack-line" style={iconStyle}></i>} color="blue">2019-04-05 实现动态数据源切换</TimeLineItem>
+                    </Timeline>
+                  </div>
+                  <div className={styles.logWebDiv}>
+                    <Timeline>
                       <TimeLineItem dot={<i className="ri-stack-line" style={iconStyle}></i>} color="blue">2019-04-15 Apache Shiro与Jwt实现用户认证与鉴权</TimeLineItem>
                       <TimeLineItem dot={<i className="ri-stack-line" style={iconStyle}></i>} color="blue">2019-04-23 系统整合Activiti流程管控组件</TimeLineItem>
                       <TimeLineItem dot={<i className="ri-global-line" style={iconStyle}></i>} color="green">2019-07-02 前台功能逐步完善</TimeLineItem>

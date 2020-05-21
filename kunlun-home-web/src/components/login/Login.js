@@ -46,7 +46,7 @@ const Login = (props) => {
         </div>
         <div className={styles.spinSpanDiv}>
           <Spin spinning={pageLoading} size={"large"} tip={"页面努力加载中，请稍候！"} className={[styles.spinDot, styles.spinSpan]}>
-            <div className={styles.inputDiv}>
+            <div className={styles.inputDiv} style={{marginRight: "14%", marginTop: "5%"}}>
               <div className={styles.welcomeDiv}>
                 <span className={styles.welcomeFont1}>欢迎使用{config.name}</span>
               </div>
