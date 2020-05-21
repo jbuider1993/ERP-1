@@ -31,10 +31,11 @@ const ThemeDrawer = (props) => {
       <Drawer
         mask={false}
         className={styles.drawer}
-        width={"260px"}
+        width={"300px"}
         placement="right"
         onClose={onClose}
         visible={themeDrawerVisible}
+        mask={true}
       >
         <Tabs
           hideAdd
@@ -44,12 +45,12 @@ const ThemeDrawer = (props) => {
         >
           <TabPane tab={"主题样式"} key={"style"} closable={false} style={{ marginLeft: "15px", marginRight: "15px", marginBottom: "15px" }}>
             <ThemeStyle {...themeStyleProps} />
-            <Button type={"primary"} icon={<i className="ri-save-3-line" style={iconStyle}></i>} onClick={onDefaultStyle} style={{ width: "230px" }}>恢复默认</Button>
+            <Button type={"primary"} icon={<i className="ri-save-3-line" style={iconStyle}></i>} onClick={onDefaultStyle} style={{ width: "270px" }}>恢复默认</Button>
           </TabPane>
           <TabPane tab={"主题颜色"} key={"color"} closable={false} className={styles.sketchPicker} style={{ marginLeft: "15px", marginRight: "15px" }}>
             <div style={{paddingBottom: "5px"}}>
               <div style={{width: "89%", paddingBottom: "5px"}}>
-                <i className="ri-list-settings-line" style={iconStyle}></i>
+                <i className="ri-list-settings-fill" style={iconStyle}></i>
                 <span style={{marginLeft: "5px", fontWeight: "bolder"}}>预置：</span>
               </div>
               <div style={{paddingBottom: "5px"}}>
@@ -61,7 +62,7 @@ const ThemeDrawer = (props) => {
               </div>
               <div>
                 <div style={{width: "89%", paddingBottom: "5px"}}>
-                  <i className="ri-edit-box-line" style={iconStyle}></i>
+                  <i className="ri-edit-box-fill" style={iconStyle}></i>
                   <span style={{marginLeft: "5px", fontWeight: "bolder"}}>自定义：</span>
                 </div>
                 <div>
@@ -73,7 +74,7 @@ const ThemeDrawer = (props) => {
                 </div>
               </div>
             </div>
-            <Button type={"primary"} icon={<i className="ri-save-3-line" style={iconStyle}></i>} onClick={onDefaultColor} style={{ width: "230px", marginTop: "15px" }}>恢复默认</Button>
+            <Button type={"primary"} icon={<i className="ri-save-3-line" style={iconStyle}></i>} onClick={onDefaultColor} style={{ width: "270px", marginTop: "15px" }}>恢复默认</Button>
           </TabPane>
         </Tabs>
       </Drawer>

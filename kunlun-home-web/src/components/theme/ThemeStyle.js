@@ -15,7 +15,7 @@ const ThemeStyle = (props) => {
     <div style={{ marginBottom: "15px" }}>
       <ul style={{ listStyle: "none", cursor: "pointer", marginLeft: "-40px" }}>
         <li style={{ marginBottom: "5px" }}>
-          <i className="ri-layout-line" style={iconStyle}></i>&nbsp;样式布局：
+          <i className="ri-layout-fill" style={iconStyle}></i>&nbsp;样式布局：
         </li>
         <li>
           <ul style={{ listStyle: "none", cursor: "pointer", marginLeft: "-40px" }}>
