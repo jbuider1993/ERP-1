@@ -84,7 +84,7 @@ class SideMenu extends React.Component {
     );
 
     const tabOperateOptions = <div style={{marginTop: "2px", marginRight: "10px", marginLeft: "10px"}}>
-      <Dropdown overlay={dropdownOptions} className={styles.down}>
+      <Dropdown overlay={dropdownOptions} className={styles.cursorDiv}>
         <Tooltip title={"页签操作"} placement={"left"}>
           <i className="ri-menu-line" style={{ fontSize: "20px" }}></i>
         </Tooltip>
