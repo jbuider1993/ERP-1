@@ -7,8 +7,9 @@ const ThemeStyle = (props) => {
   const { themeStyle, onChangeStyle } = props;
 
   const iconStyle = {
-    verticalAlign: "bottom",
-    marginRight: "3px",
+    verticalAlign: "sub",
+    marginRight: "5px",
+    fontSize: "18px"
   };
 
   return (
