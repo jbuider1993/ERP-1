@@ -24,7 +24,7 @@ const ThemeDrawer = (props) => {
   const iconStyle = {
     verticalAlign: "sub",
     marginRight: "5px",
-    fontSize: "18px"
+    fontSize: "17px"
   };
 
   return (
@@ -32,7 +32,7 @@ const ThemeDrawer = (props) => {
       <Drawer
         mask={false}
         className={styles.drawer}
-        width={"300px"}
+        width={280}
         placement="right"
         onClose={onClose}
         visible={themeDrawerVisible}
@@ -46,7 +46,7 @@ const ThemeDrawer = (props) => {
         >
           <TabPane tab={"主题样式"} key={"style"} closable={false} style={{ marginLeft: "15px", marginRight: "15px", marginBottom: "15px" }}>
             <ThemeStyle {...themeStyleProps} />
-            <Button type={"primary"} icon={<i className="ri-save-3-line" style={iconStyle}></i>} onClick={onDefaultStyle} style={{ width: "270px" }}>恢复默认</Button>
+            <Button type={"primary"} icon={<i className="ri-save-3-line" style={iconStyle}></i>} onClick={onDefaultStyle} style={{ width: "250px" }}>恢复默认</Button>
           </TabPane>
           <TabPane tab={"主题颜色"} key={"color"} closable={false} className={styles.sketchPicker} style={{ marginLeft: "15px", marginRight: "15px" }}>
             <div style={{paddingBottom: "5px"}}>
@@ -75,7 +75,7 @@ const ThemeDrawer = (props) => {
                 </div>
               </div>
             </div>
-            <Button type={"primary"} icon={<i className="ri-save-3-line" style={iconStyle}></i>} onClick={onDefaultColor} style={{ width: "270px", marginTop: "15px" }}>恢复默认</Button>
+            <Button type={"primary"} icon={<i className="ri-save-3-line" style={iconStyle}></i>} onClick={onDefaultColor} style={{ width: "250px", marginTop: "10px" }}>恢复默认</Button>
           </TabPane>
         </Tabs>
       </Drawer>
