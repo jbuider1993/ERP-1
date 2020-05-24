@@ -69,10 +69,10 @@ const Login = (props) => {
                     <Input placeholder={"请输入验证码"} style={{ width: "130px" }} onPressEnter={onKeyEnter} prefix={<i className="ri-shield-flash-line" style={{ color: '#506c86' }}></i>} />
                   </FormItem>
                 </Row>
-                <Row style={{ marginRight: "13%", marginTop: "-17.5%", float: "right", display: "inline-block" }}>
+                <Row style={{ marginRight: "13%", marginTop: "-17.8%", float: "right", display: "inline-block" }}>
                   <FormItem>
                     <div onClick={refreshCode}>
-                      <img src={codeModel ? "data:image/png;base64," + codeModel.binary : "default.png"} style={{height: "30px", width: "100px", border: "1px solid #E8E8E8"}}/>
+                      <img src={codeModel ? "data:image/png;base64," + codeModel.binary : "default.png"} style={{height: "33px", width: "100px"}}/>
                     </div>
                   </FormItem>
                 </Row>

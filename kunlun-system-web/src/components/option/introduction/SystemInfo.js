@@ -41,24 +41,22 @@ const SystemInfo = (props) => {
                   <Divider className={styles.dividerDiv} />
                 </div>
                 <div className={styles.briefContentDiv}>
-                  <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{config.name}基于前后端分离架构，通过Apache Shiro与Jwt组件，用token进行数据交互认证，可独立部署。</div>
-                  <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;kunlun-service 基于 SpringBoot 与 Spring Cloud 构建开发，提供后端基于微服务架构的解决方案；kunlun-web 基于 umi(乌米) 与蚂蚁金服 Ant Design 构建开发，提供前端解决方案。</div>
-                  <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;系统基于前后端分离架构，前端服务有：kunlun-home-web（前端框架）和kunlun-system-web（前端业务服务）；后端服务有：kunlun-register-service（微服务注册中心）、kunlun-gateway-service（微服务网关）、kunlun-basedata-service（基础数据、缓存与微服务调用链追踪）和kunlun-system-service（系统业务服务）。</div>
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{config.name}是一套基于前后端分离架构的后台管理系统。kunlun-web 基于React + Umi(乌米) + Ant Design (蚂蚁金服) 构建开发，提供前端解决方案；kunlun-service 基于 SpringBoot 与 Spring Cloud 构建开发，提供后端基于微服务架构的解决方案。系统通过Apache Shiro与Jwt组件，用token进行数据交互认证，可快速开发并独立进行Docker容器化部署。
                 </div>
                 <div className={styles.projectInfoDIv}>
-                  <Descriptions title="" layout="vertical" bordered column={3} style={{ flex: 1}}>
+                  <Descriptions title="" layout="vertical" bordered column={3} style={{padding: "0px 10px 0px 10px"}}>
                     <DescriptionsItem label="名称">服务治理</DescriptionsItem>
                     <DescriptionsItem label="项目名">kunlun-register-service</DescriptionsItem>
-                    <DescriptionsItem label="说明">服务注册、服务发现、服务心跳检测及高级消息队列</DescriptionsItem>
-                    <DescriptionsItem label="服务网关">基础数据服务</DescriptionsItem>
+                    <DescriptionsItem label="说明">服务注册、服务发现、服务心跳检测、高级消息队列(RabbitMQ)及分布式配置中心等</DescriptionsItem>
+                    <DescriptionsItem label="服务网关">基础数据</DescriptionsItem>
                     <DescriptionsItem label="kunlun-gateway-service">kunlun-basedata-service</DescriptionsItem>
-                    <DescriptionsItem label="服务路由及分布式服务配置中心">提供基础数据支持，如菜单、角色、权限等，并提供分布式缓存功能</DescriptionsItem>
-                    <DescriptionsItem label="业务服务">前端框架服务</DescriptionsItem>
+                    <DescriptionsItem label="服务路由、登录用户校验、鉴权及生成Token、Hystrix的turbine模式配置及Swagger路由配置等">提供基础数据支持，如菜单、角色、权限等，并提供基于Redis的分布式缓存功能、基于ElasticSearch + RabbitMQ的服务调用追踪、资源爬取等</DescriptionsItem>
+                    <DescriptionsItem label="业务服务">前端框架</DescriptionsItem>
                     <DescriptionsItem label="kunlun-system-service">kunlun-home-web</DescriptionsItem>
-                    <DescriptionsItem label="业务功能支持服务">提供项目布局，登录、菜单、主题等功能</DescriptionsItem>
-                    <DescriptionsItem label="前端业务服务">公共模块</DescriptionsItem>
+                    <DescriptionsItem label="业务功能支持服务，提供业务数据、动态数据源、脚本自动执行及基于RabbitMQ的异步操作日志生成功能">提供登录页面、业务菜单、消息待办、主题皮肤、登录人信息及项目布局等</DescriptionsItem>
+                    <DescriptionsItem label="前端业务">公共模块</DescriptionsItem>
                     <DescriptionsItem label="kunlun-system-web">kunlun-common-api</DescriptionsItem>
-                    <DescriptionsItem label="提供前端业务数据展示功能">提供公共基础模型、工具等</DescriptionsItem>
+                    <DescriptionsItem label="展示系统业务数据及功能页面，如首页信息、人员管理、用户地图、流程管理、操作日志、事项日程、服务资源管理、菜单管理等">提供公共基础模型、工具、自动配置、统一异常处理、统一Swagger配置及操作日志AOP等等</DescriptionsItem>
                   </Descriptions>
                 </div>
               </div>
