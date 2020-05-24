@@ -36,8 +36,8 @@ class MenuLimitDrawer extends React.Component {
     const { getFieldsValue, validateFields, setFieldsValue, resetFields } = this.formRef;
 
     const formItemLayout = {
-      labelCol: {span: 6},
-      wrapperCol: {span: 18},
+      labelCol: {span: 8},
+      wrapperCol: {span: 16},
     };
 
     const onCheckTreeNode = (checkedTreeNodeKeys, item) => {
@@ -71,7 +71,7 @@ class MenuLimitDrawer extends React.Component {
         <Spin spinning={menuLimitLoading}>
           <Drawer
             title={(roleInfoData && roleInfoData.roleName ? roleInfoData.roleName + "_" : "") + "菜单权限"}
-            width={350}
+            width={300}
             placement="right"
             onClose={onClose}
             maskClosable={false}

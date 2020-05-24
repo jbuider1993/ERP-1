@@ -41,10 +41,12 @@ export default {
     },
 
     *login({ payload: params }, { select, call, put }) {
+      console.log("===== globalModel login =====");
       yield put({ type: "updateState", payload: { pageLoading: true }});
       const { userName, password } = params;
       const {dispatch, codeModel} = yield select(state => state.globalModel);
       const res = yield call(globalService.login, { userName, password, code: codeModel.code });
+      console.log("===== globalModel login res ===== " + res.code);
       if (res.code == "200") {
         console.log(res);
         window._USERINFO_ = res.data.userInfo;
@@ -79,7 +81,7 @@ export default {
 
     *logout({ payload: params }, { select, call, put }) {
       yield put({ type: "updateState", payload: { pageLoading: true }});
-      const { userName, password } = window._USERINFO_ ? window._USERINFO_ : sessionStorage.userInfo;
+      const { userName, password } = window._USERINFO_ ? JSON.parse(window._USERINFO_) : JSON.parse(sessionStorage.userInfo);
       const res = yield call(globalService.logout, { userName, password });
       if (res.code == "200") {
         console.log(res);

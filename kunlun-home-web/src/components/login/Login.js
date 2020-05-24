@@ -46,7 +46,7 @@ const Login = (props) => {
         </div>
         <div className={styles.spinSpanDiv}>
           <Spin spinning={pageLoading} size={"large"} tip={"页面努力加载中，请稍候！"} className={[styles.spinDot, styles.spinSpan]}>
-            <div className={styles.inputDiv} style={{marginRight: "14%", marginTop: "5%"}}>
+            <div className={styles.inputDiv} style={{marginRight: "11%", marginTop: "3%"}}>
               <div className={styles.welcomeDiv}>
                 <span className={styles.welcomeFont1}>欢迎使用{config.name}</span>
               </div>
@@ -69,15 +69,15 @@ const Login = (props) => {
                     <Input placeholder={"请输入验证码"} style={{ width: "130px" }} onPressEnter={onKeyEnter} prefix={<i className="ri-shield-flash-line" style={{ color: '#506c86' }}></i>} />
                   </FormItem>
                 </Row>
-                <Row style={{ marginRight: "13%", marginTop: "-18%", float: "right", display: "inline-block" }}>
+                <Row style={{ marginRight: "13%", marginTop: "-17.5%", float: "right", display: "inline-block" }}>
                   <FormItem>
                     <div onClick={refreshCode}>
-                      <img src={codeModel ? "data:image/png;base64," + codeModel.binary : null} />
+                      <img src={codeModel ? "data:image/png;base64," + codeModel.binary : "default.png"} style={{height: "30px", width: "100px", border: "1px solid #E8E8E8"}}/>
                     </div>
                   </FormItem>
                 </Row>
                 <Row align="center">
-                  <Button type="primary" size="default" htmlType="submit" style={{ width: "240px" }} onClick={login}>登录</Button>
+                  <Button type="primary" size="default" style={{ width: "240px" }} onClick={login}>登录</Button>
                 </Row>
               </Form>
             </div>

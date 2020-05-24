@@ -20,9 +20,9 @@ const OnlineList = (props) => {
         <Tag color="blue"><span>&nbsp;</span>{"在线"}<span>&nbsp;</span></Tag> :
         <Tag color="red"><span>&nbsp;</span>{"下线"}<span>&nbsp;</span></Tag> },
     { title: '登录时间', dataIndex: 'loginTime', key: 'loginTime', width: '14%',
-      render: (text, record, index) => <span>{moment(text).format("YYYY-MM-DD HH:mm:SS")}</span> },
+      render: (text, record, index) => <span>{moment(text).format("YYYY-MM-DD HH:mm:ss")}</span> },
     { title: '最后访问时间', dataIndex: 'lastTime', key: 'lastTime', width: '14%',
-      render: (text, record, index) => <span>{moment(text).format("YYYY-MM-DD HH:mm:SS")}</span> },
+      render: (text, record, index) => <span>{moment(text).format("YYYY-MM-DD HH:mm:ss")}</span> },
     { title: '操作', key: 'operate', width: '10%',
       render: (text, record) => (
       <span>
