@@ -5,38 +5,22 @@
   background: #ffffff;
 }
 
-.tabTitle [role="tab"] {
-  padding: 12px 30px 0px 30px !important;
-  border: 0px !important;
-  height: 47px !important;
-}
-
-.tabTitle [class^=ant-tabs-ink-bar] {
-  visibility: visible !important;
-}
-
-.tabTitle [class^=ant-tabs-nav-container] {
-  border-bottom: 1px solid #e8e8e8 !important;
-  height: 47px !important;
-}
-
-.tabTitle [class^=ant-tabs-bar] {
-  margin: 0 0 0 0 !important;
-}
-
 .noticeTabButton {
   border-top: 1px solid #e8e8e8;
   cursor: pointer;
   background: #fafafa;
+  display: flex;
+  flex: 1;
+  flex-direction: row;
+  text-align: center;
 }
 
 .noticeTabClear {
-  position: absolute;
-  display: inline-block;
-  width: 50%;
   transition: all .3s;
   line-height: 46px;
   text-align: center;
+  display: flex;
+  flex: 1;
 }
 
 .noticeTabClear:hover {
@@ -45,13 +29,12 @@
 }
 
 .noticeTabMore {
-  display: inline-block;
-  width: 50%;
   transition: all .3s;
   border-left: 1px solid #e8e8e8;
   line-height: 46px;
   text-align: center;
-  margin-left: 186px;
+  display: flex;
+  flex: 1;
 }
 
 .noticeTabMore:hover {
