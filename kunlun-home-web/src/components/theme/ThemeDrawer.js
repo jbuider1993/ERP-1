@@ -36,7 +36,7 @@ const ThemeDrawer = (props) => {
         placement="right"
         onClose={onClose}
         visible={themeDrawerVisible}
-        mask={false}
+        mask={true}
       >
         <Tabs
           hideAdd

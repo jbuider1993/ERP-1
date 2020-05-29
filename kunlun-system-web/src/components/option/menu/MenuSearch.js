@@ -77,7 +77,7 @@ class MenuSearch extends React.Component {
             </Col>
             <Col span={6}>
               <div style={{marginLeft: "10px"}}>
-                <Button type={"primary"} onClick={searchMenuList} icon={<i className="ri-search-line" style={iconStyle}></i>}>查询</Button>
+                <Button onClick={searchMenuList} icon={<i className="ri-search-line" style={iconStyle}></i>} style={{border: "0px", background: window._THEMECOLOR_}}>查询</Button>
                 <Button onClick={() => handleReset()} style={{marginLeft: "10px"}} icon={<i className="ri-restart-line" style={iconStyle}></i>}>重置</Button>
                 <Button type="dashed" style={{marginLeft: "10px"}} onClick={() => toggleCollapse()}>
                   <i className={this.state.expand ? "ri-arrow-down-s-line" : "ri-arrow-up-s-line"} style={iconStyle}></i>搜索

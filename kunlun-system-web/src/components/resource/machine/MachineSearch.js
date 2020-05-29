@@ -51,7 +51,7 @@ const MachineSearch = (props) => {
           </Col>
           <Col span={6}>
             <div style={{ marginTop: "4px", marginLeft: "10px" }}>
-              <Button type={"primary"} onClick={searchMachineList} icon={"search"}>查询</Button>
+              <Button onClick={searchMachineList} icon={"search"} style={{border: "0px", background: window._THEMECOLOR_}}>查询</Button>
               <Button onClick={() => resetFields()} style={{ marginLeft: "10px" }} icon={"rest"}>重置</Button>
             </div>
           </Col>

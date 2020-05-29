@@ -20,8 +20,6 @@ import styles from './index.css';
 
 function BasicLayout(props) {
 
-  debugger
-
   const showPageByPath = () => {
     let urlPath = props.location.pathname;
     if (props.location.hash != "") {

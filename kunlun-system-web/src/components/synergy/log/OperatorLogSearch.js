@@ -69,7 +69,7 @@ class OperatorLogSearch extends React.Component {
             </Col>
             <Col span={6}>
               <FormItem>
-                <Button type="primary" size="default" icon={<i className="ri-search-line" style={iconStyle}></i>} style={{marginLeft: "10px"}} onClick={() => handleSearch()}>查询</Button>
+                <Button size="default" icon={<i className="ri-search-line" style={iconStyle}></i>} style={{marginLeft: "10px", border: "0px", background: window._THEMECOLOR_}} onClick={() => handleSearch()}>查询</Button>
                 <Button type="default" size="default" icon={<i className="ri-restart-line" style={iconStyle}></i>} style={{marginLeft: "10px"}} onClick={() => handleReset()}>重置</Button>
                 <Button type="dashed" size="default" style={{ marginLeft: "10px" }} onClick={() => onShowDetail()}>
                   <i className={this.state.expand ? "ri-arrow-down-s-line" : "ri-arrow-up-s-line"} style={iconStyle}></i>搜索
