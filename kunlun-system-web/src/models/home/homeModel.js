@@ -72,12 +72,16 @@ export default {
     setup({ dispatch, history }) {
       history.listen(location => {
         if (location.pathname === "/home") {
-          dispatch({ type: 'updateState', payload: { loading: true }});
-          Promise.all([dispatch({ type: 'getUserCount', payload: {} }), dispatch({ type: 'getMessages', payload: {} })]).then(() =>
-            dispatch({ type: 'updateState', payload: { loading: false }})
-          );
 
-          dispatch({ type: 'getSchedules', payload: {}});
+          debugger
+
+          dispatch({ type: 'updateState', payload: { loading: true }});
+          if (window._TOKEN_) {
+            dispatch({ type: 'getUserCount', payload: {} });
+            dispatch({ type: 'getMessages', payload: {} });
+            dispatch({ type: 'getSchedules', payload: {}});
+            dispatch({ type: 'updateState', payload: { loading: false }})
+          }
         }
       });
     },

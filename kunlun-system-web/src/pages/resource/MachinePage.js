@@ -73,8 +73,8 @@ const MachinePage = (props) => {
   );
 };
 
-function mapStateToProps({ machineModel }) {
-  return { machineModel };
+function mapStateToProps({ globalModel, machineModel }) {
+  return { globalModel, machineModel };
 }
 
 export default connect(mapStateToProps)(MachinePage);

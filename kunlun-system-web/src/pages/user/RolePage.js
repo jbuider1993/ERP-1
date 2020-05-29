@@ -180,8 +180,8 @@ const RolePage = (props) => {
   );
 };
 
-function mapStateToProps({ roleModel }){
-  return { roleModel };
+function mapStateToProps({ globalModel, roleModel }){
+  return { globalModel, roleModel };
 }
 
 export default connect(mapStateToProps)(RolePage);

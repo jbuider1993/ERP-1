@@ -167,16 +167,9 @@ class MenuModal extends React.Component {
                 </Col>
               </Row>
               <Row>
-                <Col span={12}>
+                <Col span={24}>
                   <FormItem {...formItemLayout} label="菜单url" name={"url"} rules={[{required: false, message: '请输入菜单url'}]}>
                     <Input/>
-                  </FormItem>
-                </Col>
-                <Col span={12}>
-                  <FormItem {...formItemLayout} label="携带Token" name={"carryToken"} rules={[{required: false, message: ''}]}>
-                    <RadioGroup value={radioCheckedValue}>
-                      {showOptions}
-                    </RadioGroup>
                   </FormItem>
                 </Col>
               </Row>

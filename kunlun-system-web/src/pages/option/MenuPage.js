@@ -156,8 +156,8 @@ const MenuPage = (props) => {
   );
 };
 
-function mapStateToProps({ menuModel }) {
-  return { menuModel };
+function mapStateToProps({ globalModel, menuModel }) {
+  return { globalModel, menuModel };
 }
 
 export default connect(mapStateToProps)(MenuPage);

@@ -87,8 +87,8 @@ const IconPage = (props) => {
   );
 };
 
-function mapStateToProps({ iconModel }) {
-  return { iconModel };
+function mapStateToProps({ globalModel, iconModel }) {
+  return { globalModel, iconModel };
 }
 
 export default connect(mapStateToProps)(IconPage);

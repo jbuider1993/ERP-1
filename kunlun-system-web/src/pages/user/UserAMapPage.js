@@ -60,8 +60,8 @@ class UserAMapPage extends React.Component {
   };
 }
 
-function mapStateToProps({ userModel }) {
-  return { userModel };
+function mapStateToProps({ globalModel, userModel }) {
+  return { globalModel, userModel };
 }
 
 export default connect(mapStateToProps)(UserAMapPage);

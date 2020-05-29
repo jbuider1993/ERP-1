@@ -11,7 +11,7 @@ class UserWorkbenchCard extends React.Component {
 
     const {userCounts, onShowDetail} = this.props;
 
-    const loginUserInfo = window._USERINFO_ ? JSON.parse(window._USERINFO_) : null;
+    const loginUserInfo = window._USERINFO_ ? window._USERINFO_ : null;
 
     return (
       <div className={indexStyles.headerDiv}>

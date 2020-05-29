@@ -148,8 +148,8 @@ const ProcessPage = (props) => {
   );
 };
 
-function mapStateToProps({ processModel }){
-  return { processModel };
+function mapStateToProps({ globalModel, processModel }){
+  return { globalModel, processModel };
 }
 
 export default connect(mapStateToProps)(ProcessPage);

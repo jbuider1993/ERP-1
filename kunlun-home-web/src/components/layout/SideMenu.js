@@ -2,6 +2,7 @@ import React from 'react';
 import {Layout, Menu, Tabs, Dropdown, Tooltip} from 'antd';
 import styles from './Menu.less';
 import 'remixicon/fonts/remixicon.css';
+import config from '../../config/config';
 
 const { Sider, Content } = Layout;
 const { SubMenu } = Menu;
@@ -20,14 +21,26 @@ class SideMenu extends React.Component {
     }
   }
 
+  componentWillReceiveProps(nextProps) {
+    const {tokenModel, themeColor} = nextProps;
+    this.onLoadIFrame(tokenModel, themeColor);
+  }
+
   componentDidUpdate(prevProps, prevState, snapshot) {
     if (!!this.state.refreshView) this.setState({refreshView: null});
+  }
+
+  onLoadIFrame(tokenModel, themeColor) {
+    // 传递参数到子IFrame页面进行交互
+    const iFrameParams = { token: tokenModel.token, userInfo: tokenModel.userInfo, themeColor, isAuth: true };
+    window.frames[0].postMessage(iFrameParams, '*');
+    window.frames[window.frames.length - 1].postMessage(iFrameParams, '*');
   }
 
   render() {
 
     const { collapsed, activeHeadMenuKey, onSelectSideMenu, activeSideMenuKey, menuData, paneTabs, onTabChange, updatePathMap, menuMap,
-      onOpenSubMenu, openedSubMenuKey, removeTab, closeCurrentTab, closeOtherTab, onCloseTab, tokenModel, themeStyle, siderColor
+      onOpenSubMenu, openedSubMenuKey, removeTab, closeCurrentTab, closeOtherTab, onCloseTab, tokenModel, themeStyle, themeColor, siderColor
     } = this.props;
 
     // 更新路由Map
@@ -96,8 +109,6 @@ class SideMenu extends React.Component {
       this.setState({ refreshView: new Date().getTime() });
     };
 
-    const iFrameParams = "tokenModel=" + JSON.stringify(tokenModel);
-
     // 刷新时间戳
     const refreshFlag = this.state.refreshView;
 
@@ -127,8 +138,8 @@ class SideMenu extends React.Component {
               activeHeadMenuKey == menuData.main[0].key || (activeHeadMenuKey != "home" && themeStyle == "subMenu") ?
               <iframe id={"homeIFrame_" + activeHeadMenuKey} name={"homeIFrame_" + activeHeadMenuKey}
                       style={{width: "100%", height: "100%", padding: activeHeadMenuKey != "home" ? "20px" : "0", display: "block"}}
-                      frameBorder={"no"}
-                      src={pageUrl + "?" + iFrameParams}/> :
+                      frameBorder={"no"} src={pageUrl} onLoad={() => this.onLoadIFrame(tokenModel, themeColor)}
+              /> :
               <Tabs
                 className={[styles.gapTab, styles.distanceDiv]}
                 type="editable-card"
@@ -144,8 +155,8 @@ class SideMenu extends React.Component {
                       <div className={styles.tabDiv} ref={"iframe" + index}>
                         <iframe id={"tabIFrame_" + activeHeadMenuKey + "_" + activeSideMenuKey + index}
                                 name={"tabIFrame_" + activeHeadMenuKey + "_" + activeSideMenuKey + index}
-                                frameBorder={"no"} style={{width: "100%", height: "100%"}}
-                                src={pane.url + (pane.carryToken ? "?" + iFrameParams : "") + (refreshFlag && activeSideMenuKey == pane.key ? ((pane.carryToken ? "&" : "") + "refreshView=" + refreshFlag) : "")}
+                                frameBorder={"no"} style={{width: "100%", height: "100%"}} onLoad={() => this.onLoadIFrame(tokenModel, themeColor)}
+                                src={pane.url + (refreshFlag && activeSideMenuKey == pane.key ? ("refreshView=" + refreshFlag) : "")}
                         />
                       </div>
                     </TabPane>)

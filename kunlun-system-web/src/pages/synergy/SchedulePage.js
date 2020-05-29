@@ -89,8 +89,8 @@ const SchedulePage = (props) => {
   );
 };
 
-function mapStateToProps({ scheduleModel }){
-  return { scheduleModel };
+function mapStateToProps({ globalModel, scheduleModel }){
+  return { globalModel, scheduleModel };
 }
 
 export default connect(mapStateToProps)(SchedulePage);

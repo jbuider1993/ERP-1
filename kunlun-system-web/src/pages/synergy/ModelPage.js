@@ -147,8 +147,8 @@ const ModelPage = (props) => {
   );
 };
 
-function mapStateToProps({modelModel}) {
-  return {modelModel};
+function mapStateToProps({globalModel, modelModel}) {
+  return {globalModel, modelModel};
 }
 
 export default connect(mapStateToProps)(ModelPage);

@@ -72,8 +72,8 @@ const OperatorLogPage = (props) => {
   );
 };
 
-function mapStateToProps({ operatorLogModel }){
-  return { operatorLogModel };
+function mapStateToProps({ globalModel, operatorLogModel }){
+  return { globalModel, operatorLogModel };
 }
 
 export default connect(mapStateToProps)(OperatorLogPage);

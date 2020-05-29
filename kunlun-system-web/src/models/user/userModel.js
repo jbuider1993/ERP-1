@@ -78,7 +78,7 @@ export default {
     setup({ dispatch, history }) {
       return history.listen(location => {
         if (location.pathname === "/user/list") {
-          dispatch({ type: 'getListDatas', payload: {} });
+          dispatch({ type: 'getListDatas', payload: {}});
         }
       });
     },

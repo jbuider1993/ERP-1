@@ -62,8 +62,8 @@ const OnlinePage = (props) => {
   );
 };
 
-function mapStateToProps({ onlineModel }){
-  return { onlineModel };
+function mapStateToProps({ globalModel, onlineModel }){
+  return { globalModel, onlineModel };
 }
 
 export default connect(mapStateToProps)(OnlinePage);

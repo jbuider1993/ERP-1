@@ -73,8 +73,8 @@ const InstancePage = (props) => {
   );
 };
 
-function mapStateToProps({ instanceModel }) {
-  return { instanceModel };
+function mapStateToProps({ globalModel, instanceModel }) {
+  return { globalModel, instanceModel };
 }
 
 export default connect(mapStateToProps)(InstancePage);

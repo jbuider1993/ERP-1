@@ -136,6 +136,7 @@ const AppPage = (props) => {
     themeStyle,
     siderColor,
     menuMap,
+    themeColor,
     onTabChange: (activeTabKey) => {
       dispatch({ type: "globalModel/updateState", payload: { activeSideMenuKey: activeTabKey, activeHeadMenuKey: menuMap.get(activeTabKey) }});
     },
@@ -202,10 +203,10 @@ const AppPage = (props) => {
     },
     onChangeColor: (type, color) => {
       const payload = type == "preset" ? {themeColor: color} : selectedStyle == "theme" ? { themeColor: color } : { siderColor: color };
-      dispatch({ type: "globalModel/updateState", payload });
+      dispatch({ type: "globalModel/updateState", payload: {themeColor: color}});
     },
     onDefaultColor: () => {
-      dispatch({ type: "globalModel/updateState", payload: { themeColor: "#000000", siderColor: "#fff", }});
+      dispatch({ type: "globalModel/updateState", payload: { themeColor: "#000000", siderColor: "#fff" }});
     },
     onChangeStyle: (style) => {
       dispatch({ type: "globalModel/updateState", payload: { themeStyle: style }});

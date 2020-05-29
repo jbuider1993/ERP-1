@@ -7,6 +7,8 @@ axios.defaults.timeout = 300000;
 axios.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded";
 
 export function get(url, data) {
+  if (!window._TOKEN_) return {code: null};
+
   if (url) {
     let getUrl = "";
     Object.keys(data).forEach((item) => {
@@ -22,8 +24,6 @@ export function get(url, data) {
       config.timeout = 300000;
       return config;
     });
-
-    console.log("get url ===>>> " + url + " token ===>>> " + window._TOKEN_);
 
     let response = new Promise((resolve, reject) => {
       instance.get(url).then(res => {
@@ -52,20 +52,19 @@ export function get(url, data) {
         } else {
           message.error("请求失败！");
         }
-        console.log("Get Request Params:  [url] ===> " + url + " [data] ===> " + JSON.stringify(data));
-        console.log("Get Request " + error);
         return reject(error);
       });
     });
     return response;
   } else {
-    console.log("Get Request Params:  [url] ===> " + url + " [data] ===> " + JSON.stringify(data));
     message.error("请求格式不正确！");
     return null;
   }
 }
 
 export function post(url, data) {
+  if (!window._TOKEN_) return {code: null};
+
   if (url && data) {
     const instance = axios.create();
     instance.interceptors.request.use(config => {
@@ -73,8 +72,6 @@ export function post(url, data) {
       config.timeout = 300000;
       return config;
     });
-
-    console.log("post url ===>>> " + url + " token ===>>> " + window._TOKEN_);
 
     let response = new Promise((resolve, reject) => {
       instance.post(url, qs.stringify(data)).then(res => {
@@ -89,14 +86,11 @@ export function post(url, data) {
         } else {
           message.error("请求失败！");
         }
-        console.log("Post Request Params:  [url] ===> " + url + " [data] ===> " + JSON.stringify(data));
-        console.log("Post Request " + error);
         return reject(error);
       });
     });
     return response;
   } else {
-    console.log("Post Request Params:  [url] ===> " + url + " [data] ===> " + JSON.stringify(data));
     message.error("请求格式不正确！");
     return null;
   }
@@ -127,14 +121,11 @@ export function download(url, data, type) {
         } else {
           message.error("请求失败！");
         }
-        console.log("Post Request Params:  [url] ===> " + url + " [data] ===> " + JSON.stringify(data));
-        console.log("Post Request " + error);
         return reject(error);
       });
     });
     return response;
   } else {
-    console.log("Post Request Params:  [url] ===> " + url + " [data] ===> " + JSON.stringify(data));
     message.error("请求格式不正确！");
     return null;
   }

@@ -11,8 +11,8 @@ const SystemInfoPage = (props) => {
   );
 };
 
-function mapStateToProps({ optionModel }) {
-  return { optionModel };
+function mapStateToProps({ globalModel, optionModel }) {
+  return { globalModel, optionModel };
 }
 
 export default connect(mapStateToProps)(SystemInfoPage);

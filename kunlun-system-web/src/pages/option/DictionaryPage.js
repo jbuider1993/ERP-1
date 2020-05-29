@@ -172,8 +172,8 @@ class DictionaryPage extends React.Component {
   };
 }
 
-function mapStateToProps({dictionaryModel}){
-  return {dictionaryModel};
+function mapStateToProps({globalModel, dictionaryModel}){
+  return {globalModel, dictionaryModel};
 }
 
 export default connect(mapStateToProps)(DictionaryPage);

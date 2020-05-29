@@ -66,8 +66,8 @@ const MessagePage = (props) => {
   );
 };
 
-function mapStateToProps({ messageModel }) {
-  return { messageModel };
+function mapStateToProps({ globalModel, messageModel }) {
+  return { globalModel, messageModel };
 }
 
 export default connect(mapStateToProps)(MessagePage);
