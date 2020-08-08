@@ -4,7 +4,7 @@ const SYSTEM_SERVICE_API = 'http://localhost:8015/kunlun-system-service';
 const ACTIVITI_PROCESS_API = "http://localhost:8025";
 const config = {
   name: '昆仑管理系统',
-  footerText: '昆仑管理系统 © 2018-2028 KunLun Copyright | Version 2.0',
+  footerText: '昆仑管理系统 © 2018-2028 KunLun Copyright | Version 1.0.0',
   LIMIT_SIZE: 5,
   PAGE_SIZE: 10,
   PAGE_SIZE_LIST: ['10', '20', '50', '100', '200'],

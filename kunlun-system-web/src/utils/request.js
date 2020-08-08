@@ -32,7 +32,9 @@ export function get(url, data) {
         if (error.response) {
           const status = error.response.status;
           if (status == "400" || status == "404") {
-            if (error.response.data.path && error.response.data.path == "/timeout") {
+            message.error("客户端请求错误！");
+          } else if (status == "500") {
+            if (error.response.data.status && error.response.data.status == 999) {
               Modal.confirm({
                 title: '提示',
                 okText: "确认",
@@ -44,10 +46,8 @@ export function get(url, data) {
                 onCancel() {},
               });
             } else {
-              message.error("客户端请求错误！");
+              message.error("服务器内部错误！");
             }
-          } else if (status == "500") {
-            message.error("服务器内部错误！");
           }
         } else {
           message.error("请求失败！");
