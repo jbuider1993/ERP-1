@@ -69,7 +69,7 @@ class HeadMenu extends React.Component {
             <span style={{fontWeight: "bolder"}}>admin</span>
             <span style={{marginLeft: "20px"}}>系统管理员</span>
             <div>15555555555</div>
-            <div>{moment(new Date()).format("yyyy-MM-DD HH:mm:ss")}</div>
+            <div>{moment(new Date()).format("YYYY-MM-DD HH:mm:ss")}</div>
           </div>
         </div>
         <MenuItem style={{ margin: "5px 10px 0px 10px" }}>
