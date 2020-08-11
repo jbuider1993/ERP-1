@@ -10,7 +10,7 @@
     "dva": "^2.4.1",
     "antd": "^4.5.2",
     "axios": "^0.19.0",
-    "remixicon": "^2.4.0",
+    "remixicon": "^2.5.0",
     "react": "^16.13.0",
     "react-color": "^2.18.0",
     "react-dom": "^16.13.0"
