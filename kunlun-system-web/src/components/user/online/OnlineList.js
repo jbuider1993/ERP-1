@@ -39,11 +39,13 @@ const OnlineList = (props) => {
       <Table
         bordered
         size={"small"}
+        tableLayout={"auto"}
         columns={columns}
         dataSource={onlineList}
         pagination={false}
         loading={onlineLoading}
         rowKey={record => record.id}
+        scroll={{y: (window.innerHeight - 235)}}
       />
     </div>
   );

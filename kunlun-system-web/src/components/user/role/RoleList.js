@@ -56,12 +56,14 @@ const RoleList = (props) => {
       <Table
         bordered
         size={"small"}
+        tableLayout={"auto"}
         rowSelection={rowSelection}
         columns={columns}
         dataSource={roleList}
         pagination={false}
         loading={roleLoading}
         rowKey={record => record.id}
+        scroll={{y: (window.innerHeight - 200)}}
       />
     </div>
   );

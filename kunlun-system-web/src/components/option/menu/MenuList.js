@@ -51,7 +51,7 @@ const MenuList = (props) => {
         onExpand={onExpandMenuList}
         pagination={false}
         expandedRowKeys={unfoldCollapseKeys}
-        scroll={{ y: 550 }}
+        scroll={{y: (window.innerHeight - 235)}}
       />
     </div>
   );

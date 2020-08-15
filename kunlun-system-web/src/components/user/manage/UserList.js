@@ -35,12 +35,14 @@ const UserList = (props) => {
     <div className={ styles.listTable }>
       <Table
         bordered
+        tableLayout={"auto"}
         rowSelection={rowSelection}
         columns={columns}
         dataSource={userList}
         pagination={false}
         loading={userLoading}
         rowKey={record => record.id}
+        scroll={{y: (window.innerHeight - 195)}}
       />
     </div>
   );
