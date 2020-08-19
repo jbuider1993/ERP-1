@@ -12,9 +12,9 @@ class ServiceInvokeList extends React.Component {
     const columns = [
       { title: '微服务名', dataIndex: 'serviceName', key: 'serviceName', width: '30%' },
       { title: '请求方式', dataIndex: 'requestType', key: 'requestType', width: '25%' },
-      { title: '访问次数', dataIndex: 'threadName', key: 'threadName', width: '15%' },
-      { title: '访问耗时', dataIndex: 'threadName', key: 'threadName', width: '15%' },
-      { title: '服务状态', dataIndex: 'status', key: 'status', render: (text, record, index) => text == "正常" ?
+      { title: '访问次数', dataIndex: 'count', key: 'count', width: '15%' },
+      { title: '访问耗时', dataIndex: 'duration', key: 'duration', width: '15%' },
+      { title: '服务状态', dataIndex: 'available', key: 'available', render: (text, record, index) => text == "正常" ?
           <Tag color="blue"><span>&nbsp;</span>{text}<span>&nbsp;</span></Tag> :
           <Tag color="red"><span>&nbsp;</span>{text}<span>&nbsp;</span></Tag> }];
 
