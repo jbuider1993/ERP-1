@@ -24,13 +24,14 @@ class HomePage extends React.Component {
 
     const { dispatch, homeModel } = this.props;
 
-    const { userCounts, mqQueues, mqExchanges, loading, scheduleData, scheduleIndex, scheduleTotal } = homeModel;
+    const { userCounts, mqQueues, mqExchanges, loading, scheduleData, scheduleIndex, scheduleTotal, serviceInvokes } = homeModel;
 
     const statisticsCountProps = {
       userCounts
     };
 
     const serviceInvokeListProps = {
+      serviceInvokes,
       onShowDetail: (key) => {
         commonUtil.sendRequestToHome(true, key, null);
       }

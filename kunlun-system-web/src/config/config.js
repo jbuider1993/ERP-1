@@ -33,6 +33,9 @@ const config = {
     addMessage: `${SYSTEM_SERVICE_API}/message/addMessage`,
     updateMessage: `${SYSTEM_SERVICE_API}/message/updateMessage`,
     batchDeleteMessage: `${SYSTEM_SERVICE_API}/message/batchDeleteMessage`,
+
+    // 服务调用
+    queryServiceInvokes: `${BASEDATA_SERVICE_API}/elasticSearch/queryServiceInvokes`,
   },
   system_api: {
     // 菜单管理

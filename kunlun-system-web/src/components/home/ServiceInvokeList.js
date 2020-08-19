@@ -7,13 +7,13 @@ class ServiceInvokeList extends React.Component {
 
   render() {
 
-    const {serviceList, onShowDetail} = this.props;
+    const {serviceInvokes, onShowDetail} = this.props;
 
     const columns = [
-      { title: '微服务名', dataIndex: 'serviceName', key: 'serviceName', width: '20%' },
-      { title: '请求方式', dataIndex: 'methodName', key: 'methodName', width: '20%' },
-      { title: '访问次数', dataIndex: 'threadName', key: 'threadName', width: '20%' },
-      { title: '访问耗时', dataIndex: 'threadName', key: 'threadName', width: '20%' },
+      { title: '微服务名', dataIndex: 'serviceName', key: 'serviceName', width: '30%' },
+      { title: '请求方式', dataIndex: 'requestType', key: 'requestType', width: '25%' },
+      { title: '访问次数', dataIndex: 'threadName', key: 'threadName', width: '15%' },
+      { title: '访问耗时', dataIndex: 'threadName', key: 'threadName', width: '15%' },
       { title: '服务状态', dataIndex: 'status', key: 'status', render: (text, record, index) => text == "正常" ?
           <Tag color="blue"><span>&nbsp;</span>{text}<span>&nbsp;</span></Tag> :
           <Tag color="red"><span>&nbsp;</span>{text}<span>&nbsp;</span></Tag> }];
@@ -35,7 +35,7 @@ class ServiceInvokeList extends React.Component {
             bordered
             size={"small"}
             columns={columns}
-            dataSource={serviceList}
+            dataSource={serviceInvokes}
             pagination={false}
             rowKey={record => record.id}
           />

@@ -8,3 +8,7 @@ export function getUserCount(params) {
 export function getMessages(params) {
   return request.get(`${config.registry_api.getMessages}`, params);
 }
+
+export function queryServiceInvokes(params) {
+  return request.get(`${config.base_api.queryServiceInvokes}`, params);
+}

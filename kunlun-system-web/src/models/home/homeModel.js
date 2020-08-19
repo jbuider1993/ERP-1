@@ -12,6 +12,7 @@ export default {
     scheduleTotal: 0,
     scheduleData: null,
     scheduleList: null,
+    serviceInvokes: null,
   },
   reducers: {
     updateState(state, { payload }) {
@@ -22,11 +23,12 @@ export default {
     *getUserCount({ payload: params }, { select, call, put }) {
       try {
         const datas = yield call(homeService.getUserCount, {});
+        const res = yield call(homeService.queryServiceInvokes, params);
         if (datas.code == 200) {
-          yield put({ type: 'updateState', payload: { userCounts: datas.data }});
+          yield put({ type: 'updateState', payload: { userCounts: datas.data, serviceInvokes: res.data }});
         }
       } catch (e) {
-        console.log("homeModel getUserCount Error: " + e);
+        console.log("homeModel getUserCount error: " + e);
       }
     },
 
@@ -39,7 +41,18 @@ export default {
           yield put({ type: "updateStatus", payload: { mqQueues, mqExchanges }});
         }
       } catch (e) {
-        console.log("homeModel getMessages Error: " + e);
+        console.log("homeModel getMessages error: " + e);
+      }
+    },
+
+    *queryServiceInvokes({ payload: params }, { select, call, put }) {
+      try {
+        const res = yield call(homeService.queryServiceInvokes, params);
+        if (res.code == 200) {
+          yield put({ type: "updateStatus", payload: { serviceInvokes: res.data }});
+        }
+      } catch (e) {
+        console.log("homeModel getMessages error: " + e);
       }
     },
 
@@ -72,13 +85,11 @@ export default {
     setup({ dispatch, history }) {
       history.listen(location => {
         if (location.pathname === "/home") {
-
-          debugger
-
           dispatch({ type: 'updateState', payload: { loading: true }});
           if (window._TOKEN_) {
-            dispatch({ type: 'getUserCount', payload: {} });
-            dispatch({ type: 'getMessages', payload: {} });
+            dispatch({ type: 'getUserCount', payload: {}});
+            dispatch({ type: 'getMessages', payload: {}});
+            dispatch({ type: 'queryServiceInvokes', payload: {}});
             dispatch({ type: 'getSchedules', payload: {}});
             dispatch({ type: 'updateState', payload: { loading: false }})
           }
