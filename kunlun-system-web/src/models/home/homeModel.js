@@ -13,6 +13,7 @@ export default {
     scheduleData: null,
     scheduleList: null,
     serviceInvokes: null,
+    userStatistics: null,
   },
   reducers: {
     updateState(state, { payload }) {
@@ -23,9 +24,8 @@ export default {
     *getUserCount({ payload: params }, { select, call, put }) {
       try {
         const datas = yield call(homeService.getUserCount, {});
-        const res = yield call(homeService.queryServiceInvokes, params);
         if (datas.code == 200) {
-          yield put({ type: 'updateState', payload: { userCounts: datas.data, serviceInvokes: res.data }});
+          yield put({ type: 'updateState', payload: { userCounts: datas.data }});
         }
       } catch (e) {
         console.log("homeModel getUserCount error: " + e);
@@ -38,7 +38,7 @@ export default {
         if (res.code == 200) {
           const mqQueues = res.data.queues;
           const mqExchanges = res.data.exchanges;
-          yield put({ type: "updateStatus", payload: { mqQueues, mqExchanges }});
+          yield put({ type: "updateState", payload: { mqQueues, mqExchanges }});
         }
       } catch (e) {
         console.log("homeModel getMessages error: " + e);
@@ -49,10 +49,17 @@ export default {
       try {
         const res = yield call(homeService.queryServiceInvokes, params);
         if (res.code == 200) {
-          yield put({ type: "updateStatus", payload: { serviceInvokes: res.data }});
+          yield put({ type: "updateState", payload: { serviceInvokes: res.data }});
         }
       } catch (e) {
         console.log("homeModel getMessages error: " + e);
+      }
+    },
+
+    *onSelectYear({payload: params}, {select, call, put}) {
+      const res = yield call(homeService.statisticOnlineByYear, params);
+      if (res.code == 200) {
+        yield put({type: "updateState", payload: {userStatistics: res.data}});
       }
     },
 
@@ -91,6 +98,7 @@ export default {
             dispatch({ type: 'getMessages', payload: {}});
             dispatch({ type: 'queryServiceInvokes', payload: {}});
             dispatch({ type: 'getSchedules', payload: {}});
+            dispatch({ type: 'onSelectYear', payload: {year: moment(new Date()).format("YYYY")}});
             dispatch({ type: 'updateState', payload: { loading: false }})
           }
         }

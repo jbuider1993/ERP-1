@@ -27,6 +27,7 @@ const config = {
   base_api: {
     // 首页数据
     getUserCount: `${BASEDATA_SERVICE_API}/home/getUserCount`,
+    statisticOnlineByYear: `${BASEDATA_SERVICE_API}/onlineUser/statisticOnlineByYear`,
 
     // 消息管理
     getAllMessages: `${SYSTEM_SERVICE_API}/message/getAllMessages`,

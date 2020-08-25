@@ -1,17 +1,19 @@
 import React from 'react';
 import styles from './Home.less';
 import indexStyles from "../../pages/home/homeIndex.less";
-import {AutoComplete, Input, Icon} from 'antd';
-import { Line } from '@antv/g2plot';
+import {AutoComplete, Input} from 'antd';
+// import { Line } from '@antv/g2plot';
+import moment from 'moment';
+import { Line } from '@ant-design/charts';
 
 const { Option } = AutoComplete;
 
 class UserStatisticsChart extends React.Component {
 
-  componentDidMount() {
-    // 显示线图
-    this.showLineChart();
-  }
+  // componentWillReceiveProps() {
+  //   // 显示线图
+  //   this.showLineChart();
+  // }
 
   showLineChart() {
     const data = [
@@ -29,12 +31,15 @@ class UserStatisticsChart extends React.Component {
       { month: '12', value: 13 },
     ];
 
+    debugger
+
+    const {userStatistics} = this.props;
     const linePlot = new Line(document.getElementById('userVisitChart'), {
       title: { visible: false, text: '配置折线数据点样式'},
       description: { visible: false, text: '自定义配置趋势线上数据点的样式'},
       padding: [20, 15, 25, 30],
       forceFit: true,
-      data,
+      data: userStatistics && userStatistics.length > 0 ? userStatistics : data,
       xField: 'month',
       yField: 'value',
       label: { visible: true, type: 'point'},
@@ -49,16 +54,40 @@ class UserStatisticsChart extends React.Component {
         },
       },
     });
-    linePlot.render();
+    linePlot.repaint();
   }
 
   render() {
 
-    let yearDateSource = [{key: "2016", value: "2016年"},
-      {key: "2017", value: "2017年"},
-      {key: "2018", value: "2018年"},
-      {key: "2019", value: "2019年"},
-      {key: "2020", value: "2020年"}];
+    const {userStatistics, onSelectYear} = this.props;
+
+    const userStatisticLineConfig = {
+      title: { visible: false, text: '配置折线数据点样式'},
+      description: { visible: false, text: '自定义配置趋势线上数据点的样式'},
+      padding: [20, 15, 25, 30],
+      forceFit: true,
+      data: userStatistics && userStatistics.length > 0 ? userStatistics : data,
+      xField: 'month',
+      yField: 'value',
+      label: { visible: true, type: 'point'},
+      point: {
+        visible: true,
+        size: 5,
+        shape: 'diamond',
+        style: {
+          fill: 'white',
+          stroke: '#2593fc',
+          lineWidth: 2,
+        },
+      },
+    }
+
+    const startYear = Number.parseInt(moment(new Date()).format("YYYY"));
+    let yearDateSource = new Array();
+    for (let i = 5; i >= 0; i--) {
+      const objDate = {key: startYear - i, value: startYear - i};
+      yearDateSource.push(objDate);
+    }
     const yearOptions = yearDateSource.map(item => <Option key={item.key} value={item.value}>{item.value}</Option>);
 
     return (
@@ -67,16 +96,18 @@ class UserStatisticsChart extends React.Component {
           <div className={indexStyles.userChartMonthfont}>用户访问量统计</div>
           <div id="userChartMonthSelect" className={indexStyles.userChartMonthSelect}>
             <AutoComplete
+              dropdownClassName="certain-category-search-dropdown"
               getPopupContainer={() => document.getElementById('userChartMonthSelect')}
               placeholder={"请选择年份"}
               dataSource={yearOptions}
+              onSelect={onSelectYear}
             >
-              <Input suffix={<Icon type="search" className="certain-category-icon" />} />
+              <Input.Search />
             </AutoComplete>
           </div>
         </div>
         <div className={indexStyles.rightDiv}>
-          <div id={"userVisitChart"} className={styles.userNumCanvas}></div>
+          <Line {...userStatisticLineConfig} />
         </div>
       </div>
     );

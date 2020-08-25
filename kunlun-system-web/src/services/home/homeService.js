@@ -12,3 +12,7 @@ export function getMessages(params) {
 export function queryServiceInvokes(params) {
   return request.get(`${config.base_api.queryServiceInvokes}`, params);
 }
+
+export function statisticOnlineByYear(params) {
+  return request.get(`${config.base_api.statisticOnlineByYear}`, params);
+}

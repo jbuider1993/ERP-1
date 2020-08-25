@@ -24,42 +24,50 @@ class HomePage extends React.Component {
 
     const { dispatch, homeModel } = this.props;
 
-    const { userCounts, mqQueues, mqExchanges, loading, scheduleData, scheduleIndex, scheduleTotal, serviceInvokes } = homeModel;
+    const { userCounts, mqQueues, mqExchanges, loading, scheduleData, scheduleIndex, scheduleTotal,
+      serviceInvokes, userStatistics } = homeModel;
 
     const statisticsCountProps = {
       userCounts
-    };
+    }
 
     const serviceInvokeListProps = {
       serviceInvokes,
       onShowDetail: (key) => {
         commonUtil.sendRequestToHome(true, key, null);
       }
-    };
+    }
 
     const userInfoCardProps = {
       userCounts,
       onShowDetail: (key) => {
         commonUtil.sendRequestToHome(true, key, null);
       }
-    };
+    }
 
     const functionNavigationProps = {
       onShowDetail: (key) => {
         commonUtil.sendRequestToHome(true, key, null);
       }
-    };
+    }
+
+    const userStatisticsChartProps = {
+      userStatistics,
+      onSelectYear: (year) => {
+        dispatch({type: "homeModel/onSelectYear", payload: {year}});
+      }
+    }
 
     const mqExchangeChartProps = {
       mqExchanges,
       onShowDetail: (key) => {
         commonUtil.sendRequestToHome(true, key, null);
       }
-    };
+    }
 
     const mqQueueChartProps = {
       mqQueues
-    };
+    }
 
     const todayScheduleProps = {
       scheduleData,
@@ -71,7 +79,7 @@ class HomePage extends React.Component {
       onClickArrow: (arrowType) => {
         dispatch({type: "homeModel/onClickArrow", payload: {arrowType}});
       }
-    };
+    }
 
     return (
       <div className={indexStyles.showDiv}>
@@ -84,7 +92,7 @@ class HomePage extends React.Component {
               {/* 便捷导航 */}
               <FunctionNavigation {...functionNavigationProps} />
               {/* 用户访问量统计 */}
-              <UserStatisticsChart />
+              <UserStatisticsChart {...userStatisticsChartProps}/>
               {/* Redis键值对、内存使用及MQ队列Broker消息数量统计 */}
               <div className={indexStyles.redisMQShowDiv}>
                 <RedisInfoChart />
