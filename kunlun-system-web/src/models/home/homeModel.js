@@ -99,8 +99,8 @@ export default {
             dispatch({ type: 'queryServiceInvokes', payload: {}});
             dispatch({ type: 'getSchedules', payload: {}});
             dispatch({ type: 'onSelectYear', payload: {year: moment(new Date()).format("YYYY")}});
-            dispatch({ type: 'updateState', payload: { loading: false }})
           }
+          dispatch({ type: 'updateState', payload: { loading: false }});
         }
       });
     },

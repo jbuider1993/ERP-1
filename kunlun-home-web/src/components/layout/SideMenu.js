@@ -32,7 +32,7 @@ class SideMenu extends React.Component {
 
   onLoadIFrame(tokenModel, themeColor) {
     // 传递参数到子IFrame页面进行交互
-    const iFrameParams = { token: tokenModel.token, userInfo: tokenModel.userInfo, themeColor, isAuth: true };
+    const iFrameParams = { token: tokenModel && tokenModel.token, userInfo: tokenModel && tokenModel.userInfo, themeColor, isAuth: true };
     window.frames[0].postMessage(iFrameParams, '*');
     window.frames[window.frames.length - 1].postMessage(iFrameParams, '*');
   }
