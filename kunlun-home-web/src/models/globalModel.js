@@ -86,7 +86,7 @@ export default {
       if (res.code == "200") {
         console.log(res);
       }
-      yield put({ type: "updateState", payload: { pageLoading: false, paneTabs: [] }});
+      yield put({ type: "updateState", payload: { pageLoading: false, paneTabs: [], activeHeadMenuKey: "home", activeSideMenuKey: null }});
     },
 
     *addActiveRoute({ payload: params }, { select, call, put }) {
