@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
-import {Form, Input, Button, Row, Col, AutoComplete, DatePicker, Icon} from 'antd';
+import {Form, Input, Button, Row, Col, AutoComplete, DatePicker} from 'antd';
 import styles from './User.less';
 import index from '../../../index.less';
 import commonStyles from '../../../pages/index.css';
 import 'remixicon/fonts/remixicon.css';
 
 const FormItem = Form.Item;
-const Option = AutoComplete.Option;
 
 const UserSearch = (props) => {
 
@@ -15,6 +14,9 @@ const UserSearch = (props) => {
   const { getFieldsValue, validateFields, setFieldsValue, resetFields } = form;
 
   const handleSearch = () => {
+
+    debugger
+
     let fields = getFieldsValue();
     onSearch(fields)
   };
@@ -33,8 +35,6 @@ const UserSearch = (props) => {
     verticalAlign: "bottom",
     marginRight: "5px",
   };
-
-  debugger
 
   return (
     <div className={commonStyles.singleRowSearch}>

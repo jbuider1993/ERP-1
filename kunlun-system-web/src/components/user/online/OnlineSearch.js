@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
-import {Form, Input, Button, Row, Col, AutoComplete, Icon} from 'antd';
+import {Form, Input, Button, Row, Col} from 'antd';
 import commonStyles from '../../../pages/index.css';
 import index from "../../../index.less";
 import 'remixicon/fonts/remixicon.css';
 
 const FormItem = Form.Item;
-const Option = AutoComplete.Option;
 
 class OnlineSearch extends React.Component {
 

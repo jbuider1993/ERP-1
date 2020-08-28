@@ -83,7 +83,7 @@ class HomePage extends React.Component {
 
     return (
       <div className={indexStyles.showDiv}>
-        <Spin spinning={loading}>
+        <Spin spinning={loading} tip={"页面数据加载中。。。。。。"}>
           {/* 工作台（用户情况统计） */}
           <UserWorkbenchCard {...userInfoCardProps} />
           {/* 主题内容 */}

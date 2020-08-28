@@ -71,7 +71,7 @@ const Login = (props) => {
                 </Row>
                 <Row style={{ marginRight: "13%", marginTop: "-17.8%", float: "right", display: "inline-block" }}>
                   <FormItem>
-                    <div onClick={refreshCode}>
+                    <div onClick={refreshCode} className={styles.codeImgCursor}>
                       <img src={codeModel ? "data:image/png;base64," + codeModel.binary : "default.png"} style={{height: "33px", width: "100px"}}/>
                     </div>
                   </FormItem>
