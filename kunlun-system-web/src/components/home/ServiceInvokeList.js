@@ -1,22 +1,38 @@
 import React from 'react';
-import {Table, Tag, Tooltip, Button} from 'antd';
+import {Table, Tag, Tooltip} from 'antd';
 import indexStyles from "../../pages/home/homeIndex.less";
 import 'remixicon/fonts/remixicon.css';
 
 class ServiceInvokeList extends React.Component {
 
+  componentDidMount() {
+    setInterval(() => {
+      this.props.onQuerySchedule();
+    }, 1000 * 60 * 5);
+  }
+
+  componentWillUnmount() {
+    clearInterval();
+  }
+
   render() {
 
-    const {serviceInvokes, onShowDetail} = this.props;
+    const {serviceInvokes, onShowDetail, onQuerySchedule} = this.props;
 
     const columns = [
-      { title: '微服务名', dataIndex: 'serviceName', key: 'serviceName', width: '30%' },
-      { title: '请求方式', dataIndex: 'requestType', key: 'requestType', width: '25%' },
-      { title: '访问次数', dataIndex: 'count', key: 'count', width: '15%' },
-      { title: '访问耗时', dataIndex: 'duration', key: 'duration', width: '15%' },
-      { title: '服务状态', dataIndex: 'available', key: 'available', render: (text, record, index) => text == "正常" ?
-          <Tag color="blue"><span>&nbsp;</span>{text}<span>&nbsp;</span></Tag> :
-          <Tag color="red"><span>&nbsp;</span>{text}<span>&nbsp;</span></Tag> }];
+      { title: '微服务名', dataIndex: 'serviceName', key: 'serviceName', width: '26%', className: indexStyles.serviceNameDiv,
+        render: (text, record, index) => <Tooltip title={text}><span>{text}</span></Tooltip>
+      },
+      { title: '请求方式', dataIndex: 'requestType', key: 'requestType', width: '18%', className: indexStyles.serviceNameDiv,
+        render: (text, record, index) => <Tooltip title={text}><span>{text}</span></Tooltip>
+      },
+      { title: '调用次数', dataIndex: 'count', key: 'count', width: '18%', align: "center" },
+      { title: '耗时(ms)', dataIndex: 'duration', key: 'duration', width: '18%', align: "center" },
+      { title: '可用性(%)', dataIndex: 'available', key: 'available', width: '20%', align: "center",
+        render: (text, record, index) => text == "100" ?
+          <Tag style={{background: "green"}}>{text}</Tag> : <Tag style={{background: "red"}}>{text}</Tag>
+      }
+    ];
 
     return (
       <div className={indexStyles.tableCDiv}>
@@ -33,6 +49,7 @@ class ServiceInvokeList extends React.Component {
         <div className={indexStyles.tableCContentDiv}>
           <Table
             bordered
+            tableLayout={"fixed"}
             size={"small"}
             columns={columns}
             dataSource={serviceInvokes}

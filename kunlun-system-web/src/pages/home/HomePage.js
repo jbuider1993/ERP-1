@@ -35,7 +35,10 @@ class HomePage extends React.Component {
       serviceInvokes,
       onShowDetail: (key) => {
         commonUtil.sendRequestToHome(true, key, null);
-      }
+      },
+      onQuerySchedule: () => {
+        dispatch({type: "homeModel/queryServiceInvokes", payload: {}});
+      },
     }
 
     const userInfoCardProps = {
