@@ -45,7 +45,7 @@ const OnlineList = (props) => {
         pagination={false}
         loading={onlineLoading}
         rowKey={record => record.id}
-        scroll={{y: (window.innerHeight - 235)}}
+        scroll={{y: (window.innerHeight - 195)}}
       />
     </div>
   );

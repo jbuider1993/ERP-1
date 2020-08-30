@@ -24,7 +24,7 @@ class HomePage extends React.Component {
 
     const { dispatch, homeModel } = this.props;
 
-    const { userCounts, mqQueues, mqExchanges, loading, scheduleData, scheduleIndex, scheduleTotal,
+    const { userCounts, redisInfos, mqQueues, mqExchanges, loading, scheduleData, scheduleIndex, scheduleTotal,
       serviceInvokes, userStatistics } = homeModel;
 
     const statisticsCountProps = {
@@ -58,6 +58,13 @@ class HomePage extends React.Component {
       userStatistics,
       onSelectYear: (year) => {
         dispatch({type: "homeModel/onSelectYear", payload: {year}});
+      }
+    }
+
+    const redisInfoChartProps = {
+      redisInfos,
+      getRedisInfos: () => {
+        dispatch({type: "homeModel/getRedisInfos", payload: {}});
       }
     }
 
@@ -98,7 +105,7 @@ class HomePage extends React.Component {
               <UserStatisticsChart {...userStatisticsChartProps}/>
               {/* Redis键值对、内存使用及MQ队列Broker消息数量统计 */}
               <div className={indexStyles.redisMQShowDiv}>
-                <RedisInfoChart />
+                <RedisInfoChart {...redisInfoChartProps}/>
                 <MQBrokerChart {...mqExchangeChartProps}/>
               </div>
             </div>

@@ -29,6 +29,9 @@ const config = {
     getUserCount: `${BASEDATA_SERVICE_API}/home/getUserCount`,
     statisticOnlineByYear: `${BASEDATA_SERVICE_API}/onlineUser/statisticOnlineByYear`,
 
+    // Redis信息
+    getRedisInfos: `${BASEDATA_SERVICE_API}/home/getRedisInfo`,
+
     // 消息管理
     getAllMessages: `${SYSTEM_SERVICE_API}/message/getAllMessages`,
     addMessage: `${SYSTEM_SERVICE_API}/message/addMessage`,

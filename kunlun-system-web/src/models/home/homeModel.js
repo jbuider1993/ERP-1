@@ -6,6 +6,7 @@ export default {
   state: {
     loading: false,
     userCounts: null,
+    redisInfos: new Array(),
     mqQueues: null,
     mqExchanges: null,
     scheduleIndex: 0,
@@ -42,6 +43,29 @@ export default {
         }
       } catch (e) {
         console.log("homeModel getMessages error: " + e);
+      }
+    },
+
+    *getRedisInfos({ payload: params }, { select, call, put }) {
+      try {
+
+        debugger
+
+        const res = yield call(homeService.getRedisInfos, params);
+
+        debugger
+
+        if (res.code == 200) {
+          let {redisInfos} = yield select(state => state.homeModel);
+
+          debugger
+
+          redisInfos.push(res.data[0]);
+          redisInfos.push(res.data[1]);
+          yield put({ type: "updateState", payload: { redisInfos }});
+        }
+      } catch (e) {
+        console.log("homeModel getRedisInfos error: " + e);
       }
     },
 
@@ -96,6 +120,7 @@ export default {
           if (window._TOKEN_) {
             dispatch({ type: 'getUserCount', payload: {}});
             dispatch({ type: 'getMessages', payload: {}});
+            dispatch({ type: 'getRedisInfos', payload: {}});
             dispatch({ type: 'queryServiceInvokes', payload: {}});
             dispatch({ type: 'getSchedules', payload: {}});
             dispatch({ type: 'onSelectYear', payload: {year: moment(new Date()).format("YYYY")}});
