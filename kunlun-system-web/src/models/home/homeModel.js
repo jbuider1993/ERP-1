@@ -15,6 +15,7 @@ export default {
     scheduleList: null,
     serviceInvokes: null,
     userStatistics: null,
+    selectedYear: null,
   },
   reducers: {
     updateState(state, { payload }) {

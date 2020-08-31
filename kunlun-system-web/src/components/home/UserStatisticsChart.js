@@ -11,7 +11,7 @@ class UserStatisticsChart extends React.Component {
 
   render() {
 
-    const {userStatistics, onSelectYear} = this.props;
+    const {userStatistics, onSelectYear, selectedYear} = this.props;
 
     const userStatisticLineConfig = {
       title: { visible: false, text: '配置折线数据点样式'},
@@ -35,12 +35,11 @@ class UserStatisticsChart extends React.Component {
       tooltip: {
         custom: {
           customContent: (title, items) => {
-            const dateTitle = moment(new Date()).format("YYYY-MM-DD") + " " + title;
+            const dateTitle = (selectedYear ? selectedYear : moment(new Date()).format("YYYY")) + "年" + title + "月";
             return (
               <div style={{ padding: '15px 0px 0px 0px' }}>
                 <h5>{dateTitle}</h5>
-                <p style={{ padding: '10px 15px 0px 0px' }}>键值对数 (个)：{items && items[1] && items[1].value}</p>
-                <p>占用内存 (K)：{items && items[0] && items[0].value}</p>
+                <p style={{ padding: '10px 15px 0px 0px' }}>用户访问数 (个)：{items && items[0] && items[0].value}</p>
               </div>
             );
           },
@@ -67,6 +66,7 @@ class UserStatisticsChart extends React.Component {
               placeholder={"请选择年份"}
               dataSource={yearOptions}
               onSelect={onSelectYear}
+              defaultValue={startYear}
             >
               <Input.Search />
             </AutoComplete>

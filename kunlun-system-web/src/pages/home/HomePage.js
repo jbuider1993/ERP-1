@@ -25,7 +25,7 @@ class HomePage extends React.Component {
     const { dispatch, homeModel } = this.props;
 
     const { userCounts, redisInfos, mqQueues, mqExchanges, loading, scheduleData, scheduleIndex, scheduleTotal,
-      serviceInvokes, userStatistics } = homeModel;
+      serviceInvokes, userStatistics, selectedYear } = homeModel;
 
     const statisticsCountProps = {
       userCounts
@@ -56,7 +56,9 @@ class HomePage extends React.Component {
 
     const userStatisticsChartProps = {
       userStatistics,
+      selectedYear,
       onSelectYear: (year) => {
+        dispatch({type: "homeModel/updateState", payload: {selectedYear: year}});
         dispatch({type: "homeModel/onSelectYear", payload: {year}});
       }
     }
