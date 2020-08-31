@@ -22,6 +22,16 @@ export default {
     }
   },
   effects: {
+    *init({ payload: params }, { select, call, put }) {
+      const redisInfos = new Array();
+      const time = moment(new Date()).format("HH:mm:ss");
+      const redisMemory = {id: "11111", time, value: "0", type: "keyValue"};
+      const redisValue = {id: "22222", time, value: "0", type: "memory"};
+      redisInfos.push(redisMemory);
+      redisInfos.push(redisValue);
+      yield put({ type: 'updateState', payload: { redisInfos }});
+    },
+
     *getUserCount({ payload: params }, { select, call, put }) {
       try {
         const datas = yield call(homeService.getUserCount, {});
@@ -48,18 +58,9 @@ export default {
 
     *getRedisInfos({ payload: params }, { select, call, put }) {
       try {
-
-        debugger
-
         const res = yield call(homeService.getRedisInfos, params);
-
-        debugger
-
         if (res.code == 200) {
           let {redisInfos} = yield select(state => state.homeModel);
-
-          debugger
-
           redisInfos.push(res.data[0]);
           redisInfos.push(res.data[1]);
           yield put({ type: "updateState", payload: { redisInfos }});
@@ -118,6 +119,7 @@ export default {
         if (location.pathname === "/home") {
           dispatch({ type: 'updateState', payload: { loading: true }});
           if (window._TOKEN_) {
+            dispatch({ type: 'init', payload: {}});
             dispatch({ type: 'getUserCount', payload: {}});
             dispatch({ type: 'getMessages', payload: {}});
             dispatch({ type: 'getRedisInfos', payload: {}});

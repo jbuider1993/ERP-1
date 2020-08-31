@@ -32,6 +32,20 @@ class UserStatisticsChart extends React.Component {
           lineWidth: 2,
         },
       },
+      tooltip: {
+        custom: {
+          customContent: (title, items) => {
+            const dateTitle = moment(new Date()).format("YYYY-MM-DD") + " " + title;
+            return (
+              <div style={{ padding: '15px 0px 0px 0px' }}>
+                <h5>{dateTitle}</h5>
+                <p style={{ padding: '10px 15px 0px 0px' }}>键值对数 (个)：{items && items[1] && items[1].value}</p>
+                <p>占用内存 (K)：{items && items[0] && items[0].value}</p>
+              </div>
+            );
+          },
+        },
+      },
     }
 
     const startYear = Number.parseInt(moment(new Date()).format("YYYY"));

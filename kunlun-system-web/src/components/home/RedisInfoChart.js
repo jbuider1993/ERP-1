@@ -1,7 +1,8 @@
 import React from 'react';
 import styles from './Home.less';
 import indexStyles from "../../pages/home/homeIndex.less";
-import { Line } from '@ant-design/charts';
+import { DualLine } from '@ant-design/charts';
+import moment from 'moment';
 
 class RedisInfoChart extends React.Component {
 
@@ -19,39 +20,50 @@ class RedisInfoChart extends React.Component {
 
     const {redisInfos} = this.props;
 
-    debugger
+    const redisValues = redisInfos.filter(item => item.type == "keyValue").map(item => {
+      return {time: item.time, "键值对数": parseInt(item.value)};
+    });
+    const redisMemorys = redisInfos.filter(item => item.type == "memory").map(item => {
+      return {time: item.time, "占用内存": parseFloat(item.value)};
+    });
 
     const config = {
-      padding: [50, 20, 30, 60],
+      padding: "auto",
       forceFit: true,
-      data: redisInfos,
+      data: [redisValues, redisMemorys],
       xField: 'time',
-      yField: 'value',
-      seriesField: 'type',
-      xAxis: {
-        type: 'dateTime',
-        label: {
-          visible: true,
-          autoHide: true,
+      yField: ['键值对数', '占用内存'],
+      lineConfigs: [{
+          color: '#32f307',
+          smooth: true,
+          lineSize: 2,
+        }, {
+          color: '#ee0606',
+          smooth: true,
+          lineSize: 2,
+        },
+      ],
+      tooltip: {
+        custom: {
+          customContent: (title, items) => {
+            const dateTitle = moment(new Date()).format("YYYY-MM-DD") + " " + title;
+            return (
+              <div style={{ padding: '15px 0px 0px 0px' }}>
+                <h5>{dateTitle}</h5>
+                <p style={{ padding: '10px 15px 0px 0px' }}>键值对数 (个)：{items && items[1] && items[1].value}</p>
+                <p>占用内存 (K)：{items && items[0] && items[0].value}</p>
+              </div>
+            );
+          },
         },
       },
-      color: (d) => {
-        return d === 'memory' ? '#f5072a' : '#0a5ef1';
-      },
-      legend: { visible: true },
-      label: {
-        visible: true,
-        type: 'line',
-      },
-      animation: { appear: { animation: 'clipingWithData' } },
-      smooth: true,
     };
 
     return (
       <div className={indexStyles.redisDiv}>
         <div className={indexStyles.redisTitleDiv}>Redis键值对及内存使用统计</div>
         <div id={"redisMemory"} className={styles.redisCanvas}>
-          <Line {...config} />
+          <DualLine {...config} />
         </div>
       </div>
     );
