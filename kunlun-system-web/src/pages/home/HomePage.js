@@ -16,6 +16,19 @@ import * as commonUtil from '../../utils/commonUtil';
 
 class HomePage extends React.Component {
 
+  componentDidMount() {
+    const { dispatch, homeModel } = this.props;
+    setInterval(() => {
+      dispatch({type: "homeModel/getRedisInfos", payload: {}});
+      dispatch({type: "homeModel/getMessages", payload: {}});
+      dispatch({type: "homeModel/queryServiceInvokes", payload: {}});
+    }, 1000 * 60);
+  }
+
+  componentWillUnmount() {
+    clearInterval();
+  }
+
   constructor(props) {
     super(props);
   }
@@ -24,7 +37,7 @@ class HomePage extends React.Component {
 
     const { dispatch, homeModel } = this.props;
 
-    const { userCounts, redisInfos, mqQueues, mqExchanges, loading, scheduleData, scheduleIndex, scheduleTotal,
+    const { userCounts, redisInfos, mqInfos, loading, scheduleData, scheduleIndex, scheduleTotal,
       serviceInvokes, userStatistics, selectedYear } = homeModel;
 
     const statisticsCountProps = {
@@ -35,9 +48,6 @@ class HomePage extends React.Component {
       serviceInvokes,
       onShowDetail: (key) => {
         commonUtil.sendRequestToHome(true, key, null);
-      },
-      onQuerySchedule: () => {
-        dispatch({type: "homeModel/queryServiceInvokes", payload: {}});
       },
     }
 
@@ -65,20 +75,13 @@ class HomePage extends React.Component {
 
     const redisInfoChartProps = {
       redisInfos,
-      getRedisInfos: () => {
-        dispatch({type: "homeModel/getRedisInfos", payload: {}});
-      }
     }
 
-    const mqExchangeChartProps = {
-      mqExchanges,
+    const mqNumberProps = {
+      mqInfos,
       onShowDetail: (key) => {
         commonUtil.sendRequestToHome(true, key, null);
-      }
-    }
-
-    const mqQueueChartProps = {
-      mqQueues
+      },
     }
 
     const todayScheduleProps = {
@@ -108,7 +111,7 @@ class HomePage extends React.Component {
               {/* Redis键值对、内存使用及MQ队列Broker消息数量统计 */}
               <div className={indexStyles.redisMQShowDiv}>
                 <RedisInfoChart {...redisInfoChartProps}/>
-                <MQBrokerChart {...mqExchangeChartProps}/>
+                <MQBrokerChart {...mqNumberProps}/>
               </div>
             </div>
             {/* 右侧栏 */}

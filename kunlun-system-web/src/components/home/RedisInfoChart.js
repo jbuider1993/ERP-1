@@ -6,16 +6,6 @@ import moment from 'moment';
 
 class RedisInfoChart extends React.Component {
 
-  componentDidMount() {
-    setInterval(() => {
-      this.props.getRedisInfos();
-    }, 1000 * 60);
-  }
-
-  componentWillUnmount() {
-    clearInterval();
-  }
-
   render() {
 
     const {redisInfos} = this.props;

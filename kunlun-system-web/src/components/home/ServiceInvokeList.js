@@ -5,16 +5,6 @@ import 'remixicon/fonts/remixicon.css';
 
 class ServiceInvokeList extends React.Component {
 
-  componentDidMount() {
-    setInterval(() => {
-      this.props.onQuerySchedule();
-    }, 1000 * 60 * 5);
-  }
-
-  componentWillUnmount() {
-    clearInterval();
-  }
-
   render() {
 
     const {serviceInvokes, onShowDetail, onQuerySchedule} = this.props;

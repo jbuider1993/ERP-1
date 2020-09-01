@@ -7,8 +7,7 @@ export default {
     loading: false,
     userCounts: null,
     redisInfos: new Array(),
-    mqQueues: null,
-    mqExchanges: null,
+    mqInfos: new Array(),
     scheduleIndex: 0,
     scheduleTotal: 0,
     scheduleData: null,
@@ -24,13 +23,26 @@ export default {
   },
   effects: {
     *init({ payload: params }, { select, call, put }) {
-      const redisInfos = new Array();
       const time = moment(new Date()).format("HH:mm:ss");
+
+      // Redis数据初始化
+      const redisInfos = new Array();
       const redisMemory = {id: "11111", time, value: "0", type: "keyValue"};
       const redisValue = {id: "22222", time, value: "0", type: "memory"};
       redisInfos.push(redisMemory);
       redisInfos.push(redisValue);
-      yield put({ type: 'updateState', payload: { redisInfos }});
+
+      // MQ数据初始化
+      const mqInfos = new Array();
+      const mqMessage = {id: "11111", time, value: "0", type: "message"};
+      const mqEchange = {id: "22222", time, value: "0", type: "exchange"};
+      const mqQueue = {id: "33333", time, value: "0", type: "queue"};
+      const mqChannel = {id: "44444", time, value: "0", type: "channel"};
+      mqInfos.push(mqMessage);
+      mqInfos.push(mqEchange);
+      mqInfos.push(mqQueue);
+      mqInfos.push(mqChannel);
+      yield put({ type: 'updateState', payload: { redisInfos, mqInfos }});
     },
 
     *getUserCount({ payload: params }, { select, call, put }) {
@@ -48,9 +60,10 @@ export default {
       try {
         const res = yield call(homeService.getMessages, params);
         if (res.code == 200) {
-          const mqQueues = res.data.queues;
-          const mqExchanges = res.data.exchanges;
-          yield put({ type: "updateState", payload: { mqQueues, mqExchanges }});
+          let {mqInfos} = yield select(state => state.homeModel);
+          mqInfos.push(res.data[0]);
+          mqInfos.push(res.data[1]);
+          yield put({ type: "updateState", payload: { mqInfos }});
         }
       } catch (e) {
         console.log("homeModel getMessages error: " + e);
