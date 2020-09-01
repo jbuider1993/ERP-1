@@ -13,12 +13,20 @@ import ServiceInvokeList from '../../components/home/ServiceInvokeList';
 import config from "../../config/config";
 import indexStyles from './homeIndex.less';
 import * as commonUtil from '../../utils/commonUtil';
+import moment from 'moment';
 
 class HomePage extends React.Component {
+
+  constructor(props) {
+    super(props);
+  }
 
   componentDidMount() {
     const { dispatch, homeModel } = this.props;
     setInterval(() => {
+      const year = moment(new Date()).format("YYYY");
+      dispatch({type: "homeModel/getUserCount", payload: {}});
+      dispatch({type: "homeModel/onSelectYear", payload: {year}});
       dispatch({type: "homeModel/getRedisInfos", payload: {}});
       dispatch({type: "homeModel/getMessages", payload: {}});
       dispatch({type: "homeModel/queryServiceInvokes", payload: {}});
@@ -27,10 +35,6 @@ class HomePage extends React.Component {
 
   componentWillUnmount() {
     clearInterval();
-  }
-
-  constructor(props) {
-    super(props);
   }
 
   render() {

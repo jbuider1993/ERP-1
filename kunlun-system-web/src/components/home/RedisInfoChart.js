@@ -40,8 +40,8 @@ class RedisInfoChart extends React.Component {
             return (
               <div style={{ padding: '15px 0px 0px 0px' }}>
                 <h5>{dateTitle}</h5>
-                <p style={{ padding: '10px 15px 0px 0px' }}>键值对数 (个)：{items && items[1] && items[1].value}</p>
-                <p>占用内存 (K)：{items && items[0] && items[0].value}</p>
+                <p style={{ padding: '10px 15px 0px 0px' }}>键值对数：{items && items[1] && items[1].value} 个</p>
+                <p>占用内存：{items && items[0] && items[0].value} K</p>
               </div>
             );
           },

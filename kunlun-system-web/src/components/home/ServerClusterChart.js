@@ -1,33 +1,25 @@
 import React from 'react';
 import styles from './Home.less';
 import indexStyles from "../../pages/home/homeIndex.less";
-import { Donut } from '@antv/g2plot';
+import { Donut } from '@ant-design/charts';
 
 class ServerClusterChart extends React.Component {
 
-  componentDidMount() {
-    // 显示线图
-    this.showLineChart();
-  }
+  render() {
 
-  showLineChart() {
     const data = [
-      { type: 'kunlun-home-web', value: 3 },
-      { type: 'kunlun-system-web', value: 6 },
-      { type: 'kunlun-register-service', value: 8 },
-      { type: 'kunlun-gateway-service', value: 5 },
-      { type: 'kunlun-basedata-service', value: 3 },
-      { type: 'kunlun-system-service', value: 4 },
+      { type: 'kunlun-home-web', value: 1 },
+      { type: 'kunlun-system-web', value: 1 },
+      { type: 'kunlun-register-service', value: 1 },
+      { type: 'kunlun-gateway-service', value: 1 },
+      { type: 'kunlun-basedata-service', value: 1 },
+      { type: 'kunlun-system-service', value: 1 },
     ];
 
-    const ringPlot = new Donut(document.getElementById('serverCluster'), {
+    const config = {
       forceFit: true,
-      title: { visible: false, text: '环图-指标卡'},
-      description: { visible: false, text: '环图指标卡能够代替tooltip，在环图中心挖空部分显示各分类的详细信息。'},
-      radius: 0.9,
-      width: 'auto',
-      height: 200,
-      padding: [0, 150, 0, 0],
+      radius: 1,
+      padding: [12, 12, 12, 12],
       data,
       angleField: 'value',
       colorField: 'type',
@@ -35,21 +27,17 @@ class ServerClusterChart extends React.Component {
         visible: true,
       },
       legend: {
-        position: "right-top",
-        offsetX: -70,
-        offsetY: 10
-      }
-    });
-
-    ringPlot.render();
-  }
-
-  render() {
+        visible: true,
+        position: 'right-top',
+      },
+    };
 
     return (
       <div className={indexStyles.tableBDiv}>
         <div className={indexStyles.tableBTitleDiv}>服务器集群资源统计</div>
-        <div id={"serverCluster"} className={styles.serverDiskCanvas}></div>
+        <div id={"serverCluster"} className={styles.serverDiskCanvas}>
+          <Donut {...config} />
+        </div>
       </div>
     );
   };

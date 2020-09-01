@@ -16,22 +16,12 @@ class UserStatisticsChart extends React.Component {
     const userStatisticLineConfig = {
       title: { visible: false, text: '配置折线数据点样式'},
       description: { visible: false, text: '自定义配置趋势线上数据点的样式'},
-      padding: [30, 20, 95, 35],
+      padding: [30, 20, 35, 35],
       forceFit: true,
       data: userStatistics && userStatistics.length > 0 ? userStatistics : null,
       xField: 'month',
       yField: 'value',
       label: { visible: true, type: 'point'},
-      point: {
-        visible: true,
-        size: 5,
-        shape: 'diamond',
-        style: {
-          fill: 'white',
-          stroke: '#2593fc',
-          lineWidth: 2,
-        },
-      },
       tooltip: {
         custom: {
           customContent: (title, items) => {
