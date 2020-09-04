@@ -53,7 +53,7 @@ class UserWorkbenchCard extends React.Component {
               <Col span={8}>
                 <Card style={{textAlign: "center"}} className={styles.userVisitTotalDiv}>
                   <Statistic title="总访问量"
-                             value={userCounts ? userCounts.userCount : 110}
+                             value={userCounts ? userCounts.userCount : ""}
                              precision={0}
                              valueStyle={{color: 'green', fontSize: "25px"}}
                              prefix={<i className="ri-global-line" style={{marginRight: "10px", verticalAlign: "bottom"}}></i>}
@@ -63,7 +63,7 @@ class UserWorkbenchCard extends React.Component {
               <Col span={8}>
                 <Card style={{textAlign: "center"}} className={styles.userOnlineDiv}>
                   <Statistic title="在线人数"
-                             value={userCounts ? userCounts.onlineCount : 5}
+                             value={userCounts ? userCounts.onlineCount : ""}
                              precision={0}
                              valueStyle={{color: 'red', fontSize: "25px"}}
                              prefix={<i className="ri-macbook-line" style={{marginRight: "10px", verticalAlign: "bottom"}}></i>}
@@ -73,7 +73,7 @@ class UserWorkbenchCard extends React.Component {
               <Col span={8}>
                 <Card style={{textAlign: "center"}} className={styles.userVisitLastDiv}>
                   <Statistic title="最近一个月内访问量"
-                             value={userCounts ? userCounts.leastCount : 28}
+                             value={userCounts ? userCounts.leastCount : ""}
                              precision={0}
                              valueStyle={{color: 'blue', fontSize: "25px"}}
                              prefix={<i className="ri-computer-line" style={{marginRight: "10px", verticalAlign: "bottom"}}></i>}

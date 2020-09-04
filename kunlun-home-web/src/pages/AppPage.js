@@ -3,11 +3,12 @@ import { Layout, Spin, Modal } from 'antd';
 import config from "../config/config";
 import HeadMenu from '../components/layout/HeadMenu';
 import SideMenu from '../components/layout/SideMenu';
-import UserInfo from '../components/userInfo/UserInfo';
+import UserInformation from '../components/userInfo/UserInformation';
 import ThemeDrawer from '../components/theme/ThemeDrawer';
 import { connect } from 'dva';
 import 'remixicon/fonts/remixicon.css';
 import * as globalService from '../services/globalService';
+import UserAuthorization from "../components/userInfo/UserAuthorization";
 
 const { Content, Footer } = Layout;
 
@@ -16,9 +17,10 @@ const { Content, Footer } = Layout;
  */
 const AppPage = (props) => {
 
-  const { dispatch, history, globalModel, noficationModel } = props;
+  const { dispatch, history, globalModel, noficationModel, userInfoModel } = props;
   let { collapsed, activeHeadMenuKey, activeSideMenuKey, menuData, paneTabs, themeStyle, siderColor,
           openedSubMenuKey, homeView, tokenModel, themeDrawerVisible, themeColor, selectedStyle, menuMap } = globalModel;
+  const {roleInfoData} = userInfoModel;
 
   // 兼容单独运行前端服务
   if (menuData) {
@@ -112,16 +114,6 @@ const AppPage = (props) => {
     },
   };
 
-  const userInfoProps = {
-    tokenModel,
-    onSaveUserInfo: () => {
-      dispatch({ type: "globalModel/updateState", payload: { activeHeadMenuKey: "home" }});
-    },
-    onCloseUserInfo: () => {
-      dispatch({ type: "globalModel/updateState", payload: { activeHeadMenuKey: "home" }});
-    }
-  };
-
   const sideMenuProps = {
     history,
     collapsed,
@@ -131,7 +123,6 @@ const AppPage = (props) => {
     paneTabs,
     openedSubMenuKey,
     homeView,
-    userInfoProps,
     tokenModel,
     themeStyle,
     siderColor,
@@ -219,28 +210,44 @@ const AppPage = (props) => {
     },
   };
 
-  const footNoteProps = {
-    themeColor
-  };
+  const userInformationProps = {
+    tokenModel,
+  }
 
-return (
-  <Layout style={{ width: "100%", height: '100%', borderRight: 0, background: "#fff" }}>
-    <HeadMenu {...headMenuProps} />
-    <Content>
-      {
-        activeHeadMenuKey == "userInfo" ? <UserInfo {...userInfoProps} /> :
-        <SideMenu {...sideMenuProps} />
-      }
-      <ThemeDrawer {...themeDrawerProps} />
-    </Content>
-    <Footer style={{ height: 0, textAlign: "center", paddingTop: "0.2%", zIndex: "99", background: themeColor, display: "none" }}>
-      <span style={{ color: "#d1d1d1", fontSize: "10px" }}>{config.footerText}</span>
-    </Footer>
-  </Layout>
-)};
+  const userAuthorizationProps = {
+    tokenModel,
+    menuData,
+    roleInfoData,
+    onSaveUserInfo: () => {
+      dispatch({ type: "globalModel/updateState", payload: { activeHeadMenuKey: "home" }});
+    },
+    onCloseUserInfo: () => {
+      dispatch({ type: "globalModel/updateState", payload: { activeHeadMenuKey: "home" }});
+    }
+  }
 
-function mapStateToProps({ globalModel, noficationModel }) {
-  return { globalModel, noficationModel };
+  return (
+    <Layout style={{ width: "100%", height: '100%', borderRight: 0, background: "#fff" }}>
+      <HeadMenu {...headMenuProps} />
+      <Content>
+        {
+          activeHeadMenuKey == "userInfo" ?
+            <div id={"userInfoPage"} style={{height: "100%", flex: 1, display: "flex", flexDirection: "row", padding: "20px", background: "#f5f5f5"}}>
+              <UserInformation {...userInformationProps} />
+              <UserAuthorization {...userAuthorizationProps} />
+            </div> : <SideMenu {...sideMenuProps} />
+        }
+        <ThemeDrawer {...themeDrawerProps} />
+      </Content>
+      <Footer style={{ height: 0, textAlign: "center", paddingTop: "0.2%", zIndex: "99", background: themeColor, display: "none" }}>
+        <span style={{ color: "#d1d1d1", fontSize: "10px" }}>{config.footerText}</span>
+      </Footer>
+    </Layout>
+  )
+};
+
+function mapStateToProps({ globalModel, noficationModel, userInfoModel }) {
+  return { globalModel, noficationModel, userInfoModel };
 }
 
 export default connect(mapStateToProps)(AppPage);
