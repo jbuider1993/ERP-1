@@ -16,16 +16,6 @@ class UserWorkbenchCard extends React.Component {
     return (
       <div className={indexStyles.headerDiv}>
         <div className={indexStyles.headerBDiv}>
-          <div className={indexStyles.workFontDiv}>
-            <div className={indexStyles.workFont}>工作台</div>
-            <div className={indexStyles.allUserInfo}>
-              <div onClick={() => onShowDetail("list")} className={indexStyles.fontWeightHover}>
-                <Tooltip title={"查看全部用户"}>
-                  <i className="ri-group-line" style={{fontSize: "18px", marginLeft: "70px", marginTop: "5px"}}></i>
-                </Tooltip>
-              </div>
-            </div>
-          </div>
           <div className={indexStyles.userInfoDiv}>
             <div className={indexStyles.userPhotoDiv}>
               <Avatar size={80} icon={<i className="ri-user-line"></i>} src={userLogo} />
@@ -38,50 +28,57 @@ class UserWorkbenchCard extends React.Component {
                 <div>{loginUserInfo ? loginUserInfo.email : "test@test.com"}</div>
               </div>
             </div>
+            <div className={indexStyles.allUserInfo}>
+              <div onClick={() => onShowDetail("list")} className={indexStyles.fontWeightHover}>
+                <Tooltip title={"查看全部用户"}>
+                  <i className="ri-group-line" style={{fontSize: "18px", marginLeft: "70px", marginTop: "5px"}}></i>
+                </Tooltip>
+              </div>
+            </div>
           </div>
         </div>
         <div className={indexStyles.headerADiv}>
-          <div className={indexStyles.userCountBlock}>
-            <div style={{float: "right"}} onClick={() => onShowDetail("online")} className={indexStyles.fontWeightHover}>
-              <Tooltip title={"查看登录用户"}>
-                <i className="ri-user-line" style={{fontSize: "18px", marginRight: "20px"}}></i>
-              </Tooltip>
-            </div>
-          </div>
-          <div style={{padding: '0px 20px 20px 0px'}}>
-            <Row gutter={20}>
-              <Col span={8}>
-                <Card style={{textAlign: "center"}} className={styles.userVisitTotalDiv}>
-                  <Statistic title="总访问量"
-                             value={userCounts ? userCounts.userCount : ""}
-                             precision={0}
-                             valueStyle={{color: 'green', fontSize: "25px"}}
-                             prefix={<i className="ri-global-line" style={{marginRight: "10px", verticalAlign: "bottom"}}></i>}
-                             suffix="人"/>
-                </Card>
-              </Col>
-              <Col span={8}>
-                <Card style={{textAlign: "center"}} className={styles.userOnlineDiv}>
-                  <Statistic title="在线人数"
-                             value={userCounts ? userCounts.onlineCount : ""}
-                             precision={0}
-                             valueStyle={{color: 'red', fontSize: "25px"}}
-                             prefix={<i className="ri-macbook-line" style={{marginRight: "10px", verticalAlign: "bottom"}}></i>}
-                             suffix="人"/>
-                </Card>
-              </Col>
-              <Col span={8}>
-                <Card style={{textAlign: "center"}} className={styles.userVisitLastDiv}>
-                  <Statistic title="最近一个月内访问量"
-                             value={userCounts ? userCounts.leastCount : ""}
-                             precision={0}
-                             valueStyle={{color: 'blue', fontSize: "25px"}}
-                             prefix={<i className="ri-computer-line" style={{marginRight: "10px", verticalAlign: "bottom"}}></i>}
-                             suffix="人"/>
-                </Card>
-              </Col>
-            </Row>
-          </div>
+          <Row gutter={20}>
+            <Col span={7} style={{padding: "15px 0px 0px 10px"}}>
+              <Card style={{textAlign: "center"}} className={styles.userVisitTotalDiv}>
+                <Statistic title="总访问量"
+                           value={userCounts ? userCounts.userCount : ""}
+                           precision={0}
+                           valueStyle={{color: 'green', fontSize: "25px"}}
+                           prefix={<i className="ri-global-line" style={{marginRight: "10px", verticalAlign: "bottom"}}></i>}
+                           suffix="人"/>
+              </Card>
+            </Col>
+            <Col span={8} style={{padding: "15px 0px 0px 10px"}}>
+              <Card style={{textAlign: "center"}} className={styles.userOnlineDiv}>
+                <Statistic title="在线人数"
+                           value={userCounts ? userCounts.onlineCount : ""}
+                           precision={0}
+                           valueStyle={{color: 'red', fontSize: "25px"}}
+                           prefix={<i className="ri-macbook-line" style={{marginRight: "10px", verticalAlign: "bottom"}}></i>}
+                           suffix="人"/>
+              </Card>
+            </Col>
+            <Col span={7} style={{padding: "15px 0px 0px 10px"}}>
+              <Card style={{textAlign: "center"}} className={styles.userVisitLastDiv}>
+                <Statistic title="最近一个月内访问量"
+                           value={userCounts ? userCounts.leastCount : ""}
+                           precision={0}
+                           valueStyle={{color: 'blue', fontSize: "25px"}}
+                           prefix={<i className="ri-computer-line" style={{marginRight: "10px", verticalAlign: "bottom"}}></i>}
+                           suffix="人"/>
+              </Card>
+            </Col>
+            <Col span={2}>
+              <div className={indexStyles.userCountBlock}>
+                <div style={{float: "right"}} onClick={() => onShowDetail("online")} className={indexStyles.fontWeightHover}>
+                  <Tooltip title={"查看登录用户"}>
+                    <i className="ri-user-line" style={{fontSize: "18px", marginRight: "20px"}}></i>
+                  </Tooltip>
+                </div>
+              </div>
+            </Col>
+          </Row>
         </div>
       </div>
     );

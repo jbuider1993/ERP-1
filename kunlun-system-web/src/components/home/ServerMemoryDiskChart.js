@@ -8,13 +8,13 @@ class ServerMemoryDiskChart extends React.Component {
   render() {
 
     const cpuConfig = {
-      width: 400,
-      height: 400,
+      width: 300,
+      height: 300,
       value: 64,
       min: 0,
       max: 100,
       forceFit: true,
-      padding: [10, 10, 30, 10],
+      padding: [10, 10, 25, 10],
       range: [0, 25, 50, 75, 100],
       color: ['#30bf78', '#a0d911', '#faad14', '#f4664a'],
       statistic: {
@@ -33,7 +33,7 @@ class ServerMemoryDiskChart extends React.Component {
       min: 0,
       max: 100,
       forceFit: true,
-      padding: [10, 10, 30, 10],
+      padding: [10, 10, 25, 10],
       range: [0, 25, 50, 75, 100],
       color: ['#30bf78', '#a0d911', '#faad14', '#f4664a'],
       statistic: {

@@ -18,8 +18,8 @@ class ServerClusterChart extends React.Component {
 
     const config = {
       forceFit: true,
-      radius: 1,
-      padding: [12, 12, 12, 12],
+      radius: 0.9,
+      padding: [10, 10, 10, 10],
       data,
       angleField: 'value',
       colorField: 'type',
