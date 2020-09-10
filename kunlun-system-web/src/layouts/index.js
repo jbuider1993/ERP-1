@@ -104,7 +104,7 @@ function BasicLayout(props) {
   };
 
   return (
-    <div id="layout" className={styles.layout}>
+    <div id="layout" className={styles.layout} style={{padding: props.location.pathname == "/home" ? "0px" : "20px"}}>
       <LocaleProvider locale={zhCN} style={{ height: "100%", width: "100%"}}>
         { showPageByPath() }
       </LocaleProvider>
