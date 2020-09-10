@@ -42,7 +42,7 @@ const UserList = (props) => {
         pagination={false}
         loading={userLoading}
         rowKey={record => record.id}
-        scroll={{y: (window.innerHeight - 195)}}
+        scroll={{y: (window.innerHeight - 215)}}
       />
     </div>
   );
