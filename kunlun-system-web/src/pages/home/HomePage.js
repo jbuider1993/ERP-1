@@ -3,6 +3,7 @@ import { connect } from 'dva';
 import {Spin} from 'antd';
 import FunctionNavigation from '../../components/home/FunctionNavigation';
 import UserStatisticsChart from '../../components/home/UserStatisticsChart';
+import MessageChart from '../../components/home/MessageChart';
 import RedisInfoChart from '../../components/home/RedisInfoChart';
 import MQBrokerChart from '../../components/home/MQBrokerChart';
 import UserWorkbenchCard from '../../components/home/UserWorkbenchCard';
@@ -77,6 +78,15 @@ class HomePage extends React.Component {
       }
     }
 
+    const messageChartProps = {
+      userStatistics,
+      selectedYear,
+      onSelectYear: (year) => {
+        dispatch({type: "homeModel/updateState", payload: {selectedYear: year}});
+        dispatch({type: "homeModel/onSelectYear", payload: {year}});
+      }
+    }
+
     const redisInfoChartProps = {
       redisInfos,
     }
@@ -110,8 +120,12 @@ class HomePage extends React.Component {
             <div className={indexStyles.rightContentDiv}>
               {/* 便捷导航 */}
               <FunctionNavigation {...functionNavigationProps} />
-              {/* 用户访问量统计 */}
-              <UserStatisticsChart {...userStatisticsChartProps}/>
+              <div className={indexStyles.userMessageDiv}>
+                {/* 用户访问量统计 */}
+                <UserStatisticsChart {...userStatisticsChartProps}/>
+                {/* 新闻通知 */}
+                <MessageChart {...messageChartProps} />
+              </div>
               {/* Redis键值对、内存使用及MQ队列Broker消息数量统计 */}
               <div className={indexStyles.redisMQShowDiv}>
                 <RedisInfoChart {...redisInfoChartProps}/>
