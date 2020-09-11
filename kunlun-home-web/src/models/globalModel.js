@@ -64,10 +64,12 @@ export default {
 
     *getAppMenu({ payload: params }, { select, call, put }) {
       const res = yield call(globalService.getAppMenu, params);
+      let paneTabs = [];
       if (res.code == "200") {
         console.log("getAppMenu menuData ===> " + res.data);
         sessionStorage.menuData = JSON.stringify(res.data);
-        yield put({ type: "updateState", payload: { menuData: res.data }});
+        paneTabs.push(res.data.main[0]);
+        yield put({ type: "updateState", payload: { menuData: res.data, paneTabs }});
       } else {
         console.log("config menuData ===> " + res.data);
         const menuList = yield call(globalService.getAppMenuFromConfig);
@@ -75,7 +77,8 @@ export default {
         menuData["list"] = menuList;
         menuData = {...menuData, ...config.frame_menu};
         sessionStorage.menuData = JSON.stringify(menuData);
-        yield put({ type: "updateState", payload: { menuData }});
+        paneTabs.push(menuData.main[0]);
+        yield put({ type: "updateState", payload: { menuData, paneTabs }});
       }
     },
 
@@ -91,6 +94,9 @@ export default {
 
     *addActiveRoute({ payload: params }, { select, call, put }) {
       let { paneTabs } = yield select(state => state.globalModel);
+
+      debugger
+
       const {activeHeadMenuKey, paneTabList } = yield call(globalService.getActivedMenu, params, paneTabs);
       console.log("open tab, activeHeadMenuKey ===>>> " + activeHeadMenuKey + ", activeSideMenuKey ===>>> " + params.key);
       yield put({ type: "updateState", payload: { paneTabs: paneTabList, activeHeadMenuKey, activeSideMenuKey: params.key }});

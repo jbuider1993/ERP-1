@@ -43,8 +43,10 @@ class SideMenu extends React.Component {
       onOpenSubMenu, openedSubMenuKey, removeTab, closeCurrentTab, closeOtherTab, onCloseTab, tokenModel, themeStyle, themeColor, siderColor
     } = this.props;
 
+    debugger
+
     // 更新路由Map
-    if (!menuMap.get(activeSideMenuKey)) {
+    if (activeSideMenuKey != "home" && !menuMap.get(activeSideMenuKey)) {
       menuMap.set(activeSideMenuKey, activeHeadMenuKey);
       updatePathMap(menuMap);
     }
@@ -112,7 +114,7 @@ class SideMenu extends React.Component {
     // 刷新时间戳
     const refreshFlag = this.state.refreshView;
 
-    const isShowSider = activeHeadMenuKey != "home" && themeStyle == "siderMenu" ? true : false;
+    const isShowSider = activeHeadMenuKey && activeHeadMenuKey != "home" && themeStyle == "siderMenu" ? true : false;
     const pageUrl = siderFlag ? menuData.sider[activeHeadMenuKey].filter(item => item.key == activeSideMenuKey)[0].url : menuData.main[0].url;
 
     return (

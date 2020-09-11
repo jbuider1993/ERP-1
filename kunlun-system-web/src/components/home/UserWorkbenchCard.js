@@ -73,7 +73,7 @@ class UserWorkbenchCard extends React.Component {
               <div className={indexStyles.userCountBlock}>
                 <div style={{float: "right"}} onClick={() => onShowDetail("online")} className={indexStyles.fontWeightHover}>
                   <Tooltip title={"查看登录用户"}>
-                    <i className="ri-user-line" style={{fontSize: "18px", marginRight: "20px"}}></i>
+                    <i className="ri-user-line" style={{fontSize: "18px", marginRight: "15px"}}></i>
                   </Tooltip>
                 </div>
               </div>

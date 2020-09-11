@@ -3,7 +3,7 @@ import { connect } from 'dva';
 import {Spin} from 'antd';
 import FunctionNavigation from '../../components/home/FunctionNavigation';
 import UserStatisticsChart from '../../components/home/UserStatisticsChart';
-import MessageChart from '../../components/home/MessageChart';
+import NewsMessageChart from '../../components/home/NewsMessageChart';
 import RedisInfoChart from '../../components/home/RedisInfoChart';
 import MQBrokerChart from '../../components/home/MQBrokerChart';
 import UserWorkbenchCard from '../../components/home/UserWorkbenchCard';
@@ -78,7 +78,7 @@ class HomePage extends React.Component {
       }
     }
 
-    const messageChartProps = {
+    const newsMessageChartProps = {
       userStatistics,
       selectedYear,
       onSelectYear: (year) => {
@@ -112,7 +112,7 @@ class HomePage extends React.Component {
 
     return (
       <div className={indexStyles.showDiv}>
-        <Spin spinning={loading} tip={"页面数据加载中。。。。。。"}>
+        <Spin spinning={loading} size={"large"} tip={"数据加载中。。。。。。"}>
           {/* 工作台（用户情况统计） */}
           <UserWorkbenchCard {...userInfoCardProps} />
           {/* 主题内容 */}
@@ -124,7 +124,7 @@ class HomePage extends React.Component {
                 {/* 用户访问量统计 */}
                 <UserStatisticsChart {...userStatisticsChartProps}/>
                 {/* 新闻通知 */}
-                <MessageChart {...messageChartProps} />
+                <NewsMessageChart {...newsMessageChartProps} />
               </div>
               {/* Redis键值对、内存使用及MQ队列Broker消息数量统计 */}
               <div className={indexStyles.redisMQShowDiv}>

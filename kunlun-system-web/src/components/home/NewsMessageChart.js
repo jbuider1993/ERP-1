@@ -5,7 +5,7 @@ import {AutoComplete, Input} from 'antd';
 import moment from 'moment';
 import { Line } from '@ant-design/charts';
 
-class MessageChart extends React.Component {
+class NewsMessageChart extends React.Component {
 
   render() {
 
@@ -46,4 +46,4 @@ class MessageChart extends React.Component {
   };
 }
 
-export default MessageChart;
+export default NewsMessageChart;

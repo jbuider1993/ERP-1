@@ -46,7 +46,7 @@ class MQBrokerChart extends React.Component {
           <div className={indexStyles.mqTitleFontDiv}>MQ队列Broker消息数量统计</div>
           <div onClick={() => onShowDetail("rabbitmq")} className={indexStyles.fontWeightHover}>
             <Tooltip title={"查看详情"}>
-              <i className="ri-article-line" style={{fontSize: "19px", marginRight: "20px"}}></i>
+              <i className="ri-article-line" style={{fontSize: "19px", marginRight: "15px"}}></i>
             </Tooltip>
           </div>
         </div>
