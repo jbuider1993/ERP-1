@@ -232,7 +232,7 @@ const AppPage = (props) => {
       <Content>
         {
           activeHeadMenuKey == "userInfo" ?
-            <div id={"userInfoPage"} style={{height: "100%", flex: 1, display: "flex", flexDirection: "row", padding: "20px", background: "#f5f5f5"}}>
+            <div id={"userInfoPage"} style={{height: "100%", display: "flex", flexDirection: "row", padding: "20px", background: "#f5f5f5"}}>
               <UserInformation {...userInformationProps} />
               <UserAuthorization {...userAuthorizationProps} />
             </div> : <SideMenu {...sideMenuProps} />

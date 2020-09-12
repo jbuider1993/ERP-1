@@ -79,12 +79,9 @@ class HomePage extends React.Component {
     }
 
     const newsMessageChartProps = {
-      userStatistics,
-      selectedYear,
-      onSelectYear: (year) => {
-        dispatch({type: "homeModel/updateState", payload: {selectedYear: year}});
-        dispatch({type: "homeModel/onSelectYear", payload: {year}});
-      }
+      onShowDetail: (key) => {
+        commonUtil.sendRequestToHome(true, key, null);
+      },
     }
 
     const redisInfoChartProps = {

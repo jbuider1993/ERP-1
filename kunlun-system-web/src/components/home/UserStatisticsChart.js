@@ -62,7 +62,7 @@ class UserStatisticsChart extends React.Component {
             </AutoComplete>
           </div>
         </div>
-        <div className={indexStyles.rightDiv}>
+        <div className={indexStyles.userStatisticsRightDiv}>
           <Line {...userStatisticLineConfig} />
         </div>
       </div>

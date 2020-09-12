@@ -15,8 +15,6 @@ const UserAuthorization = (props) => {
 
   const { onSaveUserInfo, onCloseUserInfo, tokenModel, roleInfoData, menuData=[]} = props;
 
-  debugger
-
   const [form] = Form.useForm();
   const {getFieldDecorator, getFieldsValue, validateFields, resetFields} = form;
 

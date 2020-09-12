@@ -13,8 +13,6 @@ const UserInformation = (props) => {
 
   const {tokenModel, roleInfoData} = props;
 
-  debugger
-
   const iconStyle = {
     verticalAlign: "bottom",
     marginRight: "5px",
