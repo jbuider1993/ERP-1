@@ -8,11 +8,7 @@ class ServerMemoryDiskChart extends React.Component {
   render() {
 
     const cpuConfig = {
-      width: 300,
-      height: 300,
       value: 64,
-      min: 0,
-      max: 100,
       forceFit: true,
       padding: [10, 10, 25, 10],
       range: [0, 25, 50, 75, 100],
@@ -22,16 +18,12 @@ class ServerMemoryDiskChart extends React.Component {
         text: 'CPU使用率',
         color: '#30bf78',
         position: ['50%', '105%'],
-        size: 15
+        size: 14
       },
     };
 
     const diskConfig = {
-      width: 400,
-      height: 400,
       value: 51,
-      min: 0,
-      max: 100,
       forceFit: true,
       padding: [10, 10, 25, 10],
       range: [0, 25, 50, 75, 100],
@@ -41,7 +33,7 @@ class ServerMemoryDiskChart extends React.Component {
         text: '磁盘使用率',
         color: '#30bf78',
         position: ['50%', '105%'],
-        size: 15
+        size: 14
       },
     };
 

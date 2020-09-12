@@ -22,8 +22,6 @@ const AppPage = (props) => {
           openedSubMenuKey, homeView, tokenModel, themeDrawerVisible, themeColor, selectedStyle, menuMap } = globalModel;
   const {roleInfoData} = userInfoModel;
 
-  debugger
-
   // 兼容单独运行前端服务
   if (menuData) {
     menuData = menuData;
@@ -131,10 +129,7 @@ const AppPage = (props) => {
     menuMap,
     themeColor,
     onTabChange: (activeTabKey) => {
-
-      debugger
-
-      dispatch({ type: "globalModel/updateState", payload: { activeSideMenuKey: activeTabKey, activeHeadMenuKey: activeTabKey == "home" ? activeTabKey : menuMap.get(activeTabKey) }});
+      dispatch({ type: "globalModel/updateState", payload: { activeSideMenuKey: activeTabKey, activeHeadMenuKey: menuMap.get(activeTabKey) }});
     },
     onSelectSideMenu: (params) => {
       const { item, key, keyPath } = params;

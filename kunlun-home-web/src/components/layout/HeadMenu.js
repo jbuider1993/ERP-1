@@ -30,8 +30,6 @@ class HeadMenu extends React.Component {
       verticalAlign: "sub",
     };
 
-    debugger
-
     // 主菜单项
     const main = menuData.main;
     const initMainMenu = main.map(item =>

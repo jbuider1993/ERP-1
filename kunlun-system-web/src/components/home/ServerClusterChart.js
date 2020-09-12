@@ -29,6 +29,15 @@ class ServerClusterChart extends React.Component {
       legend: {
         visible: true,
         position: 'right-top',
+        offsetX: -5,
+        offestY: -5,
+        text: {
+          symbol: "circle",
+          style: {r: 5, fill: "#5B8FF9"},
+          formatter: (text,cfg) => {
+            return text;
+          }
+        }
       },
     };
 
