@@ -9,15 +9,19 @@ import { Modal, message } from "antd";
 const OnlinePage = (props) => {
 
   let { dispatch, onlineModel } = props;
-  const { onlineList, total, onlineLoading, currentPage, pageSize, searchParams } = onlineModel;
+  const { onlineList, total, onlineLoading, currentPage, pageSize, searchParams, selectedRowKeys, selectedRows, isExpandSearch } = onlineModel;
 
   const onlineSearchProps = {
+    isExpandSearch,
     onSearch: (searchParams) => {
       dispatch({ type: "onlineModel/updateState", payload: { searchParams }});
       dispatch({ type: 'onlineModel/getListDatas', payload: { currentPage, pageSize, ...searchParams }});
     },
     onReset: () => {
       dispatch({ type: "onlineModel/updateState", payload: { searchParams: null }});
+    },
+    toggleExpand: () => {
+      dispatch({ type: "onlineModel/updateState", payload: { isExpandSearch: !isExpandSearch }});
     },
   };
 
@@ -30,6 +34,7 @@ const OnlinePage = (props) => {
     pageSize,
     onlineList,
     onlineLoading,
+    isExpandSearch,
     onEdit: (record) => {
       dispatch({ type: "onlineModel/updateState", payload: { onlineModalVisible: true }});
     },
@@ -37,6 +42,19 @@ const OnlinePage = (props) => {
     },
     onDelete: (record) => {
       dispatch({ type: "onlineModel/batchDeleteOnlineUser", payload: { ids: record.id }});
+    },
+    rowSelection: {
+      selectedRowKeys,
+      selectedRows,
+      onChange: (keys, selectedRows) => {
+        dispatch({
+          type: 'userModel/updateState',
+          payload: {
+            selectedRows: selectedRows,
+            selectedRowKeys: keys,
+          },
+        })
+      },
     }
   };
 

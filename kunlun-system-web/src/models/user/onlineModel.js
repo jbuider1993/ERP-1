@@ -11,6 +11,7 @@ export default {
     currentPage: 0,
     pageSize: 0,
     searchParams: null,
+    isExpandSearch: true,
   },
 
   reducers: {

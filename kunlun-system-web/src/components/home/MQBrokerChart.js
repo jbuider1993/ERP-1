@@ -18,7 +18,6 @@ class MQBrokerChart extends React.Component {
       data: mqInfos,
       xField: 'time',
       yField: 'value',
-      legend: { position: 'right' },
       seriesField: 'type',
       color: ['#1979c9', '#D62A0D', '#FAA219', '#27f503'],
       responsive: true,
@@ -37,6 +36,19 @@ class MQBrokerChart extends React.Component {
             );
           },
         },
+      },
+      legend: {
+        visible: true,
+        flipPage: true,
+        position: 'right-top',
+        offsetX: 2,
+        offestY: 2,
+        text: {
+          style: {r: 5, fill: "#5B8FF9"},
+          formatter: (text,cfg) => {
+            return text;
+          }
+        }
       },
     };
 

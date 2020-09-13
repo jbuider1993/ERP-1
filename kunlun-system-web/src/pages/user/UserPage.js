@@ -75,8 +75,6 @@ class UserPage extends React.Component {
           payload: {userModalVisible: true, operateType: "edit", userInfoData: record}
         });
       },
-      onView: (record) => {
-      },
       onDelete: (record) => {
         dispatch({type: "userModel/batchDeleteUser", payload: {ids: record.id}});
       },

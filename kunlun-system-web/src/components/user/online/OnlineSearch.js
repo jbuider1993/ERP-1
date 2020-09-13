@@ -10,22 +10,14 @@ class OnlineSearch extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = {
-      expand: true
-    };
   }
 
   formRef = React.createRef();
 
   render() {
 
-    const { onSearch, onReset } = this.props;
+    const { onSearch, onReset, toggleExpand, isExpandSearch } = this.props;
     const { getFieldsValue, validateFields, setFieldsValue, resetFields } = this.formRef;
-
-    const toggleCollapse = () => {
-      const { expand } = this.state;
-      this.setState({ expand: !expand });
-    };
 
     const handleSearch = () => {
       let fields = getFieldsValue();
@@ -48,7 +40,7 @@ class OnlineSearch extends React.Component {
     };
 
     return (
-      <div className={this.state.expand ? commonStyles.singleRowSearch : commonStyles.doubleRowSearch}>
+      <div className={isExpandSearch ? commonStyles.singleRowSearch : commonStyles.doubleRowSearch}>
         <Form ref={this.formRef}>
           <Row className={index.formRowDiv}>
             <Col span={6}>
@@ -70,13 +62,13 @@ class OnlineSearch extends React.Component {
               <FormItem>
                 <Button size="default" icon={<i className="ri-search-line" style={iconStyle}></i>} style={{marginLeft: "10px", border: "0px", background: window._THEMECOLOR_}} onClick={() => handleSearch()}>查询</Button>
                 <Button type="default" size="default" icon={<i className="ri-restart-line" style={iconStyle}></i>} style={{marginLeft: "10px"}} onClick={() => handleReset()}>重置</Button>
-                <Button type="dashed" style={{marginLeft: "10px"}} onClick={() => toggleCollapse()}>
-                  <i className={this.state.expand ? "ri-arrow-down-s-line" : "ri-arrow-up-s-line"} style={iconStyle}></i>搜索
+                <Button type="dashed" style={{marginLeft: "10px"}} onClick={() => toggleExpand()}>
+                  <i className={isExpandSearch ? "ri-arrow-down-s-line" : "ri-arrow-up-s-line"} style={iconStyle}></i>搜索
                 </Button>
               </FormItem>
             </Col>
           </Row>
-          <Row style={{ display: this.state.expand ? "none" : "flex"}} className={index.formRowDiv}>
+          <Row style={{ display: isExpandSearch ? "none" : "flex"}} className={index.formRowDiv}>
             <Col span={6}>
               <FormItem {...formItemLayout} label='浏览器' name={"usedBrowser"}>
                 <Input placeholder="请输入浏览器" size="default"/>

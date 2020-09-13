@@ -1,14 +1,14 @@
 import React from 'react';
 import styles from './User.less';
-import {Table, Tag, Popconfirm} from 'antd';
+import {Table, Tag, Tooltip, Popconfirm} from 'antd';
 import 'remixicon/fonts/remixicon.css';
 
 const UserList = (props) => {
 
-  const { userList, userLoading, rowSelection, onView, onEdit, onDelete, currentPage, pageSize } = props;
+  const { userList, userLoading, rowSelection, onEdit, onDelete, currentPage, pageSize } = props;
 
   const columns = [
-    { title: '序号', width: '5%', render: (text, record, index) => <span>{(index + 1) + (currentPage - 1) * pageSize}</span> },
+    { title: '序号', width: '6.5%', render: (text, record, index) => <span>{(index + 1) + (currentPage - 1) * pageSize}</span> },
     { title: '用户名', dataIndex: 'userName', key: 'userName', width: '15%' },
     { title: '密码', dataIndex: 'password', key: 'password', width: '15%' },
     { title: '性别', dataIndex: 'sex', key: 'sex', width: '10%' },
@@ -20,14 +20,18 @@ const UserList = (props) => {
       render: (text, record, index) => <span>{text.substr(0, text.indexOf("T"))}</span> },
     { title: '操作', key: 'operate', width: '10%',
       render: (text, record) => (
-      <span>
-        <a onClick={() => onEdit(record)}><i className="ri-edit-2-line" style={{color: '#08c'}}></i></a>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <span style={{padding: "0px 5px 0px 5px"}}>
+        <Tooltip title={"编辑用户"}>
+          <a onClick={() => onEdit(record)}>
+            <i className="ri-edit-box-fill" style={{color: '#08c', fontSize: "16px"}}></i>
+          </a>
+        </Tooltip>
+        &nbsp;&nbsp;&nbsp;
         <Popconfirm title="确定删除当前记录？" onConfirm={onDelete.bind(null, record)}>
-          <i className="ri-delete-bin-7-line" style={{color: 'red'}}></i>
+          <Tooltip title={"删除用户"}>
+            <a><i className="ri-delete-bin-2-fill" style={{color: 'red', fontSize: "16px"}}></i></a>
+          </Tooltip>
         </Popconfirm>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <a onClick={() => onView(record)}><i className="ri-file-text-line"></i></a>
       </span>)
   }];
 
@@ -42,7 +46,7 @@ const UserList = (props) => {
         pagination={false}
         loading={userLoading}
         rowKey={record => record.id}
-        scroll={{y: (window.innerHeight - 215)}}
+        scroll={{y: (window.innerHeight - 230)}}
       />
     </div>
   );
