@@ -73,7 +73,8 @@ const config = {
     downloadUsers: `${BASEDATA_SERVICE_API}/user/downloadUsers`,
 
     // 在线用户
-    getModelList: `${SYSTEM_SERVICE_API}/service/modelList`,
+    getOnlineUserList: `${BASEDATA_SERVICE_API}/onlineUser/getAllOnlineUser`,
+    forceExit: `${BASEDATA_SERVICE_API}/onlineUser/forceExit`,
 
     // 角色管理
     getRoleList: `${BASEDATA_SERVICE_API}/role/getAllRole`,
@@ -85,7 +86,7 @@ const config = {
     getRoleById: `${BASEDATA_SERVICE_API}/role/getRoleById`,
 
     // 协同管理
-    getOnlineUserList: `${BASEDATA_SERVICE_API}/onlineUser/getAllOnlineUser`,
+    getModelList: `${SYSTEM_SERVICE_API}/service/modelList`,
     deployModel: `${SYSTEM_SERVICE_API}/deploy`,
     getModelNodeList: `${SYSTEM_SERVICE_API}/service/model/XXX/json`,
     batchDeleteModel: `${SYSTEM_SERVICE_API}/service/batchDelete`,

@@ -6,7 +6,7 @@ import 'remixicon/fonts/remixicon.css';
 
 const OnlineList = (props) => {
 
-  const { onlineList, onlineLoading, onDelete, currentPage, pageSize, rowSelection, isExpandSearch } = props;
+  const { onlineList, onlineLoading, currentPage, pageSize, rowSelection, isExpandSearch, onForceExit } = props;
 
   const columns = [
     { title: '序号', width: '6%', render: (text, record, index) => <span>{(index + 1) + (currentPage - 1) * pageSize}</span> },
@@ -25,7 +25,7 @@ const OnlineList = (props) => {
       render: (text, record, index) => <span>{moment(text).format("YYYY-MM-DD HH:mm:ss")}</span> },
     { title: '操作', key: 'operate', width: '10%',
       render: (text, record) => (
-        <Popconfirm title="确定强制下线当前用户？" onConfirm={onDelete.bind(null, record)}>
+        <Popconfirm title="确定强制下线当前用户？" onConfirm={onForceExit.bind(null, record)}>
           <Tooltip title={"强制下线"}>
             <a><i className="ri-cloud-off-fill" style={{color: 'red', fontSize: "16px"}}></i></a>
           </Tooltip>

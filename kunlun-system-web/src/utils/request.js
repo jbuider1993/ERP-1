@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { message, Modal } from 'antd';
+import { message } from 'antd';
 import qs from 'qs';
 import 'remixicon/fonts/remixicon.css';
 
@@ -35,16 +35,7 @@ export function get(url, data) {
             message.error("客户端请求错误！");
           } else if (status == "500") {
             if (error.response.data.status && error.response.data.status == 999) {
-              Modal.confirm({
-                title: '提示',
-                okText: "确认",
-                cancelText: "取消",
-                content: <div><i className="ri-error-warning-line" style={{fontSize: "18px", marginRight: "10px", verticalAlign: "sub"}}></i>离开时间太长，请重新登录！</div>,
-                onOk() {
-                  window.parent.postMessage({operateType: "timeout"}, "*");
-                },
-                onCancel() {},
-              });
+              window.parent.postMessage({operateType: "timeout"}, "*");
             } else {
               message.error("服务器内部错误！");
             }

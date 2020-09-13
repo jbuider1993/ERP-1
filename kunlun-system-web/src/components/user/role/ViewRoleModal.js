@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import { Modal, Form, Row, Col, Tree, Tag } from 'antd';
 import 'remixicon/fonts/remixicon.css';
 import moment from 'moment';
+import style from './Role.less';
 
 const FormItem = Form.Item;
 const TreeNode = Tree.TreeNode;
@@ -86,17 +87,22 @@ const ViewRoleModal = (props) => {
     }
   }
 
+  const itemStyle = {
+    marginLeft: "10px",
+  }
+
   return (
     <div>
       <Modal
+        centered={true}
         visible={viewRoleModalVisible}
         title={"查看详情"}
         onCancel={onCancel}
         onOk={() => {}}
-        width={700}
+        width={600}
         destroyOnClose={false}
         footer={null}
-        bodyStyle={{height: "500px"}}
+        bodyStyle={{height: "465px", padding: "15px"}}
       >
         <Form form={form}>
           <Row>
@@ -105,17 +111,20 @@ const ViewRoleModal = (props) => {
           <Row>
             <Col span={8}>
               <FormItem { ...formItemLayout } label="角色名称" name={"roleName"}>
-                <div>{roleInfoData && roleInfoData.roleName ? roleInfoData.roleName : ""}</div>
+                <div style={itemStyle}>{roleInfoData && roleInfoData.roleName ? roleInfoData.roleName : ""}</div>
               </FormItem>
             </Col>
             <Col span={8}>
               <FormItem { ...formItemLayout } label="权限字符" name={"roleWord"}>
-                <div>{roleInfoData && roleInfoData.roleWord ? roleInfoData.roleWord : ""}</div>
+                <div style={itemStyle}>{roleInfoData && roleInfoData.roleWord ? roleInfoData.roleWord : ""}</div>
               </FormItem>
             </Col>
             <Col span={8}>
               <FormItem { ...formItemLayout } label="是否启用" name={"status"}>
-                <div>{roleInfoData && roleInfoData.status ? <Tag color="#87d068" style={{padding: "0px 10px 0px 10px"}}>是</Tag> : <Tag style={{padding: "0px 10px 0px 10px"}}>否</Tag>}</div>
+                <div style={itemStyle}>{roleInfoData && roleInfoData.status ?
+                  <Tag color={"#87d068"} style={{padding: "0px 10px 0px 10px"}}>是</Tag> :
+                  <Tag color={"#8abdf1"} style={{padding: "0px 10px 0px 10px"}}>否</Tag>}
+                </div>
               </FormItem>
             </Col>
           </Row>
@@ -132,17 +141,17 @@ const ViewRoleModal = (props) => {
           </Row>
           <Row>
             <Col span={8}>
-              <Tree onExpand={onExpandTreeNode} style={{width: "93%", overflow: "auto", height: "350px"}}>
+              <Tree onExpand={onExpandTreeNode} style={{width: "93%", overflow: "auto", height: "325px"}}>
                 {
                   menuList && menuList.length > 0 ? generateTreeNodes(selectedMenuList) : null
                 }
               </Tree>
             </Col>
             <Col span={8}>
-              <div style={{width: "93%", overflow: "auto", height: "350px"}}>暂无数据</div>
+              <div style={{width: "93%", overflow: "auto", height: "325px"}}>暂无数据</div>
             </Col>
             <Col span={8}>
-              <ul style={{width: "93%", overflow: "auto", height: "350px", lineHeight: 1.8}}>
+              <ul style={{width: "93%", overflow: "auto", height: "325px", lineHeight: 1.8}}>
                 {
                   allotedUsers ? allotedUsers.map(item => <li>{item.userName}</li>) : null
                 }

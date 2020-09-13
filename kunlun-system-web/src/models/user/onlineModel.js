@@ -12,6 +12,7 @@ export default {
     pageSize: 0,
     searchParams: null,
     isExpandSearch: true,
+    selectedRows: null,
   },
 
   reducers: {
@@ -32,13 +33,22 @@ export default {
       }
       yield put({ type: "updateState", payload: { onlineLoading: false }});
     },
+
+    *forceExit({payload: params}, {select, call, put}) {
+      const {selectedOnlineUsers} = params;
+      const res = yield call(onlineService.forceExit, {onlineUsers: JSON.stringify(selectedOnlineUsers)});
+      if (res.code == 200) {
+        console.log("强制下线成功 ===>>> " + JSON.stringify(params));
+      }
+      yield put({ type: 'getListDatas', payload: {}});
+    },
   },
 
   subscriptions: {
     setup({ dispatch, history }) {
       history.listen(location => {
         if (location.pathname === "/user/online") {
-          dispatch({ type: 'getListDatas', payload: {} });
+          dispatch({ type: 'getListDatas', payload: {}});
         }
       });
     },

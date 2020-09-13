@@ -26,7 +26,10 @@ const OnlinePage = (props) => {
   };
 
   const onlineToolBarProps = {
-    onExport: () => {}
+    onExport: () => {},
+    forceExit: () => {
+      dispatch({ type: "onlineModel/forceExit", payload: { selectedOnlineUsers: selectedRows }});
+    },
   };
 
   const onlineListProps = {
@@ -35,13 +38,10 @@ const OnlinePage = (props) => {
     onlineList,
     onlineLoading,
     isExpandSearch,
-    onEdit: (record) => {
-      dispatch({ type: "onlineModel/updateState", payload: { onlineModalVisible: true }});
-    },
-    onView: (record) => {
-    },
-    onDelete: (record) => {
-      dispatch({ type: "onlineModel/batchDeleteOnlineUser", payload: { ids: record.id }});
+    onForceExit: (record) => {
+      const selectedOnlineUsers = new Array();
+      selectedOnlineUsers.push(record);
+      dispatch({ type: "onlineModel/forceExit", payload: { selectedOnlineUsers }});
     },
     rowSelection: {
       selectedRowKeys,

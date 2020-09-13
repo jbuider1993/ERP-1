@@ -1,5 +1,5 @@
 import config from "../config/config";
-import { message } from 'antd';
+import { message, Modal } from 'antd';
 import { routerRedux } from 'dva/router';
 import * as globalService from '../services/globalService';
 
@@ -25,6 +25,7 @@ export default {
     selectedStyle: "theme",
     isBlockStyle: true,
     menuMap: new Map(),
+    timeoutModalCount: 0,
   },
   reducers: {
     updateState(state, { payload }) {
@@ -106,15 +107,37 @@ export default {
       tokenModel["userInfo"] = userInfo;
       yield put({type: "updateState", payload: {tokenModel, menuData: JSON.parse(sessionStorage.menuData)}});
     },
+
+    *handleTimeout({payload: params}, {select, call, put}) {
+      const {dispatch, history} = params;
+      let {timeoutModalCount} = yield select(state => state.globalModel);
+      if (timeoutModalCount > 0) return;
+      timeoutModalCount++;
+
+      Modal.confirm({
+        title: '提示',
+        okText: "确认",
+        cancelText: "取消",
+        content: <div><i className="ri-error-warning-line" style={{fontSize: "18px", marginRight: "10px", verticalAlign: "sub"}}></i>离开时间太长，请重新登录！</div>,
+        onOk() {
+          dispatch({type: "logout", payload: {}}).then(() =>
+            history.push({pathname: "/"})
+          );
+        },
+        onCancel() {
+          timeoutModalCount--;
+          dispatch({type: "updateState", payload: {timeoutModalCount}});
+        },
+      });
+      dispatch({type: "updateState", payload: {timeoutModalCount}});
+    },
   },
   subscriptions: {
     onListenIFrameMessage({ dispatch, history }) {
       window.addEventListener("message", function (e) {
         // 监听页面超时事件，确定后直接跳转到登陆界面
         if (e.data && e.data.operateType == "timeout") {
-          dispatch({type: "logout", payload: {}}).then(() =>
-            window.g_app._history.push({pathname: "/"})
-          );
+          dispatch({type: "handleTimeout", payload: {dispatch, history}});
         } else {
           // kunlun-system-web请求打开菜单页面的监听
           const message = !!e && !!e.data && JSON.parse(e.data) || {};
