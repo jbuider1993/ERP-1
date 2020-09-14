@@ -40,11 +40,10 @@ class MQBrokerChart extends React.Component {
       legend: {
         visible: true,
         flipPage: true,
-        position: 'right-top',
-        offsetX: 2,
-        offestY: 2,
+        offsetX: 10,
+        offestY: 10,
         text: {
-          style: {r: 5, fill: "#5B8FF9"},
+          style: {r: 50, fill: "#0554f6", fontSize: 14},
           formatter: (text,cfg) => {
             return text;
           }

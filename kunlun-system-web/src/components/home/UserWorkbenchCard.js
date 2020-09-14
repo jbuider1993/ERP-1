@@ -24,8 +24,8 @@ class UserWorkbenchCard extends React.Component {
               <div><span style={{fontWeight: "bold"}}>{loginUserInfo ? loginUserInfo.userName : "admin"}</span>&nbsp;&nbsp;&nbsp;&nbsp;欢迎使用本系统！</div>
               <div>祝你开心每一天！</div>
               <div className={indexStyles.userPhoneAndEmailDiv}>
-                <div>{loginUserInfo ? loginUserInfo.phoneNumber : "15555555555"}</div>&nbsp;&nbsp;&nbsp;&nbsp;
-                <div>{loginUserInfo ? loginUserInfo.email : "test@test.com"}</div>
+                <span>{loginUserInfo ? loginUserInfo.phoneNumber : "15555555555"}</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                <span>{loginUserInfo ? loginUserInfo.email : "test@test.com"}</span>
               </div>
             </div>
             <div className={indexStyles.allUserInfo}>
