@@ -44,8 +44,10 @@ class TodaySchedule extends React.Component {
                 </div>
                 <div>
                   <div><span>主题：</span><span style={{color: scheduleData.themeColor}}>&nbsp;{scheduleData.theme}</span></div>
-                  <div><span>时间：</span><span>&nbsp;{moment(scheduleData.startTime).format(timeFormat) + " - " + moment(scheduleData.endTime).format(timeFormat)}</span></div>
-                  <div><span>地点：</span><span>&nbsp;{scheduleData.location}</span></div>
+                  <div style={{display: "flex", flexDirection: "row"}}>
+                    <div style={{display: "flex", flex: 1}}><span>时间：</span><span>&nbsp;{moment(scheduleData.startTime).format(timeFormat) + " - " + moment(scheduleData.endTime).format(timeFormat)}</span></div>
+                    <div style={{display: "flex", flex: 1}}><span>地点：</span><span>&nbsp;{scheduleData.location}</span></div>
+                  </div>
                   <div><span>内容：</span><span>&nbsp;{scheduleData.content}</span></div>
                   <div className={styles.scheduleShowPersonDiv}>
                     <span>人员：</span>
