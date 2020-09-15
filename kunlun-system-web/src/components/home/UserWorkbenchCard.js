@@ -18,7 +18,7 @@ class UserWorkbenchCard extends React.Component {
         <div className={indexStyles.headerBDiv}>
           <div className={indexStyles.userInfoDiv}>
             <div className={indexStyles.userPhotoDiv}>
-              <Avatar size={80} icon={<i className="ri-user-line"></i>} src={userLogo} />
+              <Avatar size={70} icon={<i className="ri-user-line"></i>} src={userLogo} />
             </div>
             <div className={indexStyles.userFontDiv}>
               <div><span style={{fontWeight: "bold"}}>{loginUserInfo ? loginUserInfo.userName : "admin"}</span>&nbsp;&nbsp;&nbsp;&nbsp;欢迎使用本系统！</div>
@@ -39,7 +39,7 @@ class UserWorkbenchCard extends React.Component {
         </div>
         <div className={indexStyles.headerADiv}>
           <Row gutter={20}>
-            <Col span={7} style={{padding: "15px 0px 0px 10px"}}>
+            <Col span={7} style={{padding: "0px 0px 0px 10px"}}>
               <Card style={{textAlign: "center"}} className={styles.userVisitTotalDiv}>
                 <Statistic title="总访问量"
                            value={userCounts ? userCounts.userCount : ""}
@@ -49,7 +49,7 @@ class UserWorkbenchCard extends React.Component {
                            suffix="人"/>
               </Card>
             </Col>
-            <Col span={8} style={{padding: "15px 0px 0px 10px"}}>
+            <Col span={8} style={{padding: "0px 0px 0px 10px"}}>
               <Card style={{textAlign: "center"}} className={styles.userOnlineDiv}>
                 <Statistic title="在线人数"
                            value={userCounts ? userCounts.onlineCount : ""}
@@ -59,7 +59,7 @@ class UserWorkbenchCard extends React.Component {
                            suffix="人"/>
               </Card>
             </Col>
-            <Col span={7} style={{padding: "15px 0px 0px 10px"}}>
+            <Col span={7} style={{padding: "0px 0px 0px 10px"}}>
               <Card style={{textAlign: "center"}} className={styles.userVisitLastDiv}>
                 <Statistic title="最近一个月内访问量"
                            value={userCounts ? userCounts.leastCount : ""}
