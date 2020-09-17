@@ -75,6 +75,7 @@ const config = {
     // 在线用户
     getOnlineUserList: `${BASEDATA_SERVICE_API}/onlineUser/getAllOnlineUser`,
     forceExit: `${BASEDATA_SERVICE_API}/onlineUser/forceExit`,
+    downloadOnlineUsers: `${BASEDATA_SERVICE_API}/onlineUser/downloadOnlineUsers`,
 
     // 角色管理
     getRoleList: `${BASEDATA_SERVICE_API}/role/getAllRole`,

@@ -26,7 +26,9 @@ const OnlinePage = (props) => {
   };
 
   const onlineToolBarProps = {
-    onExport: () => {},
+    onExport: () => {
+      dispatch({ type: "onlineModel/downloadOnlineUsers", payload: { searchParams }});
+    },
     forceExit: () => {
       dispatch({ type: "onlineModel/forceExit", payload: { selectedOnlineUsers: selectedRows }});
     },

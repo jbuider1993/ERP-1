@@ -42,6 +42,12 @@ export default {
       }
       yield put({ type: 'getListDatas', payload: {}});
     },
+
+    *downloadOnlineUsers({payload: params}, {select, call, put}) {
+      yield put({ type: "updateState", payload: { onlineLoading: true }});
+      const res = yield call(onlineService.downloadOnlineUsers, params);
+      yield put({ type: "updateState", payload: { onlineLoading: false }});
+    },
   },
 
   subscriptions: {
