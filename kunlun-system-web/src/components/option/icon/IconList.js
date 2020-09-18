@@ -27,7 +27,7 @@ const IconList = (props) => {
         bordered
         rowKey={record => record.id}
         pagination={false}
-        scroll={{y: (window.innerHeight - 190)}}
+        scroll={{y: (window.innerHeight - 225)}}
       />
     </div>
   );
