@@ -57,7 +57,7 @@ class SelectMenuDrawer extends React.Component {
 
     // 返回工具栏新增、批量删除按钮
     return (
-      <div className={styles.drawerDiv}>
+      <div>
         <Spin spinning={selectMenuLoading}>
           <Drawer
             title="父级菜单"
@@ -71,16 +71,16 @@ class SelectMenuDrawer extends React.Component {
             <div className={styles.menuDrawerDiv}>
               <div className={styles.menuDrawerModalDiv}>
                 <Form ref={this.formRef}>
-                  <Row>
+                  <Row style={{margin: "0px 20px -20px -20px"}}>
                     <Col span={24}>
                       <FormItem {...formItemLayout} label="菜单名称" name={"level"} rules={[{required: false, message: '请选择菜单类型'}]}>
-                        <Input/>
+                        <Input.Search />
                       </FormItem>
                     </Col>
                   </Row>
                 </Form>
               </div>
-              <div className={styles.menuDrawerTreeDiv}>
+              <div className={styles.menuDrawerTreeDiv} style={{height: window.innerHeight - 185}}>
                 <Tree
                   checkable
                   autoExpandParent={true}

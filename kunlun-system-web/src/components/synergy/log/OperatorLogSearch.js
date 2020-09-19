@@ -11,16 +11,13 @@ class OperatorLogSearch extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = {
-      isShowDetailItem: false
-    }
   }
 
   formRef = React.createRef();
 
   render() {
 
-    const {onSearch, onReset} = this.props;
+    const {onSearch, onReset, isExpandSearch, onShowDetailSearch} = this.props;
     const { getFieldsValue, validateFields, setFieldsValue, resetFields } = this.formRef;
 
     const handleSearch = () => {
@@ -31,11 +28,6 @@ class OperatorLogSearch extends React.Component {
     const handleReset = () => {
       resetFields();
       onReset()
-    };
-
-    const onShowDetail = () => {
-      const isShowDetailItem = this.state.isShowDetailItem;
-      this.setState({ isShowDetailItem: !isShowDetailItem });
     };
 
     const formItemLayout = {
@@ -49,7 +41,7 @@ class OperatorLogSearch extends React.Component {
     };
 
     return (
-      <div className={this.state.isShowDetailItem ? commonStyles.doubleRowSearch : commonStyles.singleRowSearch}>
+      <div className={isExpandSearch ? commonStyles.doubleRowSearch : commonStyles.singleRowSearch}>
         <Form ref={this.formRef}>
           <Row className={index.formRowDiv}>
             <Col span={6}>
@@ -71,14 +63,14 @@ class OperatorLogSearch extends React.Component {
               <FormItem>
                 <Button size="default" icon={<i className="ri-search-line" style={iconStyle}></i>} style={{marginLeft: "10px", border: "0px", background: window._THEMECOLOR_}} onClick={() => handleSearch()}>查询</Button>
                 <Button type="default" size="default" icon={<i className="ri-restart-line" style={iconStyle}></i>} style={{marginLeft: "10px"}} onClick={() => handleReset()}>重置</Button>
-                <Button type="dashed" size="default" style={{ marginLeft: "10px" }} onClick={() => onShowDetail()}>
-                  <i className={this.state.expand ? "ri-arrow-down-s-line" : "ri-arrow-up-s-line"} style={iconStyle}></i>搜索
+                <Button type="dashed" size="default" style={{ marginLeft: "10px" }} onClick={() => onShowDetailSearch()}>
+                  <i className={isExpandSearch ? "ri-arrow-down-s-line" : "ri-arrow-up-s-line"} style={iconStyle}></i>搜索
                 </Button>
               </FormItem>
             </Col>
           </Row>
           {
-            this.state.isShowDetailItem ?
+            isExpandSearch ?
             <Row className={index.formRowDiv}>
               <Col span={6}>
                 <FormItem {...formItemLayout} label="调用方法" name={"methodName"}>

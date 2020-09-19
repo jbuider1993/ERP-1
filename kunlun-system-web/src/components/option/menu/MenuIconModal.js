@@ -51,6 +51,7 @@ class MenuIconModal extends React.Component {
     return (
       <div>
         <Modal
+          centered={true}
           visible={menuIconModalVisible}
           title={"选择图标"}
           onCancel={onCancel}

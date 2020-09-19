@@ -13,7 +13,7 @@ const OperatorLogToolbar = (props) => {
 
   return (
     <div style={{marginBottom: "15px", marginTop: "15px"}}>
-      <Button type="primary" size="default" icon={<i className="ri-download-2-line" style={iconStyle}></i>} onClick={() => onExport()} style={{border: "1px solid #786CE7", color: "#786CE7"}}>导出</Button>
+      <Button type="primary" size="default" icon={<i className="ri-download-2-line" style={iconStyle}></i>} onClick={() => onExport()}>导出</Button>
     </div>
   );
 };

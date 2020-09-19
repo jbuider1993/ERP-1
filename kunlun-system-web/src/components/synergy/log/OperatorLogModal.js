@@ -28,6 +28,7 @@ const OperatorLogModal = (props) => {
   return (
     <div>
       <Modal
+        centered={true}
         visible={logModalVisible}
         onCancel={onCancel}
         title={"日志详情"}

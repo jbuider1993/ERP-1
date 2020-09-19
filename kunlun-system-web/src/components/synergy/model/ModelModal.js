@@ -19,6 +19,7 @@ const ModelModal = (props) => {
   return (
     <div>
       <Modal
+        centered={true}
         visible={modelModalVisible}
         onCancel={onCancel}
         title={"模型详情"}

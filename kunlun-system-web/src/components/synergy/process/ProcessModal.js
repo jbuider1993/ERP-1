@@ -31,6 +31,7 @@ const ProcessModal = (props) => {
   return (
     <div>
       <Modal
+        centered={true}
         visible={processModalVisible}
         onCancel={onCancel}
         title={"模型流程"}

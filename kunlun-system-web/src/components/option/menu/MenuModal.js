@@ -37,6 +37,11 @@ class MenuModal extends React.Component {
       wrapperCol: {span: 16},
     };
 
+    const singleFormItemLayout = {
+      labelCol: {span: 4},
+      wrapperCol: {span: 20},
+    };
+
     // 点击Modal框确定按钮触发的事件
     const onOk = () => {
       validateFields((err, values) => {
@@ -96,6 +101,7 @@ class MenuModal extends React.Component {
       <div>
         <Spin spinning={saveLoading}>
           <Modal
+            centered={true}
             className={styles.modal}
             visible={menuModalVisible}
             title={menuModalType == "add" ? "新增菜单" : "编辑菜单"}
@@ -168,7 +174,7 @@ class MenuModal extends React.Component {
               </Row>
               <Row>
                 <Col span={24}>
-                  <FormItem {...formItemLayout} label="菜单url" name={"url"} rules={[{required: false, message: '请输入菜单url'}]}>
+                  <FormItem {...singleFormItemLayout} label="菜单url" name={"url"} rules={[{required: false, message: '请输入菜单url'}]}>
                     <Input/>
                   </FormItem>
                 </Col>

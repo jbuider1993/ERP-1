@@ -41,7 +41,7 @@ class IconModal extends React.Component {
           visible={iconModalVisible}
           title={"查看图标"}
           onCancel={onCancel}
-          width={450}
+          width={500}
           destroyOnClose={true}
           footer={null}
         >

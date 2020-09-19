@@ -16,6 +16,7 @@ export default {
     selectedRowKeys: [],
     searchParams: null,
     logRecord: null,
+    isExpandSearch: false,
   },
 
   reducers: {
@@ -38,7 +39,9 @@ export default {
     },
 
     *downloadOperateLog({payload: params}, {select, call, put}) {
+      yield put({ type: "updateState", payload: { logLoading: true }});
       const res = yield call(operatorLogService.downloadOperateLog, params);
+      yield put({ type: "updateState", payload: { logLoading: false }});
     },
   },
 

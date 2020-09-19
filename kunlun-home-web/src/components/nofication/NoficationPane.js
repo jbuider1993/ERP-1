@@ -51,7 +51,7 @@ class NoficationPane extends React.Component {
                     <span>{item.title}</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <span>{item.createTime ? moment(item.createTime).format("YYYY-MM-DD HH:mm:ss") : ""}</span>
                   </div>
-                  <div style={{width: "300px", margin: "-15px 0px 0px 24px"}} className={styles.messageContentDiv}>
+                  <div style={{width: "300px", margin: "-20px 0px 0px 24px"}} className={styles.messageContentDiv}>
                     <span style={{whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis"}}>{item.content.replace(/<[^>]*>|/g,"")}</span>
                   </div>
                 </li>)

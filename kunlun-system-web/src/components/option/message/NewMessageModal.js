@@ -55,12 +55,13 @@ class NewMessageModal extends React.Component {
     return (
       <div>
         <Modal
+          centered={true}
           visible={newMessageModalVisible}
-          title={messageModalType == "add" ? "新增菜单" : "编辑菜单"}
+          title={messageModalType == "add" ? "新增通知" : "编辑通知"}
           okText="保存"
           onCancel={onCancel}
           onOk={() => this.handleSubmit(this.formRef.current.validateFields)}
-          height={500}
+          height={400}
           width={"70%"}
           destroyOnClose={true}
         >

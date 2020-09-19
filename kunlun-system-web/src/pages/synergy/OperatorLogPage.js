@@ -13,15 +13,19 @@ const OperatorLogPage = (props) => {
 
   const { dispatch, operatorLogModel } = props;
   const { logList, total, logLoading, operateType, logModalVisible, currentPage, pageSize, selectedRowKeys,
-    selectedRows, logInfoData, searchParams, logRecord } = operatorLogModel;
+    selectedRows, logInfoData, searchParams, logRecord, isExpandSearch } = operatorLogModel;
 
   const operatorLogSearchProps = {
+    isExpandSearch,
     onSearch: (searchParams) => {
       dispatch({type: "operatorLogModel/updateState", payload: {searchParams}});
       dispatch({type: 'operatorLogModel/getListDatas', payload: {currentPage, pageSize, ...searchParams}});
     },
     onReset: () => {
       dispatch({type: "operatorLogModel/updateState", payload: {searchParams: null}});
+    },
+    onShowDetailSearch: () => {
+      dispatch({type: "operatorLogModel/updateState", payload: {isExpandSearch: !isExpandSearch}});
     },
   };
 
@@ -44,6 +48,7 @@ const OperatorLogPage = (props) => {
     pageSize,
     logList,
     logLoading,
+    isExpandSearch,
     onView: (record) => {
       dispatch({ type: 'operatorLogModel/updateState', payload: { logModalVisible: true, logRecord: record }});
     },

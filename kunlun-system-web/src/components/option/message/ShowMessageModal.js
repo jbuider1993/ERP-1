@@ -16,6 +16,7 @@ const ShowMessageModal = (props) => {
   return (
     <div>
       <Modal
+        centered={true}
         visible={showMessageModalVisible}
         title={"消息详情"}
         onCancel={onCancel}

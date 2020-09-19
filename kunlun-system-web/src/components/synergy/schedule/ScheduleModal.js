@@ -48,6 +48,7 @@ class ScheduleModal extends React.Component {
     return (
       <div>
         <Modal
+          centered={true}
           visible={scheduleModalVisible}
           title={operateType == "add" ? "新建日程" : "编辑日程"}
           okText="保存"
