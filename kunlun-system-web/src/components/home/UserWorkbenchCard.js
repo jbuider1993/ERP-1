@@ -39,17 +39,27 @@ class UserWorkbenchCard extends React.Component {
         </div>
         <div className={indexStyles.headerADiv}>
           <Row gutter={20}>
-            <Col span={7} style={{padding: "0px 0px 0px 10px"}}>
+            <Col span={5} style={{padding: "0px 0px 0px 10px"}}>
+              <Card style={{textAlign: "center"}} className={styles.userVisitTotalDiv}>
+                <Statistic title="注册用户量"
+                           value={userCounts ? userCounts.userCount : ""}
+                           precision={0}
+                           valueStyle={{color: '#faad14', fontSize: "25px"}}
+                           prefix={<i className="ri-global-line" style={{marginRight: "10px", verticalAlign: "bottom"}}></i>}
+                           suffix="人"/>
+              </Card>
+            </Col>
+            <Col span={6} style={{padding: "0px 0px 0px 10px"}}>
               <Card style={{textAlign: "center"}} className={styles.userVisitTotalDiv}>
                 <Statistic title="总访问量"
-                           value={userCounts ? userCounts.userCount : ""}
+                           value={userCounts ? userCounts.visitCount : ""}
                            precision={0}
                            valueStyle={{color: 'green', fontSize: "25px"}}
                            prefix={<i className="ri-global-line" style={{marginRight: "10px", verticalAlign: "bottom"}}></i>}
                            suffix="人"/>
               </Card>
             </Col>
-            <Col span={8} style={{padding: "0px 0px 0px 10px"}}>
+            <Col span={6} style={{padding: "0px 0px 0px 10px"}}>
               <Card style={{textAlign: "center"}} className={styles.userOnlineDiv}>
                 <Statistic title="在线人数"
                            value={userCounts ? userCounts.onlineCount : ""}
@@ -59,7 +69,7 @@ class UserWorkbenchCard extends React.Component {
                            suffix="人"/>
               </Card>
             </Col>
-            <Col span={7} style={{padding: "0px 0px 0px 10px"}}>
+            <Col span={5} style={{padding: "0px 0px 0px 10px"}}>
               <Card style={{textAlign: "center"}} className={styles.userVisitLastDiv}>
                 <Statistic title="最近一个月内访问量"
                            value={userCounts ? userCounts.leastCount : ""}
