@@ -48,7 +48,7 @@ class UserStatisticsChart extends React.Component {
     return (
       <div className={indexStyles.userChartMonthDiv}>
         <div className={indexStyles.userChartMonthInfoDiv}>
-          <div className={indexStyles.userChartMonthfont}>用户访问量统计</div>
+          <div className={indexStyles.userChartMonthfont}>用户访问</div>
           <div id="userChartMonthSelect" className={indexStyles.userChartMonthSelect}>
             <AutoComplete
               dropdownClassName="certain-category-search-dropdown"

@@ -51,7 +51,7 @@ class RedisInfoChart extends React.Component {
 
     return (
       <div className={indexStyles.redisDiv}>
-        <div className={indexStyles.redisTitleDiv}>Redis键值对及内存使用统计</div>
+        <div className={indexStyles.redisTitleDiv}>Redis资源</div>
         <div id={"redisMemory"} className={styles.redisCanvas}>
           <DualLine {...config} />
         </div>

@@ -41,7 +41,7 @@ class UserWorkbenchCard extends React.Component {
           <Row gutter={20}>
             <Col span={5} style={{padding: "0px 0px 0px 10px"}}>
               <Card style={{textAlign: "center"}} className={styles.userVisitTotalDiv}>
-                <Statistic title="注册用户量"
+                <Statistic title="注册用户数"
                            value={userCounts ? userCounts.userCount : ""}
                            precision={0}
                            valueStyle={{color: '#faad14', fontSize: "25px"}}
@@ -71,7 +71,7 @@ class UserWorkbenchCard extends React.Component {
             </Col>
             <Col span={5} style={{padding: "0px 0px 0px 10px"}}>
               <Card style={{textAlign: "center"}} className={styles.userVisitLastDiv}>
-                <Statistic title="最近一个月内访问量"
+                <Statistic title="近一个月访问量"
                            value={userCounts ? userCounts.leastCount : ""}
                            precision={0}
                            valueStyle={{color: 'blue', fontSize: "25px"}}

@@ -27,7 +27,7 @@ class ServiceInvokeList extends React.Component {
     return (
       <div className={indexStyles.tableCDiv}>
         <div className={indexStyles.tableCTitleDiv}>
-          <div className={indexStyles.tableCTitleFont}>服务调用情况统计</div>
+          <div className={indexStyles.tableCTitleFont}>服务调用</div>
           <div className={indexStyles.tableCTitleTool}>
             <div onClick={() => onShowDetail("zipkin")} className={indexStyles.fontWeightHover}>
               <Tooltip title={"查看详情"}>

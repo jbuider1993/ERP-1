@@ -39,7 +39,7 @@ class ServerMemoryDiskChart extends React.Component {
 
     return (
       <div className={indexStyles.tableADiv}>
-        <div className={indexStyles.tableATitleDiv}>服务器CPU及磁盘使用统计</div>
+        <div className={indexStyles.tableATitleDiv}>服务器资源</div>
         <div className={styles.serverMemoryDiv}>
           <div id={"serverMemory"} className={styles.serverCPU}>
             <Gauge {...cpuConfig} />

@@ -118,12 +118,12 @@ class HomePage extends React.Component {
               {/* 便捷导航 */}
               <FunctionNavigation {...functionNavigationProps} />
               <div className={indexStyles.userMessageDiv}>
-                {/* 用户访问量统计 */}
+                {/* 用户访问统计 */}
                 <UserStatisticsChart {...userStatisticsChartProps}/>
                 {/* 新闻通知 */}
                 <NewsMessageChart {...newsMessageChartProps} />
               </div>
-              {/* Redis键值对、内存使用及MQ队列Broker消息数量统计 */}
+              {/* Redis资源及MQ队列统计 */}
               <div className={indexStyles.redisMQShowDiv}>
                 <RedisInfoChart {...redisInfoChartProps}/>
                 <MQBrokerChart {...mqNumberProps}/>
@@ -135,9 +135,9 @@ class HomePage extends React.Component {
               <TodaySchedule {...todayScheduleProps} />
               {/* 服务器CPU及磁盘使用统计 */}
               <ServerMemoryDiskChart />
-              {/* 服务器集群资源统计 */}
+              {/* 服务资源统计 */}
               <ServerClusterChart />
-              {/* 服务调用情况统计 */}
+              {/* 服务调用统计 */}
               <ServiceInvokeList {...serviceInvokeListProps} />
             </div>
           </div>

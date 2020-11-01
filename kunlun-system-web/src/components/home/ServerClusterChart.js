@@ -43,7 +43,7 @@ class ServerClusterChart extends React.Component {
 
     return (
       <div className={indexStyles.tableBDiv}>
-        <div className={indexStyles.tableBTitleDiv}>服务器集群资源统计</div>
+        <div className={indexStyles.tableBTitleDiv}>服务资源</div>
         <div id={"serverCluster"} className={styles.serverDiskCanvas}>
           <Donut {...config} />
         </div>
