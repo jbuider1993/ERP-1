@@ -18,7 +18,7 @@ class UserPage extends React.Component {
     const userSearchProps = {
       onSearch: (searchParams) => {
         dispatch({type: "userModel/updateState", payload: {searchParams}});
-        dispatch({type: 'userModel/getListDatas', payload: {currentPage, pageSize, ...searchParams}});
+        dispatch({type: 'userModel/getListDatas', payload: {currentPage, pageSize, params: searchParams}});
       },
       onReset: () => {
         dispatch({type: "userModel/updateState", payload: {searchParams: null}});

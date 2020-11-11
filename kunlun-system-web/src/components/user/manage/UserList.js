@@ -17,7 +17,7 @@ const UserList = (props) => {
       { text: '126', value: '126' },{ text: '163', value: '163' },{ text: 'qq', value: 'qq' },{ text: 'gmail', value: 'gmail' }],
       onFilter: (value, record) => record.email.indexOf(value) === 0 },
     { title: '创建时间', dataIndex: 'createTime', key: 'createTime', width: '15%',
-      render: (text, record, index) => <span>{text.substr(0, text.indexOf("T"))}</span> },
+      render: (text, record, index) => <span>{text}</span> },
     { title: '操作', key: 'operate', width: '10%',
       render: (text, record) => (
       <span style={{padding: "0px 5px 0px 5px"}}>
