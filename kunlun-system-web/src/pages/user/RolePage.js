@@ -20,7 +20,7 @@ const RolePage = (props) => {
   const roleSearchProps = {
     onSearch: (searchParams) => {
       dispatch({ type: "roleModel/updateState", payload: { searchParams }});
-      dispatch({ type: 'roleModel/getListDatas', payload: { currentPage, pageSize, ...searchParams }});
+      dispatch({ type: 'roleModel/getListDatas', payload: { currentPage, pageSize, params: searchParams }});
     },
     onReset: () => {
       dispatch({ type: "roleModel/updateState", payload: { searchParams: null }});

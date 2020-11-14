@@ -34,10 +34,10 @@ const RoleSearch = (props) => {
 
   return (
     <div className={commonStyles.singleRowSearch}>
-      <Form>
+      <Form form={form}>
         <Row className={index.formRowDiv}>
           <Col span={6}>
-            <FormItem {...formItemLayout} label="角色名称" name={"userName"}>
+            <FormItem {...formItemLayout} label="角色名称" name={"roleName"}>
               <Input placeholder="请输入角色名称" size="default"/>
             </FormItem>
           </Col>
