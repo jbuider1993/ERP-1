@@ -24,7 +24,7 @@ export default {
   effects: {
     *getListDatas({payload: {currentPage = 1, pageSize = config.PAGE_SIZE, params}}, { call, put }) {
       yield put({ type: "updateState", payload: { onlineLoading: true }});
-      const res = yield call(onlineService.getAllOnlineUser, { params, currentPage, pageSize });
+      const res = yield call(onlineService.getAllOnlineUser, { ...params, currentPage, pageSize });
       if (res.code == "200") {
         yield put({
           type: 'updateState',

@@ -12,7 +12,7 @@ export function get(url, data) {
   if (url) {
     let getUrl = "";
     Object.keys(data).forEach((item) => {
-      if (item) {
+      if (data[item]) {
         getUrl += item + "=" + data[item] + "&";
       }
     });

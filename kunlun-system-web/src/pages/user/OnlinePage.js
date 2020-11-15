@@ -15,7 +15,7 @@ const OnlinePage = (props) => {
     isExpandSearch,
     onSearch: (searchParams) => {
       dispatch({ type: "onlineModel/updateState", payload: { searchParams }});
-      dispatch({ type: 'onlineModel/getListDatas', payload: { currentPage, pageSize, ...searchParams }});
+      dispatch({ type: 'onlineModel/getListDatas', payload: { currentPage, pageSize, params: searchParams }});
     },
     onReset: () => {
       dispatch({ type: "onlineModel/updateState", payload: { searchParams: null }});

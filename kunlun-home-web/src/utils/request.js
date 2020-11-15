@@ -9,7 +9,9 @@ export function get(url, data) {
     let getUrl = "";
     if (data) {
       Object.keys(data).forEach((item) => {
-        getUrl += item + "=" + data[item] + "&";
+        if (data[item]) {
+          getUrl += item + "=" + data[item] + "&";
+        }
       });
     } else {
       getUrl = url;

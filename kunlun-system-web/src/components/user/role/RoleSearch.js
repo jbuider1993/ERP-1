@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Form, Input, Button, Row, Col, AutoComplete} from 'antd';
+import { Form, Input, Button, Row, Col, AutoComplete, DatePicker } from 'antd';
 import commonStyles from '../../../pages/index.css';
 import index from "../../../index.less";
 import 'remixicon/fonts/remixicon.css';
@@ -47,8 +47,8 @@ const RoleSearch = (props) => {
             </FormItem>
           </Col>
           <Col span={6}>
-            <FormItem {...formItemLayout} label='创建时间' name={"email"}>
-              <Input placeholder="请输入创建时间" size="default"/>
+            <FormItem {...formItemLayout} label='创建时间' name={"createTime"}>
+              <DatePicker placeholder="请输入创建时间" size="default" style={{ width: "100%"}} />
             </FormItem>
           </Col>
           <Col span={6}>
