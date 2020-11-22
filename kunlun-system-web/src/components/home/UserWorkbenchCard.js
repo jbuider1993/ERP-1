@@ -21,8 +21,8 @@ class UserWorkbenchCard extends React.Component {
               <Avatar size={70} icon={<i className="ri-user-line"></i>} src={userLogo} />
             </div>
             <div className={indexStyles.userFontDiv}>
-              <div><span style={{fontWeight: "bold"}}>{loginUserInfo ? loginUserInfo.userName : "admin"}</span>&nbsp;&nbsp;&nbsp;&nbsp;欢迎使用本系统！</div>
-              <div>祝你开心每一天！</div>
+              <div style={{marginLeft: "5%"}}><span style={{fontWeight: "bold"}}>{loginUserInfo ? loginUserInfo.userName : "admin"}</span>&nbsp;&nbsp;&nbsp;&nbsp;欢迎使用本系统！</div>
+              <div style={{marginLeft: "5%"}}>祝你开心每一天！</div>
               <div className={indexStyles.userPhoneAndEmailDiv}>
                 <span>{loginUserInfo ? loginUserInfo.phoneNumber : "15555555555"}</span>&nbsp;&nbsp;&nbsp;&nbsp;
                 <span>{loginUserInfo ? loginUserInfo.email : "test@test.com"}</span>
