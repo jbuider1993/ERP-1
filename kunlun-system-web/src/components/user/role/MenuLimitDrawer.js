@@ -4,6 +4,7 @@ import styles from './Role.less';
 
 const FormItem = Form.Item;
 const TreeNode = Tree.TreeNode;
+const Search = Input.Search;
 
 class MenuLimitDrawer extends React.Component {
 
@@ -67,7 +68,7 @@ class MenuLimitDrawer extends React.Component {
 
     // 返回工具栏新增、批量删除按钮
     return (
-      <div className={styles.drawerDiv}>
+      <div>
         <Spin spinning={menuLimitLoading}>
           <Drawer
             title={(roleInfoData && roleInfoData.roleName ? roleInfoData.roleName + "_" : "") + "菜单权限"}
@@ -83,8 +84,8 @@ class MenuLimitDrawer extends React.Component {
                 <Form ref={this.formRef}>
                   <Row>
                     <Col span={24}>
-                      <FormItem {...formItemLayout} label="菜单名称" name={"level"} rules={[{required: false, message: '请选择菜单类型'}]}>
-                        <Input/>
+                      <FormItem {...formItemLayout} name={"level"}>
+                        <Search style={{marginLeft: "20px", width: "138%"}} placeholder="请输入菜单名称" onSearch={() => {}} enterButton />
                       </FormItem>
                     </Col>
                   </Row>

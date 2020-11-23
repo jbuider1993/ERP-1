@@ -30,7 +30,7 @@ class UserWorkbenchCard extends React.Component {
             </div>
             <div className={indexStyles.allUserInfo}>
               <div onClick={() => onShowDetail("list")} className={indexStyles.fontWeightHover}>
-                <Tooltip title={"查看全部用户"}>
+                <Tooltip title={"全部用户"}>
                   <i className="ri-group-line" style={{fontSize: "18px", marginLeft: "70px", marginTop: "5px"}}></i>
                 </Tooltip>
               </div>
@@ -82,7 +82,7 @@ class UserWorkbenchCard extends React.Component {
             <Col span={2}>
               <div className={indexStyles.userCountBlock}>
                 <div style={{float: "right"}} onClick={() => onShowDetail("online")} className={indexStyles.fontWeightHover}>
-                  <Tooltip title={"查看登录用户"}>
+                  <Tooltip title={"登录详情"}>
                     <i className="ri-user-line" style={{fontSize: "18px", marginRight: "15px"}}></i>
                   </Tooltip>
                 </div>

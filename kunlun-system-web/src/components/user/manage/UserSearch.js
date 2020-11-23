@@ -4,6 +4,7 @@ import styles from './User.less';
 import index from '../../../index.less';
 import commonStyles from '../../../pages/index.css';
 import 'remixicon/fonts/remixicon.css';
+import moment from 'moment';
 
 const FormItem = Form.Item;
 
@@ -11,10 +12,14 @@ const UserSearch = (props) => {
 
   const { onSearch, onReset } = props;
   const [form] = Form.useForm();
-  const { getFieldsValue, validateFields, setFieldsValue, resetFields } = form;
+  const { getFieldsValue, getFieldValue, validateFields, setFieldsValue, resetFields } = form;
 
   const handleSearch = () => {
     let fields = getFieldsValue();
+    const date = getFieldValue("createTime");
+    if (date) {
+      fields["createTime"] = moment(date).format("yyyy-MM-DD");
+    }
     onSearch(fields)
   };
 
@@ -24,8 +29,8 @@ const UserSearch = (props) => {
   };
 
   const formItemLayout = {
-    labelCol: {span: 10},
-    wrapperCol: {span: 14},
+    labelCol: {span: 8},
+    wrapperCol: {span: 16},
   };
 
   const iconStyle = {

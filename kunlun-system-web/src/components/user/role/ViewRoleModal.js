@@ -102,7 +102,7 @@ const ViewRoleModal = (props) => {
         width={600}
         destroyOnClose={false}
         footer={null}
-        bodyStyle={{height: "465px", padding: "15px"}}
+        bodyStyle={{height: "483px", padding: "15px"}}
       >
         <Form form={form}>
           <Row>
@@ -141,7 +141,7 @@ const ViewRoleModal = (props) => {
           </Row>
           <Row>
             <Col span={8}>
-              <Tree onExpand={onExpandTreeNode} style={{width: "93%", overflow: "auto", height: "325px"}}>
+              <Tree onExpand={onExpandTreeNode} style={{width: "93%", overflow: "auto", height: "340px", marginTop: "2px"}}>
                 {
                   menuList && menuList.length > 0 ? generateTreeNodes(selectedMenuList) : null
                 }

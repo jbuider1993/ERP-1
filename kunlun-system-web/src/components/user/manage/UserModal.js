@@ -59,7 +59,7 @@ const UserModal = (props) => {
         okText="保存"
         onCancel={onCancel}
         onOk={onOk}
-        width={800}
+        width={700}
         destroyOnClose={true}
         bodyStyle={{height: "260px"}}
       >

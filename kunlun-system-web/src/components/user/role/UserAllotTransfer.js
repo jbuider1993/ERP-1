@@ -48,16 +48,17 @@ class UserAllotTransfer extends React.Component {
     return (
       <div>
         <Modal
+          centered={true}
           visible={userAllotTransferVisible}
           title={(roleInfoData && roleInfoData.roleName ? roleInfoData.roleName + "_" : "") + "分配用户"}
           onCancel={onCancel}
           onOk={() => onAllotUser(targetKeys)}
-          width={650}
+          width={550}
           destroyOnClose={false}
-          bodyStyle={{height: "450px"}}
+          bodyStyle={{height: "430px"}}
         >
           <Transfer
-            listStyle={{height: "400px", width: "280px"}}
+            listStyle={{height: "385px", width: "280px"}}
             titles={["全部用户", "权限用户"]}
             dataSource={targetDatas}
             showSearch
