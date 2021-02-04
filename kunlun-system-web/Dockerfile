@@ -1,27 +1,22 @@
-# 指定基础image
-FROM node:10
+# 基于node镜像而构建
+FROM node:10.16.3
 
-# 切换目录
+# 指定工作目录
 WORKDIR .
 
-# 挂载文件
-VOLUME /kunlun-system-web/node_modules
+# COPY 指令将从构建上下文目录中 <源路径> 的文件/目录复制到新的一层的镜像内的 <目标路径> 位置
+COPY package.json ./
 
-# 复制当前文件下所有文件到指定路径
-COPY . .
+RUN npm install -g cnpm --registry=https://registry.npm.taobao.org
 
-# 执行命令
-RUN npm install -g --registry=https://registry.npm.taobao.org
+# 安装依赖
+RUN cnpm install --no-cache
 
-# 执行命令
-RUN npm install -g
+# 将所有文件copy到工作目录
+COPY ./ ./
 
-#COPY . .
+# 声明运行时容器提供服务端口
+EXPOSE 8005
 
-RUN npm run build
-
-# 暴露容器端口
-EXPOSE 8000
-
-# 设置容器启动时执行的操作
-CMD npm start
+# 指定默认的容器主进程的启动命令
+CMD ["npm", "run", "start"]
