@@ -26,7 +26,7 @@ const IconPage = (props) => {
     fetchIcons: () => {
       Modal.confirm({
         title: "抓取图标",
-        content: <div><i className="ri-error-warning-line" style={{fontSize: "18px", marginRight: "10px", verticalAlign: "sub"}}/>是否确定从<a href='https://remixicon.com/' target='_blank'> Remix Icon </a>官网抓取图标数据？注意：抓取图标过程中请耐心等待！</div>,
+        content: <div>是否确定从<a href='https://remixicon.com/' target='_blank'> Remix Icon </a>官网抓取图标数据？注意：抓取图标过程中请耐心等待！</div>,
         onOk() {
           dispatch({ type: "iconModel/fetchIcons", payload: {}});
         },

@@ -6,18 +6,19 @@ import ScheduleList from "../../components/synergy/schedule/ScheduleList";
 import ScheduleModal from "../../components/synergy/schedule/ScheduleModal";
 import DetailScheduleModal from "../../components/synergy/schedule/DetailScheduleModal";
 import styles from '../../components/synergy/schedule/Schedule.less';
-import { Modal, message, Spin } from "antd";
-import config from '../../config/config';
-import * as commonUtil from '../../utils/commonUtil';
+import { Spin } from "antd";
+import moment from 'moment';
 
 const SchedulePage = (props) => {
 
   const { dispatch, scheduleModel } = props;
-  const { scheduleList, calendarMode, daySchedules, detailScheduleModalVisible, scheduleLoading, operateType, scheduleModalVisible, singleSchedule, saveLoading } = scheduleModel;
+  const { scheduleList, calendarMode, daySchedules, detailScheduleModalVisible, scheduleLoading, operateType,
+    scheduleModalVisible, singleSchedule, saveLoading, userList } = scheduleModel;
 
   const scheduleToolBarProps = {
     addSave: () => {
       dispatch({ type: 'scheduleModel/updateState', payload: { scheduleModalVisible: true, operateType: "add" }});
+      dispatch({ type: 'scheduleModel/getUserList', payload: {}});
     },
     onExport:() => {}
   };
@@ -33,6 +34,7 @@ const SchedulePage = (props) => {
     operateType,
     onShowDetail: (daySchedules) => {
       dispatch({ type: 'scheduleModel/updateState', payload: { daySchedules, detailScheduleModalVisible: true }});
+      dispatch({ type: 'scheduleModel/getUserList', payload: {}});
     },
     onCacheCalenarMode: (value, mode) => {
       dispatch({ type: 'scheduleModel/updateState', payload: { calendarMode: mode }});
@@ -44,6 +46,7 @@ const SchedulePage = (props) => {
     scheduleModalVisible,
     singleSchedule,
     saveLoading,
+    userList,
     onCacheThemeColor: (themeColor) => {
       let obj = {};
       if (operateType == "edit") {
@@ -55,6 +58,10 @@ const SchedulePage = (props) => {
       dispatch({ type: 'scheduleModel/updateState', payload: { singleSchedule: obj }});
     },
     onSave: (values) => {
+      values["startTime"] = moment(values["startTime"]).format("yyyy-MM-DD HH:mm:ss");
+      values["endTime"] = moment(values["endTime"]).format("yyyy-MM-DD HH:mm:ss");
+      values["participants"] = values["participant"].join(",");
+      values["themeColor"] = singleSchedule.themeColor;
       dispatch({ type: 'scheduleModel/onSave', payload: values});
     },
     onCancel: () => {
@@ -65,6 +72,7 @@ const SchedulePage = (props) => {
   const detailScheduleModelProps = {
     daySchedules,
     detailScheduleModalVisible,
+    userList,
     onCancel: () => {
       dispatch({ type: 'scheduleModel/updateState', payload: { detailScheduleModalVisible: false }});
     },

@@ -1,11 +1,13 @@
 import * as scheduleService from '../../services/synergy/scheduleService';
 import config from '../../config/config';
 import {message} from 'antd';
+import * as userService from "@/services/user/userService";
 
 export default {
   namespace: 'scheduleModel',
   state: {
     scheduleList: [],
+    userList: [],
     scheduleLoading: false,
     operateType: 'add',
     scheduleModalVisible: false,
@@ -42,6 +44,16 @@ export default {
         message.error("新增失败");
       }
       yield put({ type: "updateState", payload: { scheduleLoading: false }});
+    },
+
+    *getUserList({payload: {params}}, { select, call, put }) {
+      const res = yield call(userService.getAllUser, { ...params, currentPage: 1, pageSize: 999999 });
+      if (res.code == "200") {
+        yield put({
+          type: 'updateState',
+          payload: { userList: res.data.records },
+        });
+      }
     },
   },
 

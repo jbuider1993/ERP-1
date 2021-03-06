@@ -28,9 +28,6 @@ class MenuModal extends React.Component {
       selectedTreeNode, selectedIconRows, menuInfoData, menuModalType,
     } = this.props;
     const { isChecked, radioCheckedValue } = this.state;
-    const { getFieldsValue, validateFields, setFieldsValue, resetFields } = this.formRef;
-
-    debugger
 
     const formItemLayout = {
       labelCol: {span: 8},
@@ -44,7 +41,7 @@ class MenuModal extends React.Component {
 
     // 点击Modal框确定按钮触发的事件
     const onOk = () => {
-      validateFields((err, values) => {
+      this.formRef.current.validateFields((err, values) => {
         if (!err) {
           onSave(values);
         }

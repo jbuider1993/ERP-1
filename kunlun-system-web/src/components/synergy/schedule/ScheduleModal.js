@@ -15,7 +15,7 @@ class ScheduleModal extends React.Component {
   render() {
 
     const {
-      scheduleModalVisible, operateType, onSave, onCancel, singleSchedule, saveLoading, onCacheThemeColor
+      scheduleModalVisible, operateType, onSave, onCancel, singleSchedule, saveLoading, onCacheThemeColor, userList
     } = this.props;
 
     const formItemLayout = {
@@ -29,11 +29,24 @@ class ScheduleModal extends React.Component {
     };
 
     const onOk = () => {
-      this.formRef.current.validateFields().then(values => {
-        onSave(values);
-      }).catch(error => {
-        console.log("ScheduleModal Error ===>>> " + error);
-      });
+      let flag = false;
+      const optionValues = this.formRef.current.getFieldsValue();
+      for (let key of Object.keys(optionValues)) {
+        if (key == "id" || (key == "themeColor" && singleSchedule && singleSchedule.themeColor)) {
+          continue;
+        }
+        const value = optionValues[key];
+        flag = !value ? true : flag;
+      }
+      if (flag) {
+        this.formRef.current.validateFields().then(values => {
+          onSave(values);
+        }).catch(error => {
+          console.log("ScheduleModal Error ===>>> " + error);
+        });
+      } else {
+        onSave(optionValues);
+      }
     };
 
     const themeColors = ["red", "blue", "green", "orange", "purple"];
@@ -44,6 +57,8 @@ class ScheduleModal extends React.Component {
         </div>
       </li>
     );
+
+    const participantOptions = userList.map(item => <Option key={item.id} value={item.id}>{item.userName}</Option>);
 
     return (
       <div>
@@ -104,6 +119,7 @@ class ScheduleModal extends React.Component {
               <Col span={12}>
                 <FormItem {...formItemLayout} label="参与人" name={"participant"} rules={[{required: true, message: '请选择参与人'}]}>
                   <Select mode="tags" style={{width: '100%'}} tokenSeparators={[',']}>
+                    {participantOptions}
                   </Select>
                 </FormItem>
               </Col>

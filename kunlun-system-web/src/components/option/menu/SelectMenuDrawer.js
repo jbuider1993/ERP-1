@@ -24,7 +24,6 @@ class SelectMenuDrawer extends React.Component {
       selectMenuModalVisible, onClose, selectMenuLoading, menuList, onSelectTreeNode
     } = this.props;
     const { checkedTreeNodeKeys, expandedTreeNodeKeys, selectedTreeNode } = this.state;
-    const { getFieldsValue, validateFields, setFieldsValue, resetFields } = this.formRef;
 
     const formItemLayout = {
       labelCol: {span: 8},
