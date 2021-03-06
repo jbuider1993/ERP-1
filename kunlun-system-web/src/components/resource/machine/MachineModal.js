@@ -16,6 +16,8 @@ class MachineModal extends React.Component {
     }
   }
 
+  formRef = React.createRef();
+
   render() {
 
     // 从传递过来的props中获取参数
@@ -23,8 +25,6 @@ class MachineModal extends React.Component {
       machineModalVisible, onCancel, onSave, machineInfoData, operateType, saveLoading,
     } = this.props;
     const { radioCheckedValue } = this.state;
-    const [form] = Form.useForm();
-    const { getFieldsValue, validateFields, setFieldsValue, resetFields } = form;
 
     const formItemLayout = {
       labelCol: {span: 8},
@@ -33,7 +33,7 @@ class MachineModal extends React.Component {
 
     // 点击Modal框确定按钮触发的事件
     const onOk = () => {
-      validateFields((err, values) => {
+      this.formRef.current.validateFields((err, values) => {
         if (!err) {
           onSave(values);
         }
@@ -62,7 +62,7 @@ class MachineModal extends React.Component {
             width={650}
             destroyOnClose={true}
           >
-            <Form align="center" style={{marginLeft: "-4%"}}>
+            <Form align="center" style={{marginLeft: "-4%"}} ref={this.formRef}>
               <Row>
                 <Col span={12}>
                   <FormItem {...formItemLayout} label="菜单类型" name={"level"} rules={[{required: false, message: '请选择菜单类型'}]}>

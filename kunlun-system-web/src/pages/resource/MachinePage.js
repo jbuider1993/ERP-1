@@ -1,19 +1,27 @@
 import React from 'react';
 import { connect } from 'dva';
+import {Spin} from 'antd';
 import MachineList from "../../components/resource/machine/MachineList";
 import MachineToolBar from '../../components/resource/machine/MachineToolBar';
 import MachineModal from '../../components/resource/machine/MachineModal';
 import MachineSearch from '../../components/resource/machine/MachineSearch';
+import TablePagination from "@/components/common/TablePagination";
 
 const MachinePage = (props) => {
 
   const { dispatch, machineModel } = props;
-  const { machineLoading, machineList, machineModalVisible, operateType, machineInfoData, saveLoading } = machineModel;
+  const { machineLoading, machineList, machineModalVisible, operateType, machineInfoData, saveLoading,
+    isExpandSearch, total, currentPage, pageSize, searchParams } = machineModel;
 
   const machineSearchProps = {
+    isExpandSearch,
     onSearch: (values) => {
       dispatch({ type: "machineModel/getMachineList", payload: values });
     },
+    toggleExpand: () => {
+      dispatch({ type: "machineModel/updateState", payload: {isExpandSearch: !isExpandSearch}});
+    },
+
   };
 
   const machineToolBarProps = {
@@ -63,12 +71,27 @@ const MachinePage = (props) => {
     },
   };
 
+  const tablePaginationProps = {
+    total,
+    currentPage,
+    pageSize,
+    onPageChange: (currentPage, pageSize) => {
+      dispatch({type: 'userModel/getListDatas', payload: {currentPage, pageSize, ...searchParams}});
+    },
+    onShowSizeChange: (currentPage, pageSize) => {
+      dispatch({type: 'userModel/getListDatas', payload: {currentPage, pageSize, ...searchParams}});
+    },
+  }
+
   return (
     <div>
-      <MachineSearch {...machineSearchProps} />
-      <MachineToolBar {...machineToolBarProps} />
-      <MachineModal {...machineModalProps} />
-      <MachineList {...machineListProps} />
+      <Spin spinning={machineLoading}>
+        <MachineSearch {...machineSearchProps} />
+        <MachineToolBar {...machineToolBarProps} />
+        <MachineModal {...machineModalProps} />
+        <MachineList {...machineListProps} />
+        <TablePagination {...tablePaginationProps} />
+      </Spin>
     </div>
   );
 };

@@ -18,7 +18,6 @@ class MessageSearch extends React.Component {
   render() {
 
     const {addMenu, unfoldCollapse, onSearch, onReset} = this.props;
-    const { getFieldsValue, validateFields, setFieldsValue, resetFields } = this.formRef;
 
     const formItemLayout = {
       labelCol: {span: 8},
@@ -26,12 +25,12 @@ class MessageSearch extends React.Component {
     };
 
     const searchMenuList = () => {
-      const params = getFieldsValue();
+      const params = this.formRef.current.getFieldsValue();
       onSearch(params);
     };
 
     const handleReset = () => {
-      resetFields();
+      this.formRef.current.resetFields();
       onReset()
     };
 

@@ -22,7 +22,6 @@ class MenuSearch extends React.Component {
   render() {
 
     const {addMenu, unfoldCollapse, onSearch, onReset} = this.props;
-    const {getFieldDecorator, getFieldsValue, resetFields} = this.formRef;
 
     const formItemLayout = {
       labelCol: {span: 8},
@@ -35,12 +34,12 @@ class MenuSearch extends React.Component {
     };
 
     const searchMenuList = () => {
-      const params = getFieldsValue();
+      const params = this.formRef.current.getFieldsValue();
       onSearch(params);
     };
 
     const handleReset = () => {
-      resetFields();
+      this.formRef.current.resetFields();
       onReset()
     };
 

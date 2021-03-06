@@ -15,15 +15,14 @@ class DictionarySearch extends React.Component {
   render() {
 
     const { onSearch, onReset } = this.props;
-    const { getFieldsValue, setFieldsValue, resetFields } = this.formRef;
 
     const handleSearch = () => {
-      let fields = getFieldsValue();
+      let fields = this.formRef.current.getFieldsValue();
       onSearch(fields)
     };
 
     const handleReset = () => {
-      resetFields();
+      this.formRef.current.resetFields();
       onReset()
     };
 

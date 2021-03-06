@@ -19,7 +19,7 @@ const MenuPage = (props) => {
   const menuSearchProps = {
     onSearch: (searchParams) => {
       dispatch({type: "menuModel/updateState", payload: {searchParams}});
-      dispatch({type: 'menuModel/getListDatas', payload: {currentPage, pageSize, ...searchParams}});
+      dispatch({type: 'menuModel/getMenuTreeList', payload: {currentPage, pageSize, ...searchParams}});
     },
     onReset: () => {
       dispatch({type: "menuModel/updateState", payload: {searchParams: null}});

@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'dva';
+import {Spin} from 'antd';
 import MessageSearch from "../../components/option/message/MessageSearch";
 import MessageToolBar from "../../components/option/message/MessageToolBar";
 import MessageList from "../../components/option/message/MessageList";
@@ -11,6 +12,15 @@ const MessagePage = (props) => {
   const { dispatch, location, messageModel } = props;
   const {newMessageModalVisible, showMessageModalVisible, messageModalType, messageLoading, messageList, currentSize,
     messageType, total, messageRecord} = messageModel;
+
+  const messageSearchProps = {
+    addMenu: () => {},
+    unfoldCollapse: () => {},
+    onSearch: (values) => {
+      dispatch({ type: "messageModel/getListDatas", payload: {}});
+    },
+    onReset: () => {}
+  }
 
   const messageToolBarProps = {
     addMessage: (event) => {
@@ -57,11 +67,13 @@ const MessagePage = (props) => {
 
   return (
     <div>
-      <MessageSearch />
-      <MessageToolBar {...messageToolBarProps} />
-      <MessageList {...messageListProps} />
-      <NewMessageModal {...newMessageModalProps} />
-      <ShowMessageModal {...showMessageModalProps} />
+      <Spin spinning={messageLoading}>
+        <MessageSearch {...messageSearchProps} />
+        <MessageToolBar {...messageToolBarProps} />
+        <MessageList {...messageListProps} />
+        <NewMessageModal {...newMessageModalProps} />
+        <ShowMessageModal {...showMessageModalProps} />
+      </Spin>
     </div>
   );
 };

@@ -15,7 +15,6 @@ class IconSearch extends React.Component {
   render() {
 
     const {onSearch, onReset} = this.props;
-    const { getFieldsValue, setFieldsValue, resetFields } = this.formRef;
 
     const formItemLayout = {
       labelCol: {span: 8},
@@ -23,12 +22,12 @@ class IconSearch extends React.Component {
     };
 
     const searchMenuList = () => {
-      const params = getFieldsValue();
+      const params = this.formRef.current.getFieldsValue();
       onSearch(params);
     };
 
     const handleReset = () => {
-      resetFields();
+      this.formRef.current.resetFields();
       onReset()
     };
 

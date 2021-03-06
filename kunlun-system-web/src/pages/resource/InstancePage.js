@@ -1,74 +1,97 @@
 import React from 'react';
 import { connect } from 'dva';
-import MachineList from "../../components/resource/machine/MachineList";
-import MachineToolBar from '../../components/resource/machine/MachineToolBar';
-import MachineModal from '../../components/resource/machine/MachineModal';
-import MachineSearch from '../../components/resource/machine/MachineSearch';
+import {Spin} from 'antd';
+import InstanceList from "../../components/resource/instance/InstanceList";
+import InstanceToolBar from '../../components/resource/instance/InstanceToolBar';
+import InstanceModal from '../../components/resource/instance/InstanceModal';
+import InstanceSearch from '../../components/resource/instance/InstanceSearch';
+import TablePagination from "@/components/common/TablePagination";
 
 const InstancePage = (props) => {
 
   const { dispatch, instanceModel } = props;
-  const { instanceLoading, instanceList, instanceModalVisible, operateType, instanceInfoData, saveLoading } = instanceModel;
+  const { instanceLoading, instanceList, instanceModalVisible, operateType, instanceInfoData, saveLoading,
+    isExpandSearch, total, currentPage, pageSize, searchParams } = instanceModel;
 
-  const machineSearchProps = {
+  const instanceSearchProps = {
+    isExpandSearch,
     onSearch: (values) => {
-      dispatch({ type: "menuModel/getMenuTreeList", payload: values });
+      dispatch({ type: "instanceModel/getMachineList", payload: values });
     },
+    toggleExpand: () => {
+      dispatch({ type: "instanceModel/updateState", payload: {isExpandSearch: !isExpandSearch}});
+    },
+
   };
 
-  const machineToolBarProps = {
+  const instanceToolBarProps = {
     addMachine: () => {
-      dispatch({ type: "menuModel/updateState", payload: { menuModalVisible: true }});
+      dispatch({ type: "instanceModel/updateState", payload: { menuModalVisible: true }});
     },
     downloadTemplate: () => {
-      dispatch({type: "menuModel/updateState", payload: {unfoldCollapseKeys: []}});
+      dispatch({type: "instanceModel/downloadTemplate", payload: {}});
     },
     onImport: () => {
-      dispatch({type: "menuModel/updateState", payload: {unfoldCollapseKeys: []}});
+      dispatch({type: "instanceModel/updateState", payload: {unfoldCollapseKeys: []}});
     },
   };
 
-  const machineModalProps = {
+  const instanceModalProps = {
     instanceLoading,
     instanceModalVisible,
     operateType,
     instanceInfoData,
     saveLoading,
     onCancel: () => {
-      dispatch({ type: "menuModel/updateState", payload: { menuInfoData: null, selectedTreeNode: [], selectedIconRows: [], menuModalVisible: false }});
+      dispatch({ type: "instanceModel/updateState", payload: { menuInfoData: null, selectedTreeNode: [], selectedIconRows: [], menuModalVisible: false }});
     },
     onSave: (params) => {
-      Promise.all([dispatch({ type: "menuModel/onSave", payload: params })]).then(() =>
-        dispatch({ type: "menuModel/updateState", payload: { menuInfoData: null, selectedTreeNode: [], selectedIconRows: [], menuModalVisible: false }}));
+      Promise.all([dispatch({ type: "instanceModel/onSave", payload: params })]).then(() =>
+        dispatch({ type: "instanceModel/updateState", payload: { menuInfoData: null, selectedTreeNode: [], selectedIconRows: [], menuModalVisible: false }}));
     },
     onSelectParentMenu: () => {
-      dispatch({ type: "menuModel/updateState", payload: { selectMenuModalVisible: true }});
+      dispatch({ type: "instanceModel/updateState", payload: { selectMenuModalVisible: true }});
     },
     onShowIconModal: () => {
-      dispatch({ type: "menuModel/updateState", payload: { menuIconModalVisible: true }});
+      dispatch({ type: "instanceModel/updateState", payload: { menuIconModalVisible: true }});
     },
   };
 
-  const machineListProps = {
+  const instanceListProps = {
     instanceLoading,
     instanceList,
     onEditMenu: (menuInfoData) => {
-      dispatch({ type: "menuModel/updateState", payload: { menuInfoData, menuModalVisible: true, menuModalType: "edit" }});
+      dispatch({ type: "instanceModel/updateState", payload: { menuInfoData, menuModalVisible: true, menuModalType: "edit" }});
     },
     onDelete: (record) => {
-      dispatch({ type: "menuModel/onDelete", payload: { id: record.id }});
+      dispatch({ type: "instanceModel/onDelete", payload: { id: record.id }});
     },
     onExpandMenuList: (expanded, record) => {
-      dispatch({ type: "menuModel/updateState", payload: {}});
+      dispatch({ type: "instanceModel/updateState", payload: {}});
     },
   };
 
+  const tablePaginationProps = {
+    total,
+    currentPage,
+    pageSize,
+    onPageChange: (currentPage, pageSize) => {
+      dispatch({type: 'instanceModel/getListDatas', payload: {currentPage, pageSize, ...searchParams}});
+    },
+    onShowSizeChange: (currentPage, pageSize) => {
+      dispatch({type: 'instanceModel/getListDatas', payload: {currentPage, pageSize, ...searchParams}});
+    },
+  }
+
   return (
     <div>
-      <MachineSearch {...machineSearchProps} />
-      <MachineToolBar {...machineToolBarProps} />
-      <MachineModal {...machineModalProps} />
-      <MachineList {...machineListProps} />
+      <Spin spinning={instanceLoading}>
+        <InstanceSearch {...instanceSearchProps} />
+        <InstanceToolBar {...instanceToolBarProps} />
+        <InstanceModal {...instanceModalProps} />
+        <InstanceList {...instanceListProps} />
+        <TablePagination {...tablePaginationProps} />
+      </Spin>
     </div>
   );
 };

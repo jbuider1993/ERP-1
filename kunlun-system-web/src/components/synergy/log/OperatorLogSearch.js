@@ -18,15 +18,14 @@ class OperatorLogSearch extends React.Component {
   render() {
 
     const {onSearch, onReset, isExpandSearch, onShowDetailSearch} = this.props;
-    const { getFieldsValue, validateFields, setFieldsValue, resetFields } = this.formRef;
 
     const handleSearch = () => {
-      let fields = getFieldsValue();
+      let fields = this.formRef.current.getFieldsValue();
       onSearch(fields)
     };
 
     const handleReset = () => {
-      resetFields();
+      this.formRef.current.resetFields();
       onReset()
     };
 
