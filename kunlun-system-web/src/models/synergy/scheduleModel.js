@@ -39,6 +39,7 @@ export default {
       const res = yield call(scheduleService.addSchedule, params);
       if (res.code == "200") {
         yield put({type: 'updateState', payload: { scheduleList: res.data }});
+        yield put({type: 'getListDatas', payload: {}});
         message.success("新增成功");
       } else {
         message.error("新增失败");

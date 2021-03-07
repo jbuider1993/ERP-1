@@ -19,6 +19,7 @@ const DetailScheduleModal = (props) => {
     <div className={styles.listDiv}>
       <Modal
         visible={detailScheduleModalVisible}
+        centered={true}
         title={"详细日程"}
         okText="保存"
         onCancel={onCancel}

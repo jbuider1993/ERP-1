@@ -14,7 +14,6 @@ export default {
     operateType: "add",
     instanceInfoData: null,
     saveLoading: false,
-    isExpandSearch: true,
   },
   reducers: {
     updateState(state, { payload }) {

@@ -11,17 +11,12 @@ const InstancePage = (props) => {
 
   const { dispatch, instanceModel } = props;
   const { instanceLoading, instanceList, instanceModalVisible, operateType, instanceInfoData, saveLoading,
-    isExpandSearch, total, currentPage, pageSize, searchParams } = instanceModel;
+    total, currentPage, pageSize, searchParams } = instanceModel;
 
   const instanceSearchProps = {
-    isExpandSearch,
     onSearch: (values) => {
       dispatch({ type: "instanceModel/getMachineList", payload: values });
     },
-    toggleExpand: () => {
-      dispatch({ type: "instanceModel/updateState", payload: {isExpandSearch: !isExpandSearch}});
-    },
-
   };
 
   const instanceToolBarProps = {

@@ -10,7 +10,7 @@ const Option = AutoComplete.Option;
 
 const InstanceSearch = (props) => {
 
-  const { onSearch, toggleExpand, isExpandSearch, onReset } = props;
+  const { onSearch, onReset } = props;
   const [form] = Form.useForm();
   const { getFieldsValue, validateFields, setFieldsValue, resetFields } = form;
 
@@ -35,7 +35,7 @@ const InstanceSearch = (props) => {
   };
 
   return (
-    <div className={isExpandSearch ? commonStyles.singleRowSearch : commonStyles.doubleRowSearch}>
+    <div className={commonStyles.singleRowSearch}>
       <Form form={form}>
         <Row className={index.formRowDiv}>
           <Col span={6}>
@@ -57,16 +57,6 @@ const InstanceSearch = (props) => {
             <FormItem>
               <Button size="default" icon={<i className="ri-search-line" style={iconStyle}></i>} style={{marginLeft: "10px", border: "0px", background: window._THEMECOLOR_}} onClick={() => handleSearch()}>查询</Button>
               <Button type="default" size="default" icon={<i className="ri-restart-line" style={iconStyle}></i>} style={{marginLeft: "10px"}} onClick={() => handleReset()}>重置</Button>
-              <Button type="dashed" style={{marginLeft: "10px"}} onClick={() => toggleExpand()}>
-                <i className={isExpandSearch ? "ri-arrow-down-s-line" : "ri-arrow-up-s-line"} style={iconStyle}></i>搜索
-              </Button>
-            </FormItem>
-          </Col>
-        </Row>
-        <Row style={{ display: isExpandSearch ? "none" : "flex"}} className={index.formRowDiv}>
-          <Col span={6}>
-            <FormItem label={"内存"} {...formItemLayout} name={"url"}>
-              <Input placeholder={"请输入内存"} />
             </FormItem>
           </Col>
         </Row>
