@@ -24,13 +24,17 @@ export default {
   effects: {
     *getListDatas({ payload: {currentPage = 1, pageSize = config.PAGE_SIZE, params} }, { select, call, put }) {
       yield put({type: "updateState", payload: {messageLoading: true}});
-      const res = yield call(messageService.getAllMessages, { params, currentPage, pageSize });
       let messageList = [], currentSize = "", total = "", size = "";
-      if (res.code == 200) {
-        messageList = res.data.records;
-        currentSize = res.data.currentPage;
-        total = res.data.total;
-        size = res.data.pageSize;
+      try {
+        const res = yield call(messageService.getAllMessages, {params, currentPage, pageSize});
+        if (res.code == 200) {
+          messageList = res.data.records;
+          currentSize = res.data.currentPage;
+          total = res.data.total;
+          size = res.data.pageSize;
+        }
+      } catch (e) {
+        console.log("messageModel getAllMessages error: " + e);
       }
       yield put({type: "updateState", payload: {messageLoading: false, messageList, currentSize, total, pageSize: size}});
     },

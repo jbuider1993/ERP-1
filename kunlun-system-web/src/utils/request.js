@@ -1,15 +1,20 @@
 import axios from 'axios';
 import { message } from 'antd';
 import qs from 'qs';
+import 'remixicon/fonts/remixicon.css';
 
 axios.defaults.timeout = 300000;
 axios.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded";
 
 export function get(url, data) {
+  if (!window._TOKEN_) return {code: null};
+
   if (url) {
     let getUrl = "";
     Object.keys(data).forEach((item) => {
-      getUrl += item + "=" + data[item] + "&";
+      if (data[item]) {
+        getUrl += item + "=" + data[item] + "&";
+      }
     });
     if (getUrl.indexOf("&") > 0) {
       url = url + "?" + getUrl.substr(0, getUrl.length - 1);
@@ -22,35 +27,37 @@ export function get(url, data) {
       return config;
     });
 
-    console.log("get url ===>>> " + url + " token ===>>> " + window._TOKEN_);
-
     let response = new Promise((resolve, reject) => {
       instance.get(url).then(res => {
         return resolve(res.data);
       }).catch(error => {
         if (error.response) {
-          if (error.response.status == "400" || error.response.status == "404") {
+          const status = error.response.status;
+          if (status == "400" || status == "404") {
             message.error("客户端请求错误！");
-          } else if (error.response.status == "500") {
-            message.error("服务器内部错误！");
+          } else if (status == "500") {
+            if (error.response.data.status && error.response.data.status == 999) {
+              window.parent.postMessage({operateType: "timeout"}, "*");
+            } else {
+              message.error("服务器内部错误！");
+            }
           }
         } else {
           message.error("请求失败！");
         }
-        console.log("Get Request Params:  [url] ===> " + url + " [data] ===> " + JSON.stringify(data));
-        console.log("Get Request " + error);
         return reject(error);
       });
     });
     return response;
   } else {
-    console.log("Get Request Params:  [url] ===> " + url + " [data] ===> " + JSON.stringify(data));
     message.error("请求格式不正确！");
     return null;
   }
 }
 
 export function post(url, data) {
+  if (!window._TOKEN_) return {code: null};
+
   if (url && data) {
     const instance = axios.create();
     instance.interceptors.request.use(config => {
@@ -58,8 +65,6 @@ export function post(url, data) {
       config.timeout = 300000;
       return config;
     });
-
-    console.log("post url ===>>> " + url + " token ===>>> " + window._TOKEN_);
 
     let response = new Promise((resolve, reject) => {
       instance.post(url, qs.stringify(data)).then(res => {
@@ -74,14 +79,11 @@ export function post(url, data) {
         } else {
           message.error("请求失败！");
         }
-        console.log("Post Request Params:  [url] ===> " + url + " [data] ===> " + JSON.stringify(data));
-        console.log("Post Request " + error);
         return reject(error);
       });
     });
     return response;
   } else {
-    console.log("Post Request Params:  [url] ===> " + url + " [data] ===> " + JSON.stringify(data));
     message.error("请求格式不正确！");
     return null;
   }
@@ -96,7 +98,7 @@ export function download(url, data, type) {
 
   if (url && data) {
     const instance = axios.create();
-    instance.defaults.headers["Token"] = window.app._store.getState().globalModel.token || "";
+    instance.defaults.headers["Authorization"] = window._TOKEN_ || "";
     let response = new Promise((resolve, reject) => {
       instance.request(obj).then(res => {
         if (res.data instanceof Blob) {
@@ -112,14 +114,11 @@ export function download(url, data, type) {
         } else {
           message.error("请求失败！");
         }
-        console.log("Post Request Params:  [url] ===> " + url + " [data] ===> " + JSON.stringify(data));
-        console.log("Post Request " + error);
         return reject(error);
       });
     });
     return response;
   } else {
-    console.log("Post Request Params:  [url] ===> " + url + " [data] ===> " + JSON.stringify(data));
     message.error("请求格式不正确！");
     return null;
   }

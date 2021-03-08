@@ -1,16 +1,20 @@
 import React from 'react';
-import { Form, Row, Col, Input, Button, AutoComplete, Icon } from 'antd';
+import { Form, Row, Col, Input, Button, AutoComplete } from 'antd';
 import config from '../../../config/config';
 import index from "../../../index.less";
+import commonStyles from '../../../pages/index.css';
+import 'remixicon/fonts/remixicon.css';
 
 const FormItem = Form.Item;
 const Option = AutoComplete.Option;
 
 class IconSearch extends React.Component {
 
+  formRef = React.createRef();
+
   render() {
 
-    const {onSearch, onReset, form: {getFieldDecorator, getFieldsValue, resetFields}} = this.props;
+    const {onSearch, onReset} = this.props;
 
     const formItemLayout = {
       labelCol: {span: 8},
@@ -18,44 +22,46 @@ class IconSearch extends React.Component {
     };
 
     const searchMenuList = () => {
-      const params = getFieldsValue();
+      const params = this.formRef.current.getFieldsValue();
       onSearch(params);
     };
 
     const handleReset = () => {
-      resetFields();
+      this.formRef.current.resetFields();
       onReset()
     };
 
     const menuLevelOptions = config.MENU_LEVEL.map(item => <Option key={item.key}
                                                                    value={item.name}>{item.name}</Option>);
 
+    const iconStyle = {
+      verticalAlign: "bottom",
+      marginRight: "5px",
+    };
+
     return (
-      <div>
-        <Form>
+      <div className={commonStyles.singleRowSearch}>
+        <Form ref={this.formRef}>
           <Row className={index.formRowDiv}>
             <Col span={6}>
-              <FormItem label={"菜单名称"} {...formItemLayout}>
-                {getFieldDecorator("name", {initialValue: ""})
-                (<Input placeholder={"请输入菜单名称"}/>)}
+              <FormItem label={"菜单名称"} {...formItemLayout} name={"name"}>
+                <Input placeholder={"请输入菜单名称"}/>
               </FormItem>
             </Col>
             <Col span={6}>
-              <FormItem label={"访问路径"} {...formItemLayout}>
-                {getFieldDecorator("url", {initialValue: ""})
-                (<Input placeholder={"请输入访问路径"}/>)}
+              <FormItem label={"访问路径"} {...formItemLayout} name={"url"}>
+                <Input placeholder={"请输入访问路径"}/>
               </FormItem>
             </Col>
             <Col span={6}>
-              <FormItem label={"创建时间"} {...formItemLayout}>
-                {getFieldDecorator("createTime", {initialValue: ""})
-                (<Input placeholder={"请输入创建时间"}/>)}
+              <FormItem label={"创建时间"} {...formItemLayout} name={"createTime"}>
+                <Input placeholder={"请输入创建时间"}/>
               </FormItem>
             </Col>
             <Col span={6}>
-              <div style={{marginTop: "4px", marginLeft: "10px"}}>
-                <Button type={"primary"} onClick={searchMenuList} icon={"search"}>查询</Button>
-                <Button onClick={() => handleReset()} style={{marginLeft: "10px"}} icon={"rest"}>重置</Button>
+              <div style={{marginLeft: "10px"}}>
+                <Button onClick={searchMenuList} icon={<i className="ri-search-line" style={iconStyle}></i>} style={{border: "0px", background: window._THEMECOLOR_}}>查询</Button>
+                <Button onClick={() => handleReset()} style={{marginLeft: "10px"}} icon={<i className="ri-restart-line" style={iconStyle}></i>}>重置</Button>
               </div>
             </Col>
           </Row>
@@ -65,4 +71,4 @@ class IconSearch extends React.Component {
   };
 }
 
-export default Form.create()(IconSearch);
+export default IconSearch;

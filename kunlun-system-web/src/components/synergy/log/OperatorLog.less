@@ -2,19 +2,20 @@
   margin-top: 0px !important;
 }
 
-.listTable [class^=ant-table-body] {
-  margin: 0px !important;
-}
-
 .listTable table thead tr th {
-  background-color: #7d99ec !important;
+  background-color: #f1f1f1 !important;
   text-align: center;
-  height: 35px !important;
+  padding: 0px !important;
+  line-height: 0 !important;
 }
 
 .listTable table tbody tr td {
   text-align: center;
-  height: 30px !important;
+  padding: 8px !important;
+}
+
+.listTable table tbody tr:first-child td {
+  padding: 0px !important;
 }
 
 .divEditor {
@@ -58,6 +59,12 @@
 }
 
 .listCell {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.tableCell {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;

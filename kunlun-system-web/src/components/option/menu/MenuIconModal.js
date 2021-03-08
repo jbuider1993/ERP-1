@@ -1,7 +1,10 @@
 import React from 'react';
-import {Table, Icon, Modal} from 'antd';
+import {Table, Modal, Form, Row, Col, Input, Button, Spin} from 'antd';
 import config from '../../../config/config';
 import styles from './Menu.less';
+import 'remixicon/fonts/remixicon.css';
+
+const FormItem = Form.Item;
 
 class MenuIconModal extends React.Component {
 
@@ -15,7 +18,7 @@ class MenuIconModal extends React.Component {
 
   render() {
 
-    const {menuIconModalVisible, menuIconLoading, onCancel, menuIconList, onselectMenuIcon} = this.props;
+    const {menuIconModalVisible, menuIconLoading, onCancel, menuIconList, onselectMenuIcon, iconCurrentPage, iconTotal, onIconPageChange} = this.props;
     const {selectedIconRows, selectedIconRowKeys} = this.state;
 
     const rowSelection = {
@@ -32,14 +35,23 @@ class MenuIconModal extends React.Component {
     };
 
     const columns = [
-      {title: '序号', key: 'name', width: '15%', render: (text, record, index) => (index + 1) * config.PAGE_SIZE, align: "center" },
+      {title: '序号', key: 'name', width: '15%', render: (text, record, index) => (index + 1) + (iconCurrentPage - 1) * config.LIMIT_SIZE, align: "center" },
       {title: '图标名称', dataIndex: 'name', key: 'name', width: '25%'},
       {title: '图标key', dataIndex: 'key', key: 'key', width: '25%'},
-      {title: '图标', key: 'key', align: "center", render: (text, record, index) => <Icon type={record.key} className="certain-category-icon"/> }];
+      {title: '图标', key: 'key', align: "center", render: (text, record, index) => <i className={record.key} style={{fontSize: "19px"}}/> }];
+
+    const pagination = {
+      total: iconTotal,
+      current: iconCurrentPage,
+      pageSize: config.LIMIT_SIZE,
+      onChange: onIconPageChange,
+      showSizeChanger: false
+    };
 
     return (
       <div>
         <Modal
+          centered={true}
           visible={menuIconModalVisible}
           title={"选择图标"}
           onCancel={onCancel}
@@ -47,16 +59,30 @@ class MenuIconModal extends React.Component {
           width={650}
           destroyOnClose={true}
         >
+          <Spin spinning={menuIconLoading}>
+          <Form>
+            <Row>
+              <Col span={12}>
+                <FormItem>
+                  <Input placeholder={"请输入图标名称"} />
+                </FormItem>
+              </Col>
+              <Col span={12}>
+                <Button type={"primary"} style={{marginLeft: "10px"}}>查询</Button>
+                <Button style={{marginLeft: "10px"}}>重置</Button>
+              </Col>
+            </Row>
+          </Form>
           <Table
             className={styles.menuTable}
             rowSelection={rowSelection}
-            size={"small"}
             columns={columns}
             dataSource={menuIconList}
             bordered
-            loading={menuIconLoading}
             rowKey={record => record.id}
+            pagination={pagination}
           />
+          </Spin>
         </Modal>
       </div>
     );

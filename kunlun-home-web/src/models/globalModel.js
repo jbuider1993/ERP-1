@@ -1,5 +1,5 @@
 import config from "../config/config";
-import { message } from 'antd';
+import { message, Modal } from 'antd';
 import { routerRedux } from 'dva/router';
 import * as globalService from '../services/globalService';
 
@@ -9,6 +9,7 @@ export default {
     collapsed: false,
     activeHeadMenuKey: "home",
     activeSideMenuKey: null,
+    menuData: null,
     pageUrl: null,
     pathUrlList: [],
     paneTabs: [],
@@ -18,11 +19,13 @@ export default {
     codeModel: null,
     pageLoading: false,
     themeDrawerVisible: false,
-    themeColor: "#000000",
-    siderColor: "#fff",
-    themeStyle: "hsc",
+    themeColor: config.DEFAULT_THEME_COLOR,
+    siderColor: config.DEFAULT_SIDER_COLOR,
+    themeStyle: "siderMenu",
     selectedStyle: "theme",
-    tabStyle: "gap",
+    isBlockStyle: true,
+    menuMap: new Map(),
+    timeoutModalCount: 0,
   },
   reducers: {
     updateState(state, { payload }) {
@@ -30,24 +33,6 @@ export default {
     }
   },
   effects: {
-    *init({ payload }, { select, call, put }) {
-      let { pathUrlList, paneTabs } = yield select(state => state.globalModel);
-      if (pathUrlList.length > 0) return;
-      const main1 = config.frame_menu.main;
-      const sider1 = config.frame_menu.sider;
-      const siderKeys = main1.map(obj => obj.key);
-      const siders = siderKeys.slice(1, siderKeys.length).map(obj => sider1[obj]);
-      const temps = siders.flatMap(obj => obj);
-      const tempss = temps.filter(obj => obj.children && obj.children.length);
-      const childs = tempss.flatMap(obj => obj.children);
-      const array = [...main1, ...temps, ...childs];
-      for (let i = 0; i < array.length; i++) {
-        if (array[i].key != "") pathUrlList.push({ key: array[i].key, name: array[i].name, url: array[i].url });
-      }
-      yield put({ type: "updateState", payload: { pathUrlList, paneTabs }});
-      yield put({ type: "getAuthCode", payload: {}});
-    },
-
     *getAuthCode({ payload: params }, { select, call, put }) {
       const res = yield call(globalService.getAuthCode, params);
       if (res.code == "200") {
@@ -57,18 +42,20 @@ export default {
     },
 
     *login({ payload: params }, { select, call, put }) {
+      console.log("===== globalModel login =====");
       yield put({ type: "updateState", payload: { pageLoading: true }});
       const { userName, password } = params;
       const {dispatch, codeModel} = yield select(state => state.globalModel);
       const res = yield call(globalService.login, { userName, password, code: codeModel.code });
+      console.log("===== globalModel login res ===== " + res.code);
       if (res.code == "200") {
         console.log(res);
         window._USERINFO_ = res.data.userInfo;
         window._TOKEN_ = res.data.token;
-        const {dispatch} = yield select(state => state.globalModel);
+        sessionStorage.token = window._TOKEN_;
+        sessionStorage.userInfo = JSON.stringify(window._USERINFO_);
         yield put({ type: "updateState", payload: { tokenModel: res.data }});
-        dispatch(routerRedux.push({pathname: "/scmp"}));
-        yield put({ type: "getAppMenu", payload: {}});
+        dispatch({ type: "getAppMenu", payload: {userId: res.data.userInfo.id}}).then(() => dispatch(routerRedux.push({pathname: "/scmp"})));
       } else {
         message.error(res.message);
         console.log(res.error);
@@ -79,56 +66,97 @@ export default {
     *getAppMenu({ payload: params }, { select, call, put }) {
       const res = yield call(globalService.getAppMenu, params);
       if (res.code == "200") {
-        console.log("getAppMenu menuList ===> " + res.data);
-        yield put({ type: "updateState", payload: { menuList: res.data }});
+        console.log("getAppMenu menuData ===> " + res.data);
+        sessionStorage.menuData = JSON.stringify(res.data);
+        yield put({ type: "updateState", payload: { menuData: res.data }});
+      } else {
+        console.log("config menuData ===> " + res.data);
+        const menuList = yield call(globalService.getAppMenuFromConfig);
+        let menuData = {};
+        menuData["list"] = menuList;
+        menuData = {...menuData, ...config.frame_menu};
+        sessionStorage.menuData = JSON.stringify(menuData);
+        yield put({ type: "updateState", payload: { menuData }});
       }
     },
 
     *logout({ payload: params }, { select, call, put }) {
       yield put({ type: "updateState", payload: { pageLoading: true }});
-      const { userName, password } = window._USERINFO_;
+      const { userName, password } = window._USERINFO_ ? JSON.parse(window._USERINFO_) : JSON.parse(sessionStorage.userInfo);
       const res = yield call(globalService.logout, { userName, password });
       if (res.code == "200") {
         console.log(res);
       }
-      yield put({ type: "updateState", payload: { pageLoading: false }});
+      yield put({ type: "updateState", payload: { pageLoading: false, paneTabs: [], activeHeadMenuKey: "home", activeSideMenuKey: null }});
     },
 
     *addActiveRoute({ payload: params }, { select, call, put }) {
-      const { paneTabs } = yield select(state => state.globalModel);
-      let activeHeadMenuKey;
-      const siderMenuObj = config.frame_menu.sider;
-      for (let siderKey of Object.keys(siderMenuObj)) {
-        const siderChildren = siderMenuObj[siderKey];
-        for (let i = 0; i < siderChildren.length; i++) {
-          const menuObj = siderChildren[i];
-          if (menuObj.key == params.key) {
-            activeHeadMenuKey = siderKey;
-            if (params.key == "update") {
-              menuObj["url"] = menuObj["url"] + params.params.id
-            }
-            paneTabs.push(menuObj);
-          }
-        }
-      }
+      let { paneTabs } = yield select(state => state.globalModel);
+      const {activeHeadMenuKey, paneTabList } = yield call(globalService.getActivedMenu, params, paneTabs);
       console.log("open tab, activeHeadMenuKey ===>>> " + activeHeadMenuKey + ", activeSideMenuKey ===>>> " + params.key);
-      yield put({ type: "updateState", payload: { paneTabs, activeHeadMenuKey, activeSideMenuKey: params.key }});
+      yield put({ type: "updateState", payload: { paneTabs: paneTabList, activeHeadMenuKey, activeSideMenuKey: params.key }});
+    },
+
+    *refreshPage({payload: params}, {select, call, put}) {
+      const tokenModel = {};
+      const token = sessionStorage.token;
+      window._TOKEN_ = token;
+      const userInfo = sessionStorage.userInfo;
+      window._USERINFO_ = userInfo;
+      tokenModel["token"] = token;
+      tokenModel["userInfo"] = userInfo;
+      yield put({type: "updateState", payload: {tokenModel, menuData: JSON.parse(sessionStorage.menuData)}});
+    },
+
+    *handleTimeout({payload: params}, {select, call, put}) {
+      const {dispatch, history} = params;
+      let {timeoutModalCount} = yield select(state => state.globalModel);
+      if (timeoutModalCount > 0) return;
+      timeoutModalCount++;
+
+      Modal.confirm({
+        title: '提示',
+        okText: "确认",
+        cancelText: "取消",
+        content: <div><i className="ri-error-warning-line" style={{fontSize: "18px", marginRight: "10px", verticalAlign: "sub"}}></i>离开时间太长，请重新登录！</div>,
+        onOk() {
+          dispatch({type: "logout", payload: {}}).then(() =>
+            history.push({pathname: "/"})
+          );
+        },
+        onCancel() {
+          timeoutModalCount--;
+          dispatch({type: "updateState", payload: {timeoutModalCount}});
+        },
+      });
+      dispatch({type: "updateState", payload: {timeoutModalCount}});
     },
   },
   subscriptions: {
     onListenIFrameMessage({ dispatch, history }) {
       window.addEventListener("message", function (e) {
-        const message = !!e && !!e.data && JSON.parse(e.data) || {};
-        message.isAddRoute && dispatch({ type: "addActiveRoute", payload: message });
+        // 监听页面超时事件，确定后直接跳转到登陆界面
+        if (e.data && e.data.operateType == "timeout") {
+          dispatch({type: "handleTimeout", payload: {dispatch, history}});
+        } else {
+          // kunlun-system-web请求打开菜单页面的监听
+          const message = !!e && !!e.data && JSON.parse(e.data) || {};
+          message.isAddRoute && dispatch({type: "addActiveRoute", payload: message});
+        }
       });
     },
     setup({ dispatch, history }) {
       history.listen(location => {
         console.log("=====program start running=====");
         if (location.pathname == "/") {
-          dispatch({type: "init", payload: {}});
-          dispatch({type: "updateState", payload: {dispatch}});
+          dispatch({type: "getAuthCode", payload: {}});
         }
+
+        // 刷新页面处理
+        if (location.pathname == "/scmp") {
+          dispatch({type: "refreshPage", payload: {}});
+        }
+        dispatch({type: "updateState", payload: {dispatch}});
       });
     },
   },

@@ -1,6 +1,7 @@
 import * as userService from '../../services/user/userService';
 import { message } from "antd";
 import config from '../../config/config';
+import * as operatorLogService from "../../services/synergy/operatorLogService";
 
 export default {
   namespace: "userModel",
@@ -26,8 +27,7 @@ export default {
   effects: {
     *getListDatas({payload: {currentPage = 1, pageSize = config.PAGE_SIZE, params}}, { select, call, put }) {
       yield put({ type: "updateState", payload: { userLoading: true }});
-      const { userList } = yield select(state => state.userModel);
-      const res = yield call(userService.getAllUser, { params, currentPage, pageSize });
+      const res = yield call(userService.getAllUser, { ...params, currentPage, pageSize });
       if (res.code == "200") {
         yield put({
           type: 'updateState',
@@ -68,13 +68,17 @@ export default {
         message.info("删除失败！");
       }
     },
+
+    *downloadUsers({payload: params}, {select, call, put}) {
+      const res = yield call(userService.downloadUsers, params);
+    },
   },
 
   subscriptions: {
     setup({ dispatch, history }) {
       return history.listen(location => {
         if (location.pathname === "/user/list") {
-          dispatch({ type: 'getListDatas', payload: {} });
+          dispatch({ type: 'getListDatas', payload: {}});
         }
       });
     },

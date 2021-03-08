@@ -1,35 +1,73 @@
-.userNumCanvas > div > canvas {
-  height: 300px !important;
+.userNumCanvas > canvas {
+  width: 100% !important;
+  height: 330px !important;
 }
 
-.redisCanvas > div > canvas {
-  height: 300px !important;
+.redisCanvas canvas {
+  width: 100% !important;
+  height: 295px !important;
   background: #ffffff;
 }
 
-.serverMemoryCanvas > div > canvas {
-  height: 200px !important;
+.serverMemoryDiv {
+  display: flex;
+  flex-direction: row;
+  flex: 1;
   background: #ffffff;
 }
 
-.serverDiskCanvas > div > canvas {
-  height: 200px !important;
+.serverCPU {
+  display: flex;
+  flex: 1;
+}
+
+.serverCPU canvas {
+  height: 145px !important;
+  width: 95% !important;
   background: #ffffff;
 }
 
-.mqCanvas > div > canvas {
-  height: 300px !important;
+.serverCPU [class^=guide-annotation] {
+  top: 83% !important;
+  left: 35% !important;
+}
+
+.serverDisk {
+  display: flex;
+  flex: 1;
+}
+
+.serverDisk canvas {
+  width: 95% !important;
+  height: 145px !important;
+  background: #ffffff;
+}
+
+.serverDisk [class^=guide-annotation] {
+  top: 83% !important;
+  left: 35% !important;
+}
+
+.serverDiskCanvas canvas {
+  width: 100% !important;
+  height: 150px !important;
+  background: #ffffff;
+}
+
+.mqCanvas canvas {
+  width: 100% !important;
+  height: 295px !important;
   background: #ffffff;
 }
 
 .userVisitTotalDiv {
   background: #40a9ff87;
-  height: 85px;
+  height: 90px;
   border: 0px !important;
 }
 
 .userVisitTotalDiv [class^=ant-card-body] {
-  padding: 12px;
+  padding: 15px 0px 0px 0px;
 }
 
 .userVisitTotalDiv [class^=ant-statistic-content-value] {
@@ -42,12 +80,12 @@
 
 .userOnlineDiv {
   background: #52c41a91;
-  height: 85px;
+  height: 90px;
   border: 0px !important;
 }
 
 .userOnlineDiv [class^=ant-card-body] {
-  padding: 12px;
+  padding: 15px 0px 0px 0px;
 }
 
 .userOnlineDiv [class^=ant-statistic-content-value] {
@@ -60,12 +98,12 @@
 
 .userVisitLastDiv {
   background: #faad149e;
-  height: 85px;
+  height: 90px;
   border: 0px !important;
 }
 
 .userVisitLastDiv [class^=ant-card-body] {
-  padding: 12px;
+  padding: 15px 0px 0px 0px;
 }
 
 .userVisitLastDiv [class^=ant-statistic-content-value] {
@@ -97,21 +135,21 @@
 .commonFunctionDiv {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-  grid-template-rows: 100px 100px;
+  grid-template-rows: 70px 70px;
 }
 
 .commonTitleDiv {
   padding-left: 15px;
-  height: 55px;
+  height: 45px;
   font-size: 16px;
   background: #ffffff;
-  padding-top: 15px;
+  padding-top: 10px;
 }
 
 .functionDiv {
   text-align: center;
-  padding: 15px;
-  font-size: 16px;
+  padding: 8px;
+  font-size: 14px;
   box-shadow: 1px 0 0 0 #e8e8e8, 0 1px 0 0 #e8e8e8, 1px 1px 0 0 #e8e8e8, inset 1px 0 0 0 #e8e8e8, inset 0 1px 0 0 #e8e8e8;
 }
 
@@ -128,16 +166,13 @@
 }
 
 .scheduleDiv {
-  padding-left: 15px;
-  height: 55px;
+  height: 45px;
   font-size: 16px;
   background: #ffffff;
   border-bottom: 1px solid #e8e8e8;
-  padding-top: 15px;
-}
-
-.scheduleDetailDiv {
-  background: #ffffff;
+  padding-top: 10px;
+  display: flex;
+  flex-direction: row;
 }
 
 .scheduleDividerDiv {
@@ -146,12 +181,61 @@
   width: 100%;
 }
 
-.scheduleDistanceDiv {
-  margin-top: 5px;
+.calcendarDiv {
+  display: flex;
+  flex: 1.5;
+  border-right: 1px solid #d9d9d9;
+  width: 50%;
+}
+
+.calcendarDiv [class^=ant-fullcalendar-header] {
+  display: none;
+}
+
+.calcendarDiv [class^=ant-fullcalendar] > table {
+  height: 184px !important;
+}
+
+.calcendarDiv [class^=ant-fullcalendar] {
+  border-top: 0px;
+}
+
+.scheduleShowDiv {
+  height: 140px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  line-height: 2;
+  margin: 0px 10px 0px 10px;
+}
+
+.scheduleContentDiv {
+  margin: -5px 10px 10px 5px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  line-height: 1.8;
+  font-size: 14px;
+}
+
+.scheduleToolBarDiv {
+  text-align: center;
+  padding: 5px 5px 5px 5px;
+}
+
+.scheduleShowPersonDiv {
+  display: flex;
+  flex-direction: row;
+}
+
+.personDiv {
+  width: 80%;
+  word-wrap:break-word;
+  padding: 0px 0px 0px 5px;
 }
 
 .functionIconDiv {
-  margin: 5px 0px 10px 0px;
+  margin: -4px 0px -4px 0px;
 }
 
 .collapseDiv {
@@ -176,7 +260,23 @@
   padding: 5px 0px 10px 20px !important;
 }
 
-.scheduleTimeAndLocationDiv {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+.arrowLeft {
+  position: absolute;
+  margin-top: -32px;
+  font-size: 20px;
+  color: rgba(0, 0, 0, 0.25);
+  margin-left: -2px;
+}
+
+.arrowRight:hover,
+.arrowLeft:hover {
+  color: blue;
+  cursor: pointer;
+}
+
+.arrowRight {
+  margin-top: -132px;
+  margin-left: 97.4%;
+  font-size: 20px;
+  color: rgba(0, 0, 0, 0.25);
 }

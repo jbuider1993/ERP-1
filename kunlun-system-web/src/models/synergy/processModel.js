@@ -19,7 +19,8 @@ export default {
     selectedRowKeys: [],
     searchParams: null,
     processRecord: null,
-    modelNodeList: []
+    modelNodeList: [],
+    currentNode: null
   },
 
   reducers: {
@@ -29,7 +30,7 @@ export default {
   },
 
   effects: {
-    *getListDatas({payload: {currentPage = 1, pageSize = 15, params}}, { call, put }) {
+    *getListDatas({payload: {currentPage = 1, pageSize = config.PAGE_SIZE, params}}, { call, put }) {
       yield put({ type: "updateState", payload: { processLoading: true }});
       const res = yield call(processService.getAllProcess, { ...params, currentPage, pageSize });
       if (res.code == "200") {
@@ -83,21 +84,15 @@ export default {
       }
     },
 
-    *batchDeleteProcess({payload: ids}, {put, call}) {
-      const res = yield call(processService.batchDeleteUser, ids);
-      if (res.code == "200") {
-        message.info("删除成功！");
-        yield put({ type: 'getListDatas', payload: {}});
-      } else {
-        message.info("删除失败！");
-      }
-    },
-
     *getModelNodeList({payload: params}, {put, call}) {
-      const res = yield call(getModelNodeList, params);
+      // 获取当前流程的所有节点
+      const res = yield call(getModelNodeList, {modelId: params.modelId});
       const obj = parseProcessNode(res);
+
+      // 获取当前流程的审核节点
+      const currentRes = yield call(processService.getCurrentProcessNode, {procDefId: params.processDefineId, procInstId: params.processInstanceId});
       if (res && res.model) {
-        yield put({ type: 'updateState', payload: { modelNodeList: obj.modelNodes }});
+        yield put({ type: 'updateState', payload: { modelNodeList: obj.modelNodes, currentNode: currentRes.data }});
       } else {
         message.info("获取模型节点失败！");
       }

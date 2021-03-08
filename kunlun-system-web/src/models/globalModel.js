@@ -1,12 +1,8 @@
+import queryString from 'query-string';
+
 export default {
   namespace: 'globalModel',
   state: {
-    themeValue: "vertical",
-    colorValue: "light",
-    isShowBreadCrumb: false,
-    paneTabs: [],
-    activeTabKey: null,
-    pathUrlList: [],
     token: null,
     userInfo: null,
   },
@@ -17,14 +13,14 @@ export default {
   },
   effects: {
     *setTokenModel({ payload: params }, { select, call, put }) {
-      const { token, userInfo } = params;
-      yield put({ type: "updateState", payload: { token, userInfo }});
+      console.log("===== globalModel setTokenModel =====");
+      const { token, userInfo, themeColor } = params;
+      yield put({ type: "updateState", payload: { token, userInfo, themeColor }});
     }
   },
   subscriptions: {
-    init(params) {
-      const { dispatch, history } = params;
-      dispatch({ type: "setTokenModel", payload: { token: window._TOKEN_, userInfo: window._USERINFO_ }});
-    }
-  },
+    setup({ dispatch, history }) {
+      console.log("===== globalModel subscriptions =====");
+    },
+  }
 };

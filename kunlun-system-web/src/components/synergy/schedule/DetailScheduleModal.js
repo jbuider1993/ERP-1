@@ -8,12 +8,18 @@ const ListItemMeta = List.Item.Meta;
 
 const DetailScheduleModal = (props) => {
 
-  let {daySchedules, detailScheduleModalVisible, onCancel, editSchedule, deleteSchedule} = props;
+  let {daySchedules, detailScheduleModalVisible, onCancel, editSchedule, deleteSchedule, userList} = props;
+
+  const switchParticipant = (value) => {
+    const participants = userList.filter(item => value.indexOf(item.id) > -1).map(item => item.userName);
+    return participants.join(", ")
+  }
 
   return (
     <div className={styles.listDiv}>
       <Modal
         visible={detailScheduleModalVisible}
+        centered={true}
         title={"详细日程"}
         okText="保存"
         onCancel={onCancel}
@@ -53,8 +59,8 @@ const DetailScheduleModal = (props) => {
                   }
                   description={
                     <div className={styles.detailDescriptionDiv}>
-                      <div className={styles.detailDescriptionParticipant}>{"参与人：" + item.participant}</div>
-                      <div className={styles.detailDescriptionContent}><span>内&nbsp;&nbsp;&nbsp;&nbsp;容：</span>{item.content}</div>
+                      <div className={styles.detailDescriptionParticipant}>{"参与人：" + switchParticipant(item.participants)}</div>
+                      <div className={styles.detailDescriptionContent}><span>内&nbsp;&nbsp;&nbsp;&nbsp;容：</span><span style={{width: "100%"}}>{item.content}</span></div>
                     </div>
                   }
                 />

@@ -1,5 +1,5 @@
 import React from 'react';
-import {Drawer, Form, Button, Divider, Modal, Row, Col, Input, Icon} from 'antd';
+import {Form, Button, Modal, Row, Col, Input} from 'antd';
 import 'braft-editor/dist/index.css';
 import BraftEditor from 'braft-editor';
 import styles from './Message.less';
@@ -16,6 +16,8 @@ class NewMessageModal extends React.Component {
     }
   }
 
+  formRef = React.createRef();
+
   componentWillReceiveProps(nextProps, nextContext) {
     // 设置编辑器内容
     const record = nextProps.messageRecord;
@@ -27,23 +29,22 @@ class NewMessageModal extends React.Component {
   }
 
   handleSubmit(validateFields) {
-    validateFields((error, values) => {
-      if (!error) {
-        const submitData = {
-          title: values.title,
-          content: values.content.toHTML(), // or values.content.toRAW()
-          description: values.description
-        };
-        this.props.onOk(submitData);
-      }
-    })
+    validateFields().then(values => {
+      const submitData = {
+        title: values.title,
+        content: values.content.toHTML(), // or values.content.toRAW()
+        description: values.description
+      };
+      this.props.onOk(submitData);
+    }).catch(error => {
+      console.log("NewMessageModal error ===>>> " + error)
+    });
   }
 
   render() {
 
     const {
       newMessageModalVisible, messageModalType, messageRecord, onCancel, onOk,
-      form: { getFieldDecorator, setFieldsValue, validateFields, getFieldValue, getFieldsValue }
     } = this.props;
 
     const formItemLayout = {
@@ -54,45 +55,33 @@ class NewMessageModal extends React.Component {
     return (
       <div>
         <Modal
+          centered={true}
           visible={newMessageModalVisible}
-          title={messageModalType == "add" ? "新增菜单" : "编辑菜单"}
+          title={messageModalType == "add" ? "新增通知" : "编辑通知"}
           okText="保存"
           onCancel={onCancel}
-          onOk={() => this.handleSubmit(validateFields)}
-          height={600}
+          onOk={() => this.handleSubmit(this.formRef.current.validateFields)}
+          height={400}
           width={"70%"}
           destroyOnClose={true}
         >
-          <Form>
+          <Form initialValues={messageRecord} ref={this.formRef} name={"messageRef"}>
             <Row>
               <Col span={24}>
-                <FormItem {...formItemLayout} label="消息标题">
-                  {getFieldDecorator('title', {
-                    initialValue: messageRecord ? messageRecord.title : "",
-                    rules: [{required: false, message: '请输入消息标题'}]
-                  })
-                  (<Input placeholder={"请输入消息标题"} />)}
+                <FormItem {...formItemLayout} label="消息标题" name={"title"} rules={[{required: false, message: '请输入消息标题'}]}>
+                  <Input placeholder={"请输入消息标题"} />
                 </FormItem>
               </Col>
               <Col span={24}>
-                <FormItem {...formItemLayout} label="概要描述">
-                  {getFieldDecorator('description', {
-                    initialValue: messageRecord ? messageRecord.description : "",
-                    rules: [{required: false, message: '请输入概要描述'}]
-                  })(<TextArea placeholder={"请输入概要描述"} />)}
+                <FormItem {...formItemLayout} label="概要描述" name={"description"} rules={[{required: false, message: '请输入概要描述'}]}>
+                  <TextArea placeholder={"请输入概要描述"} />
                 </FormItem>
               </Col>
             </Row>
             <Row>
               <Col span={24}>
-                <FormItem {...formItemLayout} label="详细消息">
-                  {getFieldDecorator('content', {
-                    initialValue: messageRecord ? messageRecord.content : "",
-                    rules: [{required: false, message: '请输入正文内容'}]
-                  })(<BraftEditor
-                      className={styles.draftEditorDiv}
-                      placeholder="请输入正文内容"
-                    />)}
+                <FormItem {...formItemLayout} label="详细消息" name={"content"} rules={[{required: false, message: '请输入正文内容'}]}>
+                  <BraftEditor className={styles.draftEditorDiv} placeholder="请输入正文内容"/>
                 </FormItem>
               </Col>
             </Row>
@@ -103,4 +92,4 @@ class NewMessageModal extends React.Component {
   };
 }
 
-export default Form.create()(NewMessageModal);
+export default NewMessageModal;

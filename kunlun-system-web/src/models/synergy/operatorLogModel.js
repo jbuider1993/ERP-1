@@ -1,4 +1,5 @@
 import * as operatorLogService from '../../services/synergy/operatorLogService';
+import config from '../../config/config';
 
 export default {
   namespace: 'operatorLogModel',
@@ -15,6 +16,7 @@ export default {
     selectedRowKeys: [],
     searchParams: null,
     logRecord: null,
+    isExpandSearch: false,
   },
 
   reducers: {
@@ -24,7 +26,7 @@ export default {
   },
 
   effects: {
-    *getListDatas({payload: {currentPage = 1, pageSize = 15, params}}, { call, put }) {
+    *getListDatas({payload: {currentPage = 1, pageSize = config.PAGE_SIZE, params}}, { call, put }) {
       yield put({ type: "updateState", payload: { logLoading: true }});
       const res = yield call(operatorLogService.getLogList, { ...params, currentPage, pageSize });
       if (res.code == "200") {
@@ -33,6 +35,12 @@ export default {
           payload: { logList: res.data.records, total: res.data.total, currentPage, pageSize },
         });
       }
+      yield put({ type: "updateState", payload: { logLoading: false }});
+    },
+
+    *downloadOperateLog({payload: params}, {select, call, put}) {
+      yield put({ type: "updateState", payload: { logLoading: true }});
+      const res = yield call(operatorLogService.downloadOperateLog, params);
       yield put({ type: "updateState", payload: { logLoading: false }});
     },
   },

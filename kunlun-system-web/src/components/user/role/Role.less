@@ -7,14 +7,14 @@
 }
 
 .listTable table thead tr th {
-  background-color: #7d99ec !important;
+  background-color: #e8e8e87a !important;
   text-align: center;
-  height: 35px !important;
+  height: 48px !important;
+  padding: 0px 10px 0px 10px !important;
 }
 
 .listTable table tbody tr td {
   text-align: center;
-  height: 30px !important;
 }
 
 .divEditor {
@@ -25,4 +25,50 @@
   height: 400px !important;
   overflow-y: auto;
   border: 1px solid #dddddd;
+}
+
+.menuDrawer [class^=ant-drawer-header] {
+  padding: 12px 15px !important;
+}
+
+.menuDrawer [class^=ant-drawer-close] {
+  padding: 17px !important;
+}
+
+.menuDrawer [class^=ant-drawer-content-wrapper] {
+  right: -5px !important;
+  height: 100% !important;
+}
+
+.menuDrawer [class^=ant-drawer-body] {
+  padding: 0px 20px 0px 0px !important;
+}
+
+.menuDrawerDiv {
+  flex-direction: column;
+  height: 96%;
+}
+
+.menuDrawerModalDiv {
+  flex: 1;
+  margin-top: 15px;
+}
+
+.menuDrawerTreeDiv {
+  flex: 50;
+  display: flex;
+  margin-top: -10px;
+  margin-left: 20px;
+  overflow: auto;
+  height: calc(100% - 125px);
+}
+
+.menuDrawerFooterDiv {
+  flex: 1;
+  position: absolute;
+  bottom: 15px;
+  width: 100%;
+  border-top: 1px solid #e8e8e8;
+  text-align: center;
+  padding: 15px 0px 0px 0px;
 }

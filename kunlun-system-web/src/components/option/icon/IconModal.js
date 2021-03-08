@@ -1,17 +1,17 @@
 import React from 'react';
-import { Modal, Form, Input, Row, Col, DatePicker, Radio, Spin, AutoComplete, Icon } from 'antd';
+import { Modal, Form, Row, Col, Radio } from 'antd';
 import config from '../../../config/config';
+import 'remixicon/fonts/remixicon.css';
 
 const FormItem = Form.Item;
 const RadioGroup = Radio.Group;
-const Option = AutoComplete.Option;
 
 class IconModal extends React.Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      iconStyle: "outlined"
+      iconStyle: "line"
     }
   }
 
@@ -41,14 +41,14 @@ class IconModal extends React.Component {
           visible={iconModalVisible}
           title={"查看图标"}
           onCancel={onCancel}
-          width={650}
+          width={500}
           destroyOnClose={true}
-          footer={[]}
+          footer={null}
         >
-          <Form align="center" style={{marginLeft: "-4%"}}>
+          <Form style={{marginLeft: "20px"}}>
             <Row>
               <Col span={24}>
-                <FormItem {...formRadioLayout} label="主题风格">
+                <FormItem {...formRadioLayout} label={<span style={{color: config.VIEW_COLOR}}>主题风格</span>}>
                   <RadioGroup value={this.state.iconStyle} onChange={onRadioChange}>
                     {iconStyleOptions}
                   </RadioGroup>
@@ -57,20 +57,20 @@ class IconModal extends React.Component {
             </Row>
             <Row>
               <Col span={12}>
-                <FormItem {...formItemLayout} label="图标名称">
+                <FormItem {...formItemLayout} label={<span style={{color: config.VIEW_COLOR}}>图标名称</span>}>
                   <div>{iconInfoData ? iconInfoData.name : ""}</div>
                 </FormItem>
               </Col>
               <Col span={12}>
-                <FormItem {...formItemLayout} label="图标">
-                  <div><Icon type={iconInfoData ? iconInfoData.key : ""} theme={this.state.iconStyle} /></div>
+                <FormItem {...formItemLayout} label={<span style={{color: config.VIEW_COLOR}}>图标key</span>}>
+                  <div>{iconInfoData ? iconInfoData.key : ""}</div>
                 </FormItem>
               </Col>
             </Row>
             <Row>
               <Col span={12}>
-                <FormItem {...formItemLayout} label="图标key">
-                  <div>{iconInfoData ? iconInfoData.key : ""}</div>
+                <FormItem {...formItemLayout} label={<span style={{color: config.VIEW_COLOR}}>图标</span>}>
+                  <div><i className={iconInfoData ? "ri-" + iconInfoData.name + "-" + this.state.iconStyle : ""} style={{fontSize: "20px"}}/></div>
                 </FormItem>
               </Col>
             </Row>
@@ -81,4 +81,4 @@ class IconModal extends React.Component {
   };
 }
 
-export default Form.create()(IconModal);
+export default IconModal;

@@ -6,11 +6,15 @@ export default {
   namespace: "machineModel",
   state: {
     machineLoading: false,
+    total: 0,
+    currentPage: 0,
+    pageSize: 0,
     machineList: [],
     machineModalVisible: false,
     operateType: "add",
     machineInfoData: null,
     saveLoading: false,
+    isExpandSearch: true,
   },
   reducers: {
     updateState(state, { payload }) {
@@ -19,8 +23,8 @@ export default {
   },
   effects: {
     *getMachineList({ payload: params }, { select, call, put }) {
-      yield put({ type: "updateState", payload: { machineLoading: true }});
-      const res = yield call(machineService.getMachineList, { currentPage: 0, pageSize: 15 });
+      yield put({ type: "updateState", payload: { machineLoading: false }});
+      const res = yield call(machineService.getMachineList, { currentPage: 0, pageSize: config.PAGE_SIZE });
       if (res.code == "200") {
         yield put({ type: "updateState", payload: { machineList: res.data }});
       }

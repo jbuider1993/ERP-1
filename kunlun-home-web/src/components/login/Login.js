@@ -1,29 +1,20 @@
 import React from 'react';
 import styles from './Login.less';
 import config from '../../config/config';
-import {Button, Form, Input, Row, Icon, message, Spin} from 'antd';
+import {Button, Form, Input, Row, message, Spin} from 'antd';
+import 'remixicon/fonts/remixicon.css';
 
 const FormItem = Form.Item;
 
 const Login = (props) => {
 
-  const {
-    codeModel,
-    onLogin,
-    refreshCode,
-    pageLoading,
-    form: {
-      getFieldDecorator,
-      getFieldsValue,
-      validateFields,
-      resetFields
-    }
-  } = props;
+  const {codeModel, onLogin, refreshCode, pageLoading} = props;
+
+  const [form] = Form.useForm();
+  const {getFieldsValue, validateFields, resetFields} = form;
 
   const login = () => {
-    validateFields((err, values) => {
-      if (!!err) return;
-
+    validateFields().then(values => {
       if (values["code"].toLowerCase() != codeModel.code.toLowerCase()) {
         message.warning("输入的验证码有误！");
         return;
@@ -35,6 +26,8 @@ const Login = (props) => {
         return;
       }
       onLogin(values);
+    }).catch(error => {
+      console.log("===== 登陆验证失败 =====");
     });
   };
 
@@ -46,47 +39,40 @@ const Login = (props) => {
 
   return (
     <div className={styles.loginDiv}>
-      <div className={styles.loginPicture} style={{ marginLeft: "7.4%", marginTop: "5.2%", height: "90%", width: "85%", border: "40px solid #fafafa"}}>
+      <div className={styles.loginPicture} style={{ marginLeft: "7.4%", marginTop: "5.2%", height: "91%", width: "85%", border: "40px solid #fafafa"}}>
         <div className={styles.logoDiv}>
-          <Icon type={"windows"} theme={"filled"} className={styles.logoIcon} />
+          <i className="ri-global-fill" style={{ fontSize: "35px", marginLeft: "5px", marginTop: "-12px", float: "left" }}></i>
           <div className={styles.logoFont}>{config.name}</div>
         </div>
         <div className={styles.spinSpanDiv}>
-          <Spin spinning={pageLoading} size={"large"} tip={"页面努力加载中，请稍候！"} className={[styles.spinDot, styles.spinSpan]}>
-            <div className={styles.inputDiv}>
+          <Spin spinning={pageLoading} size={"large"} tip={"数据加载中，请稍候！"} className={[styles.spinDot, styles.spinSpan]}>
+            <div className={styles.inputDiv} style={{marginRight: "11%", marginTop: "3%"}}>
               <div className={styles.welcomeDiv}>
                 <span className={styles.welcomeFont1}>欢迎使用{config.name}</span>
-                <span className={styles.welcomeFont2}>-SCMP！</span>
               </div>
-              <Form>
-                <Row>
+              <Form initialValues={{}} form={form}>
+                <Row align="center">
                   <div className={styles.loginFont}>用户登录</div>
                 </Row>
-                <Row align="left">
-                  <FormItem>
-                    {getFieldDecorator('userName', {
-                      initialValue: "", rules: [{ required: true, message: "请输入用户名!" }]})
-                    (<Input style={{ width: "240px" }} placeholder={"请输入用户名"} prefix={<Icon type="user" style={{ color: '#506c86' }} />}/>)}
+                <Row align="center">
+                  <FormItem name={"userName"} rules={[{required: true, message: "请输入用户名!"}]}>
+                    <Input style={{ width: "240px" }} placeholder={"请输入用户名"} prefix={<i className="ri-user-3-line" style={{ color: '#506c86' }}></i>}/>
                   </FormItem>
                 </Row>
                 <Row align="center">
-                  <FormItem>
-                    {getFieldDecorator('password', {
-                      initialValue: "", rules: [{ required: true, message: "请输入密码!" }]})
-                    (<Input style={{ width: "240px" }} placeholder={"请输入密码"} prefix={<Icon type="lock" style={{ color: '#506c86' }} />}/>)}
+                  <FormItem name={"password"} rules={[{ required: true, message: "请输入密码!" }]}>
+                    <Input.Password style={{ width: "240px" }} placeholder={"请输入密码"} prefix={<i className="ri-lock-password-line" style={{ color: '#506c86' }}></i>}/>
                   </FormItem>
                 </Row>
-                <Row style={{ left: "-55px" }}>
-                  <FormItem>
-                    {getFieldDecorator('code', {
-                      initialValue: "", rules: [{ required: true, message: "请输入验证码!" }]})
-                    (<Input placeholder={"请输入验证码"} style={{ width: "130px" }} onPressEnter={onKeyEnter} prefix={<Icon type="safety" style={{ color: '#506c86' }} />} />)}
+                <Row align="center" style={{ marginLeft: "-110px" }}>
+                  <FormItem name={"code"} rules={[{ required: true, message: "请输入验证码!" }]}>
+                    <Input placeholder={"请输入验证码"} style={{ width: "130px" }} onPressEnter={onKeyEnter} prefix={<i className="ri-shield-flash-line" style={{ color: '#506c86' }}></i>} />
                   </FormItem>
                 </Row>
-                <Row style={{ right: "13.5%", marginTop: "-20.4%", float: "right", display: "inline-block" }}>
+                <Row style={{ marginRight: "13%", marginTop: "-17.8%", float: "right", display: "inline-block" }}>
                   <FormItem>
-                    <div onClick={refreshCode}>
-                      <img src={codeModel ? "data:image/png;base64," + codeModel.binary : null} />
+                    <div onClick={refreshCode} className={styles.codeImgCursor}>
+                      <img src={codeModel ? "data:image/png;base64," + codeModel.binary : "default.png"} style={{height: "33px", width: "100px"}}/>
                     </div>
                   </FormItem>
                 </Row>
@@ -102,4 +88,4 @@ const Login = (props) => {
   );
 };
 
-export default Form.create()(Login);
+export default Login;

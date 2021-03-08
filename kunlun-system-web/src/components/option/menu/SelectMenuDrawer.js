@@ -15,20 +15,19 @@ class SelectMenuDrawer extends React.Component {
     };
   }
 
+  formRef = React.createRef();
+
   render() {
 
     // 从传递过来的props中获取参数
     const {
-      selectMenuModalVisible, onClose, selectMenuLoading, menuList, onSelectTreeNode, form: {
-        getFieldDecorator,
-        validateFields,
-      }
+      selectMenuModalVisible, onClose, selectMenuLoading, menuList, onSelectTreeNode
     } = this.props;
     const { checkedTreeNodeKeys, expandedTreeNodeKeys, selectedTreeNode } = this.state;
 
     const formItemLayout = {
-      labelCol: {span: 6},
-      wrapperCol: {span: 18},
+      labelCol: {span: 8},
+      wrapperCol: {span: 16},
     };
 
     const onCheckTreeNode = (checkedTreeNodeKeys, item) => {
@@ -61,7 +60,7 @@ class SelectMenuDrawer extends React.Component {
         <Spin spinning={selectMenuLoading}>
           <Drawer
             title="父级菜单"
-            width={"22%"}
+            width={350}
             placement="right"
             onClose={onClose}
             maskClosable={false}
@@ -70,22 +69,17 @@ class SelectMenuDrawer extends React.Component {
           >
             <div className={styles.menuDrawerDiv}>
               <div className={styles.menuDrawerModalDiv}>
-                <Form>
-                  <Row>
+                <Form ref={this.formRef}>
+                  <Row style={{margin: "0px 20px -20px -20px"}}>
                     <Col span={24}>
-                      <FormItem {...formItemLayout} label="菜单名称">
-                        {getFieldDecorator('level', {
-                          initialValue: "",
-                          rules: [{required: false, message: '请选择菜单类型'}]
-                        })
-                        (<Input/>)
-                        }
+                      <FormItem {...formItemLayout} label="菜单名称" name={"level"} rules={[{required: false, message: '请选择菜单类型'}]}>
+                        <Input.Search />
                       </FormItem>
                     </Col>
                   </Row>
                 </Form>
               </div>
-              <div className={styles.menuDrawerTreeDiv}>
+              <div className={styles.menuDrawerTreeDiv} style={{height: window.innerHeight - 185}}>
                 <Tree
                   checkable
                   autoExpandParent={true}
@@ -111,4 +105,4 @@ class SelectMenuDrawer extends React.Component {
   };
 }
 
-export default Form.create()(SelectMenuDrawer);
+export default SelectMenuDrawer;

@@ -6,22 +6,27 @@ const FormItem = Form.Item;
 
 const RoleModal = (props) => {
 
-  const { roleModalVisible, roleInfoData, operateType, onSave, updateUser, onCancel, form: {
-    getFieldDecorator,
-    validateFields }
-  } = props;
+  const { roleModalVisible, roleInfoData, operateType, onSave, updateUser, onCancel } = props;
+
+  const [form] = Form.useForm();
+  const { getFieldsValue, validateFields, setFieldsValue, resetFields } = form;
 
   const formItemLayout = {
-    labelCol: { span: 8 },
-    wrapperCol: { span: 16 },
+    labelCol: { span: 6 },
+    wrapperCol: { span: 15 },
   };
 
   const onOk = () => {
-    validateFields((err, values) => {
-      if (!err) {
-        operateType == "add" ? onSave(values) : updateUser(values);
-      }
+    validateFields().then(values => {
+      operateType == "add" ? onSave(values) : updateUser(values);
+    }).catch(error => {
+      console.log("RoleModal Error ===>>> " + error);
     });
+  };
+
+  const onClose = () => {
+    // resetFields();
+    onCancel();
   };
 
   return (
@@ -29,48 +34,31 @@ const RoleModal = (props) => {
       <Modal
         visible={roleModalVisible}
         title={operateType == "add" ? "新增" : "修改"}
-        okText="保存"
-        onCancel={onCancel}
+        onCancel={onClose}
         onOk={onOk}
-        width={800}
-        destroyOnClose={true}
+        width={500}
+        destroyOnClose={false}
       >
-        <Form>
+        <Form initialValues={roleInfoData} form={form}>
           <Row>
             <Col span={0}>
-              <FormItem label="用户ID">
-                { getFieldDecorator('id', { initialValue: roleInfoData ? roleInfoData.id : "" })
-                (<Input />) }
+              <FormItem label="用户ID" name={"id"}>
+                <Input />
               </FormItem>
             </Col>
-            <Col span={12}>
-              <FormItem { ...formItemLayout } label="角色名称">
-                { getFieldDecorator('roleName', { initialValue: roleInfoData ? roleInfoData.roleName : "",
-                rules: [{required: true, message: '请输入角色名称'}]})
-                (<Input placeholder={"请输入角色名称"} />) }
+            <Col span={24}>
+              <FormItem { ...formItemLayout } label="角色名称" name={"roleName"} rules={[{required: true, message: '请输入角色名称'}]}>
+                <Input placeholder={"请输入角色名称"} />
               </FormItem>
             </Col>
-            <Col span={12}>
-              <FormItem { ...formItemLayout } label="密码">
-                { getFieldDecorator('roleWord', { initialValue: roleInfoData ? roleInfoData.roleWord : "",
-                rules: [{required: true, message: '请输入密码'}]})
-                (<Input placeholder={"请输入密码"} />) }
+            <Col span={24}>
+              <FormItem { ...formItemLayout } label="权限字符" name={"roleWord"} rules={[{required: true, message: '请输入权限字符'}]}>
+                <Input placeholder={"请输入权限字符"} />
               </FormItem>
             </Col>
-          </Row>
-          <Row>
-            <Col span={12}>
-              <FormItem { ...formItemLayout } label="电话号码">
-                { getFieldDecorator('phoneNumber', { initialValue: roleInfoData ? roleInfoData.phoneNumber : "",
-                rules: [{required: true, message: '请输入电话号码'}]})
-                (<Input placeholder={"请输入电话号码"} />) }
-              </FormItem>
-            </Col>
-            <Col span={12}>
-              <FormItem { ...formItemLayout } label="邮箱">
-                { getFieldDecorator('email', { initialValue: roleInfoData ? roleInfoData.email : "",
-                rules: [{required: true, message: '请输入邮箱'}]})
-                (<Input placeholder={"请输入邮箱"} />) }
+            <Col span={24}>
+              <FormItem { ...formItemLayout } label="是否启用" name={"status"} rules={[{required: true, message: '请选择是否启用'}]}>
+                <Input placeholder={"请选择是否启用"} />
               </FormItem>
             </Col>
           </Row>
@@ -80,4 +68,4 @@ const RoleModal = (props) => {
   );
 };
 
-export default Form.create()(RoleModal);
+export default RoleModal;

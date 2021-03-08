@@ -16,6 +16,7 @@ const ShowMessageModal = (props) => {
   return (
     <div>
       <Modal
+        centered={true}
         visible={showMessageModalVisible}
         title={"消息详情"}
         onCancel={onCancel}
@@ -24,7 +25,7 @@ const ShowMessageModal = (props) => {
         destroyOnClose={true}
         footer={[]}
       >
-        <Form>
+        <Form initialValues={messageRecord}>
           <Row>
             <Col span={24}>
               <FormItem {...formItemLayout} label="消息标题">
@@ -50,4 +51,4 @@ const ShowMessageModal = (props) => {
   );
 };
 
-export default Form.create()(ShowMessageModal);
+export default ShowMessageModal;

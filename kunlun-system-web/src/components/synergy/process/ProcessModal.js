@@ -10,7 +10,7 @@ const Step = Steps.Step;
 
 const ProcessModal = (props) => {
 
-  const { processModalVisible, processRecord, onCancel, modelName, modelNodeList } = props;
+  const { processModalVisible, processRecord, onCancel, modelName, modelNodeList, currentNode } = props;
 
   const formItemLayout = {
     labelCol: { span: 8 },
@@ -22,14 +22,21 @@ const ProcessModal = (props) => {
     processStatus = config.PROCESS_STATUS.filter(item => item.key == processRecord.processStatus);
   }
 
+  let currentIndex = 0;
+  const len = modelNodeList.length;
+  for (let i = 0; i < len; i++) {
+    currentIndex = modelNodeList[i].id == currentNode.taskDefKey ? i + 1 : currentIndex;
+  }
+
   return (
     <div>
       <Modal
+        centered={true}
         visible={processModalVisible}
         onCancel={onCancel}
         title={"模型流程"}
         width={800}
-        height={400}
+        bodyStyle={{height: "400px"}}
         destroyOnClose={true}
         footer={null}
         mask={false}
@@ -64,12 +71,12 @@ const ProcessModal = (props) => {
             <Row>
               <Col span={12}>
                 <FormItem { ...formItemLayout } label="启动时间">
-                  <div>{processRecord ? moment(processRecord.startTime).format("YYYY-MM-DD") : ""}</div>
+                  <div>{processRecord && processRecord.startTime ? moment(processRecord.startTime).format("YYYY-MM-DD") : ""}</div>
                 </FormItem>
               </Col>
               <Col span={12}>
                 <FormItem { ...formItemLayout } label="完成时间">
-                  <div>{processRecord ? moment(processRecord.endTime).format("YYYY-MM-DD") : ""}</div>
+                  <div>{processRecord && processRecord.endTime ? moment(processRecord.endTime).format("YYYY-MM-DD") : ""}</div>
                 </FormItem>
               </Col>
             </Row>
@@ -85,7 +92,7 @@ const ProcessModal = (props) => {
           >
             <TabPane tab={"流程模型"} key={"style"} closable={false} style={{ marginLeft: "15px", marginRight: "15px", marginBottom: "15px" }}>
               <div className={styles.processStep}>
-                <Steps direction="vertical" current={1}>
+                <Steps direction="vertical" current={currentIndex}>
                   {
                     modelNodeList.map(item =>
                       <Step title={item.name} description="" />
@@ -110,4 +117,4 @@ const ProcessModal = (props) => {
   );
 };
 
-export default Form.create()(ProcessModal);
+export default ProcessModal;

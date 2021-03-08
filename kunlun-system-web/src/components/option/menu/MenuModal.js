@@ -1,7 +1,8 @@
 import React from 'react';
-import { Modal, Form, Input, Row, Col, DatePicker, Radio, Spin, AutoComplete, Icon } from 'antd';
+import { Modal, Form, Input, Row, Col, Radio, Spin, AutoComplete, Icon } from 'antd';
 import config from '../../../config/config';
 import styles from './Menu.less';
+import 'remixicon/fonts/remixicon.css';
 
 const FormItem = Form.Item;
 const RadioGroup = Radio.Group;
@@ -12,9 +13,12 @@ class MenuModal extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      radioCheckedValue: config.MENU_LEVEL[0].key
+      isChecked: false,
+      radioCheckedValue: config.MENU_LEVEL[0].value
     }
   }
+
+  formRef = React.createRef();
 
   render() {
 
@@ -22,29 +26,30 @@ class MenuModal extends React.Component {
     const {
       menuModalVisible, onCancel, onSave, saveLoading, onSelectParentMenu, onShowIconModal, onRadioChange,
       selectedTreeNode, selectedIconRows, menuInfoData, menuModalType,
-      form: {
-        getFieldDecorator,
-        validateFields,
-      }
     } = this.props;
-    const { radioCheckedValue } = this.state;
+    const { isChecked, radioCheckedValue } = this.state;
 
     const formItemLayout = {
       labelCol: {span: 8},
       wrapperCol: {span: 16},
     };
 
+    const singleFormItemLayout = {
+      labelCol: {span: 4},
+      wrapperCol: {span: 20},
+    };
+
     // 点击Modal框确定按钮触发的事件
     const onOk = () => {
-      validateFields((err, values) => {
+      this.formRef.current.validateFields((err, values) => {
         if (!err) {
           onSave(values);
         }
       });
     };
 
-    const onLevelChange = (e) => {
-      this.setState({ radioCheckedValue: e.target.value });
+    const onChangeType = (e) => {
+      this.setState({ radioCheckedValue: e.target.value, isChecked: true });
     };
 
     const initMenuTitle = (selectedTreeNode, menuInfoData, field) => {
@@ -84,15 +89,16 @@ class MenuModal extends React.Component {
       return "";
     };
 
-    const levelOptions = config.MENU_LEVEL.map(item => <Radio key={item.key} value={item.key}>{item.name}</Radio>);
+    const levelOptions = config.MENU_LEVEL.map(item => <Radio key={item.key} value={item.value}>{item.name}</Radio>);
 
-    const forbidOptions = config.STATUS_FLAG.map(item => <Radio key={item.key} value={item.value}>{item.name}</Radio>);
+    const showOptions = config.STATUS_FLAG.map(item => <Radio key={item.key} value={item.value}>{item.name}</Radio>);
 
     // 返回工具栏新增、批量删除按钮
     return (
       <div>
         <Spin spinning={saveLoading}>
           <Modal
+            centered={true}
             className={styles.modal}
             visible={menuModalVisible}
             title={menuModalType == "add" ? "新增菜单" : "编辑菜单"}
@@ -102,114 +108,71 @@ class MenuModal extends React.Component {
             width={800}
             destroyOnClose={true}
           >
-            <Form align="center" style={{marginLeft: "-4%"}}>
+            <Form align="center" style={{marginLeft: "-4%"}} initialValues={menuInfoData} ref={this.formRef}>
               <Row>
                 <Col span={0}>
-                  <FormItem {...formItemLayout} label="">
-                    {getFieldDecorator('id', {
-                      initialValue: menuInfoData ? menuInfoData.id : null,
-                      rules: [{required: false, message: ''}]
-                    })}
-                  </FormItem>
+                  <FormItem {...formItemLayout} label="" name={"id"} rules={[{required: false, message: ''}]}/>
                 </Col>
                 <Col span={12}>
-                  <FormItem {...formItemLayout} label="菜单类型">
-                    {getFieldDecorator('level', {
-                      initialValue: menuInfoData ? menuInfoData.level : radioCheckedValue,
-                      rules: [{required: false, message: '请选择菜单类型'}]
-                    })
-                    (<RadioGroup value={radioCheckedValue} onChange={onLevelChange}>
+                  <FormItem {...formItemLayout} label="菜单类型" rules={[{required: false, message: ''}]}>
+                    <RadioGroup value={isChecked ? radioCheckedValue : (menuInfoData && menuInfoData.children ? config.MENU_LEVEL[0].value : config.MENU_LEVEL[1].value)} onChange={onChangeType}>
                       {levelOptions}
-                    </RadioGroup>)
-                    }
+                    </RadioGroup>
                   </FormItem>
                 </Col>
                 <Col span={12}>
-                  <FormItem {...formItemLayout} label="是否禁用">
-                    {getFieldDecorator('forbid', {
-                      initialValue: menuInfoData ? menuInfoData.forbid : false,
-                      rules: [{required: false, message: '请选择菜单类型'}]
-                    })
-                    (<RadioGroup value={radioCheckedValue}>
-                      {forbidOptions}
-                    </RadioGroup>)
-                    }
+                  <FormItem {...formItemLayout} label="是否显示" name={"show"} rules={[{required: false, message: ''}]}>
+                    <RadioGroup value={radioCheckedValue}>
+                      {showOptions}
+                    </RadioGroup>
                   </FormItem>
                 </Col>
               </Row>
               <Row>
                 <Col span={0}>
-                  <FormItem {...formItemLayout} label="父级菜单Id">
-                    {getFieldDecorator('parentId', {
-                      initialValue: initMenuTitle(selectedTreeNode, menuInfoData, "id"),
-                      rules: [{required: false, message: ''}]
-                    })
-                    (<Input />)}
+                  <FormItem {...formItemLayout} label="父级菜单Id" name={"parentId"} rules={[{required: false, message: ''}]}>
+                    <Input />
                   </FormItem>
                 </Col>
                 <Col span={12}>
-                  <FormItem {...formItemLayout} label="父级菜单">
-                    {getFieldDecorator('parent', {
-                      initialValue: initMenuTitle(selectedTreeNode, menuInfoData, "name"),
-                      rules: [{required: false, message: '请选择父级菜单'}]
-                    })
-                    (<Input onClick={onSelectParentMenu}
-                            disabled={radioCheckedValue == config.MENU_LEVEL[0].key ? true : false}
-                            suffix={<Icon type="down" className="certain-category-icon"/>}/>)}
+                  <FormItem {...formItemLayout} label="父级菜单" name={"parent"} rules={[{required: false, message: '请选择父级菜单'}]}>
+                    <Input onClick={onSelectParentMenu}
+                            disabled={isChecked ? (radioCheckedValue == config.MENU_LEVEL[0].key ? true : false) : (menuInfoData && menuInfoData.children ? true : false)}
+                            suffix={<i className="ri-arrow-down-s-line" style={{fontSize: "20px"}}/>}/>
                   </FormItem>
                 </Col>
                 <Col span={0}>
-                  <FormItem {...formItemLayout} label="longCode">
-                    {getFieldDecorator('longCode', {
-                      initialValue: getLongCode(selectedTreeNode, menuInfoData),
-                      rules: [{required: false, message: ''}]
-                    })(<Input />)}
+                  <FormItem {...formItemLayout} label="longCode" name={"longCode"} rules={[{required: false, message: ''}]}>
+                    <Input />
                   </FormItem>
                 </Col>
                 <Col span={12}>
-                  <FormItem {...formItemLayout} label="菜单名称">
-                    {getFieldDecorator('name', {
-                      initialValue: menuInfoData ? menuInfoData.name : "",
-                      rules: [{required: false, message: '请输入菜单名称'}]
-                    })(<Input/>)}
+                  <FormItem {...formItemLayout} label="菜单名称" name={"name"} rules={[{required: false, message: '请输入菜单名称'}]}>
+                    <Input/>
                   </FormItem>
                 </Col>
               </Row>
               <Row>
                 <Col span={12}>
-                  <FormItem {...formItemLayout} label="菜单key">
-                    {getFieldDecorator('key', {
-                      initialValue: menuInfoData ? menuInfoData.key : "",
-                      rules: [{required: false, message: '请输入菜单key'}]
-                    })(<Input/>)}
+                  <FormItem {...formItemLayout} label="菜单key" name={"key"} rules={[{required: false, message: '请输入菜单key'}]}>
+                    <Input/>
                   </FormItem>
                 </Col>
                 <Col span={0}>
-                  <FormItem {...formItemLayout} label="菜单图标Id">
-                    {getFieldDecorator('iconId', {
-                      initialValue: initMenuIcon(selectedIconRows, menuInfoData, "id"),
-                      rules: [{required: false, message: ''}]
-                    })(<Input />)
-                    }
+                  <FormItem {...formItemLayout} label="菜单图标Id" name={"iconId"} rules={[{required: false, message: ''}]}>
+                    <Input />
                   </FormItem>
                 </Col>
                 <Col span={12}>
-                  <FormItem {...formItemLayout} label="菜单图标">
-                    {getFieldDecorator('icon', {
-                      initialValue: initMenuIcon(selectedIconRows, menuInfoData, "name"),
-                      rules: [{required: false, message: '请选择菜单图标'}]
-                    })(<Input onClick={onShowIconModal} suffix={<Icon type="down" className="certain-category-icon"/>}/>)
-                    }
+                  <FormItem {...formItemLayout} label="菜单图标" name={"icon"} rules={[{required: false, message: '请选择菜单图标'}]}>
+                    <Input onClick={onShowIconModal} suffix={<Icon type="down" className="certain-category-icon"/>}/>
                   </FormItem>
                 </Col>
               </Row>
               <Row>
-                <Col span={12}>
-                  <FormItem {...formItemLayout} label="菜单url">
-                    {getFieldDecorator('url', {
-                      initialValue: menuInfoData ? menuInfoData.url : "",
-                      rules: [{required: false, message: '请输入菜单url'}]
-                    })(<Input/>)}
+                <Col span={24}>
+                  <FormItem {...singleFormItemLayout} label="菜单url" name={"url"} rules={[{required: false, message: '请输入菜单url'}]}>
+                    <Input/>
                   </FormItem>
                 </Col>
               </Row>
@@ -221,4 +184,4 @@ class MenuModal extends React.Component {
   };
 }
 
-export default Form.create()(MenuModal);
+export default MenuModal;

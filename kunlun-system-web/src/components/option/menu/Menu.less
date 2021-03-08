@@ -1,33 +1,57 @@
-.menuTable [class^=ant-table-body] {
-  margin: 0px !important;
+.listTable table thead tr th {
+  background-color: #f1f1f1 !important;
+  text-align: center;
+  padding: 11px !important;
 }
 
-.menuTable [class^=ant-table-row-expand-icon] {
-  float: left;
+.listTable table tbody tr td:first-child {
+  text-align: center;
+  padding: 0% 1% 0% 1% !important;
 }
-.menuTable [class^=ant-table-row-indent] {
-  padding-left: 0px !important;
+
+.listTable table tbody tr td:nth-child(2) {
+  text-align: left;
+}
+
+.listTable table tbody tr:first-child td {
+  text-align: center;
+  padding: 0px !important;
+}
+
+.listTable table tbody tr td {
+  text-align: center;
+  padding: 7px !important;
+}
+
+.listTable table tbody tr td:first-child {
+  text-align: center;
 }
 
 .menuTable table thead tr th {
-  background: #7d99ec !important;
-  height: 20px !important;
-  padding: 0.1% 0.1%;
+  background: #f1f1f1 !important;
+  padding: 11px !important;
 }
 
-.menuTable table tbody tr td:nth-child(3),
-.menuTable table tbody tr td:nth-child(4),
-.menuTable table tbody tr td:nth-child(5) {
-  text-align: left !important;
+.menuTable table tbody tr td {
+  padding: 7px !important;
 }
 
-.modal [class^=ant-modal-body] {
-  padding-top: 10px !important;
-  padding-bottom: 10px !important;
+.menuDrawer [class^=ant-drawer-content-wrapper] {
+  right: -20px !important;
+  top: -20px !important;
+  height: 104% !important;
 }
 
 .menuDrawer [class^=ant-drawer-body] {
-  padding: 0px !important;
+  padding: 0px 20px 0px 0px !important;
+}
+
+.menuDrawer [class^=ant-drawer-header] {
+  padding: 30px 10px 10px 15px !important;
+}
+
+.menuDrawer [class^=ant-drawer-close] {
+  padding: 34px 30px 10px 10px !important;
 }
 
 .menuDrawerDiv {
@@ -37,22 +61,22 @@
 }
 
 .menuDrawerModalDiv {
-  flex: 1;
-  margin-top: 20px;
+  margin: 15px 0px 15px 0px;
 }
 
 .menuDrawerTreeDiv {
   flex: 50;
   display: flex;
   margin-left: 20px;
+  overflow: auto;
 }
 
 .menuDrawerFooterDiv {
   flex: 1;
   position: absolute;
-  bottom: 10px;
+  bottom: 15px;
   width: 100%;
   border-top: 1px solid #e8e8e8;
   text-align: center;
-  padding: 20px 0px 0px 0px;
+  padding: 15px 0px 0px 0px;
 }
