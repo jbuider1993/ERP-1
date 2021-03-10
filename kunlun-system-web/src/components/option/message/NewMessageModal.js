@@ -61,8 +61,7 @@ class NewMessageModal extends React.Component {
           okText="保存"
           onCancel={onCancel}
           onOk={() => this.handleSubmit(this.formRef.current.validateFields)}
-          height={400}
-          width={"70%"}
+          width={800}
           destroyOnClose={true}
         >
           <Form initialValues={messageRecord} ref={this.formRef} name={"messageRef"}>
