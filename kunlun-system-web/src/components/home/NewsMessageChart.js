@@ -19,10 +19,8 @@ class NewsMessageChart extends React.Component {
       {id: "44444", title: "公司高层召开员工扩大会议通知", date: new Date(), type: "message"},
       {id: "55555", title: "禁止在各楼通道及厕所抽烟", date: new Date(), type: "new"},
       {id: "55555", title: "禁止在各楼通道及厕所抽烟", date: new Date(), type: "new"},
-      {id: "55555", title: "禁止在各楼通道及厕所抽烟", date: new Date(), type: "new"},
       {id: "55555", title: "禁止在各楼通道及厕所抽烟", date: new Date(), type: "message"},
       {id: "55555", title: "禁止在各楼通道及厕所抽烟", date: new Date(), type: "message"},
-      {id: "55555", title: "禁止在各楼通道及厕所抽烟", date: new Date(), type: "new"},
     ];
 
     return (
