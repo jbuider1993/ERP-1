@@ -28,7 +28,10 @@ class SideTabMenu extends React.Component {
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
-    if (!!this.state.refreshView) this.setState({refreshView: null});
+    const {refreshView} = this.state;
+    if (!!refreshView) {
+      this.setState({refreshView: null});
+    }
   }
 
   onLoadIFrame(tokenModel, themeColor) {
@@ -45,8 +48,7 @@ class SideTabMenu extends React.Component {
       onCloseTab, tokenModel, themeStyle, themeColor, siderColor, roleInfoData, onSaveUserInfo, onCloseUserInfo,
       userInfoVisible
     } = this.props;
-
-    debugger
+    const {refreshView} = this.state;
 
     // 更新路由Map
     if (!menuMap.get(activeSideMenuKey)) {
@@ -126,9 +128,6 @@ class SideTabMenu extends React.Component {
       onCloseUserInfo
     }
 
-    // 刷新时间戳
-    const refreshFlag = this.state.refreshView;
-
     const isShowSide = activeHeadMenuKey != "home" && activeHeadMenuKey != "userInfo" && themeStyle == "siderMenu" ? true : false;
     const pageUrl = siderFlag ? menuData.sider[activeHeadMenuKey].filter(item => item.key == activeSideMenuKey)[0].url : menuData.main[0].url;
 
@@ -183,7 +182,7 @@ class SideTabMenu extends React.Component {
                       <iframe id={"tabIFrame_" + activeHeadMenuKey + "_" + activeSideMenuKey + index}
                               name={"tabIFrame_" + activeHeadMenuKey + "_" + activeSideMenuKey + index}
                               frameBorder={"no"} style={{width: "100%", height: "100%"}} onLoad={() => this.onLoadIFrame(tokenModel, themeColor)}
-                              src={pane.url + (refreshFlag && activeSideMenuKey == pane.key ? ("?refreshView=" + refreshFlag) : "")}
+                              src={pane.url + (refreshView && activeSideMenuKey == pane.key ? ("?refreshView=" + refreshView) : "")}
                       />
                     </div>
                   </TabPane>)

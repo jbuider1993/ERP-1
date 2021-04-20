@@ -27,7 +27,6 @@ export default {
     menuMap: new Map(),
     timeoutModalCount: 0,
     userInfoVisible: false,
-
   },
   reducers: {
     updateState(state, { payload }) {
