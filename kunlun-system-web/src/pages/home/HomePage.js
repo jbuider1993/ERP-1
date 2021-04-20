@@ -45,10 +45,6 @@ class HomePage extends React.Component {
     const { userCounts, redisInfos, mqInfos, loading, scheduleData, scheduleIndex, scheduleTotal,
       serviceInvokes, userStatistics, selectedYear } = homeModel;
 
-    const statisticsCountProps = {
-      userCounts
-    }
-
     const serviceInvokeListProps = {
       serviceInvokes,
       onShowDetail: (key) => {

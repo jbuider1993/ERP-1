@@ -25,14 +25,15 @@ const LoginPage = (props) => {
     },
   };
 
-return (
-  <Layout style={{ width: "100%", height: '100%', borderRight: 0, background: "#31ac90" }}>
-    <Content style={{ height: "90%" }}>
-      <Login {...loginProps} />
-    </Content>
-    <Footer style={{textAlign: "center", padding: "10px"}}>{config.footerText}</Footer>
-  </Layout>
-)};
+  return (
+    <Layout style={{ width: "100%", height: '100%', borderRight: 0, background: "#31ac90" }}>
+      <Content style={{ height: "90%" }}>
+        <Login {...loginProps} />
+      </Content>
+      <Footer style={{textAlign: "center", padding: "10px"}}>{config.footerText}</Footer>
+    </Layout>
+  )
+}
 
 function mapStateToProps({ globalModel }) {
   return { globalModel };
