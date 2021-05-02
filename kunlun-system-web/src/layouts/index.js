@@ -14,6 +14,8 @@ import IconPage from '../pages/option/IconPage';
 import DictionaryPage from '../pages/option/DictionaryPage';
 import MessagePage from '../pages/option/MessagePage';
 import SystemInfoPage from '../pages/option/SystemInfoPage';
+import DepartmentPage from '../pages/user/DepartmentPage';
+import WorkPostPage from '../pages/user/WorkPostPage';
 import {LocaleProvider} from 'antd';
 import zhCN from 'antd/lib/locale-provider/zh_CN';
 import styles from './index.css';
@@ -48,6 +50,14 @@ function BasicLayout(props) {
       }
       case "/user/amap": {
         childrenElements = <UserAMapPage />;
+        break;
+      }
+      case "/user/department": {
+        childrenElements = <DepartmentPage />;
+        break;
+      }
+      case "/user/post": {
+        childrenElements = <WorkPostPage />;
         break;
       }
       case "/synergy/model": {

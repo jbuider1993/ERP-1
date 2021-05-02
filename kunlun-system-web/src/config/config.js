@@ -111,6 +111,18 @@ const config = {
     addSchedule: `${SYSTEM_SERVICE_API}/schedule/addSchedule`,
     updateSchedule: `${SYSTEM_SERVICE_API}/schedule/updateSchedule`,
     deleteSchedule: `${SYSTEM_SERVICE_API}/schedule/deleteSchedule`,
+
+    // 部门管理
+    getAllDepartment: `${BASEDATA_SERVICE_API}/department/getAllDepartment`,
+    addDepartment: `${BASEDATA_SERVICE_API}/department/addDepartment`,
+    updateDepartment: `${BASEDATA_SERVICE_API}/department/updateDepartment`,
+    deleteDepartment: `${BASEDATA_SERVICE_API}/department/deleteDepartment`,
+
+    // 岗位管理
+    getAllWorkPost: `${BASEDATA_SERVICE_API}/workPost/getAllWorkPost`,
+    addWorkPost: `${BASEDATA_SERVICE_API}/workPost/addWorkPost`,
+    updateWorkPost: `${BASEDATA_SERVICE_API}/workPost/updateWorkPost`,
+    deleteWorkPost: `${BASEDATA_SERVICE_API}/workPost/deleteWorkPost`,
   },
 
   MENU_LEVEL: [
@@ -149,6 +161,17 @@ const config = {
     {key: "system-service", value: "kunlun-system-service", description: "业务服务"},
     {key: "home", value: "kunlun-home-web", description: "前端框架"},
     {key: "system-web", value: "kunlun-system-web", description: "前端业务"},
+  ],
+
+  DEPARTMENT_STATUS: [
+    {key: "0", name: "正常"},
+    {key: "1", name: "停用"}
+  ],
+
+  DEPARTMENT_TYPE: [
+    {key: "1", name: "公司"},
+    {key: "2", name: "分公司"},
+    {key: "3", name: "部门"}
   ],
 };
 
