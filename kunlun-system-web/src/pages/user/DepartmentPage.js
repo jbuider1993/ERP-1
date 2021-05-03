@@ -5,7 +5,6 @@ import DepartmentToolsBar from "../../components/user/department/DepartmentToolb
 import DepartmentModal from "../../components/user/department/DepartmentModal";
 import DepartmentList from "../../components/user/department/DepartmentList";
 import TablePagination from '../../components/common/TablePagination';
-import { Modal, message } from "antd";
 
 class DepartmentPage extends React.Component {
 
@@ -13,7 +12,7 @@ class DepartmentPage extends React.Component {
 
     let {dispatch, departmentModel} = this.props;
     const { departmentList, total, departmentLoading, operateType, departmentModalVisible, currentPage, pageSize,
-            selectedRowKeys, selectedRows, departmentInfoData, searchParams } = departmentModel;
+            selectedRowKeys, selectedRows, departmentInfoData, searchParams, unfoldCollapseKeys } = departmentModel;
 
     const departmentSearchProps = {
       onSearch: (searchParams) => {
@@ -48,11 +47,12 @@ class DepartmentPage extends React.Component {
     }
 
     const departmentToolbarProps = {
+      isCollapse: unfoldCollapseKeys.length == 0 ? false : true,
       addSave: () => {
         dispatch({type: "departmentModel/updateState", payload: {departmentModalVisible: true}});
       },
       unfoldCollapse: () => {
-        dispatch({type: "departmentModel/downloadUsers", payload: {id: "12345"}});
+        dispatch({type: "departmentModel/unfoldCollapse", payload: {}});
       }
     }
 
@@ -61,6 +61,7 @@ class DepartmentPage extends React.Component {
       pageSize,
       departmentList,
       departmentLoading,
+      unfoldCollapseKeys,
       onEdit: (record) => {
         dispatch({
           type: "departmentModel/updateState",
@@ -82,7 +83,16 @@ class DepartmentPage extends React.Component {
             },
           })
         },
-      }
+      },
+      onExpandList: (expanded, record) => {
+        if (expanded) {
+          unfoldCollapseKeys.push(record.id);
+        } else {
+          const index = unfoldCollapseKeys.indexOf(record.id);
+          if (index > -1) unfoldCollapseKeys.splice(index, 1);
+        }
+        dispatch({ type: "departmentModel/updateState", payload: { unfoldCollapseKeys }});
+      },
     }
 
     const tablePaginationProps = {

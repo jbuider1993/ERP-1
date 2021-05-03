@@ -1,14 +1,13 @@
 import React from 'react';
-import styles from './Department.less';
+import styles from './CorrelateAuthorize.less';
 import {Table, Tag, Tooltip, Popconfirm} from 'antd';
 import 'remixicon/fonts/remixicon.css';
 import moment from 'moment';
 import config from "@/config/config";
 
-const DepartmentList = (props) => {
+const CorrelateAuthorizeList = (props) => {
 
-  const { departmentList, departmentLoading, rowSelection, onEdit, onDelete, currentPage,
-    onExpandList, pageSize, unfoldCollapseKeys } = props;
+  const { departmentList, departmentLoading, rowSelection, onEdit, onDelete, currentPage, pageSize } = props;
 
   const columns = [
     { title: '部门名称', dataIndex: 'departmentName', key: 'departmentName', width: '20%',
@@ -61,12 +60,10 @@ const DepartmentList = (props) => {
         pagination={false}
         loading={departmentLoading}
         rowKey={record => record.id}
-        onExpand={onExpandList}
-        expandedRowKeys={unfoldCollapseKeys}
         scroll={{y: (window.innerHeight - 230)}}
       />
     </div>
   );
 };
 
-export default DepartmentList;
+export default CorrelateAuthorizeList;

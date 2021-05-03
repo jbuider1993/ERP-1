@@ -16,6 +16,7 @@ import MessagePage from '../pages/option/MessagePage';
 import SystemInfoPage from '../pages/option/SystemInfoPage';
 import DepartmentPage from '../pages/user/DepartmentPage';
 import WorkPostPage from '../pages/user/WorkPostPage';
+import CorrelateAuthorizePage from '../pages/user/CorrelateAuthorizePage';
 import {LocaleProvider} from 'antd';
 import zhCN from 'antd/lib/locale-provider/zh_CN';
 import styles from './index.css';
@@ -58,6 +59,10 @@ function BasicLayout(props) {
       }
       case "/user/post": {
         childrenElements = <WorkPostPage />;
+        break;
+      }
+      case "/user/authorize": {
+        childrenElements = <CorrelateAuthorizePage />;
         break;
       }
       case "/synergy/model": {

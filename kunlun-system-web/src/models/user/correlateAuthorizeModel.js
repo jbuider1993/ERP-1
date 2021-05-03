@@ -1,13 +1,14 @@
 import * as departmentService from '../../services/user/departmentService';
+import * as workPostService from '../../services/user/workPostService';
+import * as roleService from '../../services/user/roleService';
 import { message } from "antd";
 import config from '../../config/config';
-import * as commonUtil from '../../utils/commonUtil';
 
 /**
  * 部门管理Model
  */
 export default {
-  namespace: "departmentModel",
+  namespace: "correlateAuthorizeModel",
   state: {
     departmentLoading: false,
     departmentList: [],
@@ -19,8 +20,7 @@ export default {
     departmentInfoData: null,
     selectedRowKeys: [],
     searchParams: null,
-    unfoldCollapseKeys: [],
-    radioValue: "department",
+    correlateList: [],
   },
 
   reducers: {
@@ -30,7 +30,24 @@ export default {
   },
 
   effects: {
-    *getListDatas({payload: {currentPage = 1, pageSize = config.PAGE_SIZE, params}}, { select, call, put }) {
+    *getListDatas({payload: params}, { select, call, put }) {
+      yield put({ type: "updateState", payload: { departmentLoading: true }});
+      const {itemName, radioValue} = params;
+      let res = [];
+      if ("department" == radioValue) {
+        res = yield call(departmentService.getAllDepartment, { currentPage: 1, pageSize: 999999 });
+      } else if ("post" == radioValue) {
+        res = yield call(workPostService.getAllWorkPost, { currentPage: 1, pageSize: 999999 });
+      } else {
+        res = yield call(roleService.getAllRole, { currentPage: 1, pageSize: 999999 });
+      }
+      if (res.code == "200") {
+        yield put({ type: 'updateState', payload: { correlateList: res.data.records }});
+      }
+      yield put({ type: "updateState", payload: { departmentLoading: false }});
+    },
+
+    *getUserList({payload: {currentPage = 1, pageSize = config.PAGE_SIZE, params}}, { select, call, put }) {
       yield put({ type: "updateState", payload: { departmentLoading: true }});
       const res = yield call(departmentService.getAllDepartment, { ...params, currentPage, pageSize });
       if (res.code == "200") {
@@ -71,17 +88,6 @@ export default {
         yield put({ type: 'getListDatas', payload: {}});
       } else {
         message.info("删除失败！");
-      }
-    },
-
-    *unfoldCollapse({payload: params}, {select, call, put}) {
-      const {departmentList, unfoldCollapseKeys} = yield select(state => state.departmentModel);
-      if (unfoldCollapseKeys.length == 0) {
-        const unfoldCollapseKeys = new Array();
-        commonUtil.unfoldAllNode(departmentList, unfoldCollapseKeys);
-        yield put({type: 'updateState', payload: {unfoldCollapseKeys}});
-      } else {
-        yield put({type: 'updateState', payload: {unfoldCollapseKeys: []}});
       }
     },
   },
