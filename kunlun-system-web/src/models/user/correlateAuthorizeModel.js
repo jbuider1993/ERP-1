@@ -21,6 +21,9 @@ export default {
     selectedRowKeys: [],
     searchParams: null,
     correlateList: [],
+    radioValue: "role",
+    menuLimitDrawerVisible: false,
+    userAllotTransferVisible: false,
   },
 
   reducers: {
@@ -30,6 +33,11 @@ export default {
   },
 
   effects: {
+    *init({payload: params}, {select, call, put}) {
+      const {radioValue} = yield select(state => state.correlateAuthorizeModel);
+      yield put({ type: 'getListDatas', payload: {radioValue}});
+    },
+
     *getListDatas({payload: params}, { select, call, put }) {
       yield put({ type: "updateState", payload: { departmentLoading: true }});
       const {itemName, radioValue} = params;
@@ -95,8 +103,8 @@ export default {
   subscriptions: {
     setup({ dispatch, history }) {
       return history.listen(location => {
-        if (location.pathname === "/user/department") {
-          dispatch({ type: 'getListDatas', payload: {}});
+        if (location.pathname === "/user/authorize") {
+          dispatch({ type: 'init', payload: {}});
         }
       });
     },

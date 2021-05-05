@@ -1,14 +1,15 @@
 import React from 'react';
 import styles from './CorrelateAuthorize.less';
-import {Table, Tag, Tooltip, Popconfirm, Tree} from 'antd';
+import {Tree} from 'antd';
 import 'remixicon/fonts/remixicon.css';
 
 const { TreeNode } = Tree;
 
 const CorrelateAuthorizeList = (props) => {
 
-  const { departmentList, departmentLoading, rowSelection, onEdit, onDelete, currentPage, pageSize, correlateList, fieldName } = props;
+  const {radioValue, correlateList} = props;
 
+  const fieldName = "department" == radioValue ? "departmentName" : "post" == radioValue ? "postName" : "roleName";
   const generateTreeNodes = (list) => list.map((item) => {
     if (item.children) {
       return (
@@ -18,12 +19,12 @@ const CorrelateAuthorizeList = (props) => {
       );
     }
     return <TreeNode title={item[fieldName]} key={item.id} dataRef={item}/>;
-  });
+  })
 
   return (
-    <div className={ styles.listTable }>
+    <div style={{marginLeft: "department" == radioValue ? "-7px" : "-24px", marginTop: "15px"}}>
       <Tree
-        treeDefaultExpandAll
+        className="draggable-tree"
       >
         {generateTreeNodes(correlateList)}
       </Tree>

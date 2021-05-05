@@ -7,6 +7,8 @@ import CorrelateAuthorizeModal from "../../components/user/correlateAuthorize/Co
 import CorrelateAuthorizeList from "../../components/user/correlateAuthorize/CorrelateAuthorizeList";
 import TablePagination from '../../components/common/TablePagination';
 import CorrelatedUserList from "../../components/user/correlateAuthorize/CorrelatedUserList";
+import MenuLimitDrawer from "../../components/user/correlateAuthorize/MenuLimitDrawer";
+import UserAllotTransfer from "../../components/user/correlateAuthorize/UserAllotTransfer";
 
 const {Search} = Input;
 
@@ -15,8 +17,9 @@ class CorrelateAuthorizePage extends React.Component {
   render() {
 
     let {dispatch, correlateAuthorizeModel} = this.props;
-    const { departmentList, total, departmentLoading, operateType, departmentModalVisible, currentPage, pageSize,
-            selectedRowKeys, selectedRows, departmentInfoData, searchParams, radioValue, correlateList } = correlateAuthorizeModel;
+    const { departmentList, total, departmentLoading, operateType, departmentModalVisible, currentPage,
+            pageSize, selectedRowKeys, selectedRows, departmentInfoData, searchParams, radioValue,
+            correlateList, menuLimitDrawerVisible, userAllotTransferVisible } = correlateAuthorizeModel;
 
     const correlateAuthorizeSearchProps = {
       onSearch: (searchParams) => {
@@ -51,11 +54,13 @@ class CorrelateAuthorizePage extends React.Component {
     }
 
     const correlateAuthorizeToolbarProps = {
-      addSave: () => {
-        dispatch({type: "correlateAuthorizeModel/updateState", payload: {departmentModalVisible: true}});
+      radioValue,
+      onAuthorize: () => {
+        const params = "role" == radioValue ? {menuLimitDrawerVisible: true}: {userAllotTransferVisible: true};
+        dispatch({type: "correlateAuthorizeModel/updateState", payload: params});
       },
-      unfoldCollapse: () => {
-        dispatch({type: "correlateAuthorizeModel/downloadUsers", payload: {id: "12345"}});
+      onAllot: () => {
+        dispatch({type: "correlateAuthorizeModel/updateState", payload: {userAllotTransferVisible: true}});
       }
     }
 
@@ -65,7 +70,7 @@ class CorrelateAuthorizePage extends React.Component {
       departmentList,
       departmentLoading,
       correlateList,
-      fieldName: "department" == radioValue ? "departmentName" : "post" == radioValue ? "postName" : "roleName",
+      radioValue,
       onEdit: (record) => {
         dispatch({
           type: "correlateAuthorizeModel/updateState",
@@ -107,16 +112,30 @@ class CorrelateAuthorizePage extends React.Component {
       dispatch({type: "correlateAuthorizeModel/getListDatas", payload: {radioValue: e.target.value}});
     }
 
+    const menuLimitDrawerProps = {
+      menuLimitDrawerVisible,
+      onClose:() => {
+        dispatch({type: "correlateAuthorizeModel/updateState", payload: {menuLimitDrawerVisible: false}});
+      }
+    }
+
+    const userAllotTransferProps = {
+      userAllotTransferVisible,
+      onCancel: () => {
+        dispatch({type: "correlateAuthorizeModel/updateState", payload: {userAllotTransferVisible: false}});
+      }
+    }
+
     const nameOption = "department" == radioValue ? "部门" : "post" == radioValue ? "岗位" : "角色";
 
     return (
       <div style={{height: "100%", width: "100%", display: "flex", flexDirection: "row"}}>
-        <div style={{display: "flex", flex: 1, borderRight: "1px #E1E1E1 solid", flexDirection: "column", paddingRight: "20px"}}>
-          <div style={{marginBottom: "20px"}}>
+        <div style={{display: "flex", width: "223px", borderRight: "1px #E1E1E1 solid", flexDirection: "column", paddingRight: "18px"}}>
+          <div style={{marginBottom: "15px"}}>
             <Radio.Group onChange={onRadioChange} value={radioValue}>
-              <Radio value="department" style={{marginRight: "20px"}}>部门</Radio>
-              <Radio value="post" style={{marginRight: "20px"}}>岗位</Radio>
               <Radio value="role">角色</Radio>
+              <Radio value="post">岗位</Radio>
+              <Radio value="department">部门</Radio>
             </Radio.Group>
           </div>
           <Search placeholder={"请输入" + nameOption + "名称"} onSearch={() => {}} enterButton />
@@ -128,6 +147,8 @@ class CorrelateAuthorizePage extends React.Component {
           <CorrelateAuthorizeModal {...correlateAuthorizeModalProps} />
           <CorrelatedUserList {...correlateAuthorizeListProps} />
           <TablePagination {...tablePaginationProps} />
+          <MenuLimitDrawer {...menuLimitDrawerProps} />
+          <UserAllotTransfer {...userAllotTransferProps} />
         </div>
       </div>
     );
