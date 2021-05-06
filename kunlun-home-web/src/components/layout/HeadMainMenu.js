@@ -13,16 +13,18 @@ const { SubMenu } = Menu;
 /**
  * 顶部主菜单及其内容
  */
-class HeadMenu extends React.Component {
+class HeadMainMenu extends React.Component {
 
   constructor(props) {
     super(props);
-  };
+  }
 
   render() {
 
-    const { collapsed, activeHeadMenuKey, toggleSiderMenu, activeSideMenuKey, onSelectHeadMenu, menuData, noficationList, messageList, onSelectSideMenu,
-      todoList, onShowUserInfo, onLogout, tokenModel, onSystemInfo, onTheme, themeStyle, themeColor, badgeCount, clearPane, onDetail } = this.props;
+    const { collapsed, activeHeadMenuKey, toggleSiderMenu, activeSideMenuKey, onSelectHeadMenu, menuData,
+      noficationList, messageList, onSelectSideMenu, todoList, onShowUserInfo, onLogout, tokenModel, onSystemInfo,
+      onTheme, themeStyle, themeColor, badgeCount, clearPane, onDetail
+    } = this.props;
 
     const iconStyle = {
       paddingRight: "5px",
@@ -152,4 +154,4 @@ class HeadMenu extends React.Component {
   )};
 }
 
-export default HeadMenu;
+export default HeadMainMenu;

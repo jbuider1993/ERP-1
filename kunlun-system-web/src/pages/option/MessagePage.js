@@ -47,6 +47,9 @@ const MessagePage = (props) => {
     currentSize,
     total,
     showMessage: (messageRecord) => {
+
+      debugger
+
       dispatch({ type: "messageModel/updateState", payload: {showMessageModalVisible: true, messageRecord}});
     },
     editMessage: (messageRecord) => {

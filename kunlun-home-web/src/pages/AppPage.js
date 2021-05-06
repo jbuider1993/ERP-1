@@ -1,14 +1,12 @@
 import React from 'react';
 import { Layout, Spin, Modal } from 'antd';
 import config from "../config/config";
-import HeadMenu from '../components/layout/HeadMenu';
-import SideMenu from '../components/layout/SideMenu';
-import UserInformation from '../components/userInfo/UserInformation';
+import HeadMainMenu from '../components/layout/HeadMainMenu';
+import SideTabMenu from '../components/layout/SideTabMenu';
 import ThemeDrawer from '../components/theme/ThemeDrawer';
 import { connect } from 'dva';
 import 'remixicon/fonts/remixicon.css';
 import * as globalService from '../services/globalService';
-import UserAuthorization from "../components/userInfo/UserAuthorization";
 
 const { Content, Footer } = Layout;
 
@@ -19,7 +17,9 @@ const AppPage = (props) => {
 
   const { dispatch, history, globalModel, noficationModel, userInfoModel } = props;
   let { collapsed, activeHeadMenuKey, activeSideMenuKey, menuData, paneTabs, themeStyle, siderColor,
-          openedSubMenuKey, homeView, tokenModel, themeDrawerVisible, themeColor, selectedStyle, menuMap } = globalModel;
+    openedSubMenuKey, homeView, tokenModel, themeDrawerVisible, themeColor, selectedStyle, menuMap,
+    userInfoVisible
+  } = globalModel;
   const {roleInfoData} = userInfoModel;
 
   // 兼容单独运行前端服务
@@ -36,7 +36,7 @@ const AppPage = (props) => {
 
   const { noficationList, messageList, todoList, badgeCount } = noficationModel;
 
-  const headMenuProps = {
+  const headMainMenuProps = {
     collapsed,
     activeHeadMenuKey,
     activeSideMenuKey,
@@ -70,8 +70,8 @@ const AppPage = (props) => {
           }
         }
       }
-      activeSideMenuKey = activeSideMenuKey ? activeSideMenuKey : sideMenu ? sideMenu[0].key : null;
-      openedSubMenuKey = openedSubMenuKey ? openedSubMenuKey : null;
+      activeSideMenuKey = activeSideMenuKey ? activeSideMenuKey : sideMenu ? sideMenu[0].key : "home";
+      openedSubMenuKey = openedSubMenuKey ? openedSubMenuKey : "home";
       dispatch({ type: "globalModel/updateState", payload: { activeHeadMenuKey: key, paneTabs, activeSideMenuKey, openedSubMenuKey }});
     },
     onSelectSideMenu: (params) => {
@@ -84,7 +84,7 @@ const AppPage = (props) => {
       dispatch({ type: "globalModel/updateState", payload: { activeSideMenuKey: key, paneTabs, pageUrl: item.props.path }});
     },
     onShowUserInfo: () => {
-      dispatch({ type: "globalModel/updateState", payload: { activeHeadMenuKey: "userInfo" }});
+      dispatch({ type: "globalModel/updateState", payload: { activeHeadMenuKey: "userInfo", activeSideMenuKey: "userInfo", userInfoVisible: true }});
     },
     onLogout: () => {
       Modal.confirm({
@@ -112,9 +112,9 @@ const AppPage = (props) => {
     onDetail: (key) => {
       dispatch({ type: "noficationModel/onDetail", payload: { key }});
     },
-  };
+  }
 
-  const sideMenuProps = {
+  const sideTabMenuProps = {
     history,
     collapsed,
     activeHeadMenuKey,
@@ -128,6 +128,8 @@ const AppPage = (props) => {
     siderColor,
     menuMap,
     themeColor,
+    roleInfoData,
+    userInfoVisible,
     onTabChange: (activeTabKey) => {
       dispatch({ type: "globalModel/updateState", payload: { activeSideMenuKey: activeTabKey, activeHeadMenuKey: menuMap.get(activeTabKey) }});
     },
@@ -156,7 +158,13 @@ const AppPage = (props) => {
       if (panes.length == 0) {
         activeHomeKey = menuData.main[0].key;
       }
-      dispatch({ type: "globalModel/updateState", payload: { paneTabs: panes, activeSideMenuKey: activeKey, activeHeadMenuKey: activeHomeKey }});
+      dispatch({ type: "globalModel/updateState",
+        payload: {
+          paneTabs: panes,
+          activeSideMenuKey: activeKey,
+          activeHeadMenuKey: activeHomeKey,
+          userInfoVisible: targetKey != "userInfo"
+      }});
     },
     closeCurrentTab: () => {
       let closeTabs = paneTabs.filter(item => item.key != activeSideMenuKey);
@@ -181,7 +189,13 @@ const AppPage = (props) => {
     updatePathMap: (pathMap) => {
       dispatch({ type: "globalModel/updateState", payload: { menuMap: pathMap }});
     },
-  };
+    onSaveUserInfo: () => {
+      dispatch({ type: "globalModel/updateState", payload: { activeHeadMenuKey: "home" }});
+    },
+    onCloseUserInfo: () => {
+      dispatch({ type: "globalModel/updateState", payload: { activeHeadMenuKey: "home", activeSideMenuKey: "home" }});
+    }
+  }
 
   const themeDrawerProps = {
     themeDrawerVisible,
@@ -208,35 +222,13 @@ const AppPage = (props) => {
     onSelectStyle: (e) => {
       dispatch({ type: "globalModel/updateState", payload: { selectedStyle: e.target.value }});
     },
-  };
-
-  const userInformationProps = {
-    tokenModel,
-  }
-
-  const userAuthorizationProps = {
-    tokenModel,
-    menuData,
-    roleInfoData,
-    onSaveUserInfo: () => {
-      dispatch({ type: "globalModel/updateState", payload: { activeHeadMenuKey: "home" }});
-    },
-    onCloseUserInfo: () => {
-      dispatch({ type: "globalModel/updateState", payload: { activeHeadMenuKey: "home" }});
-    }
   }
 
   return (
     <Layout style={{ width: "100%", height: '100%', borderRight: 0, background: "#fff" }}>
-      <HeadMenu {...headMenuProps} />
+      <HeadMainMenu {...headMainMenuProps} />
       <Content>
-        {
-          activeHeadMenuKey == "userInfo" ?
-            <div id={"userInfoPage"} style={{height: "100%", display: "flex", flexDirection: "row", padding: "20px", background: "#f5f5f5"}}>
-              <UserInformation {...userInformationProps} />
-              <UserAuthorization {...userAuthorizationProps} />
-            </div> : <SideMenu {...sideMenuProps} />
-        }
+        <SideTabMenu {...sideTabMenuProps} />
         <ThemeDrawer {...themeDrawerProps} />
       </Content>
       <Footer style={{ height: 0, textAlign: "center", paddingTop: "0.2%", zIndex: "99", background: themeColor, display: "none" }}>
@@ -244,7 +236,7 @@ const AppPage = (props) => {
       </Footer>
     </Layout>
   )
-};
+}
 
 function mapStateToProps({ globalModel, noficationModel, userInfoModel }) {
   return { globalModel, noficationModel, userInfoModel };

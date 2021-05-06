@@ -8,7 +8,7 @@ export default {
   state: {
     collapsed: false,
     activeHeadMenuKey: "home",
-    activeSideMenuKey: null,
+    activeSideMenuKey: "home",
     menuData: null,
     pageUrl: null,
     pathUrlList: [],
@@ -26,6 +26,7 @@ export default {
     isBlockStyle: true,
     menuMap: new Map(),
     timeoutModalCount: 0,
+    userInfoVisible: false,
   },
   reducers: {
     updateState(state, { payload }) {

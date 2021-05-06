@@ -1,19 +1,19 @@
-import React from 'react';
-import { Button, Icon } from 'antd';
+import React, { Component } from 'react';
+import { Button } from 'antd';
 import 'remixicon/fonts/remixicon.css';
 
-const MenuToolBar = (props) => {
+const UserToolsBar = (props) => {
 
-  const { addMenu, isCollapse, unfoldCollapse } = props;
+  const { addSave, isCollapse, unfoldCollapse } = props;
 
   const iconStyle = {
     verticalAlign: "bottom",
     marginRight: "5px",
-  };
+  }
 
   return (
-    <div style={{ marginBottom: "15px", marginTop: "15px"}}>
-      <Button type={"primary"} onClick={addMenu} icon={<i className="ri-add-line" style={iconStyle}></i>}>新增</Button>
+    <div style={{marginTop: "15px"}}>
+      <Button type="primary" size="default" icon={<i className="ri-add-line" style={iconStyle}></i>} onClick={addSave}>新增</Button>
       <Button style={{ marginLeft: "15px", color: "#FE9400", border: "1px solid #FE9400" }} onClick={unfoldCollapse}>
         <i className={isCollapse ? "ri-add-box-line" : "ri-checkbox-indeterminate-line"} style={iconStyle}></i>展开/折叠
       </Button>
@@ -21,4 +21,4 @@ const MenuToolBar = (props) => {
   );
 };
 
-export default MenuToolBar;
+export default UserToolsBar;

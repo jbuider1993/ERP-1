@@ -48,8 +48,8 @@ class NewMessageModal extends React.Component {
     } = this.props;
 
     const formItemLayout = {
-      labelCol: {span: 3},
-      wrapperCol: {span: 21},
+      labelCol: {span: 2},
+      wrapperCol: {span: 22},
     };
 
     return (
@@ -61,25 +61,26 @@ class NewMessageModal extends React.Component {
           okText="保存"
           onCancel={onCancel}
           onOk={() => this.handleSubmit(this.formRef.current.validateFields)}
-          height={400}
-          width={"70%"}
+          width={950}
           destroyOnClose={true}
+          bodyStyle={{paddingBottom: "0px !important"}}
+          maskClosable={false}
         >
           <Form initialValues={messageRecord} ref={this.formRef} name={"messageRef"}>
             <Row>
-              <Col span={24}>
+              <Col span={24} style={{margin: "-10px 0px -10px 0px"}}>
                 <FormItem {...formItemLayout} label="消息标题" name={"title"} rules={[{required: false, message: '请输入消息标题'}]}>
                   <Input placeholder={"请输入消息标题"} />
                 </FormItem>
               </Col>
-              <Col span={24}>
+              <Col span={24} style={{margin: "0px 0px -10px 0px"}}>
                 <FormItem {...formItemLayout} label="概要描述" name={"description"} rules={[{required: false, message: '请输入概要描述'}]}>
                   <TextArea placeholder={"请输入概要描述"} />
                 </FormItem>
               </Col>
             </Row>
             <Row>
-              <Col span={24}>
+              <Col span={24} style={{margin: "0px 0px -15px 0px"}}>
                 <FormItem {...formItemLayout} label="详细消息" name={"content"} rules={[{required: false, message: '请输入正文内容'}]}>
                   <BraftEditor className={styles.draftEditorDiv} placeholder="请输入正文内容"/>
                 </FormItem>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { List, Skeleton, Tag } from 'antd';
+import { List, Skeleton, Tag, Tooltip } from 'antd';
 import styles from './Message.less';
 import moment from 'moment';
 import 'remixicon/fonts/remixicon.css';
@@ -12,6 +12,11 @@ const MessageList = (props) => {
   let {messageLoading, messageList, currentSize, total, showMessage, editMessage, loadMoreMessage} = props;
 
   messageList = messageList ? messageList : [];
+
+  const iconStyle = {
+    verticalAlign: "bottom",
+    fontSize: "18px",
+  };
 
   return (
     <div className={styles.listDiv}>
@@ -31,11 +36,12 @@ const MessageList = (props) => {
         renderItem={item => (
           <ListItem
             className={styles.messageListItem}
-            actions={[<div className={styles.operator} onClick={(e) => editMessage(item)}>edit</div>, <div className={styles.operator} onClick={() => showMessage(item)}>more</div>]}
+            actions={[<Tooltip title={"编辑"}><i className="ri-edit-2-line" style={{...iconStyle, color: "rgb(135,94,250)"}} onClick={(e) => editMessage(item)} /></Tooltip>,
+              <Tooltip title={"查看"}><i className="ri-article-line" style={{...iconStyle, color: "rgb(6,123,96)", marginRight: "10px"}} onClick={() => showMessage(item)} /></Tooltip>]}
           >
             <Skeleton avatar title={false} loading={item.loading} active>
               <ListItemMeta
-                avatar={<i className={item.type == 1 ? "ri-notification-3-line" : "ri-message-3-line"} style={{marginLeft: "15px", fontSize: "20px"}} />}
+                avatar={<i className={item.type == 1 ? "ri-notification-3-line" : "ri-message-3-line"} style={{marginLeft: "15px", fontSize: "20px", color: item.type == 1 ? "red" : "blue"}} />}
                 title={<span>
                         <span onClick={() => showMessage(item)} className={styles.messageTitle}>{item.title}</span>
                         <span style={{float: "right", marginRight: "30%"}}>{moment(item.createTime).format("YYYY-MM-DD HH:mm:ss")}</span>
@@ -43,7 +49,7 @@ const MessageList = (props) => {
                 description={<span>{item.description}</span>}
               />
               <div style={{marginRight: "5%"}}>
-                <Tag style={{ borderRadius: "20px" }} color={item.type == 1 ? "blue" : "purple"}>{item.type == 1 ? "通知" : "消息"}</Tag>
+                <Tag style={{ borderRadius: "20px" }} color={item.type == 1 ? "red" : "blue"}>{item.type == 1 ? "通知" : "消息"}</Tag>
               </div>
             </Skeleton>
           </ListItem>

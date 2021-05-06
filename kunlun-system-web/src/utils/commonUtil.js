@@ -18,3 +18,14 @@ export function parseProcessNode(model) {
   obj.modelNodes = modelNodeList;
   return obj;
 }
+
+export const unfoldAllNode = (list, unfoldCollapseKeys) => {
+  for (let i = 0; i < list.length; i++) {
+    const children = list[i].children;
+    unfoldCollapseKeys.push(list[i].id);
+
+    if (children && children.length > 0) {
+      unfoldAllNode(children, unfoldCollapseKeys);
+    }
+  }
+}

@@ -8,6 +8,7 @@ import MenuSearch from '../../components/option/menu/MenuSearch';
 import SelectMenuDrawer from '../../components/option/menu/SelectMenuDrawer';
 import MenuIconModal from '../../components/option/menu/MenuIconModal';
 import TablePagination from '../../components/common/TablePagination';
+import * as commonUtil from '../../utils/commonUtil';
 
 const MenuPage = (props) => {
 
@@ -24,33 +25,23 @@ const MenuPage = (props) => {
     onReset: () => {
       dispatch({type: "menuModel/updateState", payload: {searchParams: null}});
     },
-  };
+  }
 
   const menuToolBarProps = {
+    isCollapse: unfoldCollapseKeys.length == 0 ? false : true,
     addMenu: () => {
       dispatch({ type: "menuModel/updateState", payload: { menuModalVisible: true }});
     },
     unfoldCollapse: () => {
       if (unfoldCollapseKeys.length == 0) {
         const unfoldCollapseKeys = new Array();
-        unfoldAllNode(menuList, unfoldCollapseKeys);
+        commonUtil.unfoldAllNode(menuList, unfoldCollapseKeys);
         dispatch({type: "menuModel/updateState", payload: {unfoldCollapseKeys}});
       } else {
         dispatch({type: "menuModel/updateState", payload: {unfoldCollapseKeys: []}});
       }
     },
-  };
-
-  const unfoldAllNode = (menuList, unfoldCollapseKeys) => {
-    for (let i = 0; i < menuList.length; i++) {
-      const children = menuList[i].children;
-      unfoldCollapseKeys.push(menuList[i].id);
-
-      if (children && children.length > 0) {
-        unfoldAllNode(children, unfoldCollapseKeys);
-      }
-    }
-  };
+  }
 
   const menuModalProps = {
     menuModalVisible,
@@ -73,7 +64,7 @@ const MenuPage = (props) => {
     onShowIconModal: () => {
       dispatch({ type: "menuModel/updateState", payload: { menuIconModalVisible: true }});
     },
-  };
+  }
 
   const selectMenuDrawerProps = {
     menuList,
@@ -87,7 +78,7 @@ const MenuPage = (props) => {
     onSelectTreeNode: (selectedTreeNode) => {
       dispatch({ type: "menuModel/updateState", payload: { selectedTreeNode, selectMenuModalVisible: false }});
     },
-  };
+  }
 
   const menuIconModalProps = {
     menuIconModalVisible,
@@ -105,7 +96,7 @@ const MenuPage = (props) => {
     onIconPageChange: (currentPage, pageSize) => {
       dispatch({ type: "menuModel/getMenuIconList", payload: { currentPage, pageSize }});
     },
-  };
+  }
 
   const menuListProps = {
     menuList,
@@ -127,7 +118,7 @@ const MenuPage = (props) => {
       }
       dispatch({ type: "menuModel/updateState", payload: { unfoldCollapseKeys }});
     },
-  };
+  }
 
   const tablePaginationProps = {
     total,
@@ -139,7 +130,7 @@ const MenuPage = (props) => {
     onShowSizeChange: (currentPage, pageSize) => {
       dispatch({type: 'menuModel/getListDatas', payload: {currentPage, pageSize, ...searchParams}});
     },
-  };
+  }
 
   return (
     <div>
