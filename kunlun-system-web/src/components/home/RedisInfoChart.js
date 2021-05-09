@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './Home.less';
 import indexStyles from "../../pages/home/homeIndex.less";
-import { DualLine } from '@ant-design/charts';
+import { Line } from '@ant-design/charts';
 import moment from 'moment';
 
 class RedisInfoChart extends React.Component {
@@ -53,7 +53,7 @@ class RedisInfoChart extends React.Component {
       <div className={indexStyles.redisDiv}>
         <div className={indexStyles.redisTitleDiv}>Redis资源</div>
         <div id={"redisMemory"} className={styles.redisCanvas}>
-          <DualLine {...config} />
+          <Line {...config} />
         </div>
       </div>
     );
