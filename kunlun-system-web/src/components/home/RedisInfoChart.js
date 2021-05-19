@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './Home.less';
 import indexStyles from "../../pages/home/homeIndex.less";
-import { Line } from '@ant-design/charts';
+import { DualAxes, G2 } from '@ant-design/charts';
 import moment from 'moment';
 
 class RedisInfoChart extends React.Component {
@@ -17,35 +17,29 @@ class RedisInfoChart extends React.Component {
       return {time: item.time, "占用内存": parseFloat(item.value)};
     });
 
+    const registerTheme = G2.registerTheme;
+    registerTheme('custom-theme', {
+      colors10: ['#ee0606', '#32f307'],
+    });
+
     const config = {
-      padding: "auto",
-      forceFit: true,
-      data: [redisValues, redisMemorys],
+      padding: [15, 18, 13, 18],
+      data: [redisMemorys, redisValues],
       xField: 'time',
-      yField: ['键值对数', '占用内存'],
-      lineConfigs: [{
-          color: '#32f307',
-          smooth: true,
-          lineSize: 2,
-        }, {
-          color: '#ee0606',
-          smooth: true,
-          lineSize: 2,
+      yField: ['占用内存', '键值对数'],
+      theme: 'custom-theme',
+      geometryOptions: [
+        {
+          geometry: 'column',
+          isStack: true,
+          columnWidthRatio: 0.4,
         },
+        { geometry: 'line' },
       ],
-      tooltip: {
-        custom: {
-          customContent: (title, items) => {
-            const dateTitle = moment(new Date()).format("YYYY-MM-DD") + " " + title;
-            return (
-              <div style={{ padding: '15px 0px 0px 0px' }}>
-                <h5>{dateTitle}</h5>
-                <p style={{ padding: '10px 15px 0px 0px' }}>键值对数：{items && items[1] && items[1].value} 个</p>
-                <p>占用内存：{items && items[0] && items[0].value} K</p>
-              </div>
-            );
-          },
-        },
+      legend: {
+        visible: true,
+        flipPage: true,
+        offsetX: 18,
       },
     };
 
@@ -53,7 +47,7 @@ class RedisInfoChart extends React.Component {
       <div className={indexStyles.redisDiv}>
         <div className={indexStyles.redisTitleDiv}>Redis资源</div>
         <div id={"redisMemory"} className={styles.redisCanvas}>
-          <Line {...config} />
+          <DualAxes {...config} />
         </div>
       </div>
     );

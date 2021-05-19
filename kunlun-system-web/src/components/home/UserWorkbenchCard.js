@@ -45,7 +45,7 @@ class UserWorkbenchCard extends React.Component {
                            value={userCounts ? userCounts.userCount : ""}
                            precision={0}
                            valueStyle={{color: '#faad14', fontSize: "25px"}}
-                           prefix={<i className="ri-global-line" style={{marginRight: "10px", verticalAlign: "bottom"}}></i>}
+                           prefix={<i className="ri-registered-fill" style={{marginRight: "10px", verticalAlign: "bottom"}}></i>}
                            suffix="人"/>
               </Card>
             </Col>
@@ -65,7 +65,7 @@ class UserWorkbenchCard extends React.Component {
                            value={userCounts ? userCounts.onlineCount : ""}
                            precision={0}
                            valueStyle={{color: 'red', fontSize: "25px"}}
-                           prefix={<i className="ri-macbook-line" style={{marginRight: "10px", verticalAlign: "bottom"}}></i>}
+                           prefix={<i className="ri-macbook-fill" style={{marginRight: "10px", verticalAlign: "bottom"}}></i>}
                            suffix="人"/>
               </Card>
             </Col>
@@ -75,7 +75,7 @@ class UserWorkbenchCard extends React.Component {
                            value={userCounts ? userCounts.leastCount : ""}
                            precision={0}
                            valueStyle={{color: 'blue', fontSize: "25px"}}
-                           prefix={<i className="ri-computer-line" style={{marginRight: "10px", verticalAlign: "bottom"}}></i>}
+                           prefix={<i className="ri-computer-fill" style={{marginRight: "10px", verticalAlign: "bottom"}}></i>}
                            suffix="人"/>
               </Card>
             </Col>

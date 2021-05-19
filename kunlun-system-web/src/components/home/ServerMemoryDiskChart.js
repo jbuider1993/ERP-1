@@ -9,7 +9,7 @@ class ServerMemoryDiskChart extends React.Component {
 
     const cpuConfig = {
       percent: 0.7,
-      padding: [3, 0, 6.5, 0],
+      padding: [4, 0, 6.5, 0],
       radius: 1,
       innerRadius: 0.75,
       range: {
@@ -36,7 +36,7 @@ class ServerMemoryDiskChart extends React.Component {
 
     const diskConfig = {
       percent: 0.5,
-      padding: [3, 0, 6.5, 0],
+      padding: [4, 0, 6.5, 0],
       radius: 1,
       innerRadius: 0.75,
       range: {
