@@ -6,14 +6,14 @@ export default {
   state: {
     loading: false,
     userCounts: null,
-    redisInfos: new Array(),
-    mqInfos: new Array(),
+    redisInfos: [],
+    mqInfos: [],
     scheduleIndex: 0,
     scheduleTotal: 0,
     scheduleData: null,
     scheduleList: null,
     serviceInvokes: null,
-    userStatistics: null,
+    userStatistics: [],
     selectedYear: null,
   },
   reducers: {

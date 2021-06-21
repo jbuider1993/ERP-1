@@ -8,32 +8,56 @@ class ServerMemoryDiskChart extends React.Component {
   render() {
 
     const cpuConfig = {
-      value: 64,
-      forceFit: true,
-      padding: [7, 0, 18, 0],
-      range: [0, 25, 50, 75, 100],
-      color: ['#30bf78', '#a0d911', '#faad14', '#f4664a'],
+      percent: 0.7,
+      padding: [4, 0, 6.5, 0],
+      radius: 1,
+      innerRadius: 0.75,
+      range: {
+        ticks: [0, 1],
+        color: ['l(0) 0:#30bf78 0.5:#a0d911 0.7:#faad14 1:#f4664a'],
+      },
+      indicator: {
+        pointer: { style: { stroke: '#D0D0D0' } },
+        pin: { style: { stroke: '#D0D0D0' } },
+      },
       statistic: {
-        visible: true,
-        text: 'CPU使用率',
-        color: '#30bf78',
-        position: ['50%', '105%'],
-        size: 13
+        content: {
+          offsetY: 15,
+          style: {
+            fontSize: '14px',
+            color: '#4B535E',
+          },
+          formatter: function formatter() {
+            return 'CPU使用率';
+          },
+        },
       },
     };
 
     const diskConfig = {
-      value: 51,
-      forceFit: true,
-      padding: [7, 0, 18, 0],
-      range: [0, 25, 50, 75, 100],
-      color: ['#30bf78', '#a0d911', '#faad14', '#f4664a'],
+      percent: 0.5,
+      padding: [4, 0, 6.5, 0],
+      radius: 1,
+      innerRadius: 0.75,
+      range: {
+        ticks: [0, 1],
+        color: ['l(0) 0:#30bf78 0.5:#a0d911 0.7:#faad14 1:#f4664a'],
+      },
+      indicator: {
+        pointer: { style: { stroke: '#D0D0D0' } },
+        pin: { style: { stroke: '#D0D0D0' } },
+      },
       statistic: {
-        visible: true,
-        text: '磁盘使用率',
-        color: '#30bf78',
-        position: ['50%', '105%'],
-        size: 13
+        content: {
+          offsetY: 15,
+          style: {
+            fontSize: '14px',
+            color: '#4B535E',
+          },
+          formatter: function formatter() {
+            return '磁盘使用率';
+          },
+        },
       },
     };
 

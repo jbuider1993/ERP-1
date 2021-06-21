@@ -13,8 +13,6 @@ class MQBrokerChart extends React.Component {
     const {onShowDetail, mqInfos} = this.props;
 
     const config = {
-      padding: 'auto',
-      forceFit: true,
       data: mqInfos,
       xField: 'time',
       yField: 'value',

@@ -33,7 +33,7 @@ class UserAllotTransfer extends React.Component {
           bodyStyle={{height: "420px"}}
         >
           <Transfer
-            listStyle={{height: "385px", width: "280px"}}
+            listStyle={{height: "388px", width: "280px", margin: "-8px -5px -5px -5px"}}
             titles={["全部用户", "权限用户"]}
             dataSource={targetDatas}
             showSearch

@@ -14,15 +14,21 @@ class UserStatisticsChart extends React.Component {
     const {userStatistics, onSelectYear, selectedYear} = this.props;
 
     const userStatisticLineConfig = {
-      title: { visible: false, text: '配置折线数据点样式'},
-      description: { visible: false, text: '自定义配置趋势线上数据点的样式'},
-      padding: [30, 20, 35, 35],
-      forceFit: true,
-      data: userStatistics && userStatistics.length > 0 ? userStatistics : null,
+      padding: [15, 0, 30, 20],
+      data: userStatistics && userStatistics.length > 0 ? userStatistics : [],
       xField: 'month',
       yField: 'value',
-      label: { visible: true, type: 'point'},
+      point: {
+        size: 5,
+        shape: 'diamond',
+        style: {
+          fill: 'white',
+          stroke: '#5B8FF9',
+          lineWidth: 2,
+        },
+      },
       tooltip: {
+        showMarkers: true,
         custom: {
           customContent: (title, items) => {
             const dateTitle = (selectedYear ? selectedYear : moment(new Date()).format("YYYY")) + "年" + title + "月";

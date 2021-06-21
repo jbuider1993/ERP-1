@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './Home.less';
 import indexStyles from "../../pages/home/homeIndex.less";
-import { Donut } from '@ant-design/charts';
+import { Pie  } from '@ant-design/charts';
 
 class ServerClusterChart extends React.Component {
 
@@ -17,27 +17,22 @@ class ServerClusterChart extends React.Component {
     ];
 
     const config = {
-      forceFit: true,
       radius: 1,
-      padding: [7, 7, 7, 7],
+      innerRadius: 0.64,
+      padding: [7, 7, 7, -100],
       data,
       angleField: 'value',
       colorField: 'type',
-      statistic: {
-        visible: true,
+      label: {
+        type: 'inner',
+        offset: '-50%',
+        style: { textAlign: 'center' },
+        autoRotate: false,
+        content: '{value}',
       },
       legend: {
         visible: true,
-        position: 'right-top',
-        offsetX: -5,
-        offestY: -5,
-        text: {
-          symbol: "circle",
-          style: {r: 5, fill: "#5B8FF9"},
-          formatter: (text,cfg) => {
-            return text;
-          }
-        }
+        offsetX: -50,
       },
     };
 
@@ -45,7 +40,7 @@ class ServerClusterChart extends React.Component {
       <div className={indexStyles.tableBDiv}>
         <div className={indexStyles.tableBTitleDiv}>服务资源</div>
         <div id={"serverCluster"} className={styles.serverDiskCanvas}>
-          <Donut {...config} />
+          <Pie  {...config} />
         </div>
       </div>
     );
